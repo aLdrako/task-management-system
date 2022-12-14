@@ -72,15 +72,15 @@ The application ***must*** support the following operations:
 - Assign/Unassign a task to a person.
 - Add comment to a task.
 - Listing
- - List all tasks (display the most important info).
-   - Filter by title
-   - Sort by title
- - List bugs/stories/feedback only.
-   - Filter by status and/or assignee
-   - Sort by title/priority/severity/size/rating (depending on the task type)
- - List tasks with assignee.
-   - Filter by status and/or assignee
-   - Sort by title
+  - List all tasks (display the most important info).
+    - Filter by title
+    - Sort by title
+  - List bugs/stories/feedback only.
+    - Filter by status and/or assignee
+    - Sort by title/priority/severity/size/rating (depending on the task type)
+  - List tasks with assignee.
+    - Filter by status and/or assignee
+    - Sort by title
 
 ## Use cases
 #### Use case #1
