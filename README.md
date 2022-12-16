@@ -116,3 +116,12 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 
 ## Teamwork Guidelines
 Please see the Teamwork Guidelines [document](https://learn.telerikacademy.com/mod/page/view.php?id=38822 "document").
+
+### Sample Input
+```none
+
+```
+### Sample Output
+```none
+
+```
