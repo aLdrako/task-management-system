@@ -50,7 +50,7 @@ Feedbacks ***must*** have an ID, a title, a description, a rating, a status, a l
 - Title is a string between 10 and 50 symbols.
 - Description is a string between 10 and 500 symbols.
 - Rating is an integer.
-- Status is one of the following: New, Unscheduled, Scheduled, or Done.
+- Status is one of the following: **New**, **Unscheduled**, **Scheduled**, or **Done**.
 - Comments is a list of comments (string messages with author).
 - History is a list of all changes (string messages) that were done to the feedback.
 
