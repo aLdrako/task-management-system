@@ -31,14 +31,14 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
 	@Override
 	public void setPriority(PriorityType priority) {
+		addChangeToHistory("priority", this.priority, priority);
 		this.priority = priority;
-		populateHistory(new HistoryImpl(format("Priority changed to: %s", priority)));
 	}
 
 	@Override
 	public void setSize(SizeType size) {
+		addChangeToHistory("size", this.size, size);
 		this.size = size;
-		populateHistory(new HistoryImpl(format("Size changed to: %s", size)));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
 	@Override
 	public void setAssignee(User assignee) {
+		addChangeToHistory("assignee", this.assignee, assignee);
 		this.assignee = assignee;
-		populateHistory(new HistoryImpl(format("Assigned to: %s", assignee.getName())));
 	}
 }

@@ -20,15 +20,17 @@ public class UserImpl implements User {
 			"User name must be between %s and %s symbols.",
 			USER_MIN_LEN,
 			USER_MAX_LEN);
+	public static final String NEW_INSTANCE_MESSAGE = "User was created.";
 
 	private String name;
 	private final List<Task> tasks;
-	private final List<History> histories;
+	private final List<History> activityHistory;
 
 	public UserImpl(String name) {
 		setName(name);
 		this.tasks = new ArrayList<>();
-		this.histories = new ArrayList<>();
+		this.activityHistory = new ArrayList<>();
+		populateHistory(new HistoryImpl(NEW_INSTANCE_MESSAGE));
 	}
 
 	@Override
@@ -71,12 +73,12 @@ public class UserImpl implements User {
 
 	@Override
 	public List<History> getHistories() {
-		return new ArrayList<>(histories);
+		return new ArrayList<>(activityHistory);
 	}
 
 	@Override
 	public void populateHistory(History history) {
-		this.histories.add(history);
+		this.activityHistory.add(history);
 	}
 
 	@Override

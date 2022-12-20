@@ -32,8 +32,8 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 	@Override
 	public void setRating(int rating) {
 		ValidationHelpers.validateInRange(rating, RATING_MIN, RATING_MAX, RATING_RANGE_ERR);
+		addChangeToHistory("rating", this.rating, rating);
 		this.rating = rating;
-		populateHistory(new HistoryImpl(format("Rating changed to: %s", rating)));
 	}
 
 }

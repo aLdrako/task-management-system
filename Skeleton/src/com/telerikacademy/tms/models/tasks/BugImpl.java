@@ -42,8 +42,8 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public void setPriority(PriorityType priority) {
+		addChangeToHistory("priority", this.priority, priority);
 		this.priority = priority;
-		populateHistory(new HistoryImpl(format("Priority changed to: %s", priority)));
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public void setSeverity(SeverityType severity) {
+		addChangeToHistory("severity", this.severity, severity);
 		this.severity = severity;
-		populateHistory(new HistoryImpl(format("Severity changed to: %s", severity)));
 	}
 
 	@Override
@@ -64,8 +64,8 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public void setAssignee(User assignee) {
+		addChangeToHistory("assignee", this.assignee, assignee);
 		this.assignee = assignee;
-		populateHistory(new HistoryImpl(format("Assigned to: %s", assignee.getName())));
 	}
 
 }

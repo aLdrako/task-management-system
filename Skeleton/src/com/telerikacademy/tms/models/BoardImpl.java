@@ -19,17 +19,19 @@ public class BoardImpl implements Board {
 			"Board name must be between %s and %s symbols.",
 			BOARD_MIN_LEN,
 			BOARD_MAX_LEN);
+	public static final String NEW_INSTANCE_MESSAGE = "Board was created.";
 
 	private String name;
 
 	private final List<Task> tasks;
 
-	private final List<History> histories;
+	private final List<History> activityHistory;
 
 	public BoardImpl(String name) {
 		setName(name);
 		this.tasks = new ArrayList<>();
-		this.histories = new ArrayList<>();
+		this.activityHistory = new ArrayList<>();
+		populateHistory(new HistoryImpl(NEW_INSTANCE_MESSAGE));
 	}
 
 	@Override
@@ -72,12 +74,12 @@ public class BoardImpl implements Board {
 
 	@Override
 	public List<History> getHistories() {
-		return new ArrayList<>(histories);
+		return new ArrayList<>(activityHistory);
 	}
 
 	@Override
 	public void populateHistory(History history) {
-		this.histories.add(history);
+		this.activityHistory.add(history);
 	}
 
 	@Override
