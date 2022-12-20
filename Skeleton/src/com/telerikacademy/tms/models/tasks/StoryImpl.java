@@ -13,10 +13,11 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 	private SizeType size;
 	private User assignee;
 
-	public StoryImpl(int id, String title, String description) {
+	public StoryImpl(int id, String title, String description, PriorityType priority, SizeType size) {
 		super(id, title, description);
+		setPriority(priority);
+		setSize(size);
 		setStatus(StoryStatus.NOT_DONE);
-		size = SizeType.SMALL;
 	}
 
 	@Override

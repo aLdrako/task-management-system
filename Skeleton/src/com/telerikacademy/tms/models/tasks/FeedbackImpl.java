@@ -19,8 +19,9 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
 	private int rating;
 
-	public FeedbackImpl(int id, String title, String description) {
+	public FeedbackImpl(int id, String title, String description, int rating) {
 		super(id, title, description);
+		setRating(rating);
 		setStatus(FeedbackStatus.NEW);
 	}
 

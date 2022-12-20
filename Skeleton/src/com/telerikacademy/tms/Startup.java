@@ -9,6 +9,9 @@ import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.BugImpl;
 import com.telerikacademy.tms.models.tasks.StoryImpl;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 
 public class Startup {
@@ -22,9 +25,9 @@ public class Startup {
 		Board board1 = new BoardImpl("BoardOne");
 		Board board2 = new BoardImpl("BoardTwo");
 
-		Task task1 = new BugImpl(1, "Models to implement", "Defines model of the project");
-		Task task2 = new StoryImpl(2, "Some good story", "Enjoy coding, while...");
-		Task task3 = new BugImpl(3, "Commands to implement", "Defines commands of the project");
+		Task task1 = new BugImpl(1, "Models to implement", "Defines model of the project", PriorityType.HIGH, SeverityType.CRITICAL);
+		Task task2 = new StoryImpl(2, "Some good story", "Enjoy coding, while...", PriorityType.MEDIUM, SizeType.MEDIUM);
+		Task task3 = new BugImpl(3, "Commands to implement", "Defines commands of the project", PriorityType.LOW, SeverityType.MINOR);
 
 		team.addUser(user1);
 		team.addUser(user2);

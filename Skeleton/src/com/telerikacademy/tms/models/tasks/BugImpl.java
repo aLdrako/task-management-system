@@ -14,14 +14,15 @@ import static java.lang.String.format;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 
-	private final List<String> steps;
+	private final List<String> steps = new ArrayList<>();
 	private PriorityType priority;
 	private SeverityType severity;
 	private User assignee;
 
-	public BugImpl(int id, String title, String description) {
+	public BugImpl(int id, String title, String description, PriorityType priority, SeverityType severity) {
 		super(id, title, description);
-		this.steps = new ArrayList<>();
+		setPriority(priority);
+		setSeverity(severity);
 		setStatus(BugStatus.ACTIVE);
 	}
 

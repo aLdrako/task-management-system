@@ -4,7 +4,7 @@ import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
-public interface Story extends Assignable {
+public interface Story extends Task, Assignable {
 
 	PriorityType getPriority();
 
