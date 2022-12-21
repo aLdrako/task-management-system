@@ -152,10 +152,10 @@ AddPersonToTeam Ivan Hackers
 AddPersonToTeam Petar Hackers
 CreateBoardInTeam Hackers Developers
 CreateBoardInTeam Hackers Staff
-CreateTaskInBoard Developers bug {{Glitching interface}} {{There is an interface that is not working and it is glitching}} High Major
+CreateTaskInBoard Developers bug {{Glitching inteface}} {{There is a broken interface}} High Major
 AddStepsToReproduceBug 1 {{1. First open the app}} {{2. Try to access the database}}
 CreateTaskInBoard Staff story {{Funny story}} {{Once upon a time there was a mouse....}} Medium Small
-CreateTaskInBoard Developers feedback {{Good job}} {{The developer that fixed the glitch from yesterday did a good job}} 8
+CreateTaskInBoard Developers feedback {{Good job}} {{To the developer that fixed the glitch}} 8
 AssignTask 1 Ivan
 AssignTask 2 Petar
 AddComment 3 {{Thank you so much for the amazing feedback}} Ivan
