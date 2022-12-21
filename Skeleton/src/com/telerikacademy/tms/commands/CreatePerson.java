@@ -24,14 +24,14 @@ public class CreatePerson implements Command {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		String name = parameters.get(0);
 
-		return createPerson(repository, name);
+		return createPerson(name);
 	}
 
-	private String createPerson(TaskManagementRepository repository, String name) {
+	private String createPerson(String name) {
 		if (!repository.isUniqueName(name)) {
 			throw new IllegalArgumentException(DUPLICATE_NAME_MESSAGE);
 		}
 		User user = repository.createUser(name);
-		return String.format(USER_CREATED_MESSAGE, name);
+		return String.format(USER_CREATED_MESSAGE, user.getName());
 	}
 }

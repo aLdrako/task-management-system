@@ -25,4 +25,7 @@ public interface TaskManagementRepository {
 	<T extends Nameable> T findElementByName(List<T> elements, String name);
 	Board findBoardByNameInTeam(Team team, String name);
 	boolean isUniqueName(String name);
+	User findUserByName(String name);
+	Board findBoardByName(String name);
+	Team findTeamByName(String name);
 }

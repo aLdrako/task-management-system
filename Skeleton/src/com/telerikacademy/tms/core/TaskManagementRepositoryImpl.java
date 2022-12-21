@@ -28,7 +28,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 	private final List<Team> teams = new ArrayList<>();
 	private final List<User> users = new ArrayList<>();
+
+	//TODO discuss should we include boards in repository or just to access them thru teams (name of a board to be unique in a team, not application)
 	private final List<Board> boards = new ArrayList<>();
+
+	//TODO discuss if we should include all tasks here, or should we access them thru teams -> boards (or thru boards directly)
 	private final List<Task> tasks = new ArrayList<>();
 
 	public TaskManagementRepositoryImpl() {
@@ -129,6 +133,18 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	public <T extends Nameable> T findElementByName(List<T> elements, String name) {
 		return elements.stream()
 				.filter(el -> el.getName().equalsIgnoreCase(name))
+	//TODO discuss should we add some common interface (to Board, Team, User) to make this method generic, as we will have to search for user, team (and board name);
+	@Override
+	public User findUserByName(String name) {
+		return users.stream()
+				.filter(u -> u.getName().equalsIgnoreCase(name))
+				.findFirst()
+				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
+	}
+	@Override
+	public Team findTeamByName(String name) {
+		return teams.stream()
+				.filter(u -> u.getName().equalsIgnoreCase(name))
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
 	}
@@ -138,6 +154,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	 */
 	public Board findBoardByNameInTeam(Team team, String name) {
 		return team.getBoards().stream()
+	@Override
+	public Board findBoardByName(String name) {
+		/**
+		 *  Nested search -> search boards in each team
+		 */
+		return teams.stream()
+				.flatMap(team -> team.getBoards().stream())
 				.filter(board -> board.getName().equalsIgnoreCase(name))
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
