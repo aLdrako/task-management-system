@@ -93,7 +93,7 @@ public class UserImpl implements User {
 
 		result.append("<<< Activity History >>>".toUpperCase()).append(System.lineSeparator());
 		for (History history : getHistories()) {
-			result.append(history.getHistory()).append(System.lineSeparator());
+			result.append(history).append(System.lineSeparator());
 		}
 
 		return result.toString();
