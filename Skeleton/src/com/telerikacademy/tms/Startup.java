@@ -69,8 +69,8 @@ public class Startup {
 //
 //		System.out.println(result);
 
-//		Engine engine = new TaskManagementEngineImpl();
-//		engine.start();
+		Engine engine = new TaskManagementEngineImpl();
+		engine.start();
 
 	}
 }

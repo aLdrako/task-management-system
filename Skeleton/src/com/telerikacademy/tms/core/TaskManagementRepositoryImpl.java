@@ -133,20 +133,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	public <T extends Nameable> T findElementByName(List<T> elements, String name) {
 		return elements.stream()
 				.filter(el -> el.getName().equalsIgnoreCase(name))
-	//TODO discuss should we add some common interface (to Board, Team, User) to make this method generic, as we will have to search for user, team (and board name);
-	@Override
-	public User findUserByName(String name) {
-		return users.stream()
-				.filter(u -> u.getName().equalsIgnoreCase(name))
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
-	}
-	@Override
-	public Team findTeamByName(String name) {
-		return teams.stream()
-				.filter(u -> u.getName().equalsIgnoreCase(name))
-				.findFirst()
-				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
 	}
 
 	/**
@@ -154,13 +142,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	 */
 	public Board findBoardByNameInTeam(Team team, String name) {
 		return team.getBoards().stream()
-	@Override
-	public Board findBoardByName(String name) {
-		/**
-		 *  Nested search -> search boards in each team
-		 */
-		return teams.stream()
-				.flatMap(team -> team.getBoards().stream())
 				.filter(board -> board.getName().equalsIgnoreCase(name))
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
