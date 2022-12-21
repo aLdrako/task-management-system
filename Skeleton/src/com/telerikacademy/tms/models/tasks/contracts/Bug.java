@@ -6,7 +6,7 @@ import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 
 import java.util.List;
 
-public interface Bug extends Assignable {
+public interface Bug extends Task, Assignable {
 
 	List<String> getSteps();
 

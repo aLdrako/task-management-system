@@ -24,16 +24,14 @@ public abstract class TaskBaseImpl implements Task {
 	private final int id;
 	private String title;
 	private String description;
-	private final List<Comment> comments;
-	private final List<History> changesHistory;
+	private final List<Comment> comments = new ArrayList<>();
+	private final List<History> changesHistory = new ArrayList<>();
 	private Status status;
 
 	public TaskBaseImpl(int id, String title, String description) {
 		this.id = id;
 		setTitle(title);
 		setDescription(description);
-		this.comments = new ArrayList<>();
-		this.changesHistory = new ArrayList<>();
 	}
 
 	@Override
@@ -93,6 +91,7 @@ public abstract class TaskBaseImpl implements Task {
 		addChangeToHistory("status", this.status, status);
 		this.status = status;
 	}
+
 	protected <T> void addChangeToHistory(String type, T valueBefore, T valueAfter) {
 		if (valueBefore != null && valueBefore != valueAfter) {
 			if (valueBefore instanceof Number && (Integer) valueBefore == 0) {

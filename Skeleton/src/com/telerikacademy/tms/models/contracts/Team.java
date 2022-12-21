@@ -1,8 +1,10 @@
 package com.telerikacademy.tms.models.contracts;
 
+import com.telerikacademy.tms.models.tasks.contracts.Historiable;
+
 import java.util.List;
 
-public interface Team {
+public interface Team extends Historiable {
 
 	String getName();
 
