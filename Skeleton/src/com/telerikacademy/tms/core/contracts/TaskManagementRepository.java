@@ -25,4 +25,5 @@ public interface TaskManagementRepository {
 	Story createStory(String title, String description, PriorityType priority, SizeType size);
 	Feedback createFeedback(String title, String description, int rating);
 	<T extends Task> T findElementById(List<T> elements, int id);
+	boolean isUniqueName(String name);
 }

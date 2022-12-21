@@ -113,6 +113,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_RECORD_ID, id)));
 	}
 
+	@Override
+	public boolean isUniqueName(String name) {
+		for (Team team : teams) {
+			if (team.getName().equalsIgnoreCase(name)) {
+				return false;
+			}
+		}
+		for (User user : users) {
+			if (user.getName().equalsIgnoreCase(name)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	//TODO discuss should we add some common interface (to Board, Team, User) to make this method generic, as we will have to search for user, team (and board name);
 	public User findUserByName(String name) {
 		return users.stream()
