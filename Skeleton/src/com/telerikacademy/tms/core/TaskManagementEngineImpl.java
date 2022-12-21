@@ -52,12 +52,10 @@ public class TaskManagementEngineImpl implements Engine {
     private void extractInput(String input) {
         String commandName = commandName(input);
         List<String> parameters = extractCommandParameters(input);
-        for (String parameter : parameters) {
-            System.out.println(parameter);
-        }
-      //  Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
-      //  String executionResult = command.execute(parameters);
-      //  print(executionResult);
+        System.out.println(parameters);
+        Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
+        String executionResult = command.execute(parameters);
+        print(executionResult);
     }
     private List<String> extractCommandParameters(String inputLine) {
         if (inputLine.contains(COMMENT_OPEN_SYMBOL)) {

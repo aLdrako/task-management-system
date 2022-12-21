@@ -1,14 +1,17 @@
-package com.telerikacademy.tms.commands.bugs;
+package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class AddStepsToReproduceBugCommand implements Command {
+public class ShowAllPeople implements Command {
+	private final TaskManagementRepository repository;
 
-	public AddStepsToReproduceBugCommand(TaskManagementRepository repository) {
+	public ShowAllPeople(TaskManagementRepository repository) {
+		this.repository = repository;
 	}
+
 	@Override
 	public String execute(List<String> parameters) {
 		return null;

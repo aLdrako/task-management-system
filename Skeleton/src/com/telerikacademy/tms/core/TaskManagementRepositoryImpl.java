@@ -102,7 +102,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		return feedback;
 	}
 
-
 	/**
 	 * Search by ID all elements which extends Task interface (Bug, Story, Feedback)
 	 */
