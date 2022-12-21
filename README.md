@@ -119,6 +119,58 @@ Please see the Teamwork Guidelines [document](https://learn.telerikacademy.com/m
 
 ### Sample Input
 ```none
+CreatePerson 
+ShowAllPeople
+ShowPersonActivity 
+CreateTeam 
+ShowAllTeams
+ShowTeamActivity 
+AddPersonToTeam 
+ShowAllTeamMembers 
+CreateBoardInTeam 
+ShowAllTeamBoards
+ShowBoardActivity 
+CreateTaskInBoard 
+ChangeStory 
+ChangeBug
+ChangeFeedback
+AssignTask
+UnassignTask
+AddComment
+ListAllTasks
+ListAllBugs
+ListAllStories
+ListAllFeedbacks
+ListTasksWithAssignee
+
+
+
+CreatePerson Ivan
+CreatePerson Petar
+CreateTeam Hackers
+AddPersonToTeam Ivan Hackers
+AddPersonToTeam Petar Hackers
+CreateBoardInTeam Hackers Developers
+CreateBoardInTeam Hackers Staff
+CreateTaskInBoard Developers bug {{Glitching interface}} {{There is an interface that is not working and it is glitching}} High Major
+AddStepsToReproduceBug 1 {{1. First open the app}} {{2. Try to access the database}}
+CreateTaskInBoard Staff story {{Funny story}} {{Once upon a time there was a mouse....}} Medium Small
+CreateTaskInBoard Developers feedback {{Good job}} {{The developer that fixed the glitch from yesterday did a good job}} 8
+AssignTask 1 Ivan
+AssignTask 2 Petar
+AddComment 3 {{Thank you so much for the amazing feedback}} Ivan
+ShowAllPeople
+ShowPersonActivity Ivan
+ShowAllTeamMembers Hackers
+ShowAllTeamBoards Hackers
+ShowTeamActivity Hackers
+ChangeStory 2 status InProgress
+ChangeStory 2 priority Low
+ChangeBug 1 severity Minor
+UnassignTask 1 Ivan
+ShowAllTeams
+ShowBoardActivity Staff
+ListAllTasks
 
 ```
 ### Sample Output
