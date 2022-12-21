@@ -24,12 +24,15 @@ public class TaskManagementEngineImpl implements Engine {
     @Override
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        while (!input.equalsIgnoreCase(TERMINATION_COMMAND)) {
+        while (true) {
+            String input = scanner.nextLine();
             try {
                 if (input.isBlank()) {
                     print(EMPTY_COMMAND_MESSAGE);
                     continue;
+                }
+                if (input.equalsIgnoreCase(TERMINATION_COMMAND)) {
+                    break;
                 }
                 extractInput(input);
             } catch (Exception e) {
@@ -39,7 +42,6 @@ public class TaskManagementEngineImpl implements Engine {
                     print(e.toString());
                 }
             }
-            input = scanner.nextLine();
         }
     }
 
@@ -50,10 +52,12 @@ public class TaskManagementEngineImpl implements Engine {
     private void extractInput(String input) {
         String commandName = commandName(input);
         List<String> parameters = extractCommandParameters(input);
-        print(parameters.toString());
-        Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
-        String executionResult = command.execute(parameters);
-        print(executionResult);
+        for (String parameter : parameters) {
+            System.out.println(parameter);
+        }
+      //  Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
+      //  String executionResult = command.execute(parameters);
+      //  print(executionResult);
     }
     private List<String> extractCommandParameters(String inputLine) {
         if (inputLine.contains(COMMENT_OPEN_SYMBOL)) {
@@ -74,7 +78,7 @@ public class TaskManagementEngineImpl implements Engine {
             int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
             parameters.addAll(Arrays.asList(fullCommand.substring(0, indexOfOpenComment).split(" ")));
             parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
+        //    fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
             fullCommand = fullCommand.replace(fullCommand.substring(0, indexOfCloseComment + 2), "");
         }
         parameters.addAll(Arrays.asList(fullCommand.split(" ")));
