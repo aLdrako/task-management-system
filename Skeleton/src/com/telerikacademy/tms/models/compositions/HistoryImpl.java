@@ -16,6 +16,7 @@ public class HistoryImpl implements History {
 		this.description = description;
 		this.timestamp = LocalDateTime.now();
 	}
+
 	@Override
 	public String getDescription() {
 		return description;

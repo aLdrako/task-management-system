@@ -7,7 +7,6 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 
 import java.util.*;
 
-
 public class TaskManagementEngineImpl implements Engine {
 	public static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty";
 	public static final String TERMINATION_COMMAND = "Exit";

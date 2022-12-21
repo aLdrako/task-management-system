@@ -6,11 +6,12 @@ import com.telerikacademy.tms.commands.enums.CommandType;
 import com.telerikacademy.tms.core.contracts.CommandFactory;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 
+import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseEnum;
+
 public class CommandFactoryImpl implements CommandFactory {
-	private static final String INVALID_COMMAND = "Invalid command name: %s!";
 
 	public Command createCommandFromCommandName(String commandName, TaskManagementRepository repository) {
-		CommandType commandType = CommandType.valueOf(commandName.toUpperCase());
+		CommandType commandType = tryParseEnum(commandName, CommandType.class);
 		switch (commandType) {
 			case CREATEPERSON:
 				return new CreatePerson(repository);
@@ -59,8 +60,7 @@ public class CommandFactoryImpl implements CommandFactory {
 			case LISTTASKSWITHASSIGNEE:
 				return new ListTasksWithAssignee(repository);
 			default:
-				throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));
+				throw new IllegalArgumentException();
 		}
 	}
-
 }

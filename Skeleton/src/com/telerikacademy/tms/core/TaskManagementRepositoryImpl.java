@@ -18,7 +18,6 @@ import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.lang.String.format;
 
