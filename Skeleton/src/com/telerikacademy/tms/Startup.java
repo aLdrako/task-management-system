@@ -1,7 +1,9 @@
 package com.telerikacademy.tms;
 
 import com.telerikacademy.tms.core.TaskManagementEngineImpl;
+import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.Engine;
+import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.TeamImpl;
 import com.telerikacademy.tms.models.UserImpl;
@@ -51,8 +53,24 @@ public class Startup {
 
 	//System.out.println(task3.getStatus());
 
-		Engine engine = new TaskManagementEngineImpl();
-		engine.start();
+//		TaskManagementRepository taskManagementRepository = new TaskManagementRepositoryImpl();
+//		Team team = taskManagementRepository.createTeam("DevOps");
+//		Team team2 = taskManagementRepository.createTeam("Mortals");
+//
+//		Board board = taskManagementRepository.createBoard("Board1");
+//		Board board2 = taskManagementRepository.createBoard("Board2");
+//
+//		User user = taskManagementRepository.createUser("Alexander");
+//		team.addBoard(board2);
+//		team2.addBoard(board2);
+//
+//		var result = taskManagementRepository.findElementByName(taskManagementRepository.getTeams(), "Mortals");
+//		var result2 = taskManagementRepository.findBoardByNameInTeam(team, "Board2");
+//
+//		System.out.println(result);
+
+//		Engine engine = new TaskManagementEngineImpl();
+//		engine.start();
 
 	}
 }

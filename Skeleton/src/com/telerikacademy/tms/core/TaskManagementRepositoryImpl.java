@@ -11,16 +11,15 @@ import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.BugImpl;
 import com.telerikacademy.tms.models.tasks.FeedbackImpl;
 import com.telerikacademy.tms.models.tasks.StoryImpl;
-import com.telerikacademy.tms.models.tasks.contracts.Bug;
-import com.telerikacademy.tms.models.tasks.contracts.Feedback;
-import com.telerikacademy.tms.models.tasks.contracts.Story;
-import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.contracts.*;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.String.format;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	public static final String NO_RECORD_ID = "No record with ID %d";
@@ -29,11 +28,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 	private final List<Team> teams = new ArrayList<>();
 	private final List<User> users = new ArrayList<>();
-
-	//TODO discuss should we include boards in repository or just to access them thru teams (name of a board to be unique in a team, not application)
 	private final List<Board> boards = new ArrayList<>();
-
-	//TODO discuss if we should include all tasks here, or should we access them thru teams -> boards (or thru boards directly)
 	private final List<Task> tasks = new ArrayList<>();
 
 	public TaskManagementRepositoryImpl() {
@@ -110,7 +105,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		return elements.stream()
 				.filter(el -> el.getID() == id)
 				.findFirst()
-				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_RECORD_ID, id)));
+				.orElseThrow(() -> new ElementNotFoundException(format(NO_RECORD_ID, id)));
 	}
 
 	@Override
@@ -128,29 +123,23 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		return true;
 	}
 
-	//TODO discuss should we add some common interface (to Board, Team, User) to make this method generic, as we will have to search for user, team (and board name);
-	public User findUserByName(String name) {
-		return users.stream()
-				.filter(u -> u.getName().equalsIgnoreCase(name))
+	/**
+	 * Use to search Teams and Users by name (unique in application)
+	 */
+	public <T extends Nameable> T findElementByName(List<T> elements, String name) {
+		return elements.stream()
+				.filter(el -> el.getName().equalsIgnoreCase(name))
 				.findFirst()
-				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
+				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
 	}
 
-	public Team findTeamByName(String name) {
-		return teams.stream()
-				.filter(u -> u.getName().equalsIgnoreCase(name))
-				.findFirst()
-				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
-	}
-
-	public Board findBoardByName(String name) {
-		/**
-		 *  Nested search -> search boards in each team
-		 */
-		return teams.stream()
-				.flatMap(team -> team.getBoards().stream())
+	/**
+	 * Use to search Boards by name, by passing specific team (unique in teams)
+	 */
+	public Board findBoardByNameInTeam(Team team, String name) {
+		return team.getBoards().stream()
 				.filter(board -> board.getName().equalsIgnoreCase(name))
 				.findFirst()
-				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
+				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
 	}
 }
