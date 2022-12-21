@@ -91,7 +91,7 @@ public class BoardImpl implements Board {
 		}
 		result.append("Activity History").append(System.lineSeparator());
 		for (History history : getHistories()) {
-			result.append(history.getHistory()).append(System.lineSeparator());
+			result.append(history).append(System.lineSeparator());
 		}
 
 		return result.toString();

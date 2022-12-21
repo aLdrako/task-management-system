@@ -16,13 +16,13 @@ public class HistoryImpl implements History {
 		this.description = description;
 		this.timestamp = LocalDateTime.now();
 	}
-
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
 	@Override
-	public String getHistory() {
+	public String toString() {
 		return format("[%s] %s", timestamp.format(formatter), this.getDescription());
 	}
 }

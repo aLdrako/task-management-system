@@ -27,7 +27,7 @@ public class ShowPersonActivity implements Command {
 		StringBuilder builder = new StringBuilder();
 		User user = repository.findUserByName(name);
 		for (History activityHistory : user.getHistories()) {
-			builder.append(activityHistory.getHistory()).append(System.lineSeparator());
+			builder.append(activityHistory).append(System.lineSeparator());
 		}
 		return builder.toString();
 	}
