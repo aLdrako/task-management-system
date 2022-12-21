@@ -8,7 +8,7 @@ import com.telerikacademy.tms.models.tasks.contracts.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public class BoardImpl implements Board {
@@ -82,14 +82,17 @@ public class BoardImpl implements Board {
 		StringBuilder result = new StringBuilder();
 
 		result.append(this.getClass().getInterfaces()[0].getSimpleName())
-				.append(": ").append(this.getName()).append(System.lineSeparator());
+				.append(": ").append(this.getName())
+				.append(" contains (").append(this.getTasks().size())
+				.append(") tasks").append(System.lineSeparator());
 
-		result.append("List of Tasks").append(System.lineSeparator());
 		for (Task task : getTasks()) {
-			result.append(task.getID()).append(" ").append(task.getTitle()).append(" | Status: ").append(task.getStatus())
-					.append(System.lineSeparator());
+			result.append("ID -> [").append(task.getID()).append("] ")
+					.append(task.getTitle()).append(" | Status: ")
+					.append(task.getStatus()).append(System.lineSeparator());
 		}
-		result.append("Activity History").append(System.lineSeparator());
+
+		result.append("<<< Activity History >>>".toUpperCase()).append(System.lineSeparator());
 		for (History history : getHistories()) {
 			result.append(history.getHistory()).append(System.lineSeparator());
 		}

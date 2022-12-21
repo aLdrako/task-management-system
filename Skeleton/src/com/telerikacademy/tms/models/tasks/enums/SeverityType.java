@@ -10,10 +10,14 @@ public enum SeverityType {
 	@Override
 	public String toString() {
 		switch (this) {
-			case CRITICAL: return "Critical";
-			case MAJOR: return "Major";
-			case MINOR: return "Minor";
-			default: throw new InvalidEnumArgument("No such severity type");
+			case CRITICAL:
+				return "Critical";
+			case MAJOR:
+				return "Major";
+			case MINOR:
+				return "Minor";
+			default:
+				throw new InvalidEnumArgument("No such severity type");
 		}
 	}
 }

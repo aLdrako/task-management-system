@@ -1,6 +1,5 @@
 package com.telerikacademy.tms.models.tasks.contracts;
 
-import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 

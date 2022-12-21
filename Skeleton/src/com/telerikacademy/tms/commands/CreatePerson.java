@@ -2,7 +2,6 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
@@ -28,7 +27,7 @@ public class CreatePerson implements Command {
 	}
 
 	private String createPerson(String name) {
-		if (!repository.isUniqueName(name)) {
+		if (!repository.isNameUnique(name)) {
 			throw new IllegalArgumentException(DUPLICATE_NAME_MESSAGE);
 		}
 		User user = repository.createUser(name);

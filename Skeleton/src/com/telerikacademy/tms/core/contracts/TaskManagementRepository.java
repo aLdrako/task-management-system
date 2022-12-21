@@ -12,17 +12,32 @@ import java.util.List;
 
 public interface TaskManagementRepository {
 	List<Team> getTeams();
+
 	List<User> getUsers();
+
 	List<Board> getBoards();
+
 	List<Task> getTasks();
+
 	Team createTeam(String name);
+
 	User createUser(String name);
+
 	Board createBoard(String name);
+
 	Bug createBug(String title, String description, PriorityType priority, SeverityType severity);
+
 	Story createStory(String title, String description, PriorityType priority, SizeType size);
+
 	Feedback createFeedback(String title, String description, int rating);
+
 	<T extends Task> T findElementById(List<T> elements, int id);
+
 	<T extends Nameable> T findElementByName(List<T> elements, String name);
+
 	Board findBoardByNameInTeam(Team team, String name);
-	boolean isUniqueName(String name);
+
+	boolean isBoardNameUniqueInTeam(Team team, String name);
+
+	boolean isNameUnique(String name);
 }

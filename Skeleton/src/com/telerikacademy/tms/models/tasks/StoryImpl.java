@@ -1,11 +1,10 @@
 package com.telerikacademy.tms.models.tasks;
 
-import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
-import com.telerikacademy.tms.models.tasks.enums.*;
-
-import static java.lang.String.format;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
+import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 

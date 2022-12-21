@@ -5,11 +5,13 @@ import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
+import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public class TeamImpl implements Team {
@@ -109,19 +111,13 @@ public class TeamImpl implements Team {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder();
 
-		result.append(this.getClass().getInterfaces()[0].getSimpleName())
-				.append(": ").append(this.getName()).append(System.lineSeparator());
-		result.append("List of Users: ");
-		for (User user : getUsers()) {
-			result.append(user.getName()).append(", ");
-		}
-		result.append(System.lineSeparator()).append("List of Boards: ");
-		for (Board board : getBoards()) {
-			result.append(board.getName()).append(", ");
-		}
-
-		return result.toString();
+		return this.getClass().getInterfaces()[0].getSimpleName() +
+				": " + this.getName() + System.lineSeparator() +
+				"Team has (" + this.getUsers().size() + ") users -> " +
+				this.getUsers().stream().map(Nameable::getName).collect(Collectors.joining(", ")) +
+				System.lineSeparator() +
+				"Team contains (" + this.getBoards().size() + ") boards -> " +
+				this.getBoards().stream().map(Nameable::getName).collect(Collectors.joining(", "));
 	}
 }

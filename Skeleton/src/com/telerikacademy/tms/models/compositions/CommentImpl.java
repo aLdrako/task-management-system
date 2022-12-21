@@ -2,7 +2,7 @@ package com.telerikacademy.tms.models.compositions;
 
 import com.telerikacademy.tms.models.compositions.contracts.Comment;
 
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public class CommentImpl implements Comment {

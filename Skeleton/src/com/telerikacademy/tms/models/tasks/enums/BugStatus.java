@@ -10,9 +10,12 @@ public enum BugStatus implements Status {
 	@Override
 	public String toString() {
 		switch (this) {
-			case ACTIVE: return "Active";
-			case FIXED: return "Fixed";
-			default: throw new InvalidEnumArgument("No such status");
+			case ACTIVE:
+				return "Active";
+			case FIXED:
+				return "Fixed";
+			default:
+				throw new InvalidEnumArgument("No such status");
 		}
 	}
 }

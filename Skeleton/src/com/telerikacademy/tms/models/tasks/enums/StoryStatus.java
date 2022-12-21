@@ -11,10 +11,14 @@ public enum StoryStatus implements Status {
 	@Override
 	public String toString() {
 		switch (this) {
-			case NOT_DONE: return "Not Done";
-			case IN_PROGRESS: return "InProgress";
-			case DONE: return "Done";
-			default: throw new InvalidEnumArgument("No such status");
+			case NOT_DONE:
+				return "Not Done";
+			case IN_PROGRESS:
+				return "InProgress";
+			case DONE:
+				return "Done";
+			default:
+				throw new InvalidEnumArgument("No such status");
 		}
 	}
 }

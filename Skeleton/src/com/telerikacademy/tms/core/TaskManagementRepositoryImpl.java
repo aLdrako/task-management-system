@@ -18,21 +18,18 @@ import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.lang.String.format;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
-	public static final String NO_RECORD_ID = "No record with ID %d";
+	public static final String NO_RECORD_ID = "No task with ID %d";
 	private final static String NO_SUCH_ELEMENT = "There is no element with name %s!";
 	private int nextId;
 
 	private final List<Team> teams = new ArrayList<>();
 	private final List<User> users = new ArrayList<>();
-
-	//TODO discuss should we include boards in repository or just to access them thru teams (name of a board to be unique in a team, not application)
 	private final List<Board> boards = new ArrayList<>();
-
-	//TODO discuss if we should include all tasks here, or should we access them thru teams -> boards (or thru boards directly)
 	private final List<Task> tasks = new ArrayList<>();
 
 	public TaskManagementRepositoryImpl() {
@@ -112,19 +109,20 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 				.orElseThrow(() -> new ElementNotFoundException(format(NO_RECORD_ID, id)));
 	}
 
-	@Override
-	public boolean isUniqueName(String name) {
-		for (Team team : teams) {
-			if (team.getName().equalsIgnoreCase(name)) {
-				return false;
-			}
-		}
-		for (User user : users) {
-			if (user.getName().equalsIgnoreCase(name)) {
-				return false;
-			}
-		}
-		return true;
+	/**
+	 * Use to check if name is unique for Team and User
+	 */
+	public boolean isNameUnique(String name) {
+		boolean sameTeamName = getTeams().stream().noneMatch(n -> n.getName().equalsIgnoreCase(name));
+		boolean sameUserName = getUsers().stream().noneMatch(n -> n.getName().equalsIgnoreCase(name));
+		return sameTeamName && sameUserName;
+	}
+
+	/**
+	 * Use to check if board name is unique in specified team
+	 */
+	public boolean isBoardNameUniqueInTeam(Team team, String name) {
+		return team.getBoards().stream().noneMatch(board -> board.getName().equalsIgnoreCase(name));
 	}
 
 	/**

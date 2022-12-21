@@ -1,6 +1,5 @@
 package com.telerikacademy.tms.models.tasks;
 
-import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
@@ -9,8 +8,6 @@ import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.String.format;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 
