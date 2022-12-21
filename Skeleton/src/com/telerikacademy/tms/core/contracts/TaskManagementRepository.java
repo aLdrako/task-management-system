@@ -26,4 +26,7 @@ public interface TaskManagementRepository {
 	Feedback createFeedback(String title, String description, int rating);
 	<T extends Task> T findElementById(List<T> elements, int id);
 	boolean isUniqueName(String name);
+	User findUserByName(String name);
+	Board findBoardByName(String name);
+	Team findTeamByName(String name);
 }

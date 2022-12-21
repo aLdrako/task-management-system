@@ -129,20 +129,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	//TODO discuss should we add some common interface (to Board, Team, User) to make this method generic, as we will have to search for user, team (and board name);
+	@Override
 	public User findUserByName(String name) {
 		return users.stream()
 				.filter(u -> u.getName().equalsIgnoreCase(name))
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
 	}
-
+	@Override
 	public Team findTeamByName(String name) {
 		return teams.stream()
 				.filter(u -> u.getName().equalsIgnoreCase(name))
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(String.format(NO_SUCH_ELEMENT, name)));
 	}
-
+	@Override
 	public Board findBoardByName(String name) {
 		/**
 		 *  Nested search -> search boards in each team
