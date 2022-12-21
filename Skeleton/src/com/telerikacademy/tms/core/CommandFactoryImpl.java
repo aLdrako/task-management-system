@@ -1,21 +1,21 @@
 package com.telerikacademy.tms.core;
 
-import com.telerikacademy.tms.commands.Board.CreateBoardInTeamCommand;
-import com.telerikacademy.tms.commands.Board.ShowBoardActivityCommand;
-import com.telerikacademy.tms.commands.Bugs.*;
-import com.telerikacademy.tms.commands.Contracts.Command;
-import com.telerikacademy.tms.commands.Enums.CommandType;
-import com.telerikacademy.tms.commands.Feedback.ChangeFeedbackRatingCommand;
-import com.telerikacademy.tms.commands.Feedback.ChangeFeedbackStatusCommand;
-import com.telerikacademy.tms.commands.Feedback.CreateFeedbackCommand;
-import com.telerikacademy.tms.commands.Feedback.ListFeedbackCommand;
-import com.telerikacademy.tms.commands.Person.AddPersonToTeamCommand;
-import com.telerikacademy.tms.commands.Person.CreatePersonCommand;
-import com.telerikacademy.tms.commands.Person.ShowAllPeopleCommand;
-import com.telerikacademy.tms.commands.Person.ShowPersonActivityCommand;
-import com.telerikacademy.tms.commands.Story.*;
-import com.telerikacademy.tms.commands.Task.*;
-import com.telerikacademy.tms.commands.Team.*;
+import com.telerikacademy.tms.commands.board.CreateBoardInTeamCommand;
+import com.telerikacademy.tms.commands.board.ShowBoardActivityCommand;
+import com.telerikacademy.tms.commands.bugs.*;
+import com.telerikacademy.tms.commands.contracts.Command;
+import com.telerikacademy.tms.commands.enums.CommandType;
+import com.telerikacademy.tms.commands.feedback.ChangeFeedbackRatingCommand;
+import com.telerikacademy.tms.commands.feedback.ChangeFeedbackStatusCommand;
+import com.telerikacademy.tms.commands.feedback.CreateFeedbackCommand;
+import com.telerikacademy.tms.commands.feedback.ListFeedbackCommand;
+import com.telerikacademy.tms.commands.person.AddPersonToTeamCommand;
+import com.telerikacademy.tms.commands.person.CreatePersonCommand;
+import com.telerikacademy.tms.commands.person.ShowAllPeopleCommand;
+import com.telerikacademy.tms.commands.person.ShowPersonActivityCommand;
+import com.telerikacademy.tms.commands.story.*;
+import com.telerikacademy.tms.commands.task.*;
+import com.telerikacademy.tms.commands.team.*;
 import com.telerikacademy.tms.core.contracts.CommandFactory;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 
@@ -69,6 +69,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ChangeFeedbackRatingCommand(repository);
             case CHANGEFEEDBACKSTATUS:
                 return new ChangeFeedbackStatusCommand(repository);
+            case ADDSTEPSTOREPRODUCEBUG:
+                return new AddStepsToReproduceBugCommand(repository);
             case ASSIGNTASK:
                 return new AssignTaskToPersonCommand(repository);
             case UNASSIGNTASK:

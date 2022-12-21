@@ -33,7 +33,7 @@ public class TeamImpl implements Team {
 		this.users = new ArrayList<>();
 		this.boards = new ArrayList<>();
 		this.activityHistory = new ArrayList<>();
-		populateHistory(new HistoryImpl(NEW_INSTANCE_MESSAGE));
+		this.activityHistory.add(new HistoryImpl(NEW_INSTANCE_MESSAGE));
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class TeamImpl implements Team {
 			}
 		}
 		this.users.add(user);
-		this.populateHistory(new HistoryImpl(format("User %s added to the team %s", user.getName(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format("User %s added to the team %s", user.getName(), this.getName())));
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class TeamImpl implements Team {
 		for (User u : getUsers()) {
 			if (u.getName().equals(user.getName())) {
 				this.users.remove(user);
-				this.populateHistory(new HistoryImpl(format("User %s removed from the team %s", user.getName(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format("User %s removed from the team %s", user.getName(), this.getName())));
 				return;
 			}
 		}
@@ -87,7 +87,7 @@ public class TeamImpl implements Team {
 			}
 		}
 		this.boards.add(board);
-		this.populateHistory(new HistoryImpl(format("Board %s added to the team %s", board.getName(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format("Board %s added to the team %s", board.getName(), this.getName())));
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class TeamImpl implements Team {
 		for (Board b : getBoards()) {
 			if (b.getName().equals(board.getName())) {
 				this.boards.remove(board);
-				this.populateHistory(new HistoryImpl(format("Board %s removed from the team %s", board.getName(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format("Board %s removed from the team %s", board.getName(), this.getName())));
 				return;
 			}
 		}
@@ -105,11 +105,6 @@ public class TeamImpl implements Team {
 	@Override
 	public List<History> getHistories() {
 		return new ArrayList<>(activityHistory);
-	}
-
-	@Override
-	public void populateHistory(History history) {
-		this.activityHistory.add(history);
 	}
 
 	@Override

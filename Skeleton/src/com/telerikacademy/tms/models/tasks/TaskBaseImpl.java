@@ -76,8 +76,7 @@ public abstract class TaskBaseImpl implements Task {
 		return new ArrayList<>(changesHistory);
 	}
 
-	@Override
-	public void populateHistory(History history) {
+	private void populateHistory(History history) {
 		this.changesHistory.add(history);
 	}
 

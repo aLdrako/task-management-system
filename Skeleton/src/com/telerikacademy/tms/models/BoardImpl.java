@@ -31,7 +31,7 @@ public class BoardImpl implements Board {
 		setName(name);
 		this.tasks = new ArrayList<>();
 		this.activityHistory = new ArrayList<>();
-		populateHistory(new HistoryImpl(NEW_INSTANCE_MESSAGE));
+		this.activityHistory.add(new HistoryImpl(NEW_INSTANCE_MESSAGE));
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class BoardImpl implements Board {
 			}
 		}
 		this.tasks.add(task);
-		this.populateHistory(new HistoryImpl(format("Task %s added to board %s", task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format("Task %s added to board %s", task.getTitle(), this.getName())));
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class BoardImpl implements Board {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
 				this.tasks.remove(task);
-				this.populateHistory(new HistoryImpl(format("Task %s removed from board %s", task.getTitle(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format("Task %s removed from board %s", task.getTitle(), this.getName())));
 				return;
 			}
 		}
@@ -75,11 +75,6 @@ public class BoardImpl implements Board {
 	@Override
 	public List<History> getHistories() {
 		return new ArrayList<>(activityHistory);
-	}
-
-	@Override
-	public void populateHistory(History history) {
-		this.activityHistory.add(history);
 	}
 
 	@Override

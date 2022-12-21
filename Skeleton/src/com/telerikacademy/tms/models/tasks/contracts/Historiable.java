@@ -8,5 +8,4 @@ public interface Historiable {
 
 	List<History> getHistories();
 
-	void populateHistory(History history);
 }

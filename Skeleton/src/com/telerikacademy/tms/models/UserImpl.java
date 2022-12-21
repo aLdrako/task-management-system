@@ -30,7 +30,7 @@ public class UserImpl implements User {
 		setName(name);
 		this.tasks = new ArrayList<>();
 		this.activityHistory = new ArrayList<>();
-		populateHistory(new HistoryImpl(NEW_INSTANCE_MESSAGE));
+		this.activityHistory.add(new HistoryImpl(NEW_INSTANCE_MESSAGE));
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class UserImpl implements User {
 			}
 		}
 		this.tasks.add(task);
-		this.populateHistory(new HistoryImpl(format("Task %s assigned to %s", task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format("Task %s assigned to %s", task.getTitle(), this.getName())));
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class UserImpl implements User {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
 				this.tasks.remove(task);
-				this.populateHistory(new HistoryImpl(format("Task %s unassigned from %s", task.getTitle(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format("Task %s unassigned from %s", task.getTitle(), this.getName())));
 				return;
 			}
 		}
@@ -74,11 +74,6 @@ public class UserImpl implements User {
 	@Override
 	public List<History> getHistories() {
 		return new ArrayList<>(activityHistory);
-	}
-
-	@Override
-	public void populateHistory(History history) {
-		this.activityHistory.add(history);
 	}
 
 	@Override

@@ -1,12 +1,11 @@
 package com.telerikacademy.tms.core;
 
+import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.CommandFactory;
 import com.telerikacademy.tms.core.contracts.Engine;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 
 import java.util.*;
-import java.util.stream.Stream;
-
 
 
 public class TaskManagementEngineImpl implements Engine {
@@ -52,9 +51,9 @@ public class TaskManagementEngineImpl implements Engine {
         String commandName = commandName(input);
         List<String> parameters = extractCommandParameters(input);
         print(parameters.toString());
-       // Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
-       // String executionResult = command.execute(parameters);
-       // print(executionResult);
+        Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
+        String executionResult = command.execute(parameters);
+        print(executionResult);
     }
     private List<String> extractCommandParameters(String inputLine) {
         if (inputLine.contains(COMMENT_OPEN_SYMBOL)) {
@@ -75,7 +74,7 @@ public class TaskManagementEngineImpl implements Engine {
             int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
             parameters.addAll(Arrays.asList(fullCommand.substring(0, indexOfOpenComment).split(" ")));
             parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-      //      fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
+            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
             fullCommand = fullCommand.replace(fullCommand.substring(0, indexOfCloseComment + 2), "");
         }
         parameters.addAll(Arrays.asList(fullCommand.split(" ")));
