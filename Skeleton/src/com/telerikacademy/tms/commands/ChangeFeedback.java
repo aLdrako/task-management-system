@@ -25,7 +25,7 @@ public class ChangeFeedback implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String typeOfChange = parameters.get(1);
@@ -43,17 +43,23 @@ public class ChangeFeedback implements Command {
 			throw new ElementNotFoundException(e.getMessage());
 		}
 
-		switch (typeOfChange) {
-			case "status":
-				FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
-				feedback.setStatus(feedbackStatus);
-				return getFormatedString(id, feedbackStatus, false);
-			case "rating":
-				Rating rating = tryParseEnum(parameters.get(2), Rating.class);
-				feedback.setRating(rating);
-				return getFormatedString(id, rating, true);
-			default:
-				throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+		try {
+			switch (typeOfChange) {
+				case "status":
+					FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
+					if (feedback.getStatus().equals(feedbackStatus)) throw new InvalidUserInputException();
+					feedback.setStatus(feedbackStatus);
+					return getFormatedString(id, feedbackStatus, false);
+				case "rating":
+					Rating rating = tryParseEnum(convertDigitToWord(parameters.get(2)), Rating.class);
+					if (feedback.getRating().equals(rating)) throw new InvalidUserInputException();
+					feedback.setRating(rating);
+					return getFormatedString(id, rating, true);
+				default:
+					throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+			}
+		} catch (InvalidUserInputException e) {
+			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
 	}
 
