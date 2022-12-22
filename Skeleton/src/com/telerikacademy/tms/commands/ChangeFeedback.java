@@ -11,7 +11,7 @@ import com.telerikacademy.tms.models.tasks.enums.Rating;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 import static java.lang.String.format;
 
 public class ChangeFeedback implements Command {
@@ -43,17 +43,23 @@ public class ChangeFeedback implements Command {
 			throw new ElementNotFoundException(e.getMessage());
 		}
 
-		switch (typeOfChange) {
-			case "status":
-				FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
-				feedback.setStatus(feedbackStatus);
-				return getFormatedString(id, feedbackStatus, false);
-			case "rating":
-				Rating rating = tryParseEnum(parameters.get(2), Rating.class);
-				feedback.setRating(rating);
-				return getFormatedString(id, rating, true);
-			default:
-				throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+		try {
+			switch (typeOfChange) {
+				case "status":
+					FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
+					if (feedback.getStatus().equals(feedbackStatus)) throw new InvalidUserInputException();
+					feedback.setStatus(feedbackStatus);
+					return getFormatedString(id, feedbackStatus, false);
+				case "rating":
+					Rating rating = tryParseEnum(convertDigitToWord(parameters.get(2)), Rating.class);
+					if (feedback.getRating().equals(rating)) throw new InvalidUserInputException();
+					feedback.setRating(rating);
+					return getFormatedString(id, rating, true);
+				default:
+					throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+			}
+		} catch (InvalidUserInputException e) {
+			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
 	}
 

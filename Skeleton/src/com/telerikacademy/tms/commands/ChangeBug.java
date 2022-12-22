@@ -12,7 +12,7 @@ import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 import static java.lang.String.format;
 
 public class ChangeBug implements Command {
@@ -44,21 +44,28 @@ public class ChangeBug implements Command {
 			throw new ElementNotFoundException(e.getMessage());
 		}
 
-		switch (typeOfChange) {
-			case "status":
-				BugStatus bugStatus = tryParseEnum(parameters.get(2), BugStatus.class);
-				bug.setStatus(bugStatus);
-				return getFormatedString(id, bugStatus, false);
-			case "priority":
-				PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-				bug.setPriority(priorityType);
-				return getFormatedString(id, priorityType, true);
-			case "severity":
-				SeverityType severityType = tryParseEnum(parameters.get(2), SeverityType.class);
-				bug.setSeverity(severityType);
-				return getFormatedString(id, severityType, true);
-			default:
-				throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+		try {
+			switch (typeOfChange) {
+				case "status":
+					BugStatus bugStatus = tryParseEnum(parameters.get(2), BugStatus.class);
+					if (bug.getStatus().equals(bugStatus)) throw new InvalidUserInputException();
+					bug.setStatus(bugStatus);
+					return getFormatedString(id, bugStatus, false);
+				case "priority":
+					PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
+					if (bug.getPriority().equals(priorityType)) throw new InvalidUserInputException();
+					bug.setPriority(priorityType);
+					return getFormatedString(id, priorityType, true);
+				case "severity":
+					SeverityType severityType = tryParseEnum(parameters.get(2), SeverityType.class);
+					if (bug.getSeverity().equals(severityType)) throw new InvalidUserInputException();
+					bug.setSeverity(severityType);
+					return getFormatedString(id, severityType, true);
+				default:
+					throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+			}
+		} catch (InvalidUserInputException e) {
+			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
 	}
 

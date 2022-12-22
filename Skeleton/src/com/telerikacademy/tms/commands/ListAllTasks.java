@@ -10,7 +10,6 @@ import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

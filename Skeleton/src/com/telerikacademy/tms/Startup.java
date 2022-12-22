@@ -2,15 +2,6 @@ package com.telerikacademy.tms;
 
 import com.telerikacademy.tms.core.TaskManagementEngineImpl;
 import com.telerikacademy.tms.core.contracts.Engine;
-import com.telerikacademy.tms.models.tasks.StoryImpl;
-import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.SizeType;
-import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
-import jdk.net.SocketFlow;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Startup {
 	public static void main(String[] args) {
@@ -22,6 +13,7 @@ public class Startup {
 	//			SizeType.LARGE);
 	//	story.setStatus(StoryStatus.INPROGRESS);
 	//	System.out.println(story.getHistories());
+
 
 //	    Team team = new TeamImpl("Team 12");
 //
@@ -55,8 +47,7 @@ public class Startup {
 //	    System.out.println(team);
 //	    System.out.println();
 //	    System.out.println(user1);
-//	    System.out.println(board1);
-//
+//	    System.out.println(board1);//
 //	    System.out.println(task3.getStatus());
 
 //		TaskManagementRepository taskManagementRepository = new TaskManagementRepositoryImpl();
@@ -72,9 +63,16 @@ public class Startup {
 //
 //		var result = taskManagementRepository.findElementByName(taskManagementRepository.getTeams(), "Mortals");
 //		var result2 = taskManagementRepository.findBoardByNameInTeam(team, "Board2");
-//
 //		System.out.println(result);
 
+//		taskManagementRepository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+//
+//		Command command = new ChangeFeedback(taskManagementRepository);
+//		String output = command.execute(List.of("1", "rating", "6"));
+//		String output2 = command.execute(List.of("1", "rating", "6"));
+//
+//		System.out.println(output);
+//		System.out.println(output2);
 
 	}
 }

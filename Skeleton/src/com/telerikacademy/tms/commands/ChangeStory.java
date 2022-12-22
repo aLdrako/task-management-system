@@ -12,7 +12,7 @@ import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 import static java.lang.String.format;
 
 public class ChangeStory implements Command {
@@ -44,21 +44,28 @@ public class ChangeStory implements Command {
 			throw new ElementNotFoundException(e.getMessage());
 		}
 
-		switch (typeOfChange) {
-			case "status":
-				StoryStatus storyStatus = tryParseEnum(parameters.get(2), StoryStatus.class);
-				story.setStatus(storyStatus);
-				return getFormatedString(id, storyStatus, false);
-			case "priority":
-				PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-				story.setPriority(priorityType);
-				return getFormatedString(id, priorityType, true);
-			case "size":
-				SizeType sizeType = tryParseEnum(parameters.get(2), SizeType.class);
-				story.setSize(sizeType);
-				return getFormatedString(id, sizeType, true);
-			default:
-				throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+		try {
+			switch (typeOfChange) {
+				case "status":
+					StoryStatus storyStatus = tryParseEnum(parameters.get(2), StoryStatus.class);
+					if (story.getStatus().equals(storyStatus)) throw new InvalidUserInputException();
+					story.setStatus(storyStatus);
+					return getFormatedString(id, storyStatus, false);
+				case "priority":
+					PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
+					if (story.getPriority().equals(priorityType)) throw new InvalidUserInputException();
+					story.setPriority(priorityType);
+					return getFormatedString(id, priorityType, true);
+				case "size":
+					SizeType sizeType = tryParseEnum(parameters.get(2), SizeType.class);
+					if (story.getSize().equals(sizeType)) throw new InvalidUserInputException();
+					story.setSize(sizeType);
+					return getFormatedString(id, sizeType, true);
+				default:
+					throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+			}
+		} catch (InvalidUserInputException e) {
+			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
 	}
 
