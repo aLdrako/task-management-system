@@ -19,7 +19,7 @@ public class ListAllTasks implements Command {
 	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 3;
 	public static final String INVALID_PARAMETER_MESSAGE = "Invalid parameter for listing";
 	public static final String LIST_ALREADY_SORTED = "List has already been sorted.";
-	public static final String TITLE_DOES_NOT_EXIST = "This title does not exist.";
+	public static final String TITLE_DOES_NOT_EXIST = "There is not task that contains the given title.";
 
 	private final TaskManagementRepository repository;
 
@@ -56,7 +56,7 @@ public class ListAllTasks implements Command {
 
 	private List<Task> filterTasks(String title) {
 		if (!titleContains(title)){
-			throw new IllegalArgumentException(TITLE_DOES_NOT_EXIST);
+			throw new InvalidUserInputException(TITLE_DOES_NOT_EXIST);
 		}
 		return repository.getTasks()
 				.stream()
