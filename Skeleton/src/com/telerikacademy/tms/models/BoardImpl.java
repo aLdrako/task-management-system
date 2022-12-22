@@ -6,6 +6,7 @@ import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;

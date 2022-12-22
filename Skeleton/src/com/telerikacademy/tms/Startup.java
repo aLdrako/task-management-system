@@ -3,11 +3,14 @@ package com.telerikacademy.tms;
 import com.telerikacademy.tms.core.TaskManagementEngineImpl;
 import com.telerikacademy.tms.core.contracts.Engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Startup {
 	public static void main(String[] args) {
 
-		Engine engine = new TaskManagementEngineImpl();
-		engine.start();
+	//	Engine engine = new TaskManagementEngineImpl();
+	//	engine.start();
 
 //	    Team team = new TeamImpl("Team 12");
 //
@@ -60,6 +63,9 @@ public class Startup {
 //		var result2 = taskManagementRepository.findBoardByNameInTeam(team, "Board2");
 //
 //		System.out.println(result);
+		List<String> parameters = new ArrayList<>();
+		parameters.add("dsad");
+		System.out.println(parameters.get(1));
 
 	}
 }

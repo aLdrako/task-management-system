@@ -100,4 +100,8 @@ public abstract class TaskBaseImpl implements Task {
 		}
 	}
 
+	@Override
+	public int compareTo(Task o) {
+		return getTitle().compareTo(o.getTitle());
+	}
 }

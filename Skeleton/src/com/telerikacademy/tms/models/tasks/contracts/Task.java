@@ -1,6 +1,6 @@
 package com.telerikacademy.tms.models.tasks.contracts;
 
-public interface Task extends Historiable, Commentable {
+public interface Task extends Historiable, Commentable, Comparable<Task> {
 	int getID();
 
 	String getTitle();
