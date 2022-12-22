@@ -2,6 +2,7 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
+import com.telerikacademy.tms.exceptions.DuplicateElementException;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
@@ -26,7 +27,7 @@ public class CreateTeam implements Command {
 
 	private String createTeam(String name) {
 		if (!repository.isNameUnique(name)) {
-			throw new IllegalArgumentException(DUPLICATE_NAME_MESSAGE);
+			throw new DuplicateElementException(DUPLICATE_NAME_MESSAGE);
 		}
 		Team team = repository.createTeam(name);
 		return String.format(TEAM_CREATED_MESSAGE, team.getName());
