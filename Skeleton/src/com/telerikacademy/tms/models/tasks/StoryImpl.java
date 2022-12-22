@@ -7,7 +7,6 @@ import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
-
 	private PriorityType priority;
 	private SizeType size;
 	private User assignee;

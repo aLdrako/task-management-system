@@ -1,6 +1,5 @@
 package com.telerikacademy.tms.models.tasks;
 
-import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.compositions.contracts.History;
@@ -14,7 +13,6 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public abstract class TaskBaseImpl implements Task {
-
 	private static final int TITLE_MIN_LEN = 10;
 	private static final int TITLE_MAX_LEN = 50;
 	private static final int DESCRIPTION_MIN_LEN = 10;

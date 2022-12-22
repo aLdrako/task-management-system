@@ -9,9 +9,9 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 public class CreateTeam implements Command {
-	public static final int EXPECTED_NUMBER_PARAMETERS = 1;
-	public static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. Please enter a unique name!";
-	public static final String TEAM_CREATED_MESSAGE = "Team with a name %s was created.";
+	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
+	private static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. Please enter a unique name!";
+	private static final String TEAM_CREATED_MESSAGE = "Team with a name %s was created.";
 	private final TaskManagementRepository repository;
 
 	public CreateTeam(TaskManagementRepository repository) {

@@ -8,8 +8,8 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import java.util.*;
 
 public class TaskManagementEngineImpl implements Engine {
-	public static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty";
-	public static final String TERMINATION_COMMAND = "Exit";
+	private static final String EMPTY_COMMAND_MESSAGE = "Command cannot be empty";
+	private static final String TERMINATION_COMMAND = "Exit";
 	private static final String COMMENT_OPEN_SYMBOL = "{{";
 	private static final String COMMENT_CLOSE_SYMBOL = "}}";
 
@@ -62,15 +62,7 @@ public class TaskManagementEngineImpl implements Engine {
 			return extractCommentParameters(inputLine);
 		}
 		String[] commandParts = inputLine.split(" ");
-
 		return new ArrayList<>(Arrays.asList(commandParts).subList(1, commandParts.length));
-
-//		String[] commandParts = inputLine.split(" ");
-//		List<String> parameters = new ArrayList<>();
-//		for (int i = 1; i < commandParts.length; i++) {
-//			parameters.add(commandParts[i]);
-//		}
-//		return parameters;
 	}
 
 	public List<String> extractCommentParameters(String fullCommand) {
@@ -88,7 +80,6 @@ public class TaskManagementEngineImpl implements Engine {
 		parameters.remove(0);
 		return parameters;
 	}
-
 
 	private String commandName(String input) {
 		return input.split(" ")[0];

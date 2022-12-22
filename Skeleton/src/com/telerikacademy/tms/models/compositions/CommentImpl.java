@@ -7,8 +7,8 @@ import static java.lang.String.format;
 
 public class CommentImpl implements Comment {
 
-	public static final int COMMENT_MIN_LEN = 3;
-	public static final int COMMENT_MAX_LEN = 200;
+	private static final int COMMENT_MIN_LEN = 3;
+	private static final int COMMENT_MAX_LEN = 200;
 	private static final String COMMENT_LEN_ERR = format(
 			"Comment must be between %d and %d characters long!",
 			COMMENT_MIN_LEN,

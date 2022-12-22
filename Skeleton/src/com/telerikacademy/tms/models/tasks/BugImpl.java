@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
-
 	private final List<String> steps = new ArrayList<>();
 	private PriorityType priority;
 	private SeverityType severity;

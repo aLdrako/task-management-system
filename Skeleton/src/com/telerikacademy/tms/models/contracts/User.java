@@ -7,7 +7,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Task;
 import java.util.List;
 
 public interface User extends Nameable, Historiable {
-
 	List<Task> getTasks();
 
 	void assignTask(Task task);

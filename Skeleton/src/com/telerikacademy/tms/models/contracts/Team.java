@@ -6,7 +6,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import java.util.List;
 
 public interface Team extends Nameable, Historiable {
-
 	List<User> getUsers();
 
 	List<Board> getBoards();

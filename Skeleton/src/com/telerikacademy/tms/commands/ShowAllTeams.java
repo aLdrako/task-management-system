@@ -8,7 +8,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowAllTeams implements Command {
-	public static final int EXPECTED_NUMBER_PARAMETERS = 0;
+	private static final int EXPECTED_NUMBER_PARAMETERS = 0;
 	private final TaskManagementRepository repository;
 
 	public ShowAllTeams(TaskManagementRepository repository) {

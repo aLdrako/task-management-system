@@ -6,15 +6,12 @@ import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
-import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ParsingHelpers.INVALID_TASK_ID_IN_CATEGORY;
+import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseInt;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
 import static java.lang.String.format;
 
 public class AssignTask implements Command {
@@ -28,6 +25,7 @@ public class AssignTask implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+		//TODO to remove after test and implementation of all commands
 //		User user = repository.createUser("Alexa");
 //		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
 //		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);

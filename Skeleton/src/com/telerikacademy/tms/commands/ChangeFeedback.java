@@ -11,7 +11,7 @@ import com.telerikacademy.tms.models.tasks.enums.Rating;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
 import static java.lang.String.format;
 
 public class ChangeFeedback implements Command {
@@ -25,6 +25,7 @@ public class ChangeFeedback implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+		//TODO to remove after test and implementation of all commands
 //		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
