@@ -1,7 +1,11 @@
 package com.telerikacademy.tms.utils;
 
 public class ParsingHelpers {
-	public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
+	public static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s";
+	public static final String INVALID_TASK_ID_IN_CATEGORY = "Provided task with ID %d does not belong to %s category";
+	private static final String NO_SUCH_ENUM = "There is no value (%s) in %s.";
+	private static final String INVALID_NUMBER_INPUT = "Invalid input. Expected a number.";
+
 
 	public static double tryParseDouble(String valueToParse, String errorMessage) {
 		try {
@@ -11,11 +15,11 @@ public class ParsingHelpers {
 		}
 	}
 
-	public static int tryParseInt(String valueToParse, String errorMessage) {
+	public static int tryParseInt(String valueToParse) {
 		try {
 			return Integer.parseInt(valueToParse);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(errorMessage);
+			throw new IllegalArgumentException(INVALID_NUMBER_INPUT);
 		}
 	}
 

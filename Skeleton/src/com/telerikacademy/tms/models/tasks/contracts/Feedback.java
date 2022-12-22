@@ -1,8 +1,10 @@
 package com.telerikacademy.tms.models.tasks.contracts;
 
+import com.telerikacademy.tms.models.tasks.enums.Rating;
+
 public interface Feedback extends Task {
 
-	int getRating();
+	Rating getRating();
 
-	void setRating(int rating);
+	void setRating(Rating rating);
 }

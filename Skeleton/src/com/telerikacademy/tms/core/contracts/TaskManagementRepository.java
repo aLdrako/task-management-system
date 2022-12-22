@@ -5,6 +5,7 @@ import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.*;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
@@ -29,7 +30,7 @@ public interface TaskManagementRepository {
 
 	Story createStory(String title, String description, PriorityType priority, SizeType size);
 
-	Feedback createFeedback(String title, String description, int rating);
+	Feedback createFeedback(String title, String description, Rating rating);
 
 	<T extends Task> T findElementById(List<T> elements, int id);
 

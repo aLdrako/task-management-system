@@ -1,6 +1,6 @@
 package com.telerikacademy.tms.models.tasks.enums;
 
-import com.telerikacademy.tms.exceptions.InvalidEnumArgument;
+import com.telerikacademy.tms.exceptions.InvalidEnumArgumentException;
 
 public enum SizeType {
 	LARGE,
@@ -17,7 +17,7 @@ public enum SizeType {
 			case SMALL:
 				return "Small";
 			default:
-				throw new InvalidEnumArgument("No such size type");
+				throw new InvalidEnumArgumentException("No such size type");
 		}
 	}
 }

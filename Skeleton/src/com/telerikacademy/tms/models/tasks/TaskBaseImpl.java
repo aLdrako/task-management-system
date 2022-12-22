@@ -66,6 +66,7 @@ public abstract class TaskBaseImpl implements Task {
 		return new ArrayList<>(comments);
 	}
 
+	@Override
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 		this.populateHistory(new HistoryImpl(format("Comment added to task: %s %s", this.getID(), this.getTitle())));
@@ -93,9 +94,6 @@ public abstract class TaskBaseImpl implements Task {
 
 	protected <T> void addChangeToHistory(String type, T valueBefore, T valueAfter) {
 		if (valueBefore != null && valueBefore != valueAfter) {
-			if (valueBefore instanceof Number && (Integer) valueBefore == 0) {
-				return;
-			}
 			changesHistory.add(new HistoryImpl(format(CHANGE_MESSAGE, type, getID(), valueBefore, valueAfter)));
 		}
 	}
