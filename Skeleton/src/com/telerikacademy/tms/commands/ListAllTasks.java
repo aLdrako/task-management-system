@@ -28,9 +28,9 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
-		repository.createFeedback("Good Feedback extra", "Some good feedback here", Rating.NINE);
-		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+	//	repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+	//	repository.createFeedback("Good Feedback extra", "Some good feedback here", Rating.NINE);
+	//	repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
 		List<Task> tasks;
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
