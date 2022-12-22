@@ -1,6 +1,6 @@
 package com.telerikacademy.tms.models.tasks.enums;
 
-import com.telerikacademy.tms.exceptions.InvalidEnumArgument;
+import com.telerikacademy.tms.exceptions.InvalidEnumArgumentException;
 
 public enum SeverityType {
 	CRITICAL,
@@ -17,7 +17,7 @@ public enum SeverityType {
 			case MINOR:
 				return "Minor";
 			default:
-				throw new InvalidEnumArgument("No such severity type");
+				throw new InvalidEnumArgumentException("No such severity type");
 		}
 	}
 }

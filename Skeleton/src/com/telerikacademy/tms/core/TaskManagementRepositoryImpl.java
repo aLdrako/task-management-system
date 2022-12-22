@@ -13,6 +13,7 @@ import com.telerikacademy.tms.models.tasks.FeedbackImpl;
 import com.telerikacademy.tms.models.tasks.StoryImpl;
 import com.telerikacademy.tms.models.tasks.contracts.*;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
@@ -22,7 +23,7 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
-	public static final String NO_RECORD_ID = "No task with ID %d";
+	private static final String NO_RECORD_ID = "No task with ID %d";
 	private final static String NO_SUCH_ELEMENT = "There is no element with name %s!";
 	private int nextId;
 
@@ -91,7 +92,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	@Override
-	public Feedback createFeedback(String title, String description, int rating) {
+	public Feedback createFeedback(String title, String description, Rating rating) {
 		Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
 		this.tasks.add(feedback);
 		return feedback;

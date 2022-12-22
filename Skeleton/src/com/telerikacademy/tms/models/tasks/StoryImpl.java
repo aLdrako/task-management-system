@@ -16,7 +16,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		super(id, title, description);
 		setPriority(priority);
 		setSize(size);
-		setStatus(StoryStatus.NOT_DONE);
+		setStatus(StoryStatus.NOTDONE);
 	}
 
 	@Override
