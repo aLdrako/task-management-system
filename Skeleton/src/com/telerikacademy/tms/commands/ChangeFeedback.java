@@ -2,7 +2,6 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
@@ -40,8 +39,6 @@ public class ChangeFeedback implements Command {
 			feedback = (Feedback) repository.findElementById(repository.getTasks(), id);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Feedback.class.getSimpleName()));
-		} catch (ElementNotFoundException e) {
-			throw new ElementNotFoundException(e.getMessage());
 		}
 
 		try {

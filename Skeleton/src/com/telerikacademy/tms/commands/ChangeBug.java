@@ -2,7 +2,6 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
@@ -28,6 +27,7 @@ public class ChangeBug implements Command {
 	public String execute(List<String> parameters) {
 		//TODO to remove after test and implementation of all commands
 //		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String typeOfChange = parameters.get(1);
@@ -41,8 +41,6 @@ public class ChangeBug implements Command {
 			bug = (Bug) repository.findElementById(repository.getTasks(), id);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Bug.class.getSimpleName()));
-		} catch (ElementNotFoundException e) {
-			throw new ElementNotFoundException(e.getMessage());
 		}
 
 		try {

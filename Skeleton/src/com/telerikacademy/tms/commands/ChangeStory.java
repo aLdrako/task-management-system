@@ -2,7 +2,6 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
@@ -41,8 +40,6 @@ public class ChangeStory implements Command {
 			story = (Story) repository.findElementById(repository.getTasks(), id);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Story.class.getSimpleName()));
-		} catch (ElementNotFoundException e) {
-			throw new ElementNotFoundException(e.getMessage());
 		}
 
 		try {
