@@ -21,7 +21,7 @@ public class ValidationHelpers {
 	}
 
 	public static void validateArgumentsCountTill(List<String> list, int expectedNumberOfParameters) {
-		if (list.size() > expectedNumberOfParameters) {
+		if (list.size() > expectedNumberOfParameters || list.size() != 0) {
 			throw new IllegalArgumentException(
 					String.format(INVALID_NUMBER_OF_ARGUMENTS, expectedNumberOfParameters, list.size())
 			);
