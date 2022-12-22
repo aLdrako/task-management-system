@@ -53,7 +53,7 @@ public class ListAllTasks implements Command {
 		}
 		return repository.getTasks()
 				.stream()
-				.filter(task -> task.getTitle().equalsIgnoreCase(title))
+				.filter(task -> task.getTitle().contains(title))
 				.collect(Collectors.toList());
 	}
 
@@ -69,7 +69,7 @@ public class ListAllTasks implements Command {
 	private String listAllTasks(List<Task> tasks) {
 		StringBuilder builder = new StringBuilder();
 		for (Task task : tasks) {
-			builder.append(tasks).append(System.lineSeparator());
+			builder.append(task).append(System.lineSeparator());
 		}
 		return builder.toString();
 	}
