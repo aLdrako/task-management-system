@@ -12,7 +12,7 @@ import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 import static java.lang.String.format;
 
 public class ChangeStory implements Command {

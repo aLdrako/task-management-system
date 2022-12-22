@@ -68,7 +68,7 @@ public class UserImpl implements User {
 				return;
 			}
 		}
-		throw new IllegalArgumentException("No such task assigned");
+		throw new IllegalArgumentException("No such task to unassign it");
 	}
 
 	@Override

@@ -1,20 +1,11 @@
 package com.telerikacademy.tms.utils;
 
 public class ParsingHelpers {
-	public static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s";
-	public static final String INVALID_TASK_ID_IN_CATEGORY = "Provided task with ID %d does not belong to %s category";
-	public static final String SAME_PARAMETERS_PASSED = "Same parameter passed. Nothing to changed";
+	public static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
+	public static final String INVALID_TASK_ID_IN_CATEGORY = "Provided task with ID %d does not belong to %s category!";
+	public static final String SAME_PARAMETERS_PASSED = "Same parameter passed. Nothing to changed.";
 	private static final String NO_SUCH_ENUM = "There is no value (%s) in %s.";
-	private static final String INVALID_NUMBER_INPUT = "Invalid input. Expected a number.";
-
-
-	public static double tryParseDouble(String valueToParse, String errorMessage) {
-		try {
-			return Double.parseDouble(valueToParse);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(errorMessage);
-		}
-	}
+	private static final String INVALID_NUMBER_INPUT = "Invalid input. Expected a number!";
 
 	public static int tryParseInt(String valueToParse) {
 		try {
@@ -55,7 +46,7 @@ public class ParsingHelpers {
 			case "10":
 				return "ten";
 			default:
-				return "Invalid input for rating";
+				return String.format("'%s', use numbers from 1 to 10", digit);
 		}
 	}
 }
