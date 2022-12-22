@@ -2,6 +2,7 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
+import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
@@ -40,13 +41,13 @@ public class ListAllTasks implements Command {
 			tasks = new ArrayList<>(repository.getTasks());
 			Collections.sort(tasks);
 		} else {
-			throw new IllegalArgumentException(INVALID_PARAMETER_MESSAGE);
+			throw new InvalidUserInputException(INVALID_PARAMETER_MESSAGE);
 		}
 		if (parameters.size() == 3 && parameters.get(2).equalsIgnoreCase("sortByTitle")) {
 			if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
 				Collections.sort(tasks);
 			} else {
-				throw new IllegalArgumentException(LIST_ALREADY_SORTED);
+				throw new InvalidUserInputException(LIST_ALREADY_SORTED);
 			}
 		}
 
