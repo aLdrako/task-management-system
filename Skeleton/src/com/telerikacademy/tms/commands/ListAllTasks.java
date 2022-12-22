@@ -28,16 +28,17 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
 		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+		repository.createFeedback("Good Feedback extra", "Some good feedback here", Rating.NINE);
+		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
 		List<Task> tasks;
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
 			String title = parameters.get(1);
 			tasks = new ArrayList<>(filterTasks(title));
 		} else if (parameters.get(0).equalsIgnoreCase("sortByTitle")){
-			Collections.sort(repository.getTasks());
 			tasks = new ArrayList<>(repository.getTasks());
+			Collections.sort(tasks);
 		} else {
 			throw new IllegalArgumentException(INVALID_PARAMETER_MESSAGE);
 		}

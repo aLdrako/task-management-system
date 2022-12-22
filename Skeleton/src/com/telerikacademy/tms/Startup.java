@@ -2,6 +2,12 @@ package com.telerikacademy.tms;
 
 import com.telerikacademy.tms.core.TaskManagementEngineImpl;
 import com.telerikacademy.tms.core.contracts.Engine;
+import com.telerikacademy.tms.models.tasks.StoryImpl;
+import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
+import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
+import jdk.net.SocketFlow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +15,13 @@ import java.util.List;
 public class Startup {
 	public static void main(String[] args) {
 
-	//	Engine engine = new TaskManagementEngineImpl();
-	//	engine.start();
+		Engine engine = new TaskManagementEngineImpl();
+		engine.start();
+
+	//	StoryImpl story = new StoryImpl(5, "dsdsadasdadasd", "dsadasdasdgd", PriorityType.HIGH,
+	//			SizeType.LARGE);
+	//	story.setStatus(StoryStatus.INPROGRESS);
+	//	System.out.println(story.getHistories());
 
 //	    Team team = new TeamImpl("Team 12");
 //
@@ -63,9 +74,7 @@ public class Startup {
 //		var result2 = taskManagementRepository.findBoardByNameInTeam(team, "Board2");
 //
 //		System.out.println(result);
-		List<String> parameters = new ArrayList<>();
-		parameters.add("dsad");
-		System.out.println(parameters.get(1));
+
 
 	}
 }
