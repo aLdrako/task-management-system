@@ -116,25 +116,25 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 
 ## Implemented Commands
 
-- CreatePerson {String name}
+- CreatePerson `{String name}`
 - ShowAllPeople
-- ShowPersonActivity {String name}
-- CreateTeam {String teamName}
+- ShowPersonActivity `{String name}`
+- CreateTeam `{String teamName}`
 - ShowAllTeams
-- ShowTeamActivity {String teamName}
-- AddPersonToTeam {String userName} {String teamName}
-- ShowAllTeamMembers {String teamName}
-- ShowAllTeamBoards {String teamName}
-- CreateBoardInTeam {String boardName} {String teamName}
-- ShowBoardActivity {String boardName}
-- CreateTaskInBoard [enum]{bug/story/feedback} {(coresponding task parameters)}
-- AddStepsToBug {ind id} {String steps} {String steps} ...
-- AssignTask {ind id} {String name}
-- UnassignTask {ind id} {String name}
-- AddComment {ind id} {String comment} {String name}
-- ChangeStory {ind id} [switch]{status/priority/severity} [enum]
-- ChangeBug {ind id} [switch]{status/priority/severity} [enum]
-- ChangeFeedback {ind id} [switch]{status/rating} [enum]
+- ShowTeamActivity `{String teamName}`
+- AddPersonToTeam `{String userName} {String teamName}`
+- ShowAllTeamMembers `{String teamName}`
+- ShowAllTeamBoards `{String teamName}`
+- CreateBoardInTeam `{String boardName} {String teamName}`
+- ShowBoardActivity `{String boardName}`
+- CreateTaskInBoard `[enum]{bug/story/feedback} {(coresponding task parameters)}`
+- AddStepsToBug `{ind id} {String steps} {String steps} ...`
+- AssignTask `{ind id} {String name}`
+- UnassignTask `{ind id} {String name}`
+- AddComment `{ind id} {String comment} {String name}`
+- ChangeStory `{ind id} [switch]{status/priority/severity} [enum]`
+- ChangeBug `{ind id} [switch]{status/priority/severity} [enum]`
+- ChangeFeedback `{ind id} [switch]{status/rating} [enum]`
 - ListAllTasks
 - ListAllBugs
 - ListAllStories
