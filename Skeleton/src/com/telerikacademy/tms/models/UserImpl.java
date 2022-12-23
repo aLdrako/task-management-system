@@ -5,6 +5,7 @@ import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class UserImpl implements User {
 	private String name;
 	private final List<Task> tasks;
 	private final List<History> activityHistory;
+
+	private TaskType taskType;
 
 	public UserImpl(String name) {
 		setName(name);
@@ -106,5 +109,12 @@ public class UserImpl implements User {
 		}
 
 		return result.toString();
+	}
+
+	public TaskType getTaskType(){
+		return taskType;
+	}
+	void setTaskType(TaskType ts){
+		taskType = ts;
 	}
 }
