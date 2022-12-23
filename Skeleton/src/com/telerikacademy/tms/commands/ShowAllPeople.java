@@ -3,13 +3,16 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.contracts.User;
+import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShowAllPeople implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 0;
-	private static final String NO_PEOPLE_MESSAGE = "No added people!";
+	private static final String NO_PEOPLE_MESSAGE = "=== NO ADDED PEOPLE ===";
+	private static final String ALL_PEOPLE_MESSAGE = "=== ALL PEOPLE ===";
 	private final TaskManagementRepository repository;
 
 	public ShowAllPeople(TaskManagementRepository repository) {
@@ -25,10 +28,16 @@ public class ShowAllPeople implements Command {
 
 	private String showAllUsers() {
 		StringBuilder builder = new StringBuilder();
-		if (repository.getUsers().size() == 0) builder.append(NO_PEOPLE_MESSAGE);
-		for (User user : repository.getUsers()) {
-			builder.append(user).append(System.lineSeparator());
+		if (repository.getUsers().size() == 0) {
+			builder.append(NO_PEOPLE_MESSAGE);
+		} else {
+			builder.append(ALL_PEOPLE_MESSAGE);
 		}
+		builder.append(System.lineSeparator());
+		builder.append(repository.getUsers().stream()
+				.map(Nameable::toString)
+				.collect(Collectors.joining("\n===============\n")));
+		builder.append(System.lineSeparator());
 		return builder.toString();
 	}
 

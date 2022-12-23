@@ -120,10 +120,10 @@ public class TeamImpl implements Team {
 
 		return this.getClass().getInterfaces()[0].getSimpleName() +
 				": " + this.getName() + System.lineSeparator() +
-				"Team has (" + this.getUsers().size() + ") users -> " +
+				"It has (" + this.getUsers().size() + ") users -> " +
 				this.getUsers().stream().map(Nameable::getName).collect(Collectors.joining(", ")) +
 				System.lineSeparator() +
-				"Team contains (" + this.getBoards().size() + ") boards -> " +
+				"It contains (" + this.getBoards().size() + ") boards -> " +
 				this.getBoards().stream().map(Nameable::getName).collect(Collectors.joining(", "));
 	}
 }

@@ -88,7 +88,7 @@ public class BoardImpl implements Board {
 				" contains (" + this.getTasks().size() +
 				") tasks" + System.lineSeparator() +
 				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
-				System.lineSeparator() + "<<< Activity History >>>".toUpperCase() + System.lineSeparator() +
+				"<<< " + this.getName() + "'s Activity History >>>"+ System.lineSeparator() +
 				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
 	}
 }
