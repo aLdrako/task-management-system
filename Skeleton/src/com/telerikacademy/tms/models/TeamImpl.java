@@ -15,15 +15,21 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public class TeamImpl implements Team {
-
 	private static final int TEAM_MIN_LEN = 5;
 	private static final int TEAM_MAX_LEN = 15;
-
 	private static final String TEAM_LEN_ERR = format(
 			"Team name must be between %s and %s symbols.",
 			TEAM_MIN_LEN,
 			TEAM_MAX_LEN);
-	public static final String NEW_INSTANCE_MESSAGE = "Team was created.";
+	private static final String NEW_INSTANCE_MESSAGE = "Team was created.";
+	private static final String USER_ALREADY_IN_TEAM = "User %s already in team %s";
+	private static final String USER_ADDED_SUCCESSFUL = "User %s added to the team %s";
+	private static final String USER_REMOVED_SUCCESSFUL = "User %s removed from the team %s";
+	private static final String USER_NOT_IN_TEAM = "User %s is not in this team %s";
+	private static final String BOARD_ALREADY_IN_TEAM = "Board %s already in team %s";
+	private static final String BOARD_ADDED_SUCCESSFUL = "Board %s added to the team %s";
+	private static final String BOARD_REMOVED_SUCCESSFUL = "Board %s removed from the team %s";
+	private static final String BOARD_NOT_IN_TEAM = "Board %s is not in this team %s";
 
 	private String name;
 	private final List<User> users;
@@ -62,11 +68,11 @@ public class TeamImpl implements Team {
 	public void addUser(User user) {
 		for (User u : getUsers()) {
 			if (u.getName().equals(user.getName())) {
-				throw new IllegalArgumentException("User already in list");
+				throw new IllegalArgumentException(format(USER_ALREADY_IN_TEAM, user.getName(), this.getName()));
 			}
 		}
 		this.users.add(user);
-		this.activityHistory.add(new HistoryImpl(format("User %s added to the team %s", user.getName(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(USER_ADDED_SUCCESSFUL, user.getName(), this.getName())));
 	}
 
 	@Override
@@ -74,22 +80,22 @@ public class TeamImpl implements Team {
 		for (User u : getUsers()) {
 			if (u.getName().equals(user.getName())) {
 				this.users.remove(user);
-				this.activityHistory.add(new HistoryImpl(format("User %s removed from the team %s", user.getName(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format(USER_REMOVED_SUCCESSFUL, user.getName(), this.getName())));
 				return;
 			}
 		}
-		throw new IllegalArgumentException("No such user in list");
+		throw new IllegalArgumentException(format(USER_NOT_IN_TEAM, user.getName(), this.getName()));
 	}
 
 	@Override
 	public void addBoard(Board board) {
 		for (Board b : getBoards()) {
 			if (b.getName().equals(board.getName())) {
-				throw new IllegalArgumentException("Board already in list");
+				throw new IllegalArgumentException(format(BOARD_ALREADY_IN_TEAM, board.getName(), this.getName()));
 			}
 		}
 		this.boards.add(board);
-		this.activityHistory.add(new HistoryImpl(format("Board %s added to the team %s", board.getName(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(BOARD_ADDED_SUCCESSFUL, board.getName(), this.getName())));
 	}
 
 	@Override
@@ -97,11 +103,11 @@ public class TeamImpl implements Team {
 		for (Board b : getBoards()) {
 			if (b.getName().equals(board.getName())) {
 				this.boards.remove(board);
-				this.activityHistory.add(new HistoryImpl(format("Board %s removed from the team %s", board.getName(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format(BOARD_REMOVED_SUCCESSFUL, board.getName(), this.getName())));
 				return;
 			}
 		}
-		throw new IllegalArgumentException("No such board in list");
+		throw new IllegalArgumentException(format(BOARD_NOT_IN_TEAM, board.getName(), this.getName()));
 	}
 
 	@Override

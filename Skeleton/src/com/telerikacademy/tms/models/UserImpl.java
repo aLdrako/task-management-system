@@ -12,15 +12,17 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public class UserImpl implements User {
-
 	private static final int USER_MIN_LEN = 5;
 	private static final int USER_MAX_LEN = 15;
-
 	private static final String USER_LEN_ERR = format(
 			"User name must be between %s and %s symbols.",
 			USER_MIN_LEN,
 			USER_MAX_LEN);
-	public static final String NEW_INSTANCE_MESSAGE = "User was created.";
+	private static final String NEW_INSTANCE_MESSAGE = "User was created.";
+	private static final String TASK_ALREADY_ASSIGNED = "Task with ID %s already assigned to %s";
+	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task '%s' assigned to %s";
+	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task '%s' unassigned from %s";
+	private static final String TASK_NOT_ASSIGNED = "Task with ID %s in not assigned to %s";
 
 	private String name;
 	private final List<Task> tasks;
@@ -52,11 +54,11 @@ public class UserImpl implements User {
 	public void assignTask(Task task) {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
-				throw new IllegalArgumentException("Task already assigned");
+				throw new IllegalArgumentException(format(TASK_ALREADY_ASSIGNED, task.getID(), this.getName()));
 			}
 		}
 		this.tasks.add(task);
-		this.activityHistory.add(new HistoryImpl(format("Task %s assigned to %s", task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_ASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
 	}
 
 	@Override
@@ -64,11 +66,11 @@ public class UserImpl implements User {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
 				this.tasks.remove(task);
-				this.activityHistory.add(new HistoryImpl(format("Task %s unassigned from %s", task.getTitle(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
 				return;
 			}
 		}
-		throw new IllegalArgumentException("No such task to unassign it");
+		throw new IllegalArgumentException(format(TASK_NOT_ASSIGNED, task.getID(), this.getName()));
 	}
 
 	@Override

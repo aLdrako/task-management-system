@@ -24,7 +24,7 @@ import static java.lang.String.format;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	private static final String NO_RECORD_ID = "No task with ID %d";
-	private final static String NO_SUCH_ELEMENT = "There is no element with name %s!";
+	private final static String NO_SUCH_ELEMENT = "There is no User or Team with name %s!";
 	private int nextId;
 
 	private final List<Team> teams = new ArrayList<>();

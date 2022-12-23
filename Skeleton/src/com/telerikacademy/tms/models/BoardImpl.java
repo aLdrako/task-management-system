@@ -6,7 +6,6 @@ import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
@@ -15,17 +14,18 @@ import static java.lang.String.format;
 public class BoardImpl implements Board {
 	private static final int BOARD_MIN_LEN = 5;
 	private static final int BOARD_MAX_LEN = 10;
-
 	private static final String BOARD_LEN_ERR = format(
 			"Board name must be between %s and %s symbols.",
 			BOARD_MIN_LEN,
 			BOARD_MAX_LEN);
-	public static final String NEW_INSTANCE_MESSAGE = "Board was created.";
+	private static final String NEW_INSTANCE_MESSAGE = "Board was created.";
+	private static final String TASK_ALREADY_IN_BOARD = "Task with ID %s already in board %s list";
+	private static final String TASK_ADDED_SUCCESSFUL = "Task %s added to board %s";
+	private static final String TASK_REMOVED_SUCCESSFUL = "Task %s removed from board %s";
+	private static final String TASK_NOT_IN_BOARD = "Task with ID %s in not in board %s list";
 
 	private String name;
-
 	private final List<Task> tasks;
-
 	private final List<History> activityHistory;
 
 	public BoardImpl(String name) {
@@ -54,11 +54,11 @@ public class BoardImpl implements Board {
 	public void addTask(Task task) {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
-				throw new IllegalArgumentException("Task already in list");
+				throw new IllegalArgumentException(format(TASK_ALREADY_IN_BOARD, task.getID(), this.getName()));
 			}
 		}
 		this.tasks.add(task);
-		this.activityHistory.add(new HistoryImpl(format("Task %s added to board %s", task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_ADDED_SUCCESSFUL, task.getTitle(), this.getName())));
 	}
 
 	@Override
@@ -66,11 +66,11 @@ public class BoardImpl implements Board {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
 				this.tasks.remove(task);
-				this.activityHistory.add(new HistoryImpl(format("Task %s removed from board %s", task.getTitle(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format(TASK_REMOVED_SUCCESSFUL, task.getTitle(), this.getName())));
 				return;
 			}
 		}
-		throw new IllegalArgumentException("No such task in list");
+		throw new IllegalArgumentException(format(TASK_NOT_IN_BOARD, task.getID(), this.getName()));
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.telerikacademy.tms.utils;
 import java.util.List;
 
 public class ValidationHelpers {
-
 	private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS_TILL = "Invalid number of arguments. Expected: from %d to %d; received: %d.";
 
@@ -28,5 +27,4 @@ public class ValidationHelpers {
 			);
 		}
 	}
-
 }

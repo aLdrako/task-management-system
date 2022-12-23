@@ -2,7 +2,6 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
@@ -12,7 +11,7 @@ import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.*;
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
 import static java.lang.String.format;
 
 public class ChangeStory implements Command {
@@ -26,6 +25,7 @@ public class ChangeStory implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+		//TODO to remove after test and implementation of all commands
 //		repository.createStory("Good Story", "Some good story here", PriorityType.LOW, SizeType.MEDIUM);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
@@ -40,8 +40,6 @@ public class ChangeStory implements Command {
 			story = (Story) repository.findElementById(repository.getTasks(), id);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Story.class.getSimpleName()));
-		} catch (ElementNotFoundException e) {
-			throw new ElementNotFoundException(e.getMessage());
 		}
 
 		try {
