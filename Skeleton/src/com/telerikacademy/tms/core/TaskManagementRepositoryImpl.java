@@ -12,10 +12,7 @@ import com.telerikacademy.tms.models.tasks.BugImpl;
 import com.telerikacademy.tms.models.tasks.FeedbackImpl;
 import com.telerikacademy.tms.models.tasks.StoryImpl;
 import com.telerikacademy.tms.models.tasks.contracts.*;
-import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
-import com.telerikacademy.tms.models.tasks.enums.SizeType;
+import com.telerikacademy.tms.models.tasks.enums.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +77,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	@Override
 	public Bug createBug(String title, String description, PriorityType priority, SeverityType severity) {
 		Bug bug = new BugImpl(++nextId, title, description, priority, severity);
+		bug.setTaskType(TaskType.BUG);
 		this.tasks.add(bug);
 		return bug;
 	}
@@ -87,6 +85,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	@Override
 	public Story createStory(String title, String description, PriorityType priority, SizeType size) {
 		Story story = new StoryImpl(++nextId, title, description, priority, size);
+		story.setTaskType(TaskType.STORY);
 		this.tasks.add(story);
 		return story;
 	}
@@ -94,6 +93,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	@Override
 	public Feedback createFeedback(String title, String description, Rating rating) {
 		Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+		feedback.setTaskType(TaskType.FEEDBACK);
 		this.tasks.add(feedback);
 		return feedback;
 	}
