@@ -5,6 +5,7 @@ import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 	private PriorityType priority;
@@ -57,5 +58,15 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
 		return super.toString() + " | Priority: " + this.getPriority() +
 				" | Size: " + this.getSize() + " | Assignee: " + isAssigned;
+	}
+
+	@Override
+	public TaskType getTaskType() {
+		return null;
+	}
+
+	@Override
+	public void setTaskType(TaskType ts) {
+
 	}
 }

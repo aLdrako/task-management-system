@@ -6,7 +6,6 @@ import com.telerikacademy.tms.models.compositions.CommentImpl;
 import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
 
 import java.util.List;
 

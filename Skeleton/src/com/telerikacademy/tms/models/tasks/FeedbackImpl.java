@@ -3,6 +3,7 @@ package com.telerikacademy.tms.models.tasks;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 	private Rating rating;
@@ -27,5 +28,15 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 	@Override
 	public String toString() {
 		return super.toString() + " | Rating: " + this.getRating();
+	}
+
+	@Override
+	public TaskType getTaskType() {
+		return null;
+	}
+
+	@Override
+	public void setTaskType(TaskType ts) {
+
 	}
 }

@@ -33,7 +33,6 @@ public class CreateTaskInBoard implements Command {
 		String description = parameters.get(3);
 		switch (ts){
 			case BUG:
-
 				PriorityType priority = PriorityType.valueOf(parameters.get(4));
 				SeverityType severity = SeverityType.valueOf(parameters.get(5));
 				Bug bug = repository.createBug(title, description, priority, severity);
