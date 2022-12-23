@@ -6,6 +6,7 @@ import com.telerikacademy.tms.models.compositions.CommentImpl;
 import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.Rating;
 
 import java.util.List;
 
@@ -25,11 +26,11 @@ public class AddComment implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		//TODO to remove after test and implementation of all commands
-//		User user = repository.createUser("Alexa");
-//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+		User user = repository.createUser("Alexa");
+		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
-		String commentMessage = parameters.get(1);
+		String commentMessage = parameters.get(1).strip();
 		String userName = parameters.get(2);
 
 		return addComment(id, commentMessage, userName);
@@ -40,6 +41,8 @@ public class AddComment implements Command {
 		User user = repository.findElementByName(repository.getUsers(), userName);
 		Comment comment = new CommentImpl(commentMessage, user.getName());
 		task.addComment(comment);
+		user.addCommentActivity(task);
+		System.out.println(comment.getContent());
 
 		return format(COMMENT_ADDED_SUCCESSFUL, user.getName(), task.getID());
 	}
