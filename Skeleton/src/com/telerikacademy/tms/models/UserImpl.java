@@ -32,7 +32,7 @@ public class UserImpl implements User {
 	private final List<Task> tasks;
 	private final List<History> activityHistory;
 
-	private TaskType taskType;
+
 
 	public UserImpl(String name) {
 		setName(name);
@@ -101,10 +101,5 @@ public class UserImpl implements User {
 				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
 	}
 
-	public TaskType getTaskType(){
-		return taskType;
-	}
-	void setTaskType(TaskType ts){
-		taskType = ts;
-	}
+
 }

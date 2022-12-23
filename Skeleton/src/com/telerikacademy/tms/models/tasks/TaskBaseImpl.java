@@ -5,6 +5,7 @@ import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.tasks.contracts.Status;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public abstract class TaskBaseImpl implements Task {
 	private final List<Comment> comments = new ArrayList<>();
 	private final List<History> changesHistory = new ArrayList<>();
 	private Status status;
+	private TaskType taskType;
 
 	public TaskBaseImpl(int id, String title, String description) {
 		this.id = id;
@@ -108,5 +110,11 @@ public abstract class TaskBaseImpl implements Task {
 		return this.getClass().getInterfaces()[0].getSimpleName() + ": " + "ID -> [" +
 				this.getID() + "] '" + this.getTitle() + "' | Status: " +
 				this.getStatus();
+	}
+	public TaskType getTaskType(){
+		return taskType;
+	}
+	public void setTaskType(TaskType ts){
+		taskType = ts;
 	}
 }
