@@ -131,6 +131,7 @@ CreateBoardInTeam
 ShowAllTeamBoards
 ShowBoardActivity 
 CreateTaskInBoard 
+AddStepsToReproduceBug
 ChangeStory 
 ChangeBug
 ChangeFeedback
@@ -153,7 +154,7 @@ AddPersonToTeam Petar Hackers
 CreateBoardInTeam Hackers Developers
 CreateBoardInTeam Hackers Staff
 CreateTaskInBoard Developers bug {{Glitching inteface}} {{There is a broken interface}} High Major
-AddStepsToReproduceBug 1 {{1. First open the app}} {{2. Try to access the database}}
+AddStepsToReproduceBug 1 Ivan {{1. First open the app}} {{2. Try to access the database}}
 CreateTaskInBoard Staff story {{Funny story}} {{Once upon a time there was a mouse....}} Medium Small
 CreateTaskInBoard Developers feedback {{Good job}} {{To the developer that fixed the glitch}} 8
 AssignTask 1 Ivan

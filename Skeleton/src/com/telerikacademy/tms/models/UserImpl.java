@@ -9,6 +9,7 @@ import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
@@ -31,7 +32,7 @@ public class UserImpl implements User {
 	private final List<Task> tasks;
 	private final List<History> activityHistory;
 
-	private TaskType taskType;
+
 
 	public UserImpl(String name) {
 		setName(name);
@@ -90,31 +91,15 @@ public class UserImpl implements User {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder();
 
-		result.append(this.getClass().getInterfaces()[0].getSimpleName())
-				.append(": ").append(this.getName())
-				.append(" has (").append(this.getTasks().size())
-				.append(") assigned tasks").append(System.lineSeparator());
-
-		for (Task task : this.getTasks()) {
-			result.append("ID -> [").append(task.getID()).append("] ")
-					.append(task.getTitle()).append(" | Status: ")
-					.append(task.getStatus()).append(System.lineSeparator());
-		}
-
-		result.append("<<< Activity History >>>".toUpperCase()).append(System.lineSeparator());
-		for (History history : getHistories()) {
-			result.append(history).append(System.lineSeparator());
-		}
-
-		return result.toString();
+		return this.getClass().getInterfaces()[0].getSimpleName() +
+				": " + this.getName() +
+				" has (" + this.getTasks().size() +
+				") assigned tasks" + System.lineSeparator() +
+				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
+				System.lineSeparator() + "<<< Activity History >>>".toUpperCase() + System.lineSeparator() +
+				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
 	}
 
-	public TaskType getTaskType(){
-		return taskType;
-	}
-	void setTaskType(TaskType ts){
-		taskType = ts;
-	}
+
 }

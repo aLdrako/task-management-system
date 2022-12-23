@@ -4,6 +4,10 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.Rating;
+import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -25,9 +29,10 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		//	repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
-		//	repository.createFeedback("Good Feedback extra", "Some good feedback here", Rating.NINE);
-		//	repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+			repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+			repository.createFeedback("A Good Feedback extra", "Some good feedback here", Rating.NINE);
+			repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+			repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
 		List<Task> tasks;
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {

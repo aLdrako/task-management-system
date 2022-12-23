@@ -24,4 +24,8 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 		this.rating = rating;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + " | Rating: " + this.getRating();
+	}
 }

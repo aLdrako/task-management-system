@@ -50,4 +50,12 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		addChangeToHistory("assignee", this.assignee, assignee);
 		this.assignee = assignee;
 	}
+
+	@Override
+	public String toString() {
+		String isAssigned = this.getAssignee() != null ? this.getAssignee().getName() : "Unassigned";
+
+		return super.toString() + " | Priority: " + this.getPriority() +
+				" | Size: " + this.getSize() + " | Assignee: " + isAssigned;
+	}
 }

@@ -2,15 +2,20 @@ package com.telerikacademy.tms.models.tasks;
 
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
+import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
-	private final List<String> steps = new ArrayList<>();
+	//TODO to clear array list in steps
+	private final List<String> steps = new ArrayList<>(Arrays.asList("Right click on any folder", "Open folder setting", "Fires BSOD"));
 	private PriorityType priority;
 	private SeverityType severity;
 	private User assignee;
@@ -65,4 +70,20 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 		this.assignee = assignee;
 	}
 
+	@Override
+	public String toString() {
+		String isAssigned = this.getAssignee() != null ? this.getAssignee().getName() : "Unassigned";
+		StringBuilder doesHaveStepsToReproduce = new StringBuilder();
+
+		if (this.getSteps().size() == 0) {
+			doesHaveStepsToReproduce.append("Not specified");
+		} else {
+			doesHaveStepsToReproduce.append(System.lineSeparator()).append("\t-> ");
+			doesHaveStepsToReproduce.append(this.getSteps().stream().map(s -> s.toString()).collect(Collectors.joining("\n\t-> ")));
+		}
+
+		return super.toString() + " | Priority: " + this.getPriority() +
+				" | Severity: " + this.getSeverity() + " | Assignee: " + isAssigned +
+				" | Steps to reproduce: " + doesHaveStepsToReproduce;
+	}
 }
