@@ -25,7 +25,6 @@ public class ListAllBugs implements Command {
 	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 4;
     public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
     public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
-
     public static final String INVALID_COMMAND = "Invalid command input. Bugs can be either filtered by status and/or assignee, and sorted by title/priority/severity.";
 
     private final TaskManagementRepository repository;
@@ -36,16 +35,19 @@ public class ListAllBugs implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
         validateParameters(parameters);
         List<Bug> bugs = listWithBugs();
 		bugs = filterBugs(parameters, bugs);
         sortBugs(parameters, bugs);
-		return listAllBugs();
+		return listAllBugs(bugs);
 	}
 
-    private String listAllBugs() {
-        
+    private String listAllBugs(List<Bug> bugs) {
+        StringBuilder builder = new StringBuilder();
+        for (Bug bug : bugs) {
+            builder.append(bug).append(System.lineSeparator());
+        }
+        return builder.toString();
     }
 
 
@@ -72,10 +74,9 @@ public class ListAllBugs implements Command {
             return bugs.stream()
                     .filter(bug -> bug.getAssignee() == user)
                     .collect(Collectors.toList());
-        } else if (parameters.get(0).equalsIgnoreCase("filterByAssigneeAndStatus")
-                || (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee"))) {
-            User user = repository.findElementByName(repository.getUsers(), parameters.get(1));
+        } else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
             BugStatus status = ParsingHelpers.tryParseEnum(parameters.get(2), BugStatus.class);
+            User user = repository.findElementByName(repository.getUsers(), parameters.get(1));
             return bugs.stream()
                     .filter(bug -> bug.getStatus() == status)
                     .filter(bug -> bug.getAssignee() == user)
@@ -94,6 +95,7 @@ public class ListAllBugs implements Command {
 		return list;
 	}
     private void validateParameters(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
         for (String parameter : parameters) {
             if (parameter.contains("sort") || parameter.contains("filter")) {
                 return;
