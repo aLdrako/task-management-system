@@ -114,73 +114,37 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
  - There is no need to test the printing commands.
 - Use **Git** to keep your source code and for team collaboration.
 
+## Implemented Commands
+
+- CreatePerson {String name}
+- ShowAllPeople
+- ShowPersonActivity {String name}
+- CreateTeam {String teamName}
+- ShowAllTeams
+- ShowTeamActivity {String teamName}
+- AddPersonToTeam {String userName} {String teamName}
+- ShowAllTeamMembers {String teamName}
+- ShowAllTeamBoards {String teamName}
+- CreateBoardInTeam {String boardName} {String teamName}
+- ShowBoardActivity {String boardName}
+- CreateTaskInBoard [enum]{bug/story/feedback} {(coresponding task parameters)}
+- AddStepsToBug {ind id} {String steps} {String steps} ...
+- AssignTask {ind id} {String name}
+- UnassignTask {ind id} {String name}
+- AddComment {ind id} {String comment} {String name}
+- ChangeStory {ind id} [switch]{status/priority/severity} [enum]
+- ChangeBug {ind id} [switch]{status/priority/severity} [enum]
+- ChangeFeedback {ind id} [switch]{status/rating} [enum]
+- ListAllTasks
+- ListAllBugs
+- ListAllStories
+- ListAllFeedbacks
+- ListTasksWithAssignee
+
 ## Teamwork Guidelines
 Please see the Teamwork Guidelines [document](https://learn.telerikacademy.com/mod/page/view.php?id=38822 "document").
 
 ### Sample Input
-```none
-
-
-CreatePerson 
-ShowAllPeople
-ShowPersonActivity 
-CreateTeam 
-ShowAllTeams
-ShowTeamActivity 
-AddPersonToTeam 
-ShowAllTeamMembers 
-------
-CreateBoardInTeam 
-ShowAllTeamBoards
-ShowBoardActivity 
-CreateTaskInBoard 
-AddStepsToBug
-ChangeStory 
-ChangeBug
-ChangeFeedback
-AssignTask
-UnassignTask
-AddComment
-ListAllTasks
-ListAllBugs
-ListAllStories
-ListAllFeedbacks
-ListTasksWithAssignee
-
-CreatePerson Ivan
-CreatePerson Petar
-CreateTeam Hackers
-AddPersonToTeam Ivan Hackers
-AddPersonToTeam Petar Hackers
-CreateBoardInTeam Hackers Developers
-CreateBoardInTeam Hackers Staff
-CreateTaskInBoard Developers bug {{Glitching inteface}} {{There is a broken interface}} High Major
-AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
-CreateTaskInBoard Staff story {{Funny story}} {{Once upon a time there was a mouse....}} Medium Small
-CreateTaskInBoard Developers feedback {{Good job}} {{To the developer that fixed the glitch}} 8
-AssignTask 1 Ivan
-AssignTask 2 Petar
-AddComment 3 {{Thank you so much for the amazing feedback}} Ivan
-ShowAllPeople
-ShowPersonActivity Ivan
-ShowAllTeamMembers Hackers
-ShowAllTeamBoards Hackers
-ShowTeamActivity Hackers
-ChangeStory 2 status InProgress
-ChangeStory 2 priority Low
-ChangeBug 1 severity Minor
-UnassignTask 1 Ivan
-ShowAllTeams
-ShowBoardActivity Staff
-ListAllTasks
-
-```
-### Sample Output
-```none
-
-```
-
-### Test Input
 ```none
 Command
 CreatePerson
@@ -199,10 +163,32 @@ ShowTeamActivity Hackers
 ShowTeamActivity {{Suicide Squad}}
 ShowPersonActivity Cortana
 ShowAllTeamMembers {{Suicide Squad}}
+ShowAllTeamBoards Hackers
+CreateBoardInTeam ToDos Hackers
+CreateBoardInTeam Goals {{Suicide Squad}}
+ShowBoardActivity ToDos
+CreateTaskInBoard bug ToDos {{Glitching inteface}} {{There is a broken interface}} high major
+CreateTaskInBoard STORY ToDos {{Funny story}} {{Once upon a time there was a mouse....}} medium small
+CreateTaskInBoard feedback Goals {{Good job here}} {{This developer is doing great}} 9
+AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
+AddStepsToBug 2 {{First open the app}} {{Try to access the database}}
+AssignTask 1 Alexa
+AssignTask 2 Alexa
+AssignTask 3 Cortana
+UnassignTask 1 Ivan
+UnassignTask 12 Cortana
+UnassignTask 2 Alexa
+AddComment 3 {{Thank you so much for the amazing feedback}} Cortana
+ChangeStory 2 status InProgress
+ChangeStory 2 priority Low
+ChangeBug 1 severity Major
+ChangeBug 1 severity Minor
+ChangeFeedback 1 rating 9
+ChangeFeedback 3 rating 10
 
 ```
 
-### Test Output
+### Sample Output
 ```none
 There is no value (Command) in CommandType.
 Invalid number of arguments. Expected: 1; received: 0.
@@ -235,23 +221,47 @@ It contains (0) boards ->
 === ALL PEOPLE ===
 User: Alexa has (0) assigned tasks
 <<< Alexa's Activity History >>>
-[23-December-2022 15:53:24] User was created.
+[23-December-2022 20:50:25] User was created.
 ===============
 User: Cortana has (0) assigned tasks
 <<< Cortana's Activity History >>>
-[23-December-2022 15:53:24] User was created.
+[23-December-2022 20:50:25] User was created.
 
 Hackers's team activity:
-[23-December-2022 15:53:24] Team was created.
+[23-December-2022 20:50:25] Team was created.
 
 Suicide Squad's team activity:
-[23-December-2022 15:53:24] Team was created.
-[23-December-2022 15:53:24] User Alexa added to the team Suicide Squad
-[23-December-2022 15:53:24] User Cortana added to the team Suicide Squad
+[23-December-2022 20:50:25] Team was created.
+[23-December-2022 20:50:25] User Alexa added to the team Suicide Squad
+[23-December-2022 20:50:25] User Cortana added to the team Suicide Squad
 
 Cortana's activity:
-[23-December-2022 15:53:24] User was created.
+[23-December-2022 20:50:25] User was created.
 
 Suicide Squad' team members: Alexa, Cortana 
+Team Hackers boards printed
+Board ToDos has been created in team Hackers!
+Board Goals has been created in team Suicide Squad!
+ToDos's activity:
+[23-December-2022 20:50:25] Board was created.
+
+Task Glitching inteface has been created in board ToDos!
+Task Funny story has been created in board ToDos!
+Task Good job here has been created in board Goals!
+Steps to reproduce added to Bug with ID 1
+Provided task with ID 2 does not belong to Bug category!
+Task with ID 1 was assigned to user Alexa.
+Task with ID 2 was assigned to user Alexa.
+Provided task with ID 3 does not belong to Assignable category!
+There is no User or Team with name Ivan!
+No task with ID 12
+Task with ID 2 was unassigned from user Alexa.
+User Cortana added comment to task with ID 3
+Status for Story with ID 2 was changed to InProgress.
+Priority for Story with ID 2 was changed to Low.
+Same parameter passed. Nothing to changed.
+Severity for Bug with ID 1 was changed to Minor.
+Provided task with ID 1 does not belong to Feedback category!
+Rating for Feedback with ID 3 was changed to 10.
 
 ```
