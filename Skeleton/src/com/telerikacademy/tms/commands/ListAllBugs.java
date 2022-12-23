@@ -38,30 +38,24 @@ public class ListAllBugs implements Command {
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
         validateParameters(parameters);
-    //   User user = repository.createUser("Ivancho");
-    //   Bug bug1 = repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.MAJOR);
-    //   Bug bug = repository.createBug("Verybad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.CRITICAL);
-    //   bug.setAssignee(user);
-    //   bug1.setAssignee(user);
         List<Bug> bugs = listWithBugs();
-        System.out.println(bugs);
 		bugs = filterBugs(parameters, bugs);
-        bugs = sortBugs(parameters, bugs);
-        System.out.println(bugs);
-		return null;
+        sortBugs(parameters, bugs);
+		return listAllBugs();
 	}
 
+    private String listAllBugs() {
+        
+    }
 
-    private List<Bug> sortBugs(List<String> parameters, List<Bug> bugs) {
+
+    private void sortBugs(List<String> parameters, List<Bug> bugs) {
         if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
             Collections.sort(bugs);
-            return bugs;
         } else if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByPriority"))) {
             bugs.sort(Comparator.comparing(Bug::getPriority));
-            return bugs;
         } else if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortBySeverity"))) {
             bugs.sort(Comparator.comparing(Bug::getSeverity));
-            return bugs;
         }
         throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
     }
