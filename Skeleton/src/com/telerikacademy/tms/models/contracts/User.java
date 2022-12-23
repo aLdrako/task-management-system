@@ -1,5 +1,6 @@
 package com.telerikacademy.tms.models.contracts;
 
+import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.tasks.contracts.Historiable;
 import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
@@ -12,4 +13,6 @@ public interface User extends Nameable, Historiable {
 	void assignTask(Task task);
 
 	void unAssignTask(Task task);
+
+	void addCommentActivity(Task task);
 }

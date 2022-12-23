@@ -1,6 +1,7 @@
 package com.telerikacademy.tms.models;
 
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
+import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
@@ -23,6 +24,7 @@ public class UserImpl implements User {
 	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task '%s' assigned to %s";
 	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task '%s' unassigned from %s";
 	private static final String TASK_NOT_ASSIGNED = "Task with ID %s in not assigned to %s";
+	private static final String COMMENT_ADDED_TO_TASK_SUCCESSFUL = "Added comment to task with ID %s";
 
 	private String name;
 	private final List<Task> tasks;
@@ -71,6 +73,11 @@ public class UserImpl implements User {
 			}
 		}
 		throw new IllegalArgumentException(format(TASK_NOT_ASSIGNED, task.getID(), this.getName()));
+	}
+
+	@Override
+	public void addCommentActivity(Task task) {
+		this.activityHistory.add(new HistoryImpl(format(COMMENT_ADDED_TO_TASK_SUCCESSFUL, task.getID())));
 	}
 
 	@Override
