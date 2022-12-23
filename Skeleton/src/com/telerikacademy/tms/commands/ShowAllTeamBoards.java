@@ -4,7 +4,6 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
-import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class ShowAllTeamBoards implements Command {
 		String teamName = parameters.get(0);
 		Team findTeam = repository.findElementByName(repository.getTeams(), teamName);
 		List<Board> boards = findTeam.getBoards();
-		for (Board board:boards) {
+		for (Board board : boards) {
 			System.out.println(board.getName());
 		}
 		return String.format(BOARDS_LISTED, teamName);

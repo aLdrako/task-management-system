@@ -40,7 +40,7 @@ public class ValidationHelpers {
 		}
 	}
 
-	public static void validateArgumentCountRange(List<String> list, int expectedMinNumberOfParameters, int expectedMaxNumberOfParameters){
+	public static void validateArgumentCountRange(List<String> list, int expectedMinNumberOfParameters, int expectedMaxNumberOfParameters) {
 		if (list.size() > expectedMaxNumberOfParameters || list.size() < expectedMinNumberOfParameters) {
 			throw new IllegalArgumentException(
 					format(INVALID_NUMBER_OF_ARGUMENTS_TILL, expectedMinNumberOfParameters, expectedMaxNumberOfParameters, list.size())

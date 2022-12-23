@@ -7,7 +7,6 @@ import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
-import java.util.Locale;
 
 public class ShowBoardActivity implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 1;
@@ -25,7 +24,7 @@ public class ShowBoardActivity implements Command {
 		return showBoardActivity(name);
 	}
 
-	private String showBoardActivity(String name){
+	private String showBoardActivity(String name) {
 		Board board = repository.findElementByName(repository.getBoards(), name);
 		StringBuilder builder = new StringBuilder();
 		builder.append(name).append("'s activity:").append(System.lineSeparator());

@@ -1,6 +1,5 @@
 package com.telerikacademy.tms.models.contracts;
 
-import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.tasks.contracts.Historiable;
 import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;

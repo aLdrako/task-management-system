@@ -3,9 +3,6 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
-import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +24,6 @@ public class AddStepsToBug implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		//TODO to remove after test and implementation of all commands
-//		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
 		validateArgumentsCountMin(parameters, EXPECTED_NUMBER_PARAMETERS_MIN);
 		int id = tryParseInt(parameters.get(0));
 		List<String> steps = new ArrayList<>();
@@ -43,7 +37,8 @@ public class AddStepsToBug implements Command {
 		Bug bug;
 		try {
 			bug = (Bug) repository.findElementById(repository.getTasks(), id);
-			if (bug.getSteps().size() != 0) throw new IllegalArgumentException(format(BUG_ALREADY_HAS_STEPS, bug.getID()));
+			if (bug.getSteps().size() != 0)
+				throw new IllegalArgumentException(format(BUG_ALREADY_HAS_STEPS, bug.getID()));
 			for (String step : steps) {
 				bug.addStep(step.strip());
 			}

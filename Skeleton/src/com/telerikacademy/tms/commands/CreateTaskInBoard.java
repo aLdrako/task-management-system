@@ -3,7 +3,6 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.contracts.Board;
-import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
@@ -31,7 +30,7 @@ public class CreateTaskInBoard implements Command {
 		Board board = repository.findElementByName(repository.getBoards(), boardName);
 		String title = parameters.get(2);
 		String description = parameters.get(3);
-		switch (ts){
+		switch (ts) {
 			case BUG:
 				PriorityType priority = PriorityType.valueOf(parameters.get(4));
 				SeverityType severity = SeverityType.valueOf(parameters.get(5));
@@ -46,7 +45,7 @@ public class CreateTaskInBoard implements Command {
 				break;
 			case FEEDBACK:
 				Rating fr = Rating.valueOf(parameters.get(4));
-				Feedback feedback = repository.createFeedback(title,description,fr);
+				Feedback feedback = repository.createFeedback(title, description, fr);
 				board.addTask(feedback);
 				break;
 		}

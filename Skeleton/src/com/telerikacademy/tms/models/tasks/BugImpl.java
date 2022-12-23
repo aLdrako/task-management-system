@@ -2,14 +2,11 @@ package com.telerikacademy.tms.models.tasks;
 
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
-import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
-import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

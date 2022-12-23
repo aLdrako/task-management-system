@@ -29,10 +29,10 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-			repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
-			repository.createFeedback("A Good Feedback extra", "Some good feedback here", Rating.NINE);
-			repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-			repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
+//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
+//		repository.createFeedback("A Good Feedback extra", "Some good feedback here", Rating.NINE);
+//		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+//		repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
 		List<Task> tasks;
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {

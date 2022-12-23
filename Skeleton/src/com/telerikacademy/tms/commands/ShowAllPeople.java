@@ -2,13 +2,10 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.models.contracts.User;
-import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.utils.ListingHelpers;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ShowAllPeople implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 0;
