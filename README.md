@@ -119,6 +119,8 @@ Please see the Teamwork Guidelines [document](https://learn.telerikacademy.com/m
 
 ### Sample Input
 ```none
+
+
 CreatePerson 
 ShowAllPeople
 ShowPersonActivity 
@@ -127,6 +129,7 @@ ShowAllTeams
 ShowTeamActivity 
 AddPersonToTeam 
 ShowAllTeamMembers 
+------
 CreateBoardInTeam 
 ShowAllTeamBoards
 ShowBoardActivity 
@@ -143,8 +146,6 @@ ListAllBugs
 ListAllStories
 ListAllFeedbacks
 ListTasksWithAssignee
-
-
 
 CreatePerson Ivan
 CreatePerson Petar
@@ -176,5 +177,81 @@ ListAllTasks
 ```
 ### Sample Output
 ```none
+
+```
+
+### Test Input
+```none
+Command
+CreatePerson
+CreatePerson Alexa
+CreatePerson Alexa
+CreatePerson Cortana
+CreateTeam Cortana
+CreateTeam Hackers
+CreateTeam Developers
+CreateTeam {{Suicide Squad}}
+AddPersonToTeam Alexa {{Suicide Squad}}
+AddPersonToTeam Cortana {{Suicide Squad}}
+ShowAllTeams
+ShowAllPeople
+ShowTeamActivity Hackers
+ShowTeamActivity {{Suicide Squad}}
+ShowPersonActivity Cortana
+ShowAllTeamMembers {{Suicide Squad}}
+
+```
+
+### Test Output
+```none
+There is no value (Command) in CommandType.
+Invalid number of arguments. Expected: 1; received: 0.
+User with a name Alexa was created.
+Duplicate name. Please enter a unique name!
+User with a name Cortana was created.
+Duplicate name. Please enter a unique name!
+Team with a name Hackers was created.
+Team with a name Developers was created.
+Team with a name Suicide Squad was created.
+Person Alexa has been added to the team Team: Suicide Squad
+It has (1) users -> Alexa
+It contains (0) boards -> !
+Person Cortana has been added to the team Team: Suicide Squad
+It has (2) users -> Alexa, Cortana
+It contains (0) boards -> !
+=== ALL TEAMS ===
+Team: Hackers
+It has (0) users -> 
+It contains (0) boards -> 
+===============
+Team: Developers
+It has (0) users -> 
+It contains (0) boards -> 
+===============
+Team: Suicide Squad
+It has (2) users -> Alexa, Cortana
+It contains (0) boards -> 
+
+=== ALL PEOPLE ===
+User: Alexa has (0) assigned tasks
+<<< Alexa's Activity History >>>
+[23-December-2022 15:53:24] User was created.
+===============
+User: Cortana has (0) assigned tasks
+<<< Cortana's Activity History >>>
+[23-December-2022 15:53:24] User was created.
+
+Hackers's team activity:
+[23-December-2022 15:53:24] Team was created.
+
+Suicide Squad's team activity:
+[23-December-2022 15:53:24] Team was created.
+[23-December-2022 15:53:24] User Alexa added to the team Suicide Squad
+[23-December-2022 15:53:24] User Cortana added to the team Suicide Squad
+
+Cortana's activity:
+[23-December-2022 15:53:24] User was created.
+
+Suicide Squad' team members: Alexa, Cortana 
 
 ```
