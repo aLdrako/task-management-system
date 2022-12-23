@@ -22,8 +22,12 @@ import java.util.stream.Collectors;
 
 
 public class ListAllBugs implements Command {
-	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 3;
+	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 4;
     public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
+    public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
+
+    public static final String INVALID_COMMAND = "Invalid command input. Bugs can be either filtered by status and/or assignee, and sorted by title/priority/severity.";
+
     private final TaskManagementRepository repository;
 
 	public ListAllBugs(TaskManagementRepository repository) {
@@ -33,8 +37,12 @@ public class ListAllBugs implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
-        repository.createBug("Verybad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.CRITICAL);
-        repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.MAJOR);
+        validateParameters(parameters);
+    //   User user = repository.createUser("Ivancho");
+    //   Bug bug1 = repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.MAJOR);
+    //   Bug bug = repository.createBug("Verybad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.CRITICAL);
+    //   bug.setAssignee(user);
+    //   bug1.setAssignee(user);
         List<Bug> bugs = listWithBugs();
         System.out.println(bugs);
 		bugs = filterBugs(parameters, bugs);
@@ -42,6 +50,7 @@ public class ListAllBugs implements Command {
         System.out.println(bugs);
 		return null;
 	}
+
 
     private List<Bug> sortBugs(List<String> parameters, List<Bug> bugs) {
         if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
@@ -54,7 +63,7 @@ public class ListAllBugs implements Command {
             bugs.sort(Comparator.comparing(Bug::getSeverity));
             return bugs;
         }
-        return bugs;
+        throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
     }
 
     private List<Bug> filterBugs(List<String> parameters, List<Bug> bugs) {
@@ -67,6 +76,14 @@ public class ListAllBugs implements Command {
         } else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
             User user = repository.findElementByName(repository.getUsers(), parameters.get(1));
             return bugs.stream()
+                    .filter(bug -> bug.getAssignee() == user)
+                    .collect(Collectors.toList());
+        } else if (parameters.get(0).equalsIgnoreCase("filterByAssigneeAndStatus")
+                || (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee"))) {
+            User user = repository.findElementByName(repository.getUsers(), parameters.get(1));
+            BugStatus status = ParsingHelpers.tryParseEnum(parameters.get(2), BugStatus.class);
+            return bugs.stream()
+                    .filter(bug -> bug.getStatus() == status)
                     .filter(bug -> bug.getAssignee() == user)
                     .collect(Collectors.toList());
         }
@@ -82,4 +99,12 @@ public class ListAllBugs implements Command {
 		}
 		return list;
 	}
+    private void validateParameters(List<String> parameters) {
+        for (String parameter : parameters) {
+            if (parameter.contains("sort") || parameter.contains("filter")) {
+                return;
+            }
+        }
+        throw new InvalidUserInputException(INVALID_COMMAND);
+    }
 }

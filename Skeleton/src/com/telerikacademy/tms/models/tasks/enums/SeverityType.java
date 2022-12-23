@@ -2,6 +2,8 @@ package com.telerikacademy.tms.models.tasks.enums;
 
 import com.telerikacademy.tms.exceptions.InvalidEnumArgumentException;
 
+import java.util.Comparator;
+
 public enum SeverityType {
 	CRITICAL,
 	MAJOR,
