@@ -16,6 +16,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,12 +33,13 @@ public class ListAllBugs implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
-        repository.createBug("Verybad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-        repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+        repository.createBug("Verybad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.CRITICAL);
+        repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.MAJOR);
         List<Bug> bugs = listWithBugs();
         System.out.println(bugs);
 		bugs = filterBugs(parameters, bugs);
         bugs = sortBugs(parameters, bugs);
+        System.out.println(bugs);
 		return null;
 	}
 
@@ -46,7 +48,11 @@ public class ListAllBugs implements Command {
             Collections.sort(bugs);
             return bugs;
         } else if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByPriority"))) {
-
+            bugs.sort(Comparator.comparing(Bug::getPriority));
+            return bugs;
+        } else if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortBySeverity"))) {
+            bugs.sort(Comparator.comparing(Bug::getSeverity));
+            return bugs;
         }
         return bugs;
     }
