@@ -102,4 +102,11 @@ public abstract class TaskBaseImpl implements Task {
 	public int compareTo(Task o) {
 		return getTitle().compareTo(o.getTitle());
 	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getInterfaces()[0].getSimpleName() + ": " + "ID -> [" +
+				this.getID() + "] '" + this.getTitle() + "' | Status: " +
+				this.getStatus();
+	}
 }

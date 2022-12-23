@@ -3,10 +3,12 @@ package com.telerikacademy.tms.models;
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.Board;
+import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
@@ -80,24 +82,13 @@ public class BoardImpl implements Board {
 
 	@Override
 	public String toString() {
-		StringBuilder result = new StringBuilder();
 
-		result.append(this.getClass().getInterfaces()[0].getSimpleName())
-				.append(": ").append(this.getName())
-				.append(" contains (").append(this.getTasks().size())
-				.append(") tasks").append(System.lineSeparator());
-
-		for (Task task : getTasks()) {
-			result.append("ID -> [").append(task.getID()).append("] ")
-					.append(task.getTitle()).append(" | Status: ")
-					.append(task.getStatus()).append(System.lineSeparator());
-		}
-
-		result.append("<<< Activity History >>>".toUpperCase()).append(System.lineSeparator());
-		for (History history : getHistories()) {
-			result.append(history).append(System.lineSeparator());
-		}
-
-		return result.toString();
+		return this.getClass().getInterfaces()[0].getSimpleName() +
+				": " + this.getName() +
+				" contains (" + this.getTasks().size() +
+				") tasks" + System.lineSeparator() +
+				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
+				System.lineSeparator() + "<<< Activity History >>>".toUpperCase() + System.lineSeparator() +
+				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
 	}
 }
