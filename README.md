@@ -155,6 +155,14 @@ CreateTeam Cortana
 CreateTeam Hackers
 CreateTeam Developers
 CreateTeam {{Suicide Squad}}
+CreateBoardInTeam ToDos Hackers
+CreateBoardInTeam Goals {{Suicide Squad}}
+ShowBoardActivity ToDos
+CreateTaskInBoard BUG ToDos {{Glitching inteface}} {{There is a broken interface}} HIGH MAJOR
+CreateTaskInBoard STORY ToDos {{Funny story}} {{Once upon a time there was a mouse....}} MEDIUM SMALL
+CreateTaskInBoard FEEDBACK Goals {{Good job here}} {{This developer is doing great}} NINE
+AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
+AddStepsToBug 2 {{First open the app}} {{Try to access the database}}
 AddPersonToTeam Alexa {{Suicide Squad}}
 AddPersonToTeam Cortana {{Suicide Squad}}
 ShowAllTeams
@@ -164,14 +172,6 @@ ShowTeamActivity {{Suicide Squad}}
 ShowPersonActivity Cortana
 ShowAllTeamMembers {{Suicide Squad}}
 ShowAllTeamBoards Hackers
-CreateBoardInTeam ToDos Hackers
-CreateBoardInTeam Goals {{Suicide Squad}}
-ShowBoardActivity ToDos
-CreateTaskInBoard bug ToDos {{Glitching inteface}} {{There is a broken interface}} high major
-CreateTaskInBoard STORY ToDos {{Funny story}} {{Once upon a time there was a mouse....}} medium small
-CreateTaskInBoard feedback Goals {{Good job here}} {{This developer is doing great}} 9
-AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
-AddStepsToBug 2 {{First open the app}} {{Try to access the database}}
 AssignTask 1 Alexa
 AssignTask 2 Alexa
 AssignTask 3 Cortana
@@ -199,16 +199,22 @@ Duplicate name. Please enter a unique name!
 Team with a name Hackers was created.
 Team with a name Developers was created.
 Team with a name Suicide Squad was created.
-Person Alexa has been added to the team Team: Suicide Squad
-It has (1) users -> Alexa
-It contains (0) boards -> !
-Person Cortana has been added to the team Team: Suicide Squad
-It has (2) users -> Alexa, Cortana
-It contains (0) boards -> !
+Board ToDos has been created in team Hackers!
+Board Goals has been created in team Suicide Squad!
+ToDos's activity:
+[23-December-2022 21:04:18] Board was created.
+
+Task Glitching inteface has been created in board ToDos!
+Task Funny story has been created in board ToDos!
+Task Good job here has been created in board Goals!
+Steps to reproduce added to Bug with ID 1
+Provided task with ID 2 does not belong to Bug category!
+Person Alexa has been added to the team Suicide Squad!
+Person Cortana has been added to the team Suicide Squad!
 === ALL TEAMS ===
 Team: Hackers
 It has (0) users -> 
-It contains (0) boards -> 
+It contains (1) boards -> ToDos
 ===============
 Team: Developers
 It has (0) users -> 
@@ -216,40 +222,33 @@ It contains (0) boards ->
 ===============
 Team: Suicide Squad
 It has (2) users -> Alexa, Cortana
-It contains (0) boards -> 
+It contains (1) boards -> Goals
 
 === ALL PEOPLE ===
 User: Alexa has (0) assigned tasks
 <<< Alexa's Activity History >>>
-[23-December-2022 20:50:25] User was created.
+[23-December-2022 21:04:18] User was created.
 ===============
 User: Cortana has (0) assigned tasks
 <<< Cortana's Activity History >>>
-[23-December-2022 20:50:25] User was created.
+[23-December-2022 21:04:18] User was created.
 
 Hackers's team activity:
-[23-December-2022 20:50:25] Team was created.
+[23-December-2022 21:04:18] Team was created.
+[23-December-2022 21:04:18] Board ToDos added to the team Hackers
 
 Suicide Squad's team activity:
-[23-December-2022 20:50:25] Team was created.
-[23-December-2022 20:50:25] User Alexa added to the team Suicide Squad
-[23-December-2022 20:50:25] User Cortana added to the team Suicide Squad
+[23-December-2022 21:04:18] Team was created.
+[23-December-2022 21:04:18] Board Goals added to the team Suicide Squad
+[23-December-2022 21:04:18] User Alexa added to the team Suicide Squad
+[23-December-2022 21:04:18] User Cortana added to the team Suicide Squad
 
 Cortana's activity:
-[23-December-2022 20:50:25] User was created.
+[23-December-2022 21:04:18] User was created.
 
 Suicide Squad' team members: Alexa, Cortana 
+ToDos
 Team Hackers boards printed
-Board ToDos has been created in team Hackers!
-Board Goals has been created in team Suicide Squad!
-ToDos's activity:
-[23-December-2022 20:50:25] Board was created.
-
-Task Glitching inteface has been created in board ToDos!
-Task Funny story has been created in board ToDos!
-Task Good job here has been created in board Goals!
-Steps to reproduce added to Bug with ID 1
-Provided task with ID 2 does not belong to Bug category!
 Task with ID 1 was assigned to user Alexa.
 Task with ID 2 was assigned to user Alexa.
 Provided task with ID 3 does not belong to Assignable category!
