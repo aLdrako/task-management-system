@@ -4,6 +4,7 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.tasks.contracts.Nameable;
+import com.telerikacademy.tms.utils.ListingHelpers;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
@@ -34,9 +35,7 @@ public class ShowAllTeams implements Command {
 			builder.append(ALL_TEAMS_MESSAGE);
 		}
 		builder.append(System.lineSeparator());
-		builder.append(repository.getTeams().stream()
-				.map(Nameable::toString)
-				.collect(Collectors.joining("\n===============\n")));
+		builder.append(ListingHelpers.elementsToString(repository.getTeams()));
 		builder.append(System.lineSeparator());
 		return builder.toString();
 	}
