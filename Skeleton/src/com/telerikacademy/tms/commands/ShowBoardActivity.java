@@ -22,7 +22,7 @@ public class ShowBoardActivity implements Command {
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		String name = parameters.get(0);
-		return null;
+		return showBoardActivity(name);
 	}
 
 	private String showBoardActivity(String name){
