@@ -131,6 +131,7 @@ CreateBoardInTeam
 ShowAllTeamBoards
 ShowBoardActivity 
 CreateTaskInBoard 
+AddStepsToReproduceBug
 ChangeStory 
 ChangeBug
 ChangeFeedback
