@@ -31,7 +31,7 @@ public class ShowAllTeamMembers implements Command {
 		if (members.size() == 0) {
 			builder.append(format(NO_MEMBERS_LISTED, teamName));
 		} else {
-			builder.append(format(MEMBERS_LISTED,teamName));
+			builder.append(format(MEMBERS_LISTED, teamName));
 			for (User member : members) {
 				builder.append(member.getName()).append(", ");
 			}

@@ -111,10 +111,12 @@ public abstract class TaskBaseImpl implements Task {
 				this.getID() + "] '" + this.getTitle() + "' | Status: " +
 				this.getStatus();
 	}
-	public TaskType getTaskType(){
+
+	public TaskType getTaskType() {
 		return taskType;
 	}
-	public void setTaskType(TaskType ts){
+
+	public void setTaskType(TaskType ts) {
 		taskType = ts;
 	}
 }

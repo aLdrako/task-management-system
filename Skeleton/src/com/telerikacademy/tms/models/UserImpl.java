@@ -1,11 +1,9 @@
 package com.telerikacademy.tms.models;
 
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
-import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,6 @@ public class UserImpl implements User {
 	private String name;
 	private final List<Task> tasks;
 	private final List<History> activityHistory;
-
 
 
 	public UserImpl(String name) {
@@ -97,7 +94,7 @@ public class UserImpl implements User {
 				" has (" + this.getTasks().size() +
 				") assigned tasks" + System.lineSeparator() +
 				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
-				"<<< " + this.getName() + "'s Activity History >>>"+ System.lineSeparator() +
+				"<<< " + this.getName() + "'s Activity History >>>" + System.lineSeparator() +
 				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
 	}
 

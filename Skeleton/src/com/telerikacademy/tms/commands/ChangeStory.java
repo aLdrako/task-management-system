@@ -25,8 +25,6 @@ public class ChangeStory implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		//TODO to remove after test and implementation of all commands
-//		repository.createStory("Good Story", "Some good story here", PriorityType.LOW, SizeType.MEDIUM);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String typeOfChange = parameters.get(1);

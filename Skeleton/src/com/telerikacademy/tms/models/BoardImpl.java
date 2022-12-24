@@ -3,7 +3,6 @@ package com.telerikacademy.tms.models;
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.Board;
-import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
@@ -88,7 +87,7 @@ public class BoardImpl implements Board {
 				" contains (" + this.getTasks().size() +
 				") tasks" + System.lineSeparator() +
 				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
-				"<<< " + this.getName() + "'s Activity History >>>"+ System.lineSeparator() +
+				"<<< " + this.getName() + "'s Activity History >>>" + System.lineSeparator() +
 				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
 	}
 }

@@ -41,7 +41,6 @@ public class AddComment implements Command {
 		Comment comment = new CommentImpl(commentMessage, user.getName());
 		task.addComment(comment);
 		user.addCommentActivity(task);
-		System.out.println(comment.getContent());
 
 		return format(COMMENT_ADDED_SUCCESSFUL, user.getName(), task.getID());
 	}

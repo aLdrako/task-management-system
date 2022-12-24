@@ -25,11 +25,6 @@ public class AssignTask implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		//TODO to remove after test and implementation of all commands
-//		User user = repository.createUser("Alexa");
-//		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
-//		repository.createStory("Good Story", "Some good story here", PriorityType.LOW, SizeType.MEDIUM);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String userName = parameters.get(1);

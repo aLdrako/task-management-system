@@ -2,7 +2,7 @@ package com.telerikacademy.tms.models.tasks.enums;
 
 import com.telerikacademy.tms.exceptions.InvalidEnumArgumentException;
 
-public enum PriorityType{
+public enum PriorityType {
 	HIGH,
 	MEDIUM,
 	LOW;
