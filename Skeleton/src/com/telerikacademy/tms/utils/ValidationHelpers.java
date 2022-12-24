@@ -7,7 +7,7 @@ import static java.lang.String.format;
 public class ValidationHelpers {
 
 	private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
-	private static final String INVALID_NUMBER_OF_ARGUMENTS_TILL = "Invalid number of arguments. Expected: from %d to %d; received: %d.";
+	private static final String INVALID_NUMBER_OF_ARGUMENTS_TILL = "Invalid number of arguments.";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS_MIN = "Invalid number of arguments. Expected: at least %d; received: %d.";
 
 	public static void validateInRange(int value, int min, int max, String message) {

@@ -11,6 +11,7 @@ import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.utils.ListingHelpers;
 import com.telerikacademy.tms.utils.ParsingHelpers;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
@@ -19,6 +20,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 
 public class ListAllBugs implements Command {
@@ -35,29 +38,31 @@ public class ListAllBugs implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+        Bug bug = repository.createBug("Very bad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.MAJOR);
+        Bug bug1 =repository.createBug("Aaaaaaaaaaaaa", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+        User user = repository.createUser("Ivancho");
+        bug1.setAssignee(user);
+        bug.setAssignee(user);
         validateParameters(parameters);
         List<Bug> bugs = listWithBugs();
 		bugs = filterBugs(parameters, bugs);
         sortBugs(parameters, bugs);
-		return listAllBugs(bugs);
+		return ListingHelpers.elementsToString(bugs);
 	}
 
-    private String listAllBugs(List<Bug> bugs) {
-        StringBuilder builder = new StringBuilder();
-        for (Bug bug : bugs) {
-            builder.append(bug).append(System.lineSeparator());
-        }
-        return builder.toString();
-    }
-
-
     private void sortBugs(List<String> parameters, List<Bug> bugs) {
+        if (parameters.stream().noneMatch(value -> value.contains("sort"))) {
+            return;
+        }
         if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
             Collections.sort(bugs);
+            return;
         } else if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByPriority"))) {
             bugs.sort(Comparator.comparing(Bug::getPriority));
+            return;
         } else if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortBySeverity"))) {
             bugs.sort(Comparator.comparing(Bug::getSeverity));
+            return;
         }
         throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
     }
@@ -75,8 +80,8 @@ public class ListAllBugs implements Command {
                     .filter(bug -> bug.getAssignee() == user)
                     .collect(Collectors.toList());
         } else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
-            BugStatus status = ParsingHelpers.tryParseEnum(parameters.get(2), BugStatus.class);
-            User user = repository.findElementByName(repository.getUsers(), parameters.get(1));
+            BugStatus status = ParsingHelpers.tryParseEnum(parameters.get(1), BugStatus.class);
+            User user = repository.findElementByName(repository.getUsers(), parameters.get(2));
             return bugs.stream()
                     .filter(bug -> bug.getStatus() == status)
                     .filter(bug -> bug.getAssignee() == user)
@@ -96,11 +101,23 @@ public class ListAllBugs implements Command {
 	}
     private void validateParameters(List<String> parameters) {
         ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
-        for (String parameter : parameters) {
-            if (parameter.contains("sort") || parameter.contains("filter")) {
-                return;
-            }
-        }
-        throw new InvalidUserInputException(INVALID_COMMAND);
+       if (parameters.stream().anyMatch(value -> value.contains("sort"))) {
+           int index = parameters.indexOf(parameters.stream().reduce("", (acc, comb) -> {
+               for (String word : parameters) {
+                   if (word.contains("sort")) {
+                       return word;
+                   }
+               }
+               return null;
+           }));
+           if (parameters.size() - 1 != index) {
+               throw new InvalidUserInputException(format("You can't have arguments after '%s'." +
+                       "If you wish to filter the list, you need to do it before you sort", parameters.get(index)));
+           }
+       }
+       if (parameters.stream()
+               .noneMatch(value -> value.contains("sort") ||value.contains("filter"))) {
+           throw new InvalidUserInputException(INVALID_COMMAND);
+       }
     }
 }
