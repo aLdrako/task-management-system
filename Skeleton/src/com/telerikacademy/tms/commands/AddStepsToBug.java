@@ -9,11 +9,12 @@ import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.INVALID_TASK_ID_IN_CATEGORY;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseInt;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCountMin;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentCountRange;
 import static java.lang.String.format;
 
 public class AddStepsToBug implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS_MIN = 2;
+	private static final int EXPECTED_NUMBER_PARAMETERS_MAX = 10;
 	private static final String STEPS_ADDED_SUCCESSFUL = "Steps to reproduce added to Bug with ID %s";
 	private static final String BUG_ALREADY_HAS_STEPS = "Bug with ID %s already has defined steps to reproduce";
 	private final TaskManagementRepository repository;
@@ -24,7 +25,7 @@ public class AddStepsToBug implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		validateArgumentsCountMin(parameters, EXPECTED_NUMBER_PARAMETERS_MIN);
+		validateArgumentCountRange(parameters, EXPECTED_NUMBER_PARAMETERS_MIN, EXPECTED_NUMBER_PARAMETERS_MAX);
 		int id = tryParseInt(parameters.get(0));
 		List<String> steps = new ArrayList<>();
 		for (int i = 1; i < parameters.size(); i++) {
