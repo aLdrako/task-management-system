@@ -3,11 +3,13 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
+import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
+import com.telerikacademy.tms.utils.ListingHelpers;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
@@ -16,9 +18,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListAllTasks implements Command {
-	private static final int EXPECTED_MAX_NUMBER_PARAMETERS = 3;
-	private static final String INVALID_PARAMETER_MESSAGE = "Invalid parameter for listing";
-	private static final String LIST_ALREADY_SORTED = "List has already been sorted.";
+	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the tasks only by title.";
+	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the tasks only by title.";
+
 	private static final String TITLE_DOES_NOT_EXIST = "There is not task that contains the given title.";
 
 	private final TaskManagementRepository repository;
@@ -29,56 +31,42 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
-//		repository.createFeedback("A Good Feedback extra", "Some good feedback here", Rating.NINE);
-//		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-//		repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
-		ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
-		List<Task> tasks;
-		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
-			String title = parameters.get(1);
-			tasks = new ArrayList<>(filterTasks(title));
-		} else if (parameters.get(0).equalsIgnoreCase("sortByTitle")) {
-			tasks = new ArrayList<>(repository.getTasks());
+		repository.createFeedback("A Good Feedback sort", "Some good feedback here", Rating.NINE);
+		repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
+		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+		repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
+		ValidationHelpers.validateFilteringAndSortingParameters(parameters);
+		List<Task> tasks = repository.getTasks();
+		tasks = filterTasks(parameters, tasks);
+		sortTasks(parameters, tasks);
+
+		return ListingHelpers.elementsToString(tasks);
+	}
+
+	private void sortTasks(List<String> parameters, List<Task> tasks) {
+		if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
 			Collections.sort(tasks);
-		} else {
-			throw new InvalidUserInputException(INVALID_PARAMETER_MESSAGE);
+			return;
 		}
-		if (parameters.size() == 3 && parameters.get(2).equalsIgnoreCase("sortByTitle")) {
-			if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
-				Collections.sort(tasks);
-			} else {
-				throw new InvalidUserInputException(LIST_ALREADY_SORTED);
+		if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("sortby"))) {
+			throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
+		}
+	}
+
+	private List<Task> filterTasks(List<String> parameters, List<Task> tasks) {
+		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
+			if (tasks.stream().noneMatch(task -> task.getTitle().contains(parameters.get(1)) ||
+					task.getTitle().equalsIgnoreCase(parameters.get(1)))) {
+				throw new InvalidUserInputException(TITLE_DOES_NOT_EXIST);
 			}
+			return tasks
+					.stream()
+					.filter(task -> task.getTitle().contains(parameters.get(1)))
+					.collect(Collectors.toList());
 		}
-
-		return listAllTasks(tasks);
-	}
-
-	private List<Task> filterTasks(String title) {
-		if (!titleContains(title)) {
-			throw new InvalidUserInputException(TITLE_DOES_NOT_EXIST);
+		if (parameters.stream().anyMatch(value -> value.contains("filter"))) {
+			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 		}
-		return repository.getTasks()
-				.stream()
-				.filter(task -> task.getTitle().contains(title))
-				.collect(Collectors.toList());
-	}
-
-	private boolean titleContains(String title) {
-		for (Task task : repository.getTasks()) {
-			if (task.getTitle().contains(title)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private String listAllTasks(List<Task> tasks) {
-		StringBuilder builder = new StringBuilder();
-		for (Task task : tasks) {
-			builder.append(task).append(System.lineSeparator());
-		}
-		return builder.toString();
+		return tasks;
 	}
 }

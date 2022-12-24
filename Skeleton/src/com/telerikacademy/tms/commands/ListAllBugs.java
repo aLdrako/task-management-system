@@ -21,15 +21,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsSorting;
 import static java.lang.String.format;
 
 
 public class ListAllBugs implements Command {
-	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 4;
     public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
     public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
-    public static final String INVALID_COMMAND = "Invalid command input. Bugs can be either filtered by status and/or assignee, and sorted by title/priority/severity.";
-
+    public static final String INVALID_ARGUMENTS_AFTER_SORT_MESSAGE = "You can't have arguments after '%s'." +
+            "If you wish to filter the list, you need to do it before you sort";
     private final TaskManagementRepository repository;
 
 	public ListAllBugs(TaskManagementRepository repository) {
@@ -43,7 +43,7 @@ public class ListAllBugs implements Command {
         User user = repository.createUser("Ivancho");
         bug1.setAssignee(user);
         bug.setAssignee(user);
-        validateParameters(parameters);
+        ValidationHelpers.validateFilteringAndSortingParameters(parameters);
         List<Bug> bugs = listWithBugs();
 		bugs = filterBugs(parameters, bugs);
         sortBugs(parameters, bugs);
@@ -51,7 +51,7 @@ public class ListAllBugs implements Command {
 	}
 
     private void sortBugs(List<String> parameters, List<Bug> bugs) {
-        if (parameters.stream().noneMatch(value -> value.contains("sort"))) {
+        if (!parameters.get(0).contains("sort") && !parameters.get(parameters.size() - 1).contains("sort")) {
             return;
         }
         if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
@@ -99,25 +99,11 @@ public class ListAllBugs implements Command {
 		}
 		return list;
 	}
-    private void validateParameters(List<String> parameters) {
-        ValidationHelpers.validateArgumentsCountTill(parameters, EXPECTED_MAX_NUMBER_PARAMETERS);
-       if (parameters.stream().anyMatch(value -> value.contains("sort"))) {
-           int index = parameters.indexOf(parameters.stream().reduce("", (acc, comb) -> {
-               for (String word : parameters) {
-                   if (word.contains("sort")) {
-                       return word;
-                   }
-               }
-               return null;
-           }));
-           if (parameters.size() - 1 != index) {
-               throw new InvalidUserInputException(format("You can't have arguments after '%s'." +
-                       "If you wish to filter the list, you need to do it before you sort", parameters.get(index)));
-           }
-       }
-       if (parameters.stream()
-               .noneMatch(value -> value.contains("sort") ||value.contains("filter"))) {
-           throw new InvalidUserInputException(INVALID_COMMAND);
-       }
-    }
+   // private void validateParameters(List<String> parameters) {
+   //     if (parameters.stream().noneMatch(value -> value.contains("sort") ||value.contains("filter"))) {
+   //         throw new InvalidUserInputException(INVALID_COMMAND);
+   //     }
+   //     ValidationHelpers.validateArgumentsSorting(parameters);
+   //     ValidationHelpers.validateArgumentsFiltering(parameters);
+   // }
 }
