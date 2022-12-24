@@ -69,11 +69,11 @@ public class TaskManagementEngineImpl implements Engine {
 		List<String> parameters = new ArrayList<>();
 		while (fullCommand.contains(COMMENT_OPEN_SYMBOL)) {
 			int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
-			int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
+			int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL, indexOfOpenComment + COMMENT_OPEN_SYMBOL.length());
 			parameters.addAll(Arrays.asList(fullCommand.substring(0, indexOfOpenComment).split(" ")));
 			parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
 			//    fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
-			fullCommand = fullCommand.replace(fullCommand.substring(0, indexOfCloseComment + 2), "");
+			fullCommand = fullCommand.replace(fullCommand.substring(0, indexOfCloseComment + COMMENT_CLOSE_SYMBOL.length()), "");
 		}
 		parameters.addAll(Arrays.asList(fullCommand.split(" ")));
 		parameters.removeAll(Collections.singleton(""));
