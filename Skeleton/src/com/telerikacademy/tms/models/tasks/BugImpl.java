@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
-	//TODO to clear array list in steps
-//	private final List<String> steps = new ArrayList<>(Arrays.asList("Right click on any folder", "Open folder setting", "Fires BSOD"));
 	private final List<String> steps = new ArrayList<>();
 	private PriorityType priority;
 	private SeverityType severity;

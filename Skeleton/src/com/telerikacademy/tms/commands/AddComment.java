@@ -24,9 +24,6 @@ public class AddComment implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		//TODO to remove after test and implementation of all commands
-//		User user = repository.createUser("Alexa");
-//		repository.createFeedback("Good Feedback", "Some good feedback here", Rating.NINE);
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String commentMessage = parameters.get(1).strip();
