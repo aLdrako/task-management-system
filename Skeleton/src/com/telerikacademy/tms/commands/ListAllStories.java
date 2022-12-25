@@ -8,7 +8,10 @@ import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
+import com.telerikacademy.tms.utils.FilterHelpers;
 import com.telerikacademy.tms.utils.ListingHelpers;
 import com.telerikacademy.tms.utils.ParsingHelpers;
 import com.telerikacademy.tms.utils.ValidationHelpers;
@@ -17,6 +20,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.telerikacademy.tms.utils.FilterHelpers.filterByAssignee;
+import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 public class ListAllStories implements Command {
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the stories only by status/assignee.";
@@ -30,7 +37,8 @@ public class ListAllStories implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		ValidationHelpers.validateFilteringAndSortingParameters(parameters);
+		validateFilteringAndSortingParameters(parameters);
+
 		List<Story> stories = listWithStories();
 		stories = filterStories(parameters, stories);
 		sortStories(parameters, stories);
@@ -51,18 +59,12 @@ public class ListAllStories implements Command {
 
 	private List<Story> filterStories(List<String> parameters, List<Story> stories) {
 		if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
-			StoryStatus status = ParsingHelpers.tryParseEnum(parameters.get(1), StoryStatus.class);
-			return stories.stream().filter(story -> story.getStatus() == status).collect(Collectors.toList());
+			return filterByStatus(parameters.get(1), stories, StoryStatus.class);
 		} else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
-			User user = repository.findElementByName(repository.getUsers(), parameters.get(1));
-			return stories.stream().filter(story -> story.getAssignee() == user)
-					.collect(Collectors.toList());
+			return filterByAssignee(parameters.get(1), stories, repository);
 		} else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
-			StoryStatus status = ParsingHelpers.tryParseEnum(parameters.get(1), StoryStatus.class);
-			User user = repository.findElementByName(repository.getUsers(), parameters.get(2));
-			return stories.stream().filter(story -> story.getStatus() == status)
-					.filter(story -> story.getAssignee() == user)
-					.collect(Collectors.toList());
+			stories = filterByStatus(parameters.get(1), stories, StoryStatus.class);
+			return filterByAssignee(parameters.get(2), stories, repository);
 		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 		}

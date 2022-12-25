@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
+
 public class ListAllTasks implements Command {
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the tasks only by title.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the tasks only by title.";
@@ -31,18 +33,13 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		//repository.createFeedback("A Good Feedback sort", "Some good feedback here", Rating.NINE);
-		//repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
-		//repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-		//repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
-		ValidationHelpers.validateFilteringAndSortingParameters(parameters);
+		validateFilteringAndSortingParameters(parameters);
+
 		List<Task> tasks = repository.getTasks();
 		tasks = filterTasks(parameters, tasks);
 		sortTasks(parameters, tasks);
-
 		return ListingHelpers.elementsToString(tasks);
 	}
-
 	private void sortTasks(List<String> parameters, List<Task> tasks) {
 		if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
 			Collections.sort(tasks);
@@ -50,7 +47,6 @@ public class ListAllTasks implements Command {
 			throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
 		}
 	}
-
 	private List<Task> filterTasks(List<String> parameters, List<Task> tasks) {
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
 			if (tasks.stream().noneMatch(task -> task.getTitle().contains(parameters.get(1)) ||

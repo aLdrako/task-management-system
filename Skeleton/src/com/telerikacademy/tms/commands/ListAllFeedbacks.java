@@ -9,6 +9,7 @@ import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
+import com.telerikacademy.tms.utils.FilterHelpers;
 import com.telerikacademy.tms.utils.ListingHelpers;
 import com.telerikacademy.tms.utils.ParsingHelpers;
 import com.telerikacademy.tms.utils.ValidationHelpers;
@@ -18,6 +19,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 public class ListAllFeedbacks implements Command {
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the feedbacks only by status.";
@@ -30,9 +34,8 @@ public class ListAllFeedbacks implements Command {
 	}
 	@Override
 	public String execute(List<String> parameters) {
-		//repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.SEVEN);
-		//repository.createFeedback("Bad Feedback sort", "Some good feedback here", Rating.EIGHT);
-		ValidationHelpers.validateFilteringAndSortingParameters(parameters);
+		validateFilteringAndSortingParameters(parameters);
+
 		List<Feedback> feedbacks = listWithFeedbacks();
 		feedbacks = filterFeedbacks(parameters, feedbacks);
 		sortFeedbacks(parameters, feedbacks);
@@ -40,8 +43,7 @@ public class ListAllFeedbacks implements Command {
 	}
 	private List<Feedback> filterFeedbacks(List<String> parameters, List<Feedback> feedbacks) {
 		if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
-			FeedbackStatus status = ParsingHelpers.tryParseEnum(parameters.get(1), FeedbackStatus.class);
-			return feedbacks.stream().filter(feedback -> feedback.getStatus() == status).collect(Collectors.toList());
+			return filterByStatus(parameters.get(1), feedbacks, FeedbackStatus.class);
 		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 		}
