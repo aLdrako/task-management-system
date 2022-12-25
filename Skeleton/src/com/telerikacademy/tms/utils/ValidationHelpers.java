@@ -14,6 +14,7 @@ public class ValidationHelpers {
 	private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS_TILL = "Invalid number of arguments.";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS_MIN = "Invalid number of arguments. Expected: at least %d; received: %d.";
+	private static final String INVALID_PARAMETER_MESSAGE = "Invalid argument detected.";
 
 	public static void validateInRange(int value, int min, int max, String message) {
 		if (value < min || value > max) {
@@ -82,6 +83,19 @@ public class ValidationHelpers {
 	 * @param list - parameters
 	 */
 	public static void validateArgumentsFiltering(List<String> list) {
+        if (list.get(0).toLowerCase().contains("filterby")) {
+            int maxParameters;
+			if (list.get(0).toLowerCase().contains("and")) {
+                validateArgumentsCountTill(list, 4);
+				maxParameters = 4;
+            } else {
+                validateArgumentsCountTill(list, 3);
+				maxParameters = 3;
+            }
+            if (list.size() == maxParameters && !list.get(maxParameters - 1).toLowerCase().contains("sortby")) {
+                throw new InvalidUserInputException(INVALID_PARAMETER_MESSAGE);
+            }
+        }
 
 	}
 	public static void validateFilteringAndSortingParameters(List<String> list) {
@@ -90,5 +104,6 @@ public class ValidationHelpers {
 			throw new InvalidUserInputException(INVALID_COMMAND);
 		}
 		validateArgumentsSorting(list);
+        validateArgumentsFiltering(list);
 	}
 }

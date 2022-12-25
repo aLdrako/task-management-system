@@ -40,6 +40,7 @@ public class ListAllBugs implements Command {
 	public String execute(List<String> parameters) {
         Bug bug = repository.createBug("Very bad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.MAJOR);
         Bug bug1 =repository.createBug("Aaaaaaaaaaaaa", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+        repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
         User user = repository.createUser("Ivancho");
         bug1.setAssignee(user);
         bug.setAssignee(user);
@@ -51,7 +52,8 @@ public class ListAllBugs implements Command {
 	}
 
     private void sortBugs(List<String> parameters, List<Bug> bugs) {
-        if (!parameters.get(0).contains("sort") && !parameters.get(parameters.size() - 1).contains("sort")) {
+        if (!parameters.get(0).toLowerCase().contains("sortby") && !parameters.get(parameters.size() - 1).toLowerCase()
+                .contains("sortby")) {
             return;
         }
         if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
@@ -68,7 +70,7 @@ public class ListAllBugs implements Command {
     }
 
     private List<Bug> filterBugs(List<String> parameters, List<Bug> bugs) {
-        if (!parameters.get(0).contains("filter")){
+        if (!parameters.get(0).toLowerCase().contains("filter")){
             return bugs;
         }
         if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
@@ -91,19 +93,10 @@ public class ListAllBugs implements Command {
     }
 
     private List<Bug> listWithBugs() {
-		List<Bug> list = new ArrayList<>();
-		for (Task task : repository.getTasks()) {
-			if (task instanceof Bug) {
-				list.add((Bug) task);
-			}
-		}
-		return list;
+
+        return repository.getTasks().stream()
+                .filter(task -> task instanceof Bug)
+                .map(Bug.class::cast)
+                .collect(Collectors.toList());
 	}
-   // private void validateParameters(List<String> parameters) {
-   //     if (parameters.stream().noneMatch(value -> value.contains("sort") ||value.contains("filter"))) {
-   //         throw new InvalidUserInputException(INVALID_COMMAND);
-   //     }
-   //     ValidationHelpers.validateArgumentsSorting(parameters);
-   //     ValidationHelpers.validateArgumentsFiltering(parameters);
-   // }
 }
