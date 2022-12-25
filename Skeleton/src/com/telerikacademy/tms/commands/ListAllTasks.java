@@ -31,10 +31,10 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		repository.createFeedback("A Good Feedback sort", "Some good feedback here", Rating.NINE);
-		repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
-		repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-		repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
+		//repository.createFeedback("A Good Feedback sort", "Some good feedback here", Rating.NINE);
+		//repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
+		//repository.createBug("Very bad bug", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+		//repository.createStory("A story begins", "Once upon a time, there was something else", PriorityType.MEDIUM, SizeType.LARGE);
 		ValidationHelpers.validateFilteringAndSortingParameters(parameters);
 		List<Task> tasks = repository.getTasks();
 		tasks = filterTasks(parameters, tasks);
@@ -46,9 +46,7 @@ public class ListAllTasks implements Command {
 	private void sortTasks(List<String> parameters, List<Task> tasks) {
 		if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
 			Collections.sort(tasks);
-			return;
-		}
-		if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("sortby"))) {
+		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("sortby"))) {
 			throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
 		}
 	}
@@ -63,8 +61,7 @@ public class ListAllTasks implements Command {
 					.stream()
 					.filter(task -> task.getTitle().contains(parameters.get(1)))
 					.collect(Collectors.toList());
-		}
-		if (parameters.stream().anyMatch(value -> value.contains("filter"))) {
+		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 		}
 		return tasks;
