@@ -3,16 +3,9 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
-import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
-import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.utils.ListingHelpers;
-import com.telerikacademy.tms.utils.ValidationHelpers;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +33,7 @@ public class ListAllTasks implements Command {
 		sortTasks(parameters, tasks);
 		return ListingHelpers.elementsToString(tasks);
 	}
+
 	private void sortTasks(List<String> parameters, List<Task> tasks) {
 		if (parameters.stream().anyMatch(value -> value.equalsIgnoreCase("sortByTitle"))) {
 			Collections.sort(tasks);
@@ -47,6 +41,7 @@ public class ListAllTasks implements Command {
 			throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
 		}
 	}
+
 	private List<Task> filterTasks(List<String> parameters, List<Task> tasks) {
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
 			if (tasks.stream().noneMatch(task -> task.getTitle().toLowerCase().contains(parameters.get(1).toLowerCase().strip()) ||

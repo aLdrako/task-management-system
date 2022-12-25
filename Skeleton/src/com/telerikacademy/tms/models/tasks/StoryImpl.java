@@ -5,7 +5,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
-import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 	private PriorityType priority;

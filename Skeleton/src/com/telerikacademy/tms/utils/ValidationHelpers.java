@@ -57,6 +57,7 @@ public class ValidationHelpers {
 	/**
 	 * In case there is a sorting parameter in the list, this method checks to see if there are parameters after
 	 * the "sort" parameter and throws an InvalidUserInputException if true.
+	 *
 	 * @param list - parameters
 	 */
 	public static void validateArgumentsSorting(List<String> list) {
@@ -78,32 +79,35 @@ public class ValidationHelpers {
 			}
 		}
 	}
+
 	/**
 	 * In case there is a filtering parameter in the list.
+	 *
 	 * @param list - parameters
 	 */
 	public static void validateArgumentsFiltering(List<String> list) {
-        if (list.get(0).toLowerCase().contains("filterby")) {
-            int maxParameters;
+		if (list.get(0).toLowerCase().contains("filterby")) {
+			int maxParameters;
 			if (list.get(0).toLowerCase().contains("and")) {
-                validateArgumentsCountTill(list, 4);
+				validateArgumentsCountTill(list, 4);
 				maxParameters = 4;
-            } else {
-                validateArgumentsCountTill(list, 3);
+			} else {
+				validateArgumentsCountTill(list, 3);
 				maxParameters = 3;
-            }
-            if (list.size() == maxParameters && !list.get(maxParameters - 1).toLowerCase().contains("sortby")) {
-                throw new InvalidUserInputException(INVALID_PARAMETER_MESSAGE);
-            }
-        }
+			}
+			if (list.size() == maxParameters && !list.get(maxParameters - 1).toLowerCase().contains("sortby")) {
+				throw new InvalidUserInputException(INVALID_PARAMETER_MESSAGE);
+			}
+		}
 
 	}
+
 	public static void validateFilteringAndSortingParameters(List<String> list) {
 		if (list.stream().noneMatch(value -> value.toLowerCase().contains("sortby") ||
 				value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_COMMAND);
 		}
 		validateArgumentsSorting(list);
-        validateArgumentsFiltering(list);
+		validateArgumentsFiltering(list);
 	}
 }

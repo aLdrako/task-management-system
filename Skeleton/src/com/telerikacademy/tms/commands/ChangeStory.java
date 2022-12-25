@@ -58,7 +58,7 @@ public class ChangeStory implements Command {
 					story.setSize(sizeType);
 					return getFormatedString(id, sizeType, true);
 				default:
-					throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+					return INVALID_CHANGE_COMMAND;
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);

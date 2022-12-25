@@ -20,7 +20,7 @@ public abstract class TaskBaseImpl implements Task {
 	private static final int DESCRIPTION_MAX_LEN = 500;
 	private static final String TEXT_LEN_ERR = "%s should be between %s and %s symbols.";
 	private static final String CHANGE_MESSAGE = "The %s of item with ID %d switched from '%s' to '%s'";
-	private static final String TASK_COMMENT_ADDED = "Comment added to task: %s %s";
+	private static final String TASK_COMMENT_ADDED = "Comment added to task.";
 
 	private final int id;
 	private String title;
@@ -71,7 +71,7 @@ public abstract class TaskBaseImpl implements Task {
 	@Override
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
-		this.populateHistory(new HistoryImpl(format(TASK_COMMENT_ADDED, this.getID(), this.getTitle())));
+		this.populateHistory(new HistoryImpl(TASK_COMMENT_ADDED));
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public abstract class TaskBaseImpl implements Task {
 	}
 
 	protected <T> void addChangeToHistory(String type, T valueBefore, T valueAfter) {
-		if (valueBefore != null && valueBefore.equals(valueAfter)) {
+		if (valueBefore != null && !valueBefore.equals(valueAfter)) {
 			changesHistory.add(new HistoryImpl(format(CHANGE_MESSAGE, type, getID(), valueBefore, valueAfter)));
 		}
 	}

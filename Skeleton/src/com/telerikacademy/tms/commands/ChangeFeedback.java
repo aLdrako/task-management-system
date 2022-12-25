@@ -52,7 +52,7 @@ public class ChangeFeedback implements Command {
 					feedback.setRating(rating);
 					return getFormatedString(id, rating, true);
 				default:
-					throw new InvalidUserInputException(INVALID_CHANGE_COMMAND);
+					return INVALID_CHANGE_COMMAND;
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);

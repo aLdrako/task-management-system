@@ -3,7 +3,6 @@ package com.telerikacademy.tms.models.tasks;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 	private Rating rating;

@@ -35,6 +35,8 @@ public class CommandFactoryImpl implements CommandFactory {
 				return new ShowAllTeamBoards(repository);
 			case SHOWBOARDACTIVITY:
 				return new ShowBoardActivity(repository);
+			case SHOWTASKACTIVITY:
+				return new ShowTaskActivity(repository);
 			case CREATETASKINBOARD:
 				return new CreateTaskInBoard(repository);
 			case ADDSTEPSTOBUG:

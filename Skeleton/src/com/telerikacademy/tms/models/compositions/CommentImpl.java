@@ -40,4 +40,9 @@ public class CommentImpl implements Comment {
 	private void setAuthor(String author) {
 		this.author = author;
 	}
+
+	@Override
+	public String toString() {
+		return format("\"%s\" - %s ", this.getContent(), this.getAuthor());
+	}
 }
