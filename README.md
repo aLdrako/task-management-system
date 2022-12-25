@@ -159,25 +159,24 @@ CreateBoardInTeam ToDos Hackers
 CreateBoardInTeam Goals {{Suicide Squad}}
 ShowBoardActivity ToDos
 CreateTaskInBoard BUG ToDos {{Glitching inteface}} {{There is a broken interface}} HIGH MAJOR
+CreateTaskInBoard BUG ToDos {{Serious issue}} {{App does not work}} HIGH MAJOR
+CreateTaskInBoard BUG ToDos {{Critical error}} {{Server is down}} HIGH CRITICAL
 CreateTaskInBoard STORY ToDos {{Funny story}} {{Once upon a time there was a mouse....}} MEDIUM SMALL
+CreateTaskInBoard STORY ToDos {{Another story}} {{Once upon a time there was a mouse....}} MEDIUM SMALL
 CreateTaskInBoard FEEDBACK Goals {{Good job here}} {{This developer is doing great}} NINE
 AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
-AddStepsToBug 2 {{First open the app}} {{Try to access the database}}
+AddStepsToBug 4 {{First open the app}} {{Try to access the database}}
+AddStepsToBug 2 {{Start the system}} {{Open the application}} {{Perform data conversion}} {{Save progress}}
 AddPersonToTeam Alexa {{Suicide Squad}}
 AddPersonToTeam Cortana {{Suicide Squad}}
-ShowAllTeams
-ShowAllPeople
-ShowTeamActivity Hackers
-ShowTeamActivity {{Suicide Squad}}
-ShowPersonActivity Cortana
-ShowAllTeamMembers {{Suicide Squad}}
-ShowAllTeamBoards Hackers
 AssignTask 1 Alexa
+AssignTask 5 Alexa
 AssignTask 2 Alexa
+AssignTask 6 Alexa
 AssignTask 3 Cortana
 UnassignTask 1 Ivan
 UnassignTask 12 Cortana
-UnassignTask 2 Alexa
+UnassignTask 6 Alexa
 AddComment 3 {{Thank you so much for the amazing feedback}} Cortana
 ChangeStory 2 status InProgress
 ChangeStory 2 priority Low
@@ -185,6 +184,13 @@ ChangeBug 1 severity Major
 ChangeBug 1 severity Minor
 ChangeFeedback 1 rating 9
 ChangeFeedback 3 rating 10
+ShowAllTeams
+ShowAllPeople
+ShowTeamActivity Hackers
+ShowTeamActivity {{Suicide Squad}}
+ShowPersonActivity Cortana
+ShowAllTeamMembers {{Suicide Squad}}
+ShowAllTeamBoards Hackers
 
 ```
 
@@ -202,15 +208,34 @@ Team with a name Suicide Squad was created.
 Board ToDos has been created in team Hackers!
 Board Goals has been created in team Suicide Squad!
 ToDos's activity:
-[23-December-2022 21:04:18] Board was created.
+[25-December-2022 11:47:13] Board was created.
 
 Task Glitching inteface has been created in board ToDos!
+Task Serious issue has been created in board ToDos!
+Task Critical error has been created in board ToDos!
 Task Funny story has been created in board ToDos!
+Task Another story has been created in board ToDos!
 Task Good job here has been created in board Goals!
 Steps to reproduce added to Bug with ID 1
-Provided task with ID 2 does not belong to Bug category!
+Provided task with ID 4 does not belong to Bug category!
+Steps to reproduce added to Bug with ID 2
 Person Alexa has been added to the team Suicide Squad!
 Person Cortana has been added to the team Suicide Squad!
+Task with ID 1 was assigned to user Alexa.
+Task with ID 5 was assigned to user Alexa.
+Task with ID 2 was assigned to user Alexa.
+Provided task with ID 6 does not belong to Assignable category!
+Task with ID 3 was assigned to user Cortana.
+There is no User or Team with name Ivan!
+No task with ID 12
+Provided task with ID 6 does not belong to Assignable category!
+User Cortana added comment to task with ID 3
+Provided task with ID 2 does not belong to Story category!
+Provided task with ID 2 does not belong to Story category!
+Same parameter passed. Nothing to changed.
+Severity for Bug with ID 1 was changed to Minor.
+Provided task with ID 1 does not belong to Feedback category!
+Provided task with ID 3 does not belong to Feedback category!
 === ALL TEAMS ===
 Team: Hackers
 It has (0) users -> 
@@ -225,42 +250,45 @@ It has (2) users -> Alexa, Cortana
 It contains (1) boards -> Goals
 
 === ALL PEOPLE ===
-User: Alexa has (0) assigned tasks
+User: Alexa has (3) assigned tasks
+Bug: ID -> [1] 'Glitching inteface' | Status: Active | Priority: High | Severity: Minor | Assignee: Alexa | Steps to reproduce: 
+	-> First open the app
+	-> Try to access the database
+Story: ID -> [5] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Alexa
+Bug: ID -> [2] 'Serious issue' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
+	-> Start the system
+	-> Open the application
+	-> Perform data conversion
+	-> Save progress
 <<< Alexa's Activity History >>>
-[23-December-2022 21:04:18] User was created.
+[25-December-2022 11:47:13] User was created.
+[25-December-2022 11:47:13] Task 'Glitching inteface' assigned to Alexa
+[25-December-2022 11:47:13] Task 'Another story' assigned to Alexa
+[25-December-2022 11:47:13] Task 'Serious issue' assigned to Alexa
 ===============
-User: Cortana has (0) assigned tasks
+User: Cortana has (1) assigned tasks
+Bug: ID -> [3] 'Critical error' | Status: Active | Priority: High | Severity: Critical | Assignee: Cortana | Steps to reproduce: Not specified
 <<< Cortana's Activity History >>>
-[23-December-2022 21:04:18] User was created.
+[25-December-2022 11:47:13] User was created.
+[25-December-2022 11:47:13] Task 'Critical error' assigned to Cortana
+[25-December-2022 11:47:13] Added comment to task with ID 3
 
 Hackers's team activity:
-[23-December-2022 21:04:18] Team was created.
-[23-December-2022 21:04:18] Board ToDos added to the team Hackers
+[25-December-2022 11:47:13] Team was created.
+[25-December-2022 11:47:13] Board ToDos added to the team Hackers
 
 Suicide Squad's team activity:
-[23-December-2022 21:04:18] Team was created.
-[23-December-2022 21:04:18] Board Goals added to the team Suicide Squad
-[23-December-2022 21:04:18] User Alexa added to the team Suicide Squad
-[23-December-2022 21:04:18] User Cortana added to the team Suicide Squad
+[25-December-2022 11:47:13] Team was created.
+[25-December-2022 11:47:13] Board Goals added to the team Suicide Squad
+[25-December-2022 11:47:13] User Alexa added to the team Suicide Squad
+[25-December-2022 11:47:13] User Cortana added to the team Suicide Squad
 
 Cortana's activity:
-[23-December-2022 21:04:18] User was created.
+[25-December-2022 11:47:13] User was created.
+[25-December-2022 11:47:13] Task 'Critical error' assigned to Cortana
+[25-December-2022 11:47:13] Added comment to task with ID 3
 
 Suicide Squad' team members: Alexa, Cortana 
-ToDos
-Team Hackers boards printed
-Task with ID 1 was assigned to user Alexa.
-Task with ID 2 was assigned to user Alexa.
-Provided task with ID 3 does not belong to Assignable category!
-There is no User or Team with name Ivan!
-No task with ID 12
-Task with ID 2 was unassigned from user Alexa.
-User Cortana added comment to task with ID 3
-Status for Story with ID 2 was changed to InProgress.
-Priority for Story with ID 2 was changed to Low.
-Same parameter passed. Nothing to changed.
-Severity for Bug with ID 1 was changed to Minor.
-Provided task with ID 1 does not belong to Feedback category!
-Rating for Feedback with ID 3 was changed to 10.
+Hackers' team boards: ToDos 
 
 ```
