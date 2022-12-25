@@ -27,7 +27,7 @@ public class ShowBoardActivity implements Command {
 	private String showBoardActivity(String name) {
 		Board board = repository.findElementByName(repository.getBoards(), name);
 		StringBuilder builder = new StringBuilder();
-		builder.append(name).append("'s activity:").append(System.lineSeparator());
+		builder.append(name).append("'s board activity:").append(System.lineSeparator());
 		for (History activityHistory : board.getHistories()) {
 			builder.append(activityHistory).append(System.lineSeparator());
 		}

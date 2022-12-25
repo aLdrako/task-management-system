@@ -35,6 +35,6 @@ public class AddPersonToTeam implements Command {
 		User user = repository.findElementByName(repository.getUsers(), name);
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
 		team.addUser(user);
-		return String.format(PERSON_ADDED_TO_TEAM, name, team);
+		return String.format(PERSON_ADDED_TO_TEAM, name, team.getName());
 	}
 }

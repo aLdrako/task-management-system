@@ -34,6 +34,6 @@ public class CreateBoardInTeam implements Command {
 		}
 		Board board = repository.createBoard(boardName);
 		team.addBoard(board);
-		return String.format(BOARD_CREATED_SUCCESSFULLY, board, team);
+		return String.format(BOARD_CREATED_SUCCESSFULLY, board.getName(), team.getName());
 	}
 }
