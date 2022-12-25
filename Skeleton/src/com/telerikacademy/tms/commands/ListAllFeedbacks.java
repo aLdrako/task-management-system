@@ -24,6 +24,7 @@ import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 public class ListAllFeedbacks implements Command {
+	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the feedbacks only by status.";
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the feedbacks only by title/rating.";
 
@@ -42,10 +43,14 @@ public class ListAllFeedbacks implements Command {
 		return ListingHelpers.elementsToString(feedbacks);
 	}
 	private List<Feedback> filterFeedbacks(List<String> parameters, List<Feedback> feedbacks) {
-		if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
-			return filterByStatus(parameters.get(1), feedbacks, FeedbackStatus.class);
-		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
-			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
+		try {
+			if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
+				return filterByStatus(parameters.get(1), feedbacks, FeedbackStatus.class);
+			} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
+				throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
+			}
+		} catch (IndexOutOfBoundsException ex) {
+			throw new InvalidUserInputException(INVALID_COUNT_PARAMETER);
 		}
 		return feedbacks;
 	}

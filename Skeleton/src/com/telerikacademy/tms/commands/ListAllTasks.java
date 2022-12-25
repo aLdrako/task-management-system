@@ -49,13 +49,13 @@ public class ListAllTasks implements Command {
 	}
 	private List<Task> filterTasks(List<String> parameters, List<Task> tasks) {
 		if (parameters.get(0).equalsIgnoreCase("filterByTitle")) {
-			if (tasks.stream().noneMatch(task -> task.getTitle().contains(parameters.get(1)) ||
+			if (tasks.stream().noneMatch(task -> task.getTitle().toLowerCase().contains(parameters.get(1).toLowerCase().strip()) ||
 					task.getTitle().equalsIgnoreCase(parameters.get(1)))) {
 				throw new InvalidUserInputException(TITLE_DOES_NOT_EXIST);
 			}
 			return tasks
 					.stream()
-					.filter(task -> task.getTitle().contains(parameters.get(1)))
+					.filter(task -> task.getTitle().contains(parameters.get(1).toLowerCase().strip()))
 					.collect(Collectors.toList());
 		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);

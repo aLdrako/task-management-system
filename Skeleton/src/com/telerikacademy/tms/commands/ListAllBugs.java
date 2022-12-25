@@ -29,6 +29,7 @@ import static java.lang.String.format;
 
 
 public class ListAllBugs implements Command {
+    public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
     public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
     public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
     private final TaskManagementRepository repository;
@@ -60,15 +61,19 @@ public class ListAllBugs implements Command {
     }
 
     private List<Bug> filterBugs(List<String> parameters, List<Bug> bugs) {
-        if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
-            return filterByStatus(parameters.get(1), bugs, BugStatus.class);
-        } else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
-            return FilterHelpers.filterByAssignee(parameters.get(1), bugs, repository);
-        } else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
-            bugs = filterByStatus(parameters.get(1), bugs, BugStatus.class);
-            return FilterHelpers.filterByAssignee(parameters.get(2), bugs, repository);
-        } else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
-            throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
+        try {
+            if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
+                return filterByStatus(parameters.get(1), bugs, BugStatus.class);
+            } else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
+                return FilterHelpers.filterByAssignee(parameters.get(1), bugs, repository);
+            } else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
+                bugs = filterByStatus(parameters.get(1), bugs, BugStatus.class);
+                return FilterHelpers.filterByAssignee(parameters.get(2), bugs, repository);
+            } else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
+                throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidUserInputException(INVALID_COUNT_PARAMETER);
         }
         return bugs;
     }

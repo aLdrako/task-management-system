@@ -26,6 +26,7 @@ import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 public class ListAllStories implements Command {
+	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the stories only by status/assignee.";
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the stories only by title/priority/size.";
 
@@ -58,15 +59,19 @@ public class ListAllStories implements Command {
 	}
 
 	private List<Story> filterStories(List<String> parameters, List<Story> stories) {
-		if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
-			return filterByStatus(parameters.get(1), stories, StoryStatus.class);
-		} else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
-			return filterByAssignee(parameters.get(1), stories, repository);
-		} else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
-			stories = filterByStatus(parameters.get(1), stories, StoryStatus.class);
-			return filterByAssignee(parameters.get(2), stories, repository);
-		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
-			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
+		try {
+			if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
+				return filterByStatus(parameters.get(1), stories, StoryStatus.class);
+			} else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
+				return filterByAssignee(parameters.get(1), stories, repository);
+			} else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
+				stories = filterByStatus(parameters.get(1), stories, StoryStatus.class);
+				return filterByAssignee(parameters.get(2), stories, repository);
+			} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
+				throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
+			}
+		} catch (IndexOutOfBoundsException ex) {
+			throw new InvalidUserInputException(INVALID_COUNT_PARAMETER);
 		}
 		return stories;
 	}
