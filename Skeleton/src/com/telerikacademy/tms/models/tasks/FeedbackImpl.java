@@ -29,14 +29,4 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 	public String toString() {
 		return super.toString() + " | Rating: " + this.getRating();
 	}
-
-	@Override
-	public TaskType getTaskType() {
-		return null;
-	}
-
-	@Override
-	public void setTaskType(TaskType ts) {
-
-	}
 }

@@ -59,14 +59,4 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		return super.toString() + " | Priority: " + this.getPriority() +
 				" | Size: " + this.getSize() + " | Assignee: " + isAssigned;
 	}
-
-	@Override
-	public TaskType getTaskType() {
-		return null;
-	}
-
-	@Override
-	public void setTaskType(TaskType ts) {
-
-	}
 }
