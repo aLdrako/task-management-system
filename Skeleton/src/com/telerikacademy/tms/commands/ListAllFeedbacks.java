@@ -30,8 +30,8 @@ public class ListAllFeedbacks implements Command {
 	}
 	@Override
 	public String execute(List<String> parameters) {
-		repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.SEVEN);
-		repository.createFeedback("Bad Feedback sort", "Some good feedback here", Rating.EIGHT);
+		//repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.SEVEN);
+		//repository.createFeedback("Bad Feedback sort", "Some good feedback here", Rating.EIGHT);
 		ValidationHelpers.validateFilteringAndSortingParameters(parameters);
 		List<Feedback> feedbacks = listWithFeedbacks();
 		feedbacks = filterFeedbacks(parameters, feedbacks);

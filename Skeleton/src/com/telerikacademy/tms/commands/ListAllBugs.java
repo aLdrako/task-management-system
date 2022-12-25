@@ -36,12 +36,12 @@ public class ListAllBugs implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-         Bug bug = repository.createBug("Very bad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.MAJOR);
-         Bug bug1 =repository.createBug("Aaaaaaaaaaaaa", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
-         repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
-         User user = repository.createUser("Ivancho");
-         bug1.setAssignee(user);
-         bug.setAssignee(user);
+        //Bug bug = repository.createBug("Very bad bug", "Some bad bug here", PriorityType.HIGH, SeverityType.MAJOR);
+        //Bug bug1 =repository.createBug("Aaaaaaaaaaaaa", "Some bad bug here", PriorityType.MEDIUM, SeverityType.CRITICAL);
+        //repository.createFeedback("Good Feedback sort", "Some good feedback here", Rating.NINE);
+        //User user = repository.createUser("Ivancho");
+        //bug1.setAssignee(user);
+        //bug.setAssignee(user);
         ValidationHelpers.validateFilteringAndSortingParameters(parameters);
         List<Bug> bugs = listWithBugs();
 		bugs = filterBugs(parameters, bugs);
