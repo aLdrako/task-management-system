@@ -126,20 +126,20 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 - ShowAllTeamMembers `{String teamName}`
 - ShowAllTeamBoards `{String teamName}`
 - CreateBoardInTeam `{String boardName} {String teamName}`
-- ShowBoardActivity `{String boardName}`
-- CreateTaskInBoard `[enum]{bug/story/feedback} {(coresponding task parameters)}`
+- ShowBoardActivity `{String boardName} {String teamName}`
+- CreateTaskInBoard `[bug/story/feedback] {String boardName} {String teamName} {(coresponding task parameters)}`
 - AddStepsToBug `{ind id} {String steps} {String steps} ...`
 - AssignTask `{ind id} {String name}`
 - UnassignTask `{ind id} {String name}`
 - AddComment `{ind id} {String comment} {String name}`
-- ChangeStory `{ind id} [switch]{status/priority/severity} [enum]`
-- ChangeBug `{ind id} [switch]{status/priority/severity} [enum]`
-- ChangeFeedback `{ind id} [switch]{status/rating} [enum]`
+- ChangeStory `{ind id} [status/priority/severity] [enums]`
+- ChangeBug `{ind id} [status/priority/severity] [enums]`
+- ChangeFeedback `{ind id} [status/rating] [enums]`
 - ShowTaskActivity `{ind id}`
-- ListAllTasks `[sortByTitle] | [filterByTitle {String title}] | [filterByTitle {String title} sortByTitle]` 
-- ListAllBugs `[sortByTitle/sortByPriority/sortBySeverity] | [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] | [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySeverity]` 
-- ListAllStories `[sortByTitle/sortByPriority/sortBySize] | [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] | [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySize]`
-- ListAllFeedbacks `[sortByTitle/sortByRating] | [filterByStatus {String status}] | [filterByStatus {String status} sortByTitle/sortByPriority]`
+- ListAllTasks `[sortByTitle] || [filterByTitle {String title}] || [filterByTitle {String title} sortByTitle]` 
+- ListAllBugs `[sortByTitle/sortByPriority/sortBySeverity] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySeverity]` 
+- ListAllStories `[sortByTitle/sortByPriority/sortBySize] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySize]`
+- ListAllFeedbacks `[sortByTitle/sortByRating] || [filterByStatus {String status}] || [filterByStatus {String status} sortByTitle/sortByPriority]`
 - ListTasksWithAssignee
 
 ## Teamwork Guidelines
@@ -158,15 +158,15 @@ CreateTeam Developers
 CreateTeam {{Suicide Squad}}
 CreateBoardInTeam ToDos Hackers
 CreateBoardInTeam Goals {{Suicide Squad}}
-CreateTaskInBoard BUG ToDos {{Glitching inteface}} {{There is a broken interface}} LOW MAJOR
-CreateTaskInBoard BUG ToDos {{Fatal issue}} {{Server is down}} HIGH CRITICAL
-CreateTaskInBoard BUG ToDos {{Serious issue}} {{App does not work}} MEDIUM MAJOR
-CreateTaskInBoard STORY Goals {{Another story}} {{Once upon a time there was a cat....}} MEDIUM SMALL
-CreateTaskInBoard STORY ToDos {{Funny story}} {{Once upon a time there was a mouse....}} HIGH MEDIUM
-CreateTaskInBoard STORY ToDos {{Third story}} {{Once upon a time there was a dog....}} LOW LARGE
-CreateTaskInBoard FEEDBACK ToDos {{Great job here}} {{This developer is doing great}} NINE
-CreateTaskInBoard FEEDBACK Goals {{Doing good}} {{There is still room for improvement}} SEVEN
-CreateTaskInBoard FEEDBACK Goals {{An Impressive job}} {{Thats what I call excellent work}} TEN
+CreateTaskInBoard bug ToDos Hackers {{Glitching inteface}} {{There is a broken interface}} low major
+CreateTaskInBoard bug ToDos Hackers {{Fatal issue}} {{Server is down}} high critical
+CreateTaskInBoard bug ToDos Hackers {{Serious issue}} {{App does not work}} medium major
+CreateTaskInBoard story Goals {{Suicide Squad}} {{Another story}} {{Once upon a time there was a cat....}} medium small
+CreateTaskInBoard story ToDos Hackers {{Funny story}} {{Once upon a time there was a mouse....}} high medium
+CreateTaskInBoard story ToDos Hackers {{Third story}} {{Once upon a time there was a dog....}} low large
+CreateTaskInBoard feedback ToDos Hackers {{Great job here}} {{This developer is doing great}} 9
+CreateTaskInBoard feedback Goals {{Suicide Squad}} {{Doing good}} {{There is still room for improvement}} 7
+CreateTaskInBoard feedback Goals {{Suicide Squad}} {{An Impressive job}} {{Thats what I call excellent work}} 10
 AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
 AddStepsToBug 4 {{First open the app}} {{Try to access the database}}
 AddStepsToBug 2 {{Start the system}} {{Open the application}} {{Perform data conversion}} {{Save progress}}
@@ -190,15 +190,15 @@ ChangeStory 6 status InProgress
 ChangeFeedback 7 status Done
 ChangeFeedback 7 rating 8
 ShowTaskActivity 3
+ShowTaskActivity 7
 ShowAllTeams
 ShowAllPeople
 ShowTeamActivity Hackers
 ShowTeamActivity {{Suicide Squad}}
-ShowBoardActivity ToDos
+ShowBoardActivity ToDos Hackers
 ShowPersonActivity Cortana
 ShowAllTeamMembers {{Suicide Squad}}
 ShowAllTeamBoards Hackers
-
 ListAllFeedbacks sortByRating
 ListAllFeedbacks filterByStatus New sortByRating
 ListAllBugs sortBySeverity
@@ -226,15 +226,15 @@ Team with a name Developers was created.
 Team with a name Suicide Squad was created.
 Board ToDos has been created in team Hackers!
 Board Goals has been created in team Suicide Squad!
-Task Glitching inteface has been created in board ToDos!
-Task Fatal issue has been created in board ToDos!
-Task Serious issue has been created in board ToDos!
-Task Another story has been created in board Goals!
-Task Funny story has been created in board ToDos!
-Task Third story has been created in board ToDos!
-Task Great job here has been created in board ToDos!
-Task Doing good has been created in board Goals!
-Task An Impressive job has been created in board Goals!
+Task 'Glitching inteface' with ID [1] has been created in board 'ToDos'!
+Task 'Fatal issue' with ID [2] has been created in board 'ToDos'!
+Task 'Serious issue' with ID [3] has been created in board 'ToDos'!
+Task 'Another story' with ID [4] has been created in board 'Goals'!
+Task 'Funny story' with ID [5] has been created in board 'ToDos'!
+Task 'Third story' with ID [6] has been created in board 'ToDos'!
+Task 'Great job here' with ID [7] has been created in board 'ToDos'!
+Task 'Doing good' with ID [8] has been created in board 'Goals'!
+Task 'An Impressive job' with ID [9] has been created in board 'Goals'!
 Steps to reproduce added to Bug with ID 1
 Provided task with ID 4 does not belong to Bug category!
 Steps to reproduce added to Bug with ID 2
@@ -257,14 +257,23 @@ Severity for Bug with ID 3 was changed to Minor.
 Status for Story with ID 6 was changed to InProgress.
 Status for Feedback with ID 7 was changed to Done.
 Rating for Feedback with ID 7 was changed to 8.
-<<< Task Activity with ID -> [3] >>>
+<<< Bug Activity with ID -> [3] >>>
 === CHANGES HISTORY ===
-[25-December-2022 19:35:49] Comment added to task.
-[25-December-2022 19:35:49] Comment added to task.
-[25-December-2022 19:35:49] The severity of item with ID 3 switched from 'Major' to 'Minor'
+[26-December-2022 15:55:06] Task with ID 3 was created.
+[26-December-2022 15:55:06] Bug is unassigned
+[26-December-2022 15:55:06] Bug was assigned to: Cortana
+[26-December-2022 15:55:06] Comment added to task.
+[26-December-2022 15:55:06] Comment added to task.
+[26-December-2022 15:55:06] The severity of item with ID 3 switched from 'Major' to 'Minor'
 === COMMENTS ===
 "Thank you so much for the amazing feedback" - Cortana 
 "It was an easy work" - Alexa 
+<<< Feedback Activity with ID -> [7] >>>
+=== CHANGES HISTORY ===
+[26-December-2022 15:55:06] Task with ID 7 was created.
+[26-December-2022 15:55:06] The status of item with ID 7 switched from 'New' to 'Done'
+[26-December-2022 15:55:06] The rating of item with ID 7 switched from '9' to '8'
+=== NO COMMENTS ===
 === ALL TEAMS ===
 Team: Hackers
 It has (0) users -> 
@@ -290,51 +299,55 @@ Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critic
 	-> Perform data conversion
 	-> Save progress
 <<< Alexa's Activity History >>>
-[25-December-2022 19:35:49] User was created.
-[25-December-2022 19:35:49] Task 'Glitching inteface' assigned to Alexa
-[25-December-2022 19:35:49] Task 'Funny story' assigned to Alexa
-[25-December-2022 19:35:49] Task 'Fatal issue' assigned to Alexa
-[25-December-2022 19:35:49] Task 'Third story' assigned to Alexa
-[25-December-2022 19:35:49] Task 'Third story' unassigned from Alexa
-[25-December-2022 19:35:49] Added comment to task with ID 3
+[26-December-2022 15:55:06] User was created.
+[26-December-2022 15:55:06] Task 'Glitching inteface' assigned to Alexa
+[26-December-2022 15:55:06] Task 'Funny story' assigned to Alexa
+[26-December-2022 15:55:06] Task 'Fatal issue' assigned to Alexa
+[26-December-2022 15:55:06] Task 'Third story' assigned to Alexa
+[26-December-2022 15:55:06] Task 'Third story' unassigned from Alexa
+[26-December-2022 15:55:06] Added comment to task with ID 3
 ===============
 User: Cortana has (2) assigned tasks
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Minor | Assignee: Cortana | Steps to reproduce: Not specified
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
 <<< Cortana's Activity History >>>
-[25-December-2022 19:35:49] User was created.
-[25-December-2022 19:35:49] Task 'Serious issue' assigned to Cortana
-[25-December-2022 19:35:49] Task 'Third story' assigned to Cortana
-[25-December-2022 19:35:49] Added comment to task with ID 3
+[26-December-2022 15:55:06] User was created.
+[26-December-2022 15:55:06] Task 'Serious issue' assigned to Cortana
+[26-December-2022 15:55:06] Task 'Third story' assigned to Cortana
+[26-December-2022 15:55:06] Added comment to task with ID 3
 
 Hackers's team activity:
-[25-December-2022 19:35:49] Team was created.
-[25-December-2022 19:35:49] Board ToDos added to the team Hackers
+[26-December-2022 15:55:06] Team was created.
+[26-December-2022 15:55:06] Board ToDos added to the team Hackers
 
 Suicide Squad's team activity:
-[25-December-2022 19:35:49] Team was created.
-[25-December-2022 19:35:49] Board Goals added to the team Suicide Squad
-[25-December-2022 19:35:49] User Alexa added to the team Suicide Squad
-[25-December-2022 19:35:49] User Cortana added to the team Suicide Squad
+[26-December-2022 15:55:06] Team was created.
+[26-December-2022 15:55:06] Board Goals added to the team Suicide Squad
+[26-December-2022 15:55:06] User Alexa added to the team Suicide Squad
+[26-December-2022 15:55:06] User Cortana added to the team Suicide Squad
 
-ToDos's board activity:
-[25-December-2022 19:35:49] Board was created.
-[25-December-2022 19:35:49] Task Glitching inteface added to board ToDos
-[25-December-2022 19:35:49] Task Fatal issue added to board ToDos
-[25-December-2022 19:35:49] Task Serious issue added to board ToDos
-[25-December-2022 19:35:49] Task Funny story added to board ToDos
-[25-December-2022 19:35:49] Task Third story added to board ToDos
-[25-December-2022 19:35:49] Task Great job here added to board ToDos
-
+<<< ToDos's Activity History >>>
+[26-December-2022 15:55:06] Board was created.
+===============
+[26-December-2022 15:55:06] Task Glitching inteface added to board ToDos
+===============
+[26-December-2022 15:55:06] Task Fatal issue added to board ToDos
+===============
+[26-December-2022 15:55:06] Task Serious issue added to board ToDos
+===============
+[26-December-2022 15:55:06] Task Funny story added to board ToDos
+===============
+[26-December-2022 15:55:06] Task Third story added to board ToDos
+===============
+[26-December-2022 15:55:06] Task Great job here added to board ToDos
 Cortana's user activity:
-[25-December-2022 19:35:49] User was created.
-[25-December-2022 19:35:49] Task 'Serious issue' assigned to Cortana
-[25-December-2022 19:35:49] Task 'Third story' assigned to Cortana
-[25-December-2022 19:35:49] Added comment to task with ID 3
+[26-December-2022 15:55:06] User was created.
+[26-December-2022 15:55:06] Task 'Serious issue' assigned to Cortana
+[26-December-2022 15:55:06] Task 'Third story' assigned to Cortana
+[26-December-2022 15:55:06] Added comment to task with ID 3
 
 Suicide Squad' team members: Alexa, Cortana 
 Hackers' team boards: ToDos 
-Command cannot be empty
 Feedback: ID -> [8] 'Doing good' | Status: New | Rating: 7
 ===============
 Feedback: ID -> [7] 'Great job here' | Status: Done | Rating: 8
