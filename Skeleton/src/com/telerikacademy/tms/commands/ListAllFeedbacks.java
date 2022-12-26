@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
-import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 
 public class ListAllFeedbacks implements Command {
 	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
@@ -37,6 +36,7 @@ public class ListAllFeedbacks implements Command {
 		validateFilteringAndSortingParameters(parameters);
 
 		feedbacks = filterFeedbacks(parameters, feedbacks);
+		validateArgumentsSorting(parameters);
 		sortFeedbacks(parameters, feedbacks);
 		return LISTING_HEADER + elementsToString(feedbacks);
 	}

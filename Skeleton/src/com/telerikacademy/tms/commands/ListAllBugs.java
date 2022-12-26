@@ -18,8 +18,7 @@ import java.util.stream.Collectors;
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
-import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 
 
 public class ListAllBugs implements Command {
@@ -41,6 +40,7 @@ public class ListAllBugs implements Command {
 		}
 		validateFilteringAndSortingParameters(parameters);
 		bugs = filterBugs(parameters, bugs);
+		validateArgumentsSorting(parameters);
 		sortBugs(parameters, bugs);
 		return LISTING_HEADER + elementsToString(bugs);
 	}

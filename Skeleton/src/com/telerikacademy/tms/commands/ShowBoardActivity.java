@@ -15,7 +15,7 @@ import static java.lang.String.format;
 
 public class ShowBoardActivity implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	public static final String ACTIVITY_HISTORY_HEADER = "<<< %s's Activity History >>>";
+	public static final String ACTIVITY_HISTORY_HEADER = "<<< %s's Activity History >>>" + System.lineSeparator();
 	private final TaskManagementRepository repository;
 
 	public ShowBoardActivity(TaskManagementRepository repository) {
@@ -30,7 +30,7 @@ public class ShowBoardActivity implements Command {
 		Team team = repository.findElementByName(repository.getTeams(), nameTeam);
 		Board board = repository.findBoardByNameInTeam(team, nameBoard);
 
-		return format(ACTIVITY_HISTORY_HEADER, board.getName()) + System.lineSeparator() +
+		return format(ACTIVITY_HISTORY_HEADER, board.getName()) +
 				elementsToString(board.getHistories());
 	}
 }

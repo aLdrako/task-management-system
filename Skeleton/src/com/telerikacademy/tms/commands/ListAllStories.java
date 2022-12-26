@@ -14,8 +14,7 @@ import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByAssignee;
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
-import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 
 public class ListAllStories implements Command {
 	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
@@ -38,6 +37,7 @@ public class ListAllStories implements Command {
 		validateFilteringAndSortingParameters(parameters);
 
 		stories = filterStories(parameters, stories);
+		validateArgumentsSorting(parameters);
 		sortStories(parameters, stories);
 		return LISTING_HEADER + ListingHelpers.elementsToString(stories);
 	}

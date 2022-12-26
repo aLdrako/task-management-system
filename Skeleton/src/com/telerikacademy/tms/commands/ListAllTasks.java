@@ -10,8 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
-import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
+import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 
 public class ListAllTasks implements Command {
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the tasks only by title.";
@@ -34,6 +33,7 @@ public class ListAllTasks implements Command {
 		validateFilteringAndSortingParameters(parameters);
 
 		tasks = filterTasks(parameters, tasks);
+		validateArgumentsSorting(parameters);
 		sortTasks(parameters, tasks);
 		return LISTING_HEADER + ListingHelpers.elementsToString(tasks);
 	}

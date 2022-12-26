@@ -4,6 +4,7 @@ import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static java.lang.String.format;
@@ -55,16 +56,14 @@ public class ValidationHelpers {
 	 */
 	public static void validateArgumentsSorting(List<String> list) {
 		if (list.stream().anyMatch(value -> value.toLowerCase().contains("sortby"))) {
-			int index = list.lastIndexOf(list.stream().reduce("", (acc, comb) -> {
-				List<String> words = new ArrayList<>();
-				for (String word : list) {
-					if (word.toLowerCase().contains("sortby")) {
-						words.add(word);
-					}
-				}
-				while (words.size() != 1) {
-					words.remove(0);
-				}
+			int index = list.indexOf(list.stream().reduce("", (acc, comb) -> {
+				List<String> words = list
+						.stream()
+						.filter(value -> value.toLowerCase().contains("sortby"))
+						.collect(Collectors.toList());
+				//while (words.size() != 1) {
+				//	words.remove(0);
+				//}
 				return words.get(0);
 			}));
 			if (list.size() - 1 != index) {
@@ -100,7 +99,7 @@ public class ValidationHelpers {
 				value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_COMMAND);
 		}
-		validateArgumentsSorting(list);
+		//validateArgumentsSorting(list);
 		validateArgumentsFiltering(list);
 	}
 }
