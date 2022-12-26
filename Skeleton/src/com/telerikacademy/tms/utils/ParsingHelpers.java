@@ -1,7 +1,6 @@
 package com.telerikacademy.tms.utils;
 
 public class ParsingHelpers {
-	public static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
 	public static final String INVALID_TASK_ID_IN_CATEGORY = "Provided task with ID %d does not belong to %s category!";
 	public static final String SAME_PARAMETERS_PASSED = "Same value passed. Nothing was changed!";
 	private static final String NO_SUCH_ENUM = "There is no value (%s) in %s.";

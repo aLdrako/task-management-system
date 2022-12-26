@@ -17,6 +17,7 @@ import static java.lang.String.format;
 public class ChangeStory implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
 	private static final String INVALID_CHANGE_COMMAND = "Invalid command for change provided. Use: 'status', 'priority' or 'size'.";
+	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
 	private final TaskManagementRepository repository;
 
 	public ChangeStory(TaskManagementRepository repository) {
@@ -27,7 +28,7 @@ public class ChangeStory implements Command {
 	public String execute(List<String> parameters) {
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
-		String typeOfChange = parameters.get(1);
+		String typeOfChange = parameters.get(1).toLowerCase();
 
 		return changeStory(parameters, id, typeOfChange);
 	}
