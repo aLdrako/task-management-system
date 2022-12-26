@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 public class ListAllTasks implements Command {
@@ -27,7 +28,7 @@ public class ListAllTasks implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		List<Task> tasks = repository.getTasks();
-		if (parameters.size() == 0) {
+		if (parameters.size() == ZERO_PARAMETERS) {
 			return LISTING_HEADER + ListingHelpers.elementsToString(tasks);
 		}
 		validateFilteringAndSortingParameters(parameters);

@@ -15,6 +15,7 @@ public class ValidationHelpers {
 	private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS_RANGE = "Invalid number of arguments. Expected: at least %d; expected: %d; received: %d.";
 	private static final String INVALID_PARAMETER_MESSAGE = "Invalid argument detected.";
+	public static final int ZERO_PARAMETERS = 0;
 
 	public static void validateInRange(int value, int min, int max, String message) {
 		if (value < min || value > max) {

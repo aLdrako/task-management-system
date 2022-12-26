@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 public class ListAllFeedbacks implements Command {
@@ -30,7 +31,7 @@ public class ListAllFeedbacks implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		List<Feedback> feedbacks = listWithFeedbacks();
-		if (parameters.size() == 0) {
+		if (parameters.size() == ZERO_PARAMETERS) {
 			return LISTING_HEADER + elementsToString(feedbacks);
 		}
 		validateFilteringAndSortingParameters(parameters);
