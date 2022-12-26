@@ -16,8 +16,6 @@ public interface TaskManagementRepository {
 
 	List<User> getUsers();
 
-	List<Board> getBoards();
-
 	List<Task> getTasks();
 
 	Team createTeam(String name);
@@ -37,8 +35,6 @@ public interface TaskManagementRepository {
 	<T extends Nameable> T findElementByName(List<T> elements, String name);
 
 	Board findBoardByNameInTeam(Team team, String name);
-
-	boolean isBoardNameUniqueInTeam(Team team, String name);
 
 	boolean isNameUnique(String name);
 }

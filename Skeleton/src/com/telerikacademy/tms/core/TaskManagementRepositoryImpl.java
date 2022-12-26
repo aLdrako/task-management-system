@@ -27,7 +27,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 	private final List<Team> teams = new ArrayList<>();
 	private final List<User> users = new ArrayList<>();
-	private final List<Board> boards = new ArrayList<>();
 	private final List<Task> tasks = new ArrayList<>();
 
 	public TaskManagementRepositoryImpl() {
@@ -42,11 +41,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	@Override
 	public List<User> getUsers() {
 		return new ArrayList<>(users);
-	}
-
-	@Override
-	public List<Board> getBoards() {
-		return new ArrayList<>(boards);
 	}
 
 	@Override
@@ -70,9 +64,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 	@Override
 	public Board createBoard(String name) {
-		Board board = new BoardImpl(name);
-		this.boards.add(board);
-		return board;
+		return new BoardImpl(name);
 	}
 
 	@Override
@@ -111,19 +103,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	/**
-	 * Use to check if name is unique for Team and User
+	 * Use to check if name is unique for Team, User оr Board
 	 */
 	public boolean isNameUnique(String name) {
 		boolean sameTeamName = getTeams().stream().noneMatch(n -> n.getName().equalsIgnoreCase(name));
+		boolean sameBoardName = getTeams().stream().flatMap(team -> team.getBoards().stream())
+				.noneMatch(n -> n.getName().equalsIgnoreCase(name));
 		boolean sameUserName = getUsers().stream().noneMatch(n -> n.getName().equalsIgnoreCase(name));
-		return sameTeamName && sameUserName;
-	}
-
-	/**
-	 * Use to check if board name is unique in specified team
-	 */
-	public boolean isBoardNameUniqueInTeam(Team team, String name) {
-		return team.getBoards().stream().noneMatch(board -> board.getName().equalsIgnoreCase(name));
+		return sameTeamName && sameUserName && sameBoardName;
 	}
 
 	/**

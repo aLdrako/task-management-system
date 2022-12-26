@@ -10,8 +10,6 @@ import java.util.List;
 
 public class CreateBoardInTeam implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
-
-	public static final String BOARD_ALREADY_EXISTS = "Board already in team!";
 	public static final String BOARD_CREATED_SUCCESSFULLY = "Board %s has been created in team %s!";
 	private final TaskManagementRepository repository;
 
@@ -29,9 +27,6 @@ public class CreateBoardInTeam implements Command {
 
 	private String createBoardInTeam(String boardName, String teamName) {
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
-		if (!repository.isBoardNameUniqueInTeam(team, boardName)) {
-			throw new IllegalArgumentException(BOARD_ALREADY_EXISTS);
-		}
 		Board board = repository.createBoard(boardName);
 		team.addBoard(board);
 		return String.format(BOARD_CREATED_SUCCESSFULLY, board.getName(), team.getName());
