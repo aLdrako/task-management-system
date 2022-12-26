@@ -69,7 +69,6 @@ public class ChangeTask implements Command {
 		} else {
 			Feedback feedback = (Feedback) task;
 			Rating rating = tryParseEnum(convertDigitToWord(parameters.get(2)), Rating.class);
-			if (feedback.getRating().equals(rating)) throw new InvalidUserInputException();
 			feedback.setRating(rating);
 			return format(CHANGE_TASK_SUCCESSFUL, RATING, task.getTaskType(), id, rating);
 		}
@@ -81,7 +80,6 @@ public class ChangeTask implements Command {
 		} else if (task.getTaskType().equals(TaskType.STORY)) {
 			Story story = (Story) task;
 			SizeType sizeType = tryParseEnum(parameters.get(2), SizeType.class);
-			if (story.getSize().equals(sizeType)) throw new InvalidUserInputException();
 			story.setSize(sizeType);
 			return format(CHANGE_TASK_SUCCESSFUL, SIZE, task.getTaskType(), id, sizeType);
 		} else {
@@ -93,7 +91,6 @@ public class ChangeTask implements Command {
 		if (task.getTaskType().equals(TaskType.BUG)) {
 			Bug bug = (Bug) task;
 			SeverityType severityType = tryParseEnum(parameters.get(2), SeverityType.class);
-			if (bug.getSeverity().equals(severityType)) throw new InvalidUserInputException();
 			bug.setSeverity(severityType);
 			return format(CHANGE_TASK_SUCCESSFUL, SEVERITY, task.getTaskType(), id, severityType);
 		} else if (task.getTaskType().equals(TaskType.STORY)) {
@@ -107,13 +104,11 @@ public class ChangeTask implements Command {
 		if (task.getTaskType().equals(TaskType.BUG)) {
 			Bug bug = (Bug) task;
 			PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-			if (bug.getPriority().equals(priorityType)) throw new InvalidUserInputException();
 			bug.setPriority(priorityType);
 			return format(CHANGE_TASK_SUCCESSFUL, PRIORITY, task.getTaskType(), id, priorityType);
 		} else if (task.getTaskType().equals(TaskType.STORY)) {
 			Story story = (Story) task;
 			PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-			if (story.getPriority().equals(priorityType)) throw new InvalidUserInputException();
 			story.setPriority(priorityType);
 			return format(CHANGE_TASK_SUCCESSFUL, PRIORITY, task.getTaskType(), id, priorityType);
 		} else {
@@ -125,19 +120,16 @@ public class ChangeTask implements Command {
 		if (task.getTaskType().equals(TaskType.BUG)) {
 			Bug bug = (Bug) task;
 			BugStatus bugStatus = tryParseEnum(parameters.get(2), BugStatus.class);
-			if (bug.getStatus().equals(bugStatus)) throw new InvalidUserInputException();
 			bug.setStatus(bugStatus);
 			return format(CHANGE_TASK_SUCCESSFUL, STATUS, task.getTaskType(), id, bugStatus);
 		} else if (task.getTaskType().equals(TaskType.STORY)) {
 			Story story = (Story) task;
 			StoryStatus storyStatus = tryParseEnum(parameters.get(2), StoryStatus.class);
-			if (story.getStatus().equals(storyStatus)) throw new InvalidUserInputException();
 			story.setStatus(storyStatus);
 			return format(CHANGE_TASK_SUCCESSFUL, STATUS, task.getTaskType(), id, storyStatus);
 		} else {
 			Feedback feedback = (Feedback) task;
 			FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
-			if (feedback.getStatus().equals(feedbackStatus)) throw new InvalidUserInputException();
 			feedback.setStatus(feedbackStatus);
 			return format(CHANGE_TASK_SUCCESSFUL, STATUS, task.getTaskType(), id, feedbackStatus);
 		}

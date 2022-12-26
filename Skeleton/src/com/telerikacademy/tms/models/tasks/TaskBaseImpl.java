@@ -1,5 +1,6 @@
 package com.telerikacademy.tms.models.tasks;
 
+import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.compositions.contracts.Comment;
 import com.telerikacademy.tms.models.compositions.contracts.History;
@@ -107,6 +108,9 @@ public abstract class TaskBaseImpl implements Task {
 	protected <T> void addChangeToHistory(String type, T valueBefore, T valueAfter) {
 		if (valueBefore != null && !valueBefore.equals(valueAfter)) {
 			changesHistory.add(new HistoryImpl(format(CHANGE_MESSAGE, type, getID(), valueBefore, valueAfter)));
+		}
+		if (valueBefore != null && valueBefore.equals(valueAfter)) {
+			throw new InvalidUserInputException();
 		}
 	}
 
