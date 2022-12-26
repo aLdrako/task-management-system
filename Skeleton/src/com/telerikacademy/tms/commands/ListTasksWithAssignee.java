@@ -2,18 +2,13 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.exceptions.InvalidUserInputException;
-import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
-import com.telerikacademy.tms.models.tasks.contracts.Status;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
 import com.telerikacademy.tms.utils.TaskSorterByTitle;
-import jdk.jshell.Snippet;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,31 +37,31 @@ public class ListTasksWithAssignee implements Command {
 		String statusValue = "";
 		List<Task> tasks = filterFeedbacksAndNotAssigned();
 		//All tasks, not filtered, not sorted.
-		if(parameters.size() == 0){
+		if (parameters.size() == 0) {
 			return generateAllTasksList(tasks);
 		}
-		while(i<parameters.size()){
+		while (i < parameters.size()) {
 			String temp = parameters.get(i);
-			if(temp.equalsIgnoreCase(FILTER_BY_ASSIGNEE)){
+			if (temp.equalsIgnoreCase(FILTER_BY_ASSIGNEE)) {
 				filterByAssignee = true;
-				assigneeName = parameters.get(i+1);
-				i+=2;
+				assigneeName = parameters.get(i + 1);
+				i += 2;
 			} else if (temp.equalsIgnoreCase(FILTER_BY_STATUS)) {
 				filterByStatus = true;
-				statusValue = parameters.get(i+1);
-				i+=2;
-			}else if(temp.equalsIgnoreCase(SORT_BY_TITLE)){
+				statusValue = parameters.get(i + 1);
+				i += 2;
+			} else if (temp.equalsIgnoreCase(SORT_BY_TITLE)) {
 				sortByTitle = true;
-				i+=1;
+				i += 1;
 			}
 		}
-		if(filterByAssignee){
+		if (filterByAssignee) {
 			tasks = filterByAssignee(tasks, assigneeName);
 		}
-		if(filterByStatus){
+		if (filterByStatus) {
 			tasks = filterByStatus(tasks, statusValue);
 		}
-		if(sortByTitle){
+		if (sortByTitle) {
 			tasks = sortByTitle(tasks);
 		}
 
@@ -79,29 +74,31 @@ public class ListTasksWithAssignee implements Command {
 	}
 
 	private List<Task> filterByStatus(List<Task> tasks, String statusValue) {
-				return tasks
+		return tasks
 				.stream()
 				.filter(task ->
 						task.getStatus() == Enum.valueOf(BugStatus.class, statusValue) ||
-						task.getStatus() == Enum.valueOf(StoryStatus.class, statusValue))
+								task.getStatus() == Enum.valueOf(StoryStatus.class, statusValue))
 				.collect(Collectors.toList());
 	}
 
-	private List<Task> filterByAssignee(List<Task> tasks,String assigneeName){
-		if(assigneeName.isBlank() || assigneeName.isEmpty()){
+	private List<Task> filterByAssignee(List<Task> tasks, String assigneeName) {
+		if (assigneeName.isBlank() || assigneeName.isEmpty()) {
 			throw new IllegalArgumentException(NAME_CANNOT_BE_EMPTY);
 		}
 		return tasks
 				.stream()
-				.filter(task -> ((Assignable)task).getAssignee().getName().equalsIgnoreCase(assigneeName))
+				.filter(task -> ((Assignable) task).getAssignee().getName().equalsIgnoreCase(assigneeName))
 				.collect(Collectors.toList());
 	}
+
 	private List<Task> filterFeedbacksAndNotAssigned() {
 		return repository.getTasks()
 				.stream()
-				.filter(task -> task.getTaskType() != TaskType.FEEDBACK && ((Assignable)task).getAssignee() != null)
+				.filter(task -> task.getTaskType() != TaskType.FEEDBACK && ((Assignable) task).getAssignee() != null)
 				.collect(Collectors.toList());
 	}
+
 	private boolean titleContains(String title) {
 		for (Task task : repository.getTasks()) {
 			if (task.getTitle().contains(title)) {
@@ -111,14 +108,15 @@ public class ListTasksWithAssignee implements Command {
 		return false;
 	}
 
-	private String generateAllTasksList (List<Task> tasks){
+	private String generateAllTasksList(List<Task> tasks) {
 		String s = "";
-		for (Task task: tasks) {
-				s += generateTaskListing(task, ((Assignable) task).getAssignee().getName());
+		for (Task task : tasks) {
+			s += generateTaskListing(task, ((Assignable) task).getAssignee().getName());
 		}
 		return s;
 	}
-	private String generateTaskListing(Task task, String assignee){
+
+	private String generateTaskListing(Task task, String assignee) {
 		return String.format("%s%t%s%t%s%t%s%n", task.getTaskType(), task.getTitle(), task.getStatus(), assignee);
 	}
 

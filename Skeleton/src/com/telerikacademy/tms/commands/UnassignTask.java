@@ -39,8 +39,7 @@ public class UnassignTask implements Command {
 			assignableTask = (Assignable) repository.findElementById(repository.getTasks(), id);
 			User user = repository.findElementByName(repository.getUsers(), userName);
 			user.unAssignTask((Task) assignableTask);
-			User unassignedtUser = new UserImpl("Unassigned");
-			assignableTask.setAssignee(unassignedtUser);
+			assignableTask.setAssignee(new UserImpl("Unassigned"));
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Assignable.class.getSimpleName()));
 		} catch (ElementNotFoundException e) {
