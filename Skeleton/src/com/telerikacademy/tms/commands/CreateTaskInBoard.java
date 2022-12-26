@@ -11,6 +11,8 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseEnum;
+
 public class CreateTaskInBoard implements Command {
 	public static final int EXPECTED_MIN_NUMBER_PARAMETERS = 5;
 	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 6;
@@ -25,7 +27,7 @@ public class CreateTaskInBoard implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentCountRange(parameters, EXPECTED_MIN_NUMBER_PARAMETERS, EXPECTED_MAX_NUMBER_PARAMETERS);
-		TaskType ts = TaskType.valueOf(parameters.get(0));
+		TaskType ts = tryParseEnum(parameters.get(0), TaskType.class);
 		String boardName = parameters.get(1);
 		Board board = repository.findElementByName(repository.getBoards(), boardName);
 		String title = parameters.get(2);
