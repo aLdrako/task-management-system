@@ -60,7 +60,7 @@ public abstract class TaskBaseImpl implements Task {
 	}
 
 	private void setDescription(String description) {
-		validateInRange(title.length(), DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN,
+		validateInRange(description.length(), DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN,
 				format(TEXT_LEN_ERR, "Description", DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN));
 		this.description = description;
 	}

@@ -69,26 +69,41 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 	@Override
 	public Bug createBug(String title, String description, PriorityType priority, SeverityType severity) {
-		Bug bug = new BugImpl(++nextId, title, description, priority, severity);
-		bug.setTaskType(TaskType.BUG);
-		this.tasks.add(bug);
-		return bug;
+		try {
+			Bug bug = new BugImpl(++nextId, title, description, priority, severity);
+			bug.setTaskType(TaskType.BUG);
+			this.tasks.add(bug);
+			return bug;
+		} catch (IllegalArgumentException e) {
+			--nextId;
+			throw new IllegalArgumentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public Story createStory(String title, String description, PriorityType priority, SizeType size) {
-		Story story = new StoryImpl(++nextId, title, description, priority, size);
-		story.setTaskType(TaskType.STORY);
-		this.tasks.add(story);
-		return story;
+		try {
+			Story story = new StoryImpl(++nextId, title, description, priority, size);
+			story.setTaskType(TaskType.STORY);
+			this.tasks.add(story);
+			return story;
+		} catch (IllegalArgumentException e) {
+			--nextId;
+			throw new IllegalArgumentException(e.getMessage());
+		}
 	}
 
 	@Override
 	public Feedback createFeedback(String title, String description, Rating rating) {
-		Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
-		feedback.setTaskType(TaskType.FEEDBACK);
-		this.tasks.add(feedback);
-		return feedback;
+		try {
+			Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
+			feedback.setTaskType(TaskType.FEEDBACK);
+			this.tasks.add(feedback);
+			return feedback;
+		} catch (IllegalArgumentException e) {
+			--nextId;
+			throw new IllegalArgumentException(e.getMessage());
+		}
 	}
 
 	/**
