@@ -19,7 +19,6 @@ import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseEnum;
 public class CreateTaskInBoard implements Command {
 	public static final int EXPECTED_MIN_NUMBER_PARAMETERS = 6;
 	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 7;
-	public static final String TASK_ALREADY_EXISTS = "Task already in board!";
 	public static final String INVALID_PARAMETER_COUNT = "Invalid parameter count";
 	public static final String TASK_CREATED_SUCCESSFULLY = "Task '%s' with ID [%d] has been created in board '%s'!";
 	private final TaskManagementRepository repository;
@@ -39,40 +38,32 @@ public class CreateTaskInBoard implements Command {
 		String title = parameters.get(3);
 		String description = parameters.get(4);
 		int id = 0;
-		switch (ts) {
-			case BUG:
-				try {
+		try {
+			switch (ts) {
+				case BUG:
 					PriorityType priority = tryParseEnum(parameters.get(5), PriorityType.class);
 					SeverityType severity = tryParseEnum(parameters.get(6), SeverityType.class);
 					Bug bug = repository.createBug(title, description, priority, severity);
 					id = bug.getID();
 					board.addTask(bug);
-				} catch (IndexOutOfBoundsException ex) {
-					throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
-				}
-				break;
-			case STORY:
-				try {
+					break;
+				case STORY:
 					PriorityType sp = tryParseEnum(parameters.get(5), PriorityType.class);
 					SizeType ss = tryParseEnum(parameters.get(6), SizeType.class);
 					Story story = repository.createStory(title, description, sp, ss);
 					id = story.getID();
 					board.addTask(story);
-				} catch (IndexOutOfBoundsException ex) {
-					throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
-				}
-				break;
-			case FEEDBACK:
-				try {
+					break;
+				case FEEDBACK:
 					Rating fr = tryParseEnum(convertDigitToWord(parameters.get(5)), Rating.class);
 					Feedback feedback = repository.createFeedback(title, description, fr);
 					id = feedback.getID();
 					board.addTask(feedback);
-				} catch (IndexOutOfBoundsException ex) {
-					throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
-				}
-				break;
+					break;
+			}
+			return String.format(TASK_CREATED_SUCCESSFULLY, title, id, boardName);
+		} catch (IndexOutOfBoundsException ex) {
+			throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
 		}
-		return String.format(TASK_CREATED_SUCCESSFULLY, title, id, boardName);
 	}
 }

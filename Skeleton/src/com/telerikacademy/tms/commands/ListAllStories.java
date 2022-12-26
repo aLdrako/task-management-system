@@ -20,6 +20,7 @@ public class ListAllStories implements Command {
 	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the stories only by status/assignee.";
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the stories only by title/priority/size.";
+	public static final String LISTING_HEADER = "<<< LIST ALL STORIES>>>" + System.lineSeparator();
 
 	private final TaskManagementRepository repository;
 
@@ -34,7 +35,7 @@ public class ListAllStories implements Command {
 		List<Story> stories = listWithStories();
 		stories = filterStories(parameters, stories);
 		sortStories(parameters, stories);
-		return ListingHelpers.elementsToString(stories);
+		return LISTING_HEADER + ListingHelpers.elementsToString(stories);
 	}
 
 	private void sortStories(List<String> parameters, List<Story> stories) {

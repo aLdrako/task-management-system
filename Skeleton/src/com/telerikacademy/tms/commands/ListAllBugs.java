@@ -4,7 +4,9 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
+import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 import com.telerikacademy.tms.utils.FilterHelpers;
 import com.telerikacademy.tms.utils.ListingHelpers;
 
@@ -14,6 +16,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
+import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 
 
@@ -21,6 +25,7 @@ public class ListAllBugs implements Command {
 	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
+	public static final String LISTING_HEADER = "<<< LIST ALL BUGS>>>" + System.lineSeparator();
 	private final TaskManagementRepository repository;
 
 	public ListAllBugs(TaskManagementRepository repository) {
@@ -34,7 +39,7 @@ public class ListAllBugs implements Command {
 		List<Bug> bugs = listWithBugs();
 		bugs = filterBugs(parameters, bugs);
 		sortBugs(parameters, bugs);
-		return ListingHelpers.elementsToString(bugs);
+		return LISTING_HEADER + elementsToString(bugs);
 	}
 
 	private void sortBugs(List<String> parameters, List<Bug> bugs) {
