@@ -11,6 +11,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.telerikacademy.tms.utils.ParsingHelpers.convertDigitToWord;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseEnum;
 
 public class CreateTaskInBoard implements Command {
@@ -34,19 +35,19 @@ public class CreateTaskInBoard implements Command {
 		String description = parameters.get(3);
 		switch (ts) {
 			case BUG:
-				PriorityType priority = PriorityType.valueOf(parameters.get(4));
-				SeverityType severity = SeverityType.valueOf(parameters.get(5));
+				PriorityType priority = tryParseEnum(parameters.get(4), PriorityType.class);
+				SeverityType severity = tryParseEnum(parameters.get(5), SeverityType.class);
 				Bug bug = repository.createBug(title, description, priority, severity);
 				board.addTask(bug);
 				break;
 			case STORY:
-				PriorityType sp = PriorityType.valueOf(parameters.get(4));
-				SizeType ss = SizeType.valueOf(parameters.get(5));
+				PriorityType sp = tryParseEnum(parameters.get(4), PriorityType.class);
+				SizeType ss = tryParseEnum(parameters.get(5), SizeType.class);
 				Story story = repository.createStory(title, description, sp, ss);
 				board.addTask(story);
 				break;
 			case FEEDBACK:
-				Rating fr = Rating.valueOf(parameters.get(4));
+				Rating fr = tryParseEnum(convertDigitToWord(parameters.get(4)), Rating.class);
 				Feedback feedback = repository.createFeedback(title, description, fr);
 				board.addTask(feedback);
 				break;
