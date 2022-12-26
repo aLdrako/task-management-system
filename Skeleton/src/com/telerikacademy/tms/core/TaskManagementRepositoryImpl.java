@@ -22,6 +22,7 @@ import static java.lang.String.format;
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	private static final String NO_RECORD_ID = "No task with ID %d";
 	private final static String NO_SUCH_ELEMENT = "There is no User or Team with name %s!";
+	private final static String NO_SUCH_BOARD_IN_TEAM = "There is no Board with name '%s' in Team '%s'!";
 	private int nextId;
 
 	private final List<Team> teams = new ArrayList<>();
@@ -142,6 +143,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		return team.getBoards().stream()
 				.filter(board -> board.getName().equalsIgnoreCase(name))
 				.findFirst()
-				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_ELEMENT, name)));
+				.orElseThrow(() -> new ElementNotFoundException(format(NO_SUCH_BOARD_IN_TEAM, name, team.getName())));
 	}
 }

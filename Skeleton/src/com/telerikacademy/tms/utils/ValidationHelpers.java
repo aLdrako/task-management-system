@@ -1,6 +1,7 @@
 package com.telerikacademy.tms.utils;
 
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
+import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +35,6 @@ public class ValidationHelpers {
 		if (list.size() > expectedNumberOfParameters || list.size() == 0) {
 			throw new IllegalArgumentException(
 					format(INVALID_NUMBER_OF_ARGUMENTS_TILL, 1, expectedNumberOfParameters, list.size())
-			);
-		}
-	}
-
-	public static void validateArgumentsCountMin(List<String> list, int expectedNumberOfParameters) {
-		if (list.size() < expectedNumberOfParameters) {
-			throw new IllegalArgumentException(
-					format(INVALID_NUMBER_OF_ARGUMENTS_MIN, expectedNumberOfParameters, list.size())
 			);
 		}
 	}
