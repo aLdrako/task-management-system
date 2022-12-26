@@ -1,5 +1,6 @@
 package com.telerikacademy.tms.models.tasks;
 
+import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
@@ -10,7 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.String.format;
+
 public class BugImpl extends TaskBaseImpl implements Bug {
+	private static final String BUG_ASSIGNED = "Bug was assigned to: %s";
+	private static final String BUG_UNASSIGNED = "Bug is unassigned";
 	private final List<String> steps = new ArrayList<>();
 	private PriorityType priority;
 	private SeverityType severity;
@@ -21,6 +26,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 		setPriority(priority);
 		setSeverity(severity);
 		setStatus(BugStatus.ACTIVE);
+		populateHistory(new HistoryImpl(BUG_UNASSIGNED));
 	}
 
 	@Override
@@ -62,7 +68,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public void setAssignee(User assignee) {
-		addChangeToHistory("assignee", this.assignee, assignee);
+		populateHistory(new HistoryImpl(format(BUG_ASSIGNED, assignee.getName())));
 		this.assignee = assignee;
 	}
 

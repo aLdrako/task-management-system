@@ -1,7 +1,6 @@
 package com.telerikacademy.tms.utils;
 
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
-import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +8,11 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class ValidationHelpers {
-	public static final String INVALID_COMMAND = "Invalid command input. Tasks can be filtered or sorted.";
-	public static final String INVALID_ARGUMENTS_AFTER_SORT_MESSAGE = "You can't have arguments after '%s'." +
+	private static final String INVALID_COMMAND = "Invalid command input. Tasks can be filtered or sorted.";
+	private static final String INVALID_ARGUMENTS_AFTER_SORT_MESSAGE = "You can't have arguments after '%s'." +
 			"If you wish to filter the list, you need to do it before you sort";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
-	private static final String INVALID_NUMBER_OF_ARGUMENTS_TILL = "Invalid number of arguments.";
-	private static final String INVALID_NUMBER_OF_ARGUMENTS_MIN = "Invalid number of arguments. Expected: at least %d; received: %d.";
+	private static final String INVALID_NUMBER_OF_ARGUMENTS_RANGE = "Invalid number of arguments. Expected: at least %d; expected: %d; received: %d.";
 	private static final String INVALID_PARAMETER_MESSAGE = "Invalid argument detected.";
 
 	public static void validateInRange(int value, int min, int max, String message) {
@@ -34,7 +32,7 @@ public class ValidationHelpers {
 	public static void validateArgumentsCountTill(List<String> list, int expectedNumberOfParameters) {
 		if (list.size() > expectedNumberOfParameters || list.size() == 0) {
 			throw new IllegalArgumentException(
-					format(INVALID_NUMBER_OF_ARGUMENTS_TILL, 1, expectedNumberOfParameters, list.size())
+					format(INVALID_NUMBER_OF_ARGUMENTS_RANGE, 1, expectedNumberOfParameters, list.size())
 			);
 		}
 	}
@@ -42,7 +40,7 @@ public class ValidationHelpers {
 	public static void validateArgumentCountRange(List<String> list, int expectedMinNumberOfParameters, int expectedMaxNumberOfParameters) {
 		if (list.size() > expectedMaxNumberOfParameters || list.size() < expectedMinNumberOfParameters) {
 			throw new IllegalArgumentException(
-					format(INVALID_NUMBER_OF_ARGUMENTS_TILL, expectedMinNumberOfParameters, expectedMaxNumberOfParameters, list.size())
+					format(INVALID_NUMBER_OF_ARGUMENTS_RANGE, expectedMinNumberOfParameters, expectedMaxNumberOfParameters, list.size())
 			);
 		}
 	}

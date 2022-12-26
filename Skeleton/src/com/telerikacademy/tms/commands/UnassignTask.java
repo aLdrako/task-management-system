@@ -3,6 +3,7 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.ElementNotFoundException;
+import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
@@ -38,7 +39,8 @@ public class UnassignTask implements Command {
 			assignableTask = (Assignable) repository.findElementById(repository.getTasks(), id);
 			User user = repository.findElementByName(repository.getUsers(), userName);
 			user.unAssignTask((Task) assignableTask);
-			assignableTask.setAssignee(null);
+			User unassignedtUser = new UserImpl("Unassigned");
+			assignableTask.setAssignee(unassignedtUser);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Assignable.class.getSimpleName()));
 		} catch (ElementNotFoundException e) {

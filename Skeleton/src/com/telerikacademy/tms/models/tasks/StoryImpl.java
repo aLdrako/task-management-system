@@ -1,12 +1,17 @@
 package com.telerikacademy.tms.models.tasks;
 
+import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 
+import static java.lang.String.format;
+
 public class StoryImpl extends TaskBaseImpl implements Story {
+	private static final String STORY_ASSIGNED = "Story was assigned to: %s";
+	private static final String STORY_UNASSIGNED = "Story is unassigned";
 	private PriorityType priority;
 	private SizeType size;
 	private User assignee;
@@ -16,6 +21,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		setPriority(priority);
 		setSize(size);
 		setStatus(StoryStatus.NOTDONE);
+		populateHistory(new HistoryImpl(STORY_UNASSIGNED));
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
 	@Override
 	public void setAssignee(User assignee) {
-		addChangeToHistory("assignee", this.assignee, assignee);
+		populateHistory(new HistoryImpl(format(STORY_ASSIGNED, assignee.getName())));
 		this.assignee = assignee;
 	}
 
