@@ -50,7 +50,7 @@ public class ListAllTasks implements Command {
 			}
 			return tasks
 					.stream()
-					.filter(task -> task.getTitle().contains(parameters.get(1).toLowerCase().strip()))
+					.filter(task -> task.getTitle().toLowerCase().contains(parameters.get(1).toLowerCase().strip()))
 					.collect(Collectors.toList());
 		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
