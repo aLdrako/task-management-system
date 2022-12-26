@@ -30,9 +30,12 @@ public class ListAllStories implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+		List<Story> stories = listWithStories();
+		if (parameters.size() == 0) {
+			return LISTING_HEADER + ListingHelpers.elementsToString(stories);
+		}
 		validateFilteringAndSortingParameters(parameters);
 
-		List<Story> stories = listWithStories();
 		stories = filterStories(parameters, stories);
 		sortStories(parameters, stories);
 		return LISTING_HEADER + ListingHelpers.elementsToString(stories);

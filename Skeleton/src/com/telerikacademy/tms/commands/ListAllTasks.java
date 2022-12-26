@@ -26,9 +26,12 @@ public class ListAllTasks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+		List<Task> tasks = repository.getTasks();
+		if (parameters.size() == 0) {
+			return LISTING_HEADER + ListingHelpers.elementsToString(tasks);
+		}
 		validateFilteringAndSortingParameters(parameters);
 
-		List<Task> tasks = repository.getTasks();
 		tasks = filterTasks(parameters, tasks);
 		sortTasks(parameters, tasks);
 		return LISTING_HEADER + ListingHelpers.elementsToString(tasks);

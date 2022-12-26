@@ -29,9 +29,12 @@ public class ListAllFeedbacks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
+		List<Feedback> feedbacks = listWithFeedbacks();
+		if (parameters.size() == 0) {
+			return LISTING_HEADER + elementsToString(feedbacks);
+		}
 		validateFilteringAndSortingParameters(parameters);
 
-		List<Feedback> feedbacks = listWithFeedbacks();
 		feedbacks = filterFeedbacks(parameters, feedbacks);
 		sortFeedbacks(parameters, feedbacks);
 		return LISTING_HEADER + elementsToString(feedbacks);

@@ -34,9 +34,11 @@ public class ListAllBugs implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		validateFilteringAndSortingParameters(parameters);
-
 		List<Bug> bugs = listWithBugs();
+		if (parameters.size() == 0) {
+			return LISTING_HEADER + elementsToString(bugs);
+		}
+		validateFilteringAndSortingParameters(parameters);
 		bugs = filterBugs(parameters, bugs);
 		sortBugs(parameters, bugs);
 		return LISTING_HEADER + elementsToString(bugs);
