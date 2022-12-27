@@ -35,7 +35,7 @@ public abstract class TaskBaseImpl implements Task {
 		this.id = id;
 		setTitle(title);
 		setDescription(description);
-		this.changesHistory.add(new HistoryImpl(format(NEW_INSTANCE_MESSAGE, id)));
+		this.populateHistory(new HistoryImpl(format(NEW_INSTANCE_MESSAGE, id)));
 	}
 
 	@Override
@@ -47,16 +47,26 @@ public abstract class TaskBaseImpl implements Task {
 	public String getTitle() {
 		return title;
 	}
-
-	private void setTitle(String title) {
-		validateInRange(title.length(), TITLE_MIN_LEN, TITLE_MAX_LEN,
-				format(TEXT_LEN_ERR, "Title", TITLE_MIN_LEN, TITLE_MAX_LEN));
-		this.title = title;
-	}
-
 	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	@Override
+	public TaskType getTaskType() {
+		return taskType;
+	}
+	@Override
+	public Status getStatus() {
+		return this.status;
+	}
+	@Override
+	public List<Comment> getComments() {
+		return new ArrayList<>(comments);
+	}
+	@Override
+	public List<History> getHistories() {
+		return new ArrayList<>(changesHistory);
 	}
 
 	private void setDescription(String description) {
@@ -65,17 +75,14 @@ public abstract class TaskBaseImpl implements Task {
 		this.description = description;
 	}
 
-	public TaskType getTaskType() {
-		return taskType;
-	}
-
 	public void setTaskType(TaskType ts) {
 		taskType = ts;
 	}
 
-	@Override
-	public Status getStatus() {
-		return this.status;
+	private void setTitle(String title) {
+		validateInRange(title.length(), TITLE_MIN_LEN, TITLE_MAX_LEN,
+				format(TEXT_LEN_ERR, "Title", TITLE_MIN_LEN, TITLE_MAX_LEN));
+		this.title = title;
 	}
 
 	@Override
@@ -85,29 +92,19 @@ public abstract class TaskBaseImpl implements Task {
 	}
 
 	@Override
-	public List<Comment> getComments() {
-		return new ArrayList<>(comments);
-	}
-
-	@Override
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 		this.populateHistory(new HistoryImpl(TASK_COMMENT_ADDED));
-	}
-
-	@Override
-	public List<History> getHistories() {
-		return new ArrayList<>(changesHistory);
-	}
-
-	protected void populateHistory(History history) {
-		this.changesHistory.add(history);
 	}
 
 	protected <T> void addChangeToHistory(String type, T valueBefore, T valueAfter) {
 		if (valueBefore != null && !valueBefore.equals(valueAfter)) {
 			changesHistory.add(new HistoryImpl(format(CHANGE_MESSAGE, type, getID(), valueBefore, valueAfter)));
 		}
+	}
+
+	protected void populateHistory(History history) {
+		this.changesHistory.add(history);
 	}
 
 	@Override

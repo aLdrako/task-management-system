@@ -48,6 +48,14 @@ public class TeamImpl implements Team {
 	public String getName() {
 		return name;
 	}
+	@Override
+	public List<User> getUsers() {
+		return new ArrayList<>(users);
+	}
+	@Override
+	public List<Board> getBoards() {
+		return new ArrayList<>(boards);
+	}
 
 	private void setName(String name) {
 		validateInRange(name.length(), TEAM_MIN_LEN, TEAM_MAX_LEN, TEAM_LEN_ERR);
@@ -55,21 +63,9 @@ public class TeamImpl implements Team {
 	}
 
 	@Override
-	public List<User> getUsers() {
-		return new ArrayList<>(users);
-	}
-
-	@Override
-	public List<Board> getBoards() {
-		return new ArrayList<>(boards);
-	}
-
-	@Override
 	public void addUser(User user) {
-		for (User u : getUsers()) {
-			if (u.getName().equals(user.getName())) {
-				throw new IllegalArgumentException(format(USER_ALREADY_IN_TEAM, user.getName(), this.getName()));
-			}
+		if (getUsers().stream().anyMatch(user1 -> user1.getName().equalsIgnoreCase(user.getName()))) {
+			throw new IllegalArgumentException(format(USER_ALREADY_IN_TEAM, user.getName(), this.getName()));
 		}
 		this.users.add(user);
 		this.activityHistory.add(new HistoryImpl(format(USER_ADDED_SUCCESSFUL, user.getName(), this.getName())));
@@ -77,22 +73,17 @@ public class TeamImpl implements Team {
 
 	@Override
 	public void removeUser(User user) {
-		for (User u : getUsers()) {
-			if (u.getName().equals(user.getName())) {
-				this.users.remove(user);
-				this.activityHistory.add(new HistoryImpl(format(USER_REMOVED_SUCCESSFUL, user.getName(), this.getName())));
-				return;
-			}
+		if (getUsers().stream().noneMatch(user1 -> user1.getName().equalsIgnoreCase(user.getName()))) {
+			throw new IllegalArgumentException(format(USER_NOT_IN_TEAM, user.getName(), this.getName()));
 		}
-		throw new IllegalArgumentException(format(USER_NOT_IN_TEAM, user.getName(), this.getName()));
+		this.users.remove(user);
+		this.activityHistory.add(new HistoryImpl(format(USER_REMOVED_SUCCESSFUL, user.getName(), this.getName())));
 	}
 
 	@Override
 	public void addBoard(Board board) {
-		for (Board b : getBoards()) {
-			if (b.getName().equals(board.getName())) {
-				throw new IllegalArgumentException(format(BOARD_ALREADY_IN_TEAM, board.getName(), this.getName()));
-			}
+		if (getBoards().stream().anyMatch(board1 -> board1.getName().equalsIgnoreCase(board.getName()))) {
+			throw new IllegalArgumentException(format(BOARD_ALREADY_IN_TEAM, board.getName(), this.getName()));
 		}
 		this.boards.add(board);
 		this.activityHistory.add(new HistoryImpl(format(BOARD_ADDED_SUCCESSFUL, board.getName(), this.getName())));
@@ -100,14 +91,11 @@ public class TeamImpl implements Team {
 
 	@Override
 	public void removeBoard(Board board) {
-		for (Board b : getBoards()) {
-			if (b.getName().equals(board.getName())) {
-				this.boards.remove(board);
-				this.activityHistory.add(new HistoryImpl(format(BOARD_REMOVED_SUCCESSFUL, board.getName(), this.getName())));
-				return;
-			}
+		if (getBoards().stream().noneMatch(board1 -> board1.getName().equalsIgnoreCase(board.getName()))) {
+			throw new IllegalArgumentException(format(BOARD_NOT_IN_TEAM, board.getName(), this.getName()));
 		}
-		throw new IllegalArgumentException(format(BOARD_NOT_IN_TEAM, board.getName(), this.getName()));
+		this.boards.remove(board);
+		this.activityHistory.add(new HistoryImpl(format(BOARD_REMOVED_SUCCESSFUL, board.getName(), this.getName())));
 	}
 
 	@Override

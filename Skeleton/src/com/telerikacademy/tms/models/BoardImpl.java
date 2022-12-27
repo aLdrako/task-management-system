@@ -40,23 +40,25 @@ public class BoardImpl implements Board {
 	public String getName() {
 		return name;
 	}
+	@Override
+	public List<Task> getTasks() {
+		return new ArrayList<>(tasks);
+	}
+	@Override
+	public List<History> getHistories() {
+		return new ArrayList<>(activityHistory);
+	}
 
 	public void setName(String name) {
 		validateInRange(name.length(), BOARD_MIN_LEN, BOARD_MAX_LEN, BOARD_LEN_ERR);
 		this.name = name;
 	}
 
-	@Override
-	public List<Task> getTasks() {
-		return new ArrayList<>(tasks);
-	}
 
 	@Override
 	public void addTask(Task task) {
-		for (Task t : getTasks()) {
-			if (t.getID() == task.getID()) {
-				throw new IllegalArgumentException(format(TASK_ALREADY_IN_BOARD, task.getID(), this.getName()));
-			}
+		if (getTasks().stream().anyMatch(task1 -> task1.getID() == task.getID())) {
+			throw new IllegalArgumentException(format(TASK_ALREADY_IN_BOARD, task.getID(), this.getName()));
 		}
 		this.tasks.add(task);
 		this.activityHistory.add(new HistoryImpl(format(TASK_ADDED_SUCCESSFUL, task.getTitle(), this.getName())));
@@ -64,20 +66,13 @@ public class BoardImpl implements Board {
 
 	@Override
 	public void removeTask(Task task) {
-		for (Task t : getTasks()) {
-			if (t.getID() == task.getID()) {
-				this.tasks.remove(task);
-				this.activityHistory.add(new HistoryImpl(format(TASK_REMOVED_SUCCESSFUL, task.getTitle(), this.getName())));
-				return;
-			}
+		if (getTasks().stream().noneMatch(task1 -> task1.getID() == task.getID())) {
+			throw new IllegalArgumentException(format(TASK_NOT_IN_BOARD, task.getID(), this.getName()));
 		}
-		throw new IllegalArgumentException(format(TASK_NOT_IN_BOARD, task.getID(), this.getName()));
+		this.tasks.remove(task);
+		this.activityHistory.add(new HistoryImpl(format(TASK_REMOVED_SUCCESSFUL, task.getTitle(), this.getName())));
 	}
 
-	@Override
-	public List<History> getHistories() {
-		return new ArrayList<>(activityHistory);
-	}
 
 	@Override
 	public String toString() {

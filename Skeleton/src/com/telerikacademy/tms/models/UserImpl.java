@@ -42,23 +42,25 @@ public class UserImpl implements User {
 	public String getName() {
 		return name;
 	}
+	@Override
+	public List<Task> getTasks() {
+		return new ArrayList<>(tasks);
+	}
+	@Override
+	public List<History> getHistories() {
+		return new ArrayList<>(activityHistory);
+	}
 
 	private void setName(String name) {
 		validateInRange(name.length(), USER_MIN_LEN, USER_MAX_LEN, USER_LEN_ERR);
 		this.name = name;
 	}
 
-	@Override
-	public List<Task> getTasks() {
-		return new ArrayList<>(tasks);
-	}
 
 	@Override
 	public void assignTask(Task task) {
-		for (Task t : getTasks()) {
-			if (t.getID() == task.getID()) {
-				throw new IllegalArgumentException(format(TASK_ALREADY_ASSIGNED, task.getID(), this.getName()));
-			}
+		if (getTasks().stream().anyMatch(task1 -> task1.getID() == task.getID())) {
+			throw new IllegalArgumentException(format(TASK_ALREADY_ASSIGNED, task.getID(), this.getName()));
 		}
 		this.tasks.add(task);
 		this.activityHistory.add(new HistoryImpl(format(TASK_ASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
@@ -66,14 +68,11 @@ public class UserImpl implements User {
 
 	@Override
 	public void unAssignTask(Task task) {
-		for (Task t : getTasks()) {
-			if (t.getID() == task.getID()) {
-				this.tasks.remove(task);
-				this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
-				return;
-			}
+		if (getTasks().stream().noneMatch(task1 -> task1.getID() == task.getID())) {
+			throw new IllegalArgumentException(format(TASK_NOT_ASSIGNED, task.getID(), this.getName()));
 		}
-		throw new IllegalArgumentException(format(TASK_NOT_ASSIGNED, task.getID(), this.getName()));
+		this.tasks.remove(task);
+		this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
 	}
 
 	@Override
@@ -81,10 +80,6 @@ public class UserImpl implements User {
 		this.activityHistory.add(new HistoryImpl(format(COMMENT_ADDED_TO_TASK_SUCCESSFUL, task.getID())));
 	}
 
-	@Override
-	public List<History> getHistories() {
-		return new ArrayList<>(activityHistory);
-	}
 
 	@Override
 	public String toString() {

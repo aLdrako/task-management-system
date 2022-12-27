@@ -33,6 +33,10 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 	public SizeType getSize() {
 		return size;
 	}
+	@Override
+	public User getAssignee() {
+		return assignee;
+	}
 
 	@Override
 	public void setPriority(PriorityType priority) {
@@ -46,10 +50,6 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		this.size = size;
 	}
 
-	@Override
-	public User getAssignee() {
-		return assignee;
-	}
 
 	@Override
 	public void setAssignee(User assignee) {
