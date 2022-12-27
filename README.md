@@ -150,12 +150,15 @@ CreatePerson
 CreatePerson Alexa
 CreatePerson Alexa
 CreatePerson Cortana
+CreatePerson {{Marco Polo}}
 CreateTeam Cortana
 CreateTeam Hackers
 CreateTeam Developers
 CreateTeam {{Suicide Squad}}
 CreateBoardInTeam ToDos Hackers
 CreateBoardInTeam Goals {{Suicide Squad}}
+AddPersonToTeam Alexa {{Suicide Squad}}
+AddPersonToTeam Cortana {{Suicide Squad}}
 CreateTaskInBoard bug ToDos Hackers {{Glitching interface}} {{There is a broken interface}} low major
 CreateTaskInBoard bug ToDos Hackers {{Fatal issue}} {{Server is down}} high critical
 CreateTaskInBoard bug ToDos Hackers {{Serious issue}} {{App does not work}} medium major
@@ -223,12 +226,15 @@ Invalid number of arguments. Expected: 1; received: 0.
 User with a name Alexa was created.
 Duplicate name. Please enter a unique name!
 User with a name Cortana was created.
+User with a name Marco Polo was created.
 Duplicate name. Please enter a unique name!
 Team with a name Hackers was created.
 Team with a name Developers was created.
 Team with a name Suicide Squad was created.
 Board ToDos has been created in team Hackers!
 Board Goals has been created in team Suicide Squad!
+Person Alexa has been added to the team Suicide Squad!
+Person Cortana has been added to the team Suicide Squad!
 Task 'Glitching interface' with ID [1] has been created in board 'ToDos'!
 Task 'Fatal issue' with ID [2] has been created in board 'ToDos'!
 Task 'Serious issue' with ID [3] has been created in board 'ToDos'!
@@ -244,8 +250,8 @@ There is no value ('11', use numbers from 1 to 10) in Rating.
 Steps to reproduce added to Bug with ID 1
 Provided task with ID 4 does not belong to Bug category!
 Steps to reproduce added to Bug with ID 2
-Person Alexa has been added to the team Suicide Squad!
-Person Cortana has been added to the team Suicide Squad!
+User <Alexa> already in team <Suicide Squad>
+User <Cortana> already in team <Suicide Squad>
 Task with ID 1 was assigned to user Alexa.
 Task with ID 5 was assigned to user Alexa.
 Task with ID 2 was assigned to user Alexa.
@@ -265,31 +271,31 @@ Same value passed. Nothing was changed!
 Status for Story with ID 6 was changed to InProgress.
 Status for Feedback with ID 7 was changed to Done.
 Rating for Feedback with ID 7 was changed to 8.
-<<< Bug Activity with ID -> [3] >>>
+<<< BUG Activity with ID -> [3] >>>
 === CHANGES HISTORY ===
-[26-December-2022 19:45:45] Task with ID 3 was created.
-[26-December-2022 19:45:45] Bug is unassigned
-[26-December-2022 19:45:45] Bug was assigned to: Cortana
-[26-December-2022 19:45:45] Comment added to task.
-[26-December-2022 19:45:45] Comment added to task.
-[26-December-2022 19:45:45] The severity of item with ID 3 switched from 'Major' to 'Minor'
+[27-December-2022 12:41:06] Task with ID -> [3] was created.
+[27-December-2022 12:41:06] Task is Unassigned
+[27-December-2022 12:41:06] The 'Assignee' of item with ID -> [3] switched from {Unassigned} to {Cortana}
+[27-December-2022 12:41:06] Comment added to task.
+[27-December-2022 12:41:06] Comment added to task.
+[27-December-2022 12:41:06] The 'Severity' of item with ID -> [3] switched from {Major} to {Minor}
 === COMMENTS ===
 "Thank you so much for the amazing feedback" - Cortana 
 "It was an easy work" - Alexa 
-<<< Feedback Activity with ID -> [7] >>>
+<<< FEEDBACK Activity with ID -> [7] >>>
 === CHANGES HISTORY ===
-[26-December-2022 19:45:45] Task with ID 7 was created.
-[26-December-2022 19:45:45] The status of item with ID 7 switched from 'New' to 'Done'
-[26-December-2022 19:45:45] The rating of item with ID 7 switched from '9' to '8'
+[27-December-2022 12:41:06] Task with ID -> [7] was created.
+[27-December-2022 12:41:06] The 'Status' of item with ID -> [7] switched from {New} to {Done}
+[27-December-2022 12:41:06] The 'Rating' of item with ID -> [7] switched from {9} to {8}
 === NO COMMENTS ===
 === ALL TEAMS ===
 Team: Hackers
-It has (0) users -> 
+It has (0) users
 It contains (1) boards -> ToDos
 ===============
 Team: Developers
-It has (0) users -> 
-It contains (0) boards -> 
+It has (0) users
+It contains (0) boards
 ===============
 Team: Suicide Squad
 It has (2) users -> Alexa, Cortana
@@ -306,58 +312,40 @@ Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critic
 	-> Open the application
 	-> Perform data conversion
 	-> Save progress
-<<< Alexa's Activity History >>>
-[26-December-2022 19:45:45] User was created.
-[26-December-2022 19:45:45] Task 'Glitching interface' assigned to Alexa
-[26-December-2022 19:45:45] Task 'Funny story' assigned to Alexa
-[26-December-2022 19:45:45] Task 'Fatal issue' assigned to Alexa
-[26-December-2022 19:45:45] Task 'Third story' assigned to Alexa
-[26-December-2022 19:45:45] Task 'Third story' unassigned from Alexa
-[26-December-2022 19:45:45] Added comment to task with ID 3
 ===============
 User: Cortana has (2) assigned tasks
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Minor | Assignee: Cortana | Steps to reproduce: Not specified
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
-<<< Cortana's Activity History >>>
-[26-December-2022 19:45:45] User was created.
-[26-December-2022 19:45:45] Task 'Serious issue' assigned to Cortana
-[26-December-2022 19:45:45] Task 'Third story' assigned to Cortana
-[26-December-2022 19:45:45] Added comment to task with ID 3
+===============
+User: Marco Polo has (0) assigned tasks
 
-<<< Hackers's Activity History >>>
-[26-December-2022 19:45:45] Team was created.
-===============
-[26-December-2022 19:45:45] Board ToDos added to the team Hackers
-<<< Suicide Squad's Activity History >>>
-[26-December-2022 19:45:45] Team was created.
-===============
-[26-December-2022 19:45:45] Board Goals added to the team Suicide Squad
-===============
-[26-December-2022 19:45:45] User Alexa added to the team Suicide Squad
-===============
-[26-December-2022 19:45:45] User Cortana added to the team Suicide Squad
-<<< ToDos's Activity History >>>
-[26-December-2022 19:45:45] Board was created.
-===============
-[26-December-2022 19:45:45] Task Glitching interface added to board ToDos
-===============
-[26-December-2022 19:45:45] Task Fatal issue added to board ToDos
-===============
-[26-December-2022 19:45:45] Task Serious issue added to board ToDos
-===============
-[26-December-2022 19:45:45] Task Funny story added to board ToDos
-===============
-[26-December-2022 19:45:45] Task Third story added to board ToDos
-===============
-[26-December-2022 19:45:45] Task Great job here added to board ToDos
-Cortana's user activity:
-[26-December-2022 19:45:45] User was created.
-[26-December-2022 19:45:45] Task 'Serious issue' assigned to Cortana
-[26-December-2022 19:45:45] Task 'Third story' assigned to Cortana
-[26-December-2022 19:45:45] Added comment to task with ID 3
+<<< Hackers's Team Activity History >>>
+[27-December-2022 12:41:06] Team was created.
+[27-December-2022 12:41:06] Board <ToDos> added to the team <Hackers>
 
-Suicide Squad' team members: Alexa, Cortana 
-Hackers' team boards: ToDos 
+<<< Suicide Squad's Team Activity History >>>
+[27-December-2022 12:41:06] Team was created.
+[27-December-2022 12:41:06] Board <Goals> added to the team <Suicide Squad>
+[27-December-2022 12:41:06] User <Alexa> added to the team <Suicide Squad>
+[27-December-2022 12:41:06] User <Cortana> added to the team <Suicide Squad>
+
+<<< ToDos's Board Activity History >>>
+[27-December-2022 12:41:06] Board was created.
+[27-December-2022 12:41:06] Task <Glitching interface> with ID -> [1] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Fatal issue> with ID -> [2] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Serious issue> with ID -> [3] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Funny story> with ID -> [5] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Third story> with ID -> [6] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Great job here> with ID -> [7] added to board <ToDos>
+
+<<< Cortana's User Activity History >>>
+[27-December-2022 12:41:06] User was created.
+[27-December-2022 12:41:06] Task <Serious issue> assigned to <Cortana>
+[27-December-2022 12:41:06] Task <Third story> assigned to <Cortana>
+[27-December-2022 12:41:06] Added comment to task with ID -> [3]
+
+Suicide Squad has (2) team members -> Alexa, Cortana 
+Hackers has (1) team boards -> ToDos 
 <<< LIST ALL FEEDBACKS>>>
 Feedback: ID -> [8] 'Doing good' | Status: New | Rating: 7
 ===============
