@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.String.format;
-
 public class BugImpl extends TaskBaseImpl implements Bug {
 	private static final String BUG_UNASSIGNED = "Task is Unassigned";
 	private final List<String> steps = new ArrayList<>();

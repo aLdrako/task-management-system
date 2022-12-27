@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class ListingHelpers {
 	public static String EMPTY_LIST_MESSAGE = "=== EMPTY LIST ===";
+	public static final String ACTIVITY_HISTORY_HEADER = "<<< %s's %s Activity History >>>";
 
 	public static <T> String elementsToString(List<T> elements) {
 		if (elements.isEmpty()) {

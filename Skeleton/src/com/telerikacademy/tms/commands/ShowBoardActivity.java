@@ -2,18 +2,18 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
+import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.ACTIVITY_HISTORY_HEADER;
 import static java.lang.String.format;
 
 public class ShowBoardActivity implements Command {
-	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	public static final String ACTIVITY_HISTORY_HEADER = "<<< %s's Activity History >>>" + System.lineSeparator();
+	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
 	private final TaskManagementRepository repository;
 
 	public ShowBoardActivity(TaskManagementRepository repository) {
@@ -23,12 +23,21 @@ public class ShowBoardActivity implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
-		String nameBoard = parameters.get(0);
-		String nameTeam = parameters.get(1);
-		Team team = repository.findElementByName(repository.getTeams(), nameTeam);
-		Board board = repository.findBoardByNameInTeam(team, nameBoard);
+		String boardName = parameters.get(0);
+		String teamName = parameters.get(1);
 
-		return format(ACTIVITY_HISTORY_HEADER, board.getName()) +
-				elementsToString(board.getHistories());
+		return showBoardActivity(boardName, teamName);
+	}
+
+	private String showBoardActivity(String boardName, String teamName) {
+		Team team = repository.findElementByName(repository.getTeams(), teamName);
+		Board board = repository.findBoardByNameInTeam(team, boardName);
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(format(ACTIVITY_HISTORY_HEADER, boardName, board.getClass().getSimpleName())).append(System.lineSeparator());
+		for (History activityHistory : board.getHistories()) {
+			builder.append(activityHistory).append(System.lineSeparator());
+		}
+		return builder.toString();
 	}
 }

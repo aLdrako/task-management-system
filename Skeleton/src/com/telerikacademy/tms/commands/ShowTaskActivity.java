@@ -39,7 +39,7 @@ public class ShowTaskActivity implements Command {
 		String anyHistories = task.getHistories().size() == 0 ? NO_CHANGES_HISTORY : CHANGES_HISTORY;
 		String anyComments = task.getComments().size() == 0 ? NO_COMMENTS : COMMENTS;
 
-		return format(TASK_ACTIVITY, task.getTaskType(), task.getID()) +
+		return format(TASK_ACTIVITY, task.getTaskType().toString().toUpperCase(), task.getID()) +
 				anyHistories +
 				task.getHistories().stream().map(Object::toString).collect(Collectors.joining("\n")) +
 				anyComments +

@@ -88,15 +88,10 @@ public class UserImpl implements User {
 
 	@Override
 	public String toString() {
-		String newLine = this.getTasks().size() == 0 ? "" : "\n";
 		return this.getClass().getInterfaces()[0].getSimpleName() +
 				": " + this.getName() +
 				" has (" + this.getTasks().size() +
 				") assigned tasks" + System.lineSeparator() +
-				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
-				newLine + "<<< " + this.getName() + "'s Activity History >>>" + System.lineSeparator() +
-				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
+				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n"));
 	}
-
-
 }

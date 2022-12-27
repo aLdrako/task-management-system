@@ -8,8 +8,6 @@ import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 
-import static java.lang.String.format;
-
 public class StoryImpl extends TaskBaseImpl implements Story {
 	private static final String STORY_UNASSIGNED = "Task is Unassigned";
 	private PriorityType priority;

@@ -30,6 +30,8 @@ public class TeamImpl implements Team {
 	private static final String BOARD_ADDED_SUCCESSFUL = "Board %s added to the team %s";
 	private static final String BOARD_REMOVED_SUCCESSFUL = "Board %s removed from the team %s";
 	private static final String BOARD_NOT_IN_TEAM = "Board %s is not in this team %s";
+	private static final String CONTAIN_USERS_AMOUNT = "It has (%s) users";
+	private static final String CONTAIN_BOARDS_AMOUNT = "It contains (%s) boards";
 
 	private String name;
 	private final List<User> users;
@@ -118,12 +120,14 @@ public class TeamImpl implements Team {
 	@Override
 	public String toString() {
 
+		String usersExists = this.getUsers().size() != 0 ? " -> " : "";
+		String boardsExists = this.getBoards().size() != 0 ? " -> " : "";
 		return this.getClass().getInterfaces()[0].getSimpleName() +
 				": " + this.getName() + System.lineSeparator() +
-				"It has (" + this.getUsers().size() + ") users -> " +
+				format(CONTAIN_USERS_AMOUNT, this.getUsers().size()) + usersExists +
 				this.getUsers().stream().map(Nameable::getName).collect(Collectors.joining(", ")) +
 				System.lineSeparator() +
-				"It contains (" + this.getBoards().size() + ") boards -> " +
+				format(CONTAIN_BOARDS_AMOUNT, this.getBoards().size()) + boardsExists +
 				this.getBoards().stream().map(Nameable::getName).collect(Collectors.joining(", "));
 	}
 }

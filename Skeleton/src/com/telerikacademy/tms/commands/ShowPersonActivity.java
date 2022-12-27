@@ -8,6 +8,9 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static com.telerikacademy.tms.utils.ListingHelpers.ACTIVITY_HISTORY_HEADER;
+import static java.lang.String.format;
+
 public class ShowPersonActivity implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
 	private final TaskManagementRepository repository;
@@ -26,7 +29,7 @@ public class ShowPersonActivity implements Command {
 	private String showPersonActivity(String name) {
 		User user = repository.findElementByName(repository.getUsers(), name);
 		StringBuilder builder = new StringBuilder();
-		builder.append(name).append("'s user activity:").append(System.lineSeparator());
+		builder.append(format(ACTIVITY_HISTORY_HEADER, name, user.getClass().getSimpleName())).append(System.lineSeparator());
 		for (History activityHistory : user.getHistories()) {
 			builder.append(activityHistory).append(System.lineSeparator());
 		}
