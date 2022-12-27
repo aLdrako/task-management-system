@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserImplTest {
 
 	@Test
-	public void userImpl_Should_Implement_UserInterface() {
+	public void userImpl_Should_ImplementUserInterface() {
 		// Arrange, Act
 		User user = new UserImpl(USER_VALID_NAME);
 
@@ -24,6 +24,15 @@ public class UserImplTest {
 	public void constructor_Should_ThrowException_When_NameLengthOutOfBounds() {
 		// Arrange, Act, Assert
 		assertThrows(IllegalArgumentException.class, () -> new UserImpl(USER_INVALID_NAME));
+	}
+
+	@Test
+	public void constructor_Should_CreateNewUser_When_ValidArgumentsPassed() {
+		// Arrange, Act
+		User user = new UserImpl(USER_VALID_NAME);
+
+		// Assert
+		assertEquals(USER_VALID_NAME, user.getName());
 	}
 
 	@Test
