@@ -43,11 +43,11 @@ public class CreatePersonTests {
         Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
     }
 
-    @ParameterizedTest(name = "with arguments: {0}")
-    public void execute_Should_ThrowException_When_NameOfPersonIsDuplicate(String validName) {
+    @Test
+    public void execute_Should_ThrowException_When_DuplicateNameIsFound() {
         // Arrange
-        repository.createUser(validName);
-        List<String> parameters = List.of(validName);
+        repository.createUser(USER_VALID_NAME);
+        List<String> parameters = List.of(USER_VALID_NAME);
 
         //Act, Assert
         Assertions.assertThrows(DuplicateElementException.class, () -> command.execute(parameters));

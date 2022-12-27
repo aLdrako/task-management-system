@@ -28,6 +28,9 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	private final List<Team> teams = new ArrayList<>();
 	private final List<User> users = new ArrayList<>();
 	private final List<Task> tasks = new ArrayList<>();
+	private final List<Bug> bugs = new ArrayList<>();
+	private final List<Story> stories = new ArrayList<>();
+	private final List<Feedback> feedbacks = new ArrayList<>();
 
 	public TaskManagementRepositoryImpl() {
 		this.nextId = 0;
@@ -46,6 +49,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	@Override
 	public List<Task> getTasks() {
 		return new ArrayList<>(tasks);
+	}
+
+	@Override
+	public List<Bug> getBugs() {
+		return new ArrayList<>(bugs);
+	}
+
+	@Override
+	public List<Story> getStories() {
+		return new ArrayList<>(stories);
+	}
+
+	@Override
+	public List<Feedback> getFeedbacks() {
+		return new ArrayList<>(feedbacks);
 	}
 
 	@Override
@@ -72,6 +90,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		try {
 			Bug bug = new BugImpl(++nextId, title, description, priority, severity);
 			this.tasks.add(bug);
+			this.bugs.add(bug);
 			return bug;
 		} catch (IllegalArgumentException e) {
 			--nextId;
@@ -84,6 +103,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		try {
 			Story story = new StoryImpl(++nextId, title, description, priority, size);
 			this.tasks.add(story);
+			this.stories.add(story);
 			return story;
 		} catch (IllegalArgumentException e) {
 			--nextId;
@@ -96,6 +116,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		try {
 			Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
 			this.tasks.add(feedback);
+			this.feedbacks.add(feedback);
 			return feedback;
 		} catch (IllegalArgumentException e) {
 			--nextId;

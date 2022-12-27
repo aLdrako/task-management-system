@@ -20,8 +20,8 @@ import static java.util.Arrays.asList;
 
 public class CreateTeamTests {
 
-    TaskManagementRepository repository;
-    Command command;
+    private TaskManagementRepository repository;
+    private Command command;
 
     @BeforeEach
     public void before() {

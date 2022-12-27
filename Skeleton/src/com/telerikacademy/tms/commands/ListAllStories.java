@@ -30,7 +30,7 @@ public class ListAllStories implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		List<Story> stories = listWithStories();
+		List<Story> stories = repository.getStories();
 		if (parameters.size() == ZERO_PARAMETERS) {
 			return LISTING_HEADER + ListingHelpers.elementsToString(stories);
 		}
@@ -70,12 +70,5 @@ public class ListAllStories implements Command {
 			throw new InvalidUserInputException(INVALID_COUNT_PARAMETER);
 		}
 		return stories;
-	}
-
-	private List<Story> listWithStories() {
-		return repository.getTasks().stream()
-				.filter(task -> task instanceof Story)
-				.map(Story.class::cast)
-				.collect(Collectors.toList());
 	}
 }

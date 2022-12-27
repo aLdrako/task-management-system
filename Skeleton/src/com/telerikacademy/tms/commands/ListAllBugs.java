@@ -30,7 +30,7 @@ public class ListAllBugs implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		List<Bug> bugs = listWithBugs();
+		List<Bug> bugs = repository.getBugs();
 		if (parameters.size() == ZERO_PARAMETERS) {
 			return LISTING_HEADER + elementsToString(bugs);
 		}
@@ -69,12 +69,5 @@ public class ListAllBugs implements Command {
 			throw new InvalidUserInputException(INVALID_COUNT_PARAMETER);
 		}
 		return bugs;
-	}
-
-	private List<Bug> listWithBugs() {
-		return repository.getTasks().stream()
-				.filter(task -> task instanceof Bug)
-				.map(Bug.class::cast)
-				.collect(Collectors.toList());
 	}
 }

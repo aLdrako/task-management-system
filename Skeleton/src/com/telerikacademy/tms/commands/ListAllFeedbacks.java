@@ -28,7 +28,7 @@ public class ListAllFeedbacks implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		List<Feedback> feedbacks = listWithFeedbacks();
+		List<Feedback> feedbacks = repository.getFeedbacks();
 		if (parameters.size() == ZERO_PARAMETERS) {
 			return LISTING_HEADER + elementsToString(feedbacks);
 		}
@@ -61,12 +61,5 @@ public class ListAllFeedbacks implements Command {
 		} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("sortby"))) {
 			throw new InvalidUserInputException(INVALID_SORT_OPTION_MESSAGE);
 		}
-	}
-
-	private List<Feedback> listWithFeedbacks() {
-		return repository.getTasks().stream()
-				.filter(task -> task instanceof Feedback)
-				.map(Feedback.class::cast)
-				.collect(Collectors.toList());
 	}
 }
