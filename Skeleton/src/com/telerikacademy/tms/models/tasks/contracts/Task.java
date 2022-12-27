@@ -14,6 +14,4 @@ public interface Task extends Historiable, Commentable, Comparable<Task> {
 	<T extends Status> void setStatus(T status);
 
 	TaskType getTaskType();
-
-	void setTaskType(TaskType ts);
 }

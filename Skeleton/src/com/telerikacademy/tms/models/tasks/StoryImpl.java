@@ -20,6 +20,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		setPriority(priority);
 		setSize(size);
 		setStatus(StoryStatus.NOTDONE);
+		setTaskType(TaskType.STORY);
 		populateHistory(new HistoryImpl(STORY_UNASSIGNED));
 	}
 

@@ -86,31 +86,6 @@ public class TeamImplTests {
 		assertThrows(IllegalArgumentException.class, () -> team.addUser(user));
 	}
 
-	@Test
-	public void removeUser_Should_ThrowException_When_RemovingNonExistedUserInList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
-		User user2 = new UserImpl(USER_VALID_NAME + " ");
-		team.addUser(user);
-
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> team.removeUser(user2));
-	}
-
-	@Test
-	public void removeUser_Should_RemoveUserFromList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
-		team.addUser(user);
-
-		// Act
-		team.removeUser(user);
-
-		// Assert
-		assertEquals(0, team.getUsers().size());
-	}
 
 	@Test
 	public void addBoard_Should_AddBoardToList() {
@@ -136,34 +111,7 @@ public class TeamImplTests {
 		// Act, Assert
 		assertThrows(IllegalArgumentException.class, () -> team.addBoard(board));
 	}
-
-	@Test
-	public void removeBoard_Should_ThrowException_When_RemovingNonExistedBoardInList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		Board board2 = new BoardImpl(BOARD_VALID_NAME + " ");
-		team.addBoard(board);
-
-
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> team.removeBoard(board2));
-	}
-
-	@Test
-	public void removeBoard_Should_RemoveBoardFromList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		team.addBoard(board);
-
-		// Act
-		team.removeBoard(board);
-
-		// Assert
-		assertEquals(0, team.getBoards().size());
-	}
-
+	
 	@Test
 	public void getHistories_Should_ReturnCopyOfListTasks() {
 		// Arrange

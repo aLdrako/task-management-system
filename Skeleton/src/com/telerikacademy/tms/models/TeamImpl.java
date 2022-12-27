@@ -24,12 +24,8 @@ public class TeamImpl implements Team {
 	private static final String NEW_INSTANCE_MESSAGE = "Team was created.";
 	private static final String USER_ALREADY_IN_TEAM = "User <%s> already in team <%s>";
 	private static final String USER_ADDED_SUCCESSFUL = "User <%s> was added to the team <%s>";
-	private static final String USER_REMOVED_SUCCESSFUL = "User <%s> was  removed from the team <%s>";
-	private static final String USER_NOT_IN_TEAM = "User <%s> is not in this team <%s>";
 	private static final String BOARD_ALREADY_IN_TEAM = "Board <%s> already in team <%s>";
 	private static final String BOARD_ADDED_SUCCESSFUL = "Board <%s> was added to the team <%s>";
-	private static final String BOARD_REMOVED_SUCCESSFUL = "Board <%s> was removed from the team <%s>";
-	private static final String BOARD_NOT_IN_TEAM = "Board <%s> is not in this team <%s>";
 	private static final String CONTAIN_USERS_AMOUNT = "It has (%s) users";
 	private static final String CONTAIN_BOARDS_AMOUNT = "It contains (%s) boards";
 
@@ -74,30 +70,12 @@ public class TeamImpl implements Team {
 	}
 
 	@Override
-	public void removeUser(User user) {
-		if (getUsers().stream().noneMatch(user1 -> user1.getName().equalsIgnoreCase(user.getName()))) {
-			throw new IllegalArgumentException(format(USER_NOT_IN_TEAM, user.getName(), this.getName()));
-		}
-		this.users.remove(user);
-		this.activityHistory.add(new HistoryImpl(format(USER_REMOVED_SUCCESSFUL, user.getName(), this.getName())));
-	}
-
-	@Override
 	public void addBoard(Board board) {
 		if (getBoards().stream().anyMatch(board1 -> board1.getName().equalsIgnoreCase(board.getName()))) {
 			throw new IllegalArgumentException(format(BOARD_ALREADY_IN_TEAM, board.getName(), this.getName()));
 		}
 		this.boards.add(board);
 		this.activityHistory.add(new HistoryImpl(format(BOARD_ADDED_SUCCESSFUL, board.getName(), this.getName())));
-	}
-
-	@Override
-	public void removeBoard(Board board) {
-		if (getBoards().stream().noneMatch(board1 -> board1.getName().equalsIgnoreCase(board.getName()))) {
-			throw new IllegalArgumentException(format(BOARD_NOT_IN_TEAM, board.getName(), this.getName()));
-		}
-		this.boards.remove(board);
-		this.activityHistory.add(new HistoryImpl(format(BOARD_REMOVED_SUCCESSFUL, board.getName(), this.getName())));
 	}
 
 	@Override

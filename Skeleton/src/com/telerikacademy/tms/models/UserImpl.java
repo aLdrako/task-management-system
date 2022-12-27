@@ -31,7 +31,6 @@ public class UserImpl implements User {
 	private final List<Task> tasks;
 	private final List<History> activityHistory;
 
-
 	public UserImpl(String name) {
 		setName(name);
 		this.tasks = new ArrayList<>();
@@ -57,7 +56,6 @@ public class UserImpl implements User {
 		this.name = name;
 	}
 
-
 	@Override
 	public void assignTask(Task task) {
 		if (getTasks().stream().anyMatch(task1 -> task1.getID() == task.getID())) {
@@ -81,13 +79,11 @@ public class UserImpl implements User {
 		this.activityHistory.add(new HistoryImpl(format(COMMENT_ADDED_TO_TASK_SUCCESSFUL, task.getID())));
 	}
 
-
 	@Override
 	public String toString() {
 		return this.getClass().getInterfaces()[0].getSimpleName() +
 				format(CONTAIN_TASKS_AMOUNT, this.getName(), this.getTasks().size()) + System.lineSeparator() +
 				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n"));
 	}
-
 
 }

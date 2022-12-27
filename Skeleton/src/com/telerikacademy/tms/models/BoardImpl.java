@@ -22,8 +22,6 @@ public class BoardImpl implements Board {
 	private static final String NEW_INSTANCE_MESSAGE = "Board was created.";
 	private static final String TASK_ALREADY_IN_BOARD = "Task with ID -> [%s] already in board <%s> list";
 	private static final String TASK_ADDED_SUCCESSFUL = "Task <%s> with ID -> [%s] was added to board <%s>";
-	private static final String TASK_REMOVED_SUCCESSFUL = "Task <%s> with ID -> [%s] was removed from board <%s>";
-	private static final String TASK_NOT_IN_BOARD = "Task with ID -> <%s> in not in board <%s> list";
 	private static final String CONTAIN_TASKS_AMOUNT = ": %s contains (%s) tasks";
 
 	private String name;
@@ -55,7 +53,6 @@ public class BoardImpl implements Board {
 		this.name = name;
 	}
 
-
 	@Override
 	public void addTask(Task task) {
 		if (getTasks().stream().anyMatch(task1 -> task1.getID() == task.getID())) {
@@ -64,16 +61,6 @@ public class BoardImpl implements Board {
 		this.tasks.add(task);
 		this.activityHistory.add(new HistoryImpl(format(TASK_ADDED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 	}
-
-	@Override
-	public void removeTask(Task task) {
-		if (getTasks().stream().noneMatch(task1 -> task1.getID() == task.getID())) {
-			throw new IllegalArgumentException(format(TASK_NOT_IN_BOARD, task.getID(), this.getName()));
-		}
-		this.tasks.remove(task);
-		this.activityHistory.add(new HistoryImpl(format(TASK_REMOVED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
-	}
-
 
 	@Override
 	public String toString() {

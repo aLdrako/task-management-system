@@ -76,10 +76,6 @@ public abstract class TaskBaseImpl implements Task {
 		this.description = description;
 	}
 
-	public void setTaskType(TaskType ts) {
-		taskType = ts;
-	}
-
 	private void setTitle(String title) {
 		validateInRange(title.length(), TITLE_MIN_LEN, TITLE_MAX_LEN,
 				format(TEXT_LEN_ERR, "Title", TITLE_MIN_LEN, TITLE_MAX_LEN));
@@ -90,6 +86,10 @@ public abstract class TaskBaseImpl implements Task {
 	public <T extends Status> void setStatus(T status) {
 		addChangeToHistory("Status", this.status, status);
 		this.status = status;
+	}
+
+	protected void setTaskType(TaskType ts) {
+		taskType = ts;
 	}
 
 	@Override
