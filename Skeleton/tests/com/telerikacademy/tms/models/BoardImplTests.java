@@ -76,32 +76,6 @@ public class BoardImplTests {
 	}
 
 	@Test
-	public void removeTask_Should_RemoveTaskFromList() {
-		// Arrange
-		BoardImpl board = new BoardImpl(BOARD_VALID_NAME);
-		Task task = initializeTask(1);
-
-		// Act
-		board.addTask(task);
-		board.removeTask(task);
-
-		// Assert
-		assertEquals(0, board.getTasks().size());
-	}
-
-	@Test
-	public void removeTask_Should_ThrowException_When_RemovingNonExistedTaskInList() {
-		// Arrange
-		BoardImpl board = new BoardImpl(BOARD_VALID_NAME);
-		Task task = initializeTask(1);
-		board.addTask(task);
-		Task task2 = initializeTask(2);
-
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> board.removeTask(task2));
-	}
-
-	@Test
 	public void getHistories_Should_ReturnCopyOfListTasks() {
 		// Arrange
 		BoardImpl board = new BoardImpl(BOARD_VALID_NAME);

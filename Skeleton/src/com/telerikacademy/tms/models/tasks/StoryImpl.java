@@ -7,6 +7,7 @@ import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 	private static final String STORY_UNASSIGNED = "Task is Unassigned";
@@ -19,6 +20,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 		setPriority(priority);
 		setSize(size);
 		setStatus(StoryStatus.NOTDONE);
+		setTaskType(TaskType.STORY);
 		populateHistory(new HistoryImpl(STORY_UNASSIGNED));
 	}
 

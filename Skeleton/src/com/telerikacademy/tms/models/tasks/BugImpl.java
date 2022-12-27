@@ -7,6 +7,7 @@ import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 		setPriority(priority);
 		setSeverity(severity);
 		setStatus(BugStatus.ACTIVE);
+		setTaskType(TaskType.BUG);
 		populateHistory(new HistoryImpl(BUG_UNASSIGNED));
 	}
 

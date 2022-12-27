@@ -71,7 +71,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	public Bug createBug(String title, String description, PriorityType priority, SeverityType severity) {
 		try {
 			Bug bug = new BugImpl(++nextId, title, description, priority, severity);
-			bug.setTaskType(TaskType.BUG);
 			this.tasks.add(bug);
 			return bug;
 		} catch (IllegalArgumentException e) {
@@ -84,7 +83,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	public Story createStory(String title, String description, PriorityType priority, SizeType size) {
 		try {
 			Story story = new StoryImpl(++nextId, title, description, priority, size);
-			story.setTaskType(TaskType.STORY);
 			this.tasks.add(story);
 			return story;
 		} catch (IllegalArgumentException e) {
@@ -97,7 +95,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	public Feedback createFeedback(String title, String description, Rating rating) {
 		try {
 			Feedback feedback = new FeedbackImpl(++nextId, title, description, rating);
-			feedback.setTaskType(TaskType.FEEDBACK);
 			this.tasks.add(feedback);
 			return feedback;
 		} catch (IllegalArgumentException e) {

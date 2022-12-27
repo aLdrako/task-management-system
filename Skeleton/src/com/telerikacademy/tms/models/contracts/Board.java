@@ -10,6 +10,4 @@ public interface Board extends Nameable, Historiable {
 	List<Task> getTasks();
 
 	void addTask(Task task);
-
-	void removeTask(Task task);
 }
