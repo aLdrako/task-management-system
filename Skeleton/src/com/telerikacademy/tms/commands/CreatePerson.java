@@ -9,7 +9,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 public class CreatePerson implements Command {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
+	public static final int EXPECTED_NUMBER_PARAMETERS = 1;
 	private static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. Please enter a unique name!";
 	private static final String USER_CREATED_MESSAGE = "User with a name %s was created.";
 
