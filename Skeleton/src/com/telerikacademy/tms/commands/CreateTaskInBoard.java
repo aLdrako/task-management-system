@@ -20,7 +20,7 @@ public class CreateTaskInBoard implements Command {
 	public static final int EXPECTED_MIN_NUMBER_PARAMETERS = 6;
 	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 7;
 	public static final String INVALID_PARAMETER_COUNT = "Invalid parameter count";
-	public static final String TASK_CREATED_SUCCESSFULLY = "Task '%s' with ID [%d] has been created in board '%s'!";
+	public static final String TASK_CREATED_SUCCESSFULLY = "Task <%s> with ID -> [%d] has been created in board <%s>!";
 	private final TaskManagementRepository repository;
 
 	public CreateTaskInBoard(TaskManagementRepository repository) {

@@ -21,9 +21,9 @@ public class UserImpl implements User {
 			USER_MAX_LEN);
 	private static final String NEW_INSTANCE_MESSAGE = "User was created.";
 	private static final String TASK_ALREADY_ASSIGNED = "Task with ID -> [%s] already assigned to <%s>";
-	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task <%s> assigned to <%s>";
-	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task <%s> unassigned from <%s>";
-	private static final String TASK_NOT_ASSIGNED = "Task with ID -> <%s> in not assigned to <%s>";
+	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task <%s> with ID -> [%s] was assigned to <%s>";
+	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task <%s> with ID -> [%s] was unassigned from <%s>";
+	private static final String TASK_NOT_ASSIGNED = "Task with ID -> [%s] in not assigned to <%s>";
 	private static final String COMMENT_ADDED_TO_TASK_SUCCESSFUL = "Added comment to task with ID -> [%s]";
 	private static final String CONTAIN_TASKS_AMOUNT = ": %s has (%s) assigned tasks";
 
@@ -62,7 +62,7 @@ public class UserImpl implements User {
 			}
 		}
 		this.tasks.add(task);
-		this.activityHistory.add(new HistoryImpl(format(TASK_ASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_ASSIGNED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class UserImpl implements User {
 		for (Task t : getTasks()) {
 			if (t.getID() == task.getID()) {
 				this.tasks.remove(task);
-				this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
+				this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 				return;
 			}
 		}

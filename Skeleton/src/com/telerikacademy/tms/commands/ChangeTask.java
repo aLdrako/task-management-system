@@ -16,7 +16,7 @@ public class ChangeTask implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
 	private static final String INVALID_CHANGE_COMMAND = "Invalid command for change provided. Use: 'status', 'priority', 'severity', 'size' or 'rating'.";
 	private static final String WRONG_SETTING_SPECIFIED = "%s does not have '%s' setting!";
-	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
+	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID -> [%d] was changed to {%s}.";
 	private static final String STATUS = Status.class.getSimpleName();
 	private static final String PRIORITY = PriorityType.class.getSimpleName().substring(0, PriorityType.class.getSimpleName().length() - 4);
 	private static final String SEVERITY = SeverityType.class.getSimpleName().substring(0, SeverityType.class.getSimpleName().length() - 4);

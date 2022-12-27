@@ -23,12 +23,12 @@ public class TeamImpl implements Team {
 			TEAM_MAX_LEN);
 	private static final String NEW_INSTANCE_MESSAGE = "Team was created.";
 	private static final String USER_ALREADY_IN_TEAM = "User <%s> already in team <%s>";
-	private static final String USER_ADDED_SUCCESSFUL = "User <%s> added to the team <%s>";
-	private static final String USER_REMOVED_SUCCESSFUL = "User <%s> removed from the team <%s>";
+	private static final String USER_ADDED_SUCCESSFUL = "User <%s> was added to the team <%s>";
+	private static final String USER_REMOVED_SUCCESSFUL = "User <%s> was  removed from the team <%s>";
 	private static final String USER_NOT_IN_TEAM = "User <%s> is not in this team <%s>";
 	private static final String BOARD_ALREADY_IN_TEAM = "Board <%s> already in team <%s>";
-	private static final String BOARD_ADDED_SUCCESSFUL = "Board <%s> added to the team <%s>";
-	private static final String BOARD_REMOVED_SUCCESSFUL = "Board <%s> removed from the team <%s>";
+	private static final String BOARD_ADDED_SUCCESSFUL = "Board <%s> was added to the team <%s>";
+	private static final String BOARD_REMOVED_SUCCESSFUL = "Board <%s> was removed from the team <%s>";
 	private static final String BOARD_NOT_IN_TEAM = "Board <%s> is not in this team <%s>";
 	private static final String CONTAIN_USERS_AMOUNT = "It has (%s) users";
 	private static final String CONTAIN_BOARDS_AMOUNT = "It contains (%s) boards";
