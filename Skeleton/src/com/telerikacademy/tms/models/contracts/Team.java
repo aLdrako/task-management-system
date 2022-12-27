@@ -12,5 +12,7 @@ public interface Team extends Nameable, Historiable {
 
 	void addUser(User user);
 
+	void removeUser(User user);
+
 	void addBoard(Board board);
 }
