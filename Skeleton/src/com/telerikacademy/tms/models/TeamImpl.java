@@ -48,10 +48,12 @@ public class TeamImpl implements Team {
 	public String getName() {
 		return name;
 	}
+
 	@Override
 	public List<User> getUsers() {
 		return new ArrayList<>(users);
 	}
+
 	@Override
 	public List<Board> getBoards() {
 		return new ArrayList<>(boards);
@@ -99,7 +101,7 @@ public class TeamImpl implements Team {
 
 		String usersExists = this.getUsers().size() != 0 ? " -> " : "";
 		String boardsExists = this.getBoards().size() != 0 ? " -> " : "";
-		return this.getClass().getInterfaces()[0].getSimpleName() +	": " + this.getName() + System.lineSeparator() +
+		return this.getClass().getInterfaces()[0].getSimpleName() + ": " + this.getName() + System.lineSeparator() +
 				format(CONTAIN_USERS_AMOUNT, this.getUsers().size()) + usersExists +
 				this.getUsers().stream().map(Nameable::getName).collect(Collectors.joining(", ")) +
 				System.lineSeparator() +

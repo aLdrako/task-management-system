@@ -16,7 +16,7 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCo
 import static java.lang.String.format;
 
 public class UnassignTask implements Command {
-	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task with ID %s was unassigned from user %s.";
+	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task with ID -> [%s] was unassigned from user <%s>.";
 	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
 	private final TaskManagementRepository repository;
 

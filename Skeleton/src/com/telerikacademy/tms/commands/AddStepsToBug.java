@@ -15,8 +15,8 @@ import static java.lang.String.format;
 public class AddStepsToBug implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS_MIN = 2;
 	private static final int EXPECTED_NUMBER_PARAMETERS_MAX = 10;
-	private static final String STEPS_ADDED_SUCCESSFUL = "Steps to reproduce added to Bug with ID %s";
-	private static final String BUG_ALREADY_HAS_STEPS = "Bug with ID %s already has defined steps to reproduce";
+	private static final String STEPS_ADDED_SUCCESSFUL = "Steps to reproduce added to Bug with ID -> [%s]";
+	private static final String BUG_ALREADY_HAS_STEPS = "Bug with ID -> [%s] already has defined steps to reproduce";
 	private final TaskManagementRepository repository;
 
 	public AddStepsToBug(TaskManagementRepository repository) {

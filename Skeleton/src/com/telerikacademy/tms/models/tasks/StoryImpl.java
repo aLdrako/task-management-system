@@ -33,6 +33,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 	public SizeType getSize() {
 		return size;
 	}
+
 	@Override
 	public User getAssignee() {
 		return assignee;

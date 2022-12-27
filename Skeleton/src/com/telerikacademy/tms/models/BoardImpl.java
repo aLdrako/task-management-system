@@ -39,10 +39,12 @@ public class BoardImpl implements Board {
 	public String getName() {
 		return name;
 	}
+
 	@Override
 	public List<Task> getTasks() {
 		return new ArrayList<>(tasks);
 	}
+
 	@Override
 	public List<History> getHistories() {
 		return new ArrayList<>(activityHistory);

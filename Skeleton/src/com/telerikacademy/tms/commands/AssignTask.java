@@ -19,7 +19,7 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCo
 import static java.lang.String.format;
 
 public class AssignTask implements Command {
-	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task with ID %s was assigned to user %s.";
+	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task with ID -> [%s] was assigned to user <%s>.";
 	private static final String USER_NOT_FOUND_IN_TEAM = "Cannot find user in team in order to assign task";
 	private static final String TASK_ALREADY_ASSIGNED = "Task is already assigned to %s!";
 
