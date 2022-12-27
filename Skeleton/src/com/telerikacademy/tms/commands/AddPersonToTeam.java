@@ -9,13 +9,8 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 public class AddPersonToTeam implements Command {
-
-	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
-
-	public static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. Member already added!";
-	public static final String TEAM_NON_EXIST = "Team does not exist!";
-	public static final String PERSON_NOT_FOUND = "Person not found!";
-	public static final String PERSON_ADDED_TO_TEAM = "Person %s has been added to the team %s!";
+	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
+	private static final String PERSON_ADDED_TO_TEAM = "Person %s has been added to the team %s!";
 
 	private final TaskManagementRepository repository;
 
@@ -26,15 +21,23 @@ public class AddPersonToTeam implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
-		String name = parameters.get(0);
-		String team = parameters.get(1);
-		return addMemberToTeam(name, team);
+		String userName = parameters.get(0);
+		String teamName = parameters.get(1);
+		return addMemberToTeam(userName, teamName);
 	}
 
-	private String addMemberToTeam(String name, String teamName) {
-		User user = repository.findElementByName(repository.getUsers(), name);
+	private String addMemberToTeam(String userName, String teamName) {
+		User user = repository.findElementByName(repository.getUsers(), userName);
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
+
+		repository.getTeams().forEach(t -> {
+			if (t.getUsers().stream().anyMatch(u -> u.getName().equals(userName))
+					&& !t.getName().equals(teamName)) {
+				t.removeUser(user);
+			}
+		});
+
 		team.addUser(user);
-		return String.format(PERSON_ADDED_TO_TEAM, name, team.getName());
+		return String.format(PERSON_ADDED_TO_TEAM, userName, team.getName());
 	}
 }
