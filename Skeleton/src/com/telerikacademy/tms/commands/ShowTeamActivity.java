@@ -30,7 +30,8 @@ public class ShowTeamActivity implements Command {
 		Team team = repository.findElementByName(repository.getTeams(), name);
 
 		StringBuilder builder = new StringBuilder();
-		builder.append(format(ACTIVITY_HISTORY_HEADER, name, team.getClass().getSimpleName())).append(System.lineSeparator());
+		builder.append(format(ACTIVITY_HISTORY_HEADER, name,
+				team.getClass().getInterfaces()[0].getSimpleName())).append(System.lineSeparator());
 		for (History activityHistory : team.getHistories()) {
 			builder.append(activityHistory).append(System.lineSeparator());
 		}

@@ -12,7 +12,7 @@ import static java.lang.String.format;
 
 public class ShowAllTeamMembers implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 1;
-	public static final String MEMBERS_LISTED = "%s' has (%s) team members -> ";
+	public static final String MEMBERS_LISTED = "%s has (%s) team members -> ";
 	public static final String NO_MEMBERS_LISTED = "%s team has no members.";
 	private final TaskManagementRepository repository;
 

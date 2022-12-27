@@ -34,7 +34,8 @@ public class ShowBoardActivity implements Command {
 		Board board = repository.findBoardByNameInTeam(team, boardName);
 
 		StringBuilder builder = new StringBuilder();
-		builder.append(format(ACTIVITY_HISTORY_HEADER, boardName, board.getClass().getSimpleName())).append(System.lineSeparator());
+		builder.append(format(ACTIVITY_HISTORY_HEADER, boardName,
+				board.getClass().getInterfaces()[0].getSimpleName())).append(System.lineSeparator());
 		for (History activityHistory : board.getHistories()) {
 			builder.append(activityHistory).append(System.lineSeparator());
 		}

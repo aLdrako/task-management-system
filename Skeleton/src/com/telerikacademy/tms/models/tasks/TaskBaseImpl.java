@@ -19,9 +19,9 @@ public abstract class TaskBaseImpl implements Task {
 	private static final int TITLE_MAX_LEN = 50;
 	private static final int DESCRIPTION_MIN_LEN = 10;
 	private static final int DESCRIPTION_MAX_LEN = 500;
-	private static final String NEW_INSTANCE_MESSAGE = "Task with ID %s was created.";
+	private static final String NEW_INSTANCE_MESSAGE = "Task with ID -> [%s] was created.";
 	private static final String TEXT_LEN_ERR = "%s should be between %s and %s symbols.";
-	private static final String CHANGE_MESSAGE = "The %s of item with ID %d switched from '%s' to '%s'";
+	private static final String CHANGE_MESSAGE = "The '%s' of item with ID -> [%d] switched from {%s} to {%s}";
 	private static final String TASK_COMMENT_ADDED = "Comment added to task.";
 
 	private final int id;
@@ -81,7 +81,7 @@ public abstract class TaskBaseImpl implements Task {
 
 	@Override
 	public <T extends Status> void setStatus(T status) {
-		addChangeToHistory("status", this.status, status);
+		addChangeToHistory("Status", this.status, status);
 		this.status = status;
 	}
 

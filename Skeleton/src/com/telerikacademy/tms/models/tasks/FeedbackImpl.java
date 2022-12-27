@@ -20,7 +20,7 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
 	@Override
 	public void setRating(Rating rating) {
-		addChangeToHistory("rating", this.rating, rating);
+		addChangeToHistory("Rating", this.rating, rating);
 		this.rating = rating;
 	}
 

@@ -22,14 +22,14 @@ public class TeamImpl implements Team {
 			TEAM_MIN_LEN,
 			TEAM_MAX_LEN);
 	private static final String NEW_INSTANCE_MESSAGE = "Team was created.";
-	private static final String USER_ALREADY_IN_TEAM = "User %s already in team %s";
-	private static final String USER_ADDED_SUCCESSFUL = "User %s added to the team %s";
-	private static final String USER_REMOVED_SUCCESSFUL = "User %s removed from the team %s";
-	private static final String USER_NOT_IN_TEAM = "User %s is not in this team %s";
-	private static final String BOARD_ALREADY_IN_TEAM = "Board %s already in team %s";
-	private static final String BOARD_ADDED_SUCCESSFUL = "Board %s added to the team %s";
-	private static final String BOARD_REMOVED_SUCCESSFUL = "Board %s removed from the team %s";
-	private static final String BOARD_NOT_IN_TEAM = "Board %s is not in this team %s";
+	private static final String USER_ALREADY_IN_TEAM = "User <%s> already in team <%s>";
+	private static final String USER_ADDED_SUCCESSFUL = "User <%s> added to the team <%s>";
+	private static final String USER_REMOVED_SUCCESSFUL = "User <%s> removed from the team <%s>";
+	private static final String USER_NOT_IN_TEAM = "User <%s> is not in this team <%s>";
+	private static final String BOARD_ALREADY_IN_TEAM = "Board <%s> already in team <%s>";
+	private static final String BOARD_ADDED_SUCCESSFUL = "Board <%s> added to the team <%s>";
+	private static final String BOARD_REMOVED_SUCCESSFUL = "Board <%s> removed from the team <%s>";
+	private static final String BOARD_NOT_IN_TEAM = "Board <%s> is not in this team <%s>";
 	private static final String CONTAIN_USERS_AMOUNT = "It has (%s) users";
 	private static final String CONTAIN_BOARDS_AMOUNT = "It contains (%s) boards";
 
@@ -122,8 +122,7 @@ public class TeamImpl implements Team {
 
 		String usersExists = this.getUsers().size() != 0 ? " -> " : "";
 		String boardsExists = this.getBoards().size() != 0 ? " -> " : "";
-		return this.getClass().getInterfaces()[0].getSimpleName() +
-				": " + this.getName() + System.lineSeparator() +
+		return this.getClass().getInterfaces()[0].getSimpleName() +	": " + this.getName() + System.lineSeparator() +
 				format(CONTAIN_USERS_AMOUNT, this.getUsers().size()) + usersExists +
 				this.getUsers().stream().map(Nameable::getName).collect(Collectors.joining(", ")) +
 				System.lineSeparator() +
