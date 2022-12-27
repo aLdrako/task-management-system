@@ -47,6 +47,8 @@ public class CommandFactoryImpl implements CommandFactory {
 				return new ChangeBug(repository);
 			case CHANGEFEEDBACK:
 				return new ChangeFeedback(repository);
+			case CHANGETASK:
+				return new ChangeTask(repository);
 			case ASSIGNTASK:
 				return new AssignTask(repository);
 			case UNASSIGNTASK:

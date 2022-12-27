@@ -33,9 +33,6 @@ public class ShowAllPeople implements Command {
 		}
 		builder.append(System.lineSeparator());
 		builder.append(ListingHelpers.elementsToString(repository.getUsers()));
-		builder.append(System.lineSeparator());
 		return builder.toString();
 	}
-
-
 }

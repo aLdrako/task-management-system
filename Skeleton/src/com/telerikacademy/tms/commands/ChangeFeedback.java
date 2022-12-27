@@ -16,6 +16,7 @@ import static java.lang.String.format;
 public class ChangeFeedback implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
 	private static final String INVALID_CHANGE_COMMAND = "Invalid command for change provided. Use: 'status' or 'rating'.";
+	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
 	private final TaskManagementRepository repository;
 
 	public ChangeFeedback(TaskManagementRepository repository) {
@@ -26,7 +27,7 @@ public class ChangeFeedback implements Command {
 	public String execute(List<String> parameters) {
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
-		String typeOfChange = parameters.get(1);
+		String typeOfChange = parameters.get(1).toLowerCase();
 
 		return changeFeedback(parameters, id, typeOfChange);
 	}

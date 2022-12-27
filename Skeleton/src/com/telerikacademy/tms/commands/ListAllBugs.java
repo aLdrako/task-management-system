@@ -4,11 +4,8 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
-import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
-import com.telerikacademy.tms.models.tasks.enums.TaskType;
 import com.telerikacademy.tms.utils.FilterHelpers;
-import com.telerikacademy.tms.utils.ListingHelpers;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,7 +14,6 @@ import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
-import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 
 

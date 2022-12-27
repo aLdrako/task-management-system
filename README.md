@@ -127,14 +127,12 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 - ShowAllTeamBoards `{String teamName}`
 - CreateBoardInTeam `{String boardName} {String teamName}`
 - ShowBoardActivity `{String boardName} {String teamName}`
-- CreateTaskInBoard `[bug/story/feedback] {String boardName} {String teamName} {(coresponding task parameters)}`
+- CreateTaskInBoard `[bug/story/feedback](enums) {String boardName} {String teamName} {(coresponding task parameters)}`
 - AddStepsToBug `{ind id} {String steps} {String steps} ...`
 - AssignTask `{ind id} {String name}`
 - UnassignTask `{ind id} {String name}`
 - AddComment `{ind id} {String comment} {String name}`
-- ChangeStory `{ind id} [status/priority/severity] [enums]`
-- ChangeBug `{ind id} [status/priority/severity] [enums]`
-- ChangeFeedback `{ind id} [status/rating] [enums]`
+- ChangeTask `{ind id} [status/priority/severity/size/rating](enums)`
 - ShowTaskActivity `{ind id}`
 - ListAllTasks `[sortByTitle] || [filterByTitle {String title}] || [filterByTitle {String title} sortByTitle]` 
 - ListAllBugs `[sortByTitle/sortByPriority/sortBySeverity] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySeverity]` 
@@ -152,21 +150,27 @@ CreatePerson
 CreatePerson Alexa
 CreatePerson Alexa
 CreatePerson Cortana
+CreatePerson {{Marco Polo}}
 CreateTeam Cortana
 CreateTeam Hackers
 CreateTeam Developers
 CreateTeam {{Suicide Squad}}
 CreateBoardInTeam ToDos Hackers
 CreateBoardInTeam Goals {{Suicide Squad}}
-CreateTaskInBoard bug ToDos Hackers {{Glitching inteface}} {{There is a broken interface}} low major
+AddPersonToTeam Alexa {{Suicide Squad}}
+AddPersonToTeam Cortana {{Suicide Squad}}
+CreateTaskInBoard bug ToDos Hackers {{Glitching interface}} {{There is a broken interface}} low major
 CreateTaskInBoard bug ToDos Hackers {{Fatal issue}} {{Server is down}} high critical
 CreateTaskInBoard bug ToDos Hackers {{Serious issue}} {{App does not work}} medium major
+CreateTaskInBoard bug ToDos Hackers {{Serious issue}} {{App does not work}} medium large
+CreateTaskInBoard bug Ultimate Hackers {{Serious issue}} {{App does not work}} medium large
 CreateTaskInBoard story Goals {{Suicide Squad}} {{Another story}} {{Once upon a time there was a cat....}} medium small
 CreateTaskInBoard story ToDos Hackers {{Funny story}} {{Once upon a time there was a mouse....}} high medium
 CreateTaskInBoard story ToDos Hackers {{Third story}} {{Once upon a time there was a dog....}} low large
 CreateTaskInBoard feedback ToDos Hackers {{Great job here}} {{This developer is doing great}} 9
 CreateTaskInBoard feedback Goals {{Suicide Squad}} {{Doing good}} {{There is still room for improvement}} 7
 CreateTaskInBoard feedback Goals {{Suicide Squad}} {{An Impressive job}} {{Thats what I call excellent work}} 10
+CreateTaskInBoard feedback Goals {{Suicide Squad}} {{An Impressive job}} {{Thats what I call excellent work}} 11
 AddStepsToBug 1 {{First open the app}} {{Try to access the database}}
 AddStepsToBug 4 {{First open the app}} {{Try to access the database}}
 AddStepsToBug 2 {{Start the system}} {{Open the application}} {{Perform data conversion}} {{Save progress}}
@@ -183,12 +187,14 @@ UnassignTask 6 Alexa
 AssignTask 6 Cortana
 AddComment 3 {{Thank you so much for the amazing feedback}} Cortana
 AddComment 3 {{It was an easy work}} Alexa
-ChangeBug 2 status Fixed
-ChangeBug 1 priority High
-ChangeBug 3 severity Minor
-ChangeStory 6 status InProgress
-ChangeFeedback 7 status Done
-ChangeFeedback 7 rating 8
+ChangeTask 2 status Fixed
+ChangeTask 1 priority High
+ChangeTask 1 rating High
+ChangeTask 3 severity Minor
+ChangeTask 3 severity Minor
+ChangeTask 6 status InProgress
+ChangeTask 7 status Done
+ChangeTask 7 rating 8
 ShowTaskActivity 3
 ShowTaskActivity 7
 ShowAllTeams
@@ -220,26 +226,32 @@ Invalid number of arguments. Expected: 1; received: 0.
 User with a name Alexa was created.
 Duplicate name. Please enter a unique name!
 User with a name Cortana was created.
+User with a name Marco Polo was created.
 Duplicate name. Please enter a unique name!
 Team with a name Hackers was created.
 Team with a name Developers was created.
 Team with a name Suicide Squad was created.
 Board ToDos has been created in team Hackers!
 Board Goals has been created in team Suicide Squad!
-Task 'Glitching inteface' with ID [1] has been created in board 'ToDos'!
+Person Alexa has been added to the team Suicide Squad!
+Person Cortana has been added to the team Suicide Squad!
+Task 'Glitching interface' with ID [1] has been created in board 'ToDos'!
 Task 'Fatal issue' with ID [2] has been created in board 'ToDos'!
 Task 'Serious issue' with ID [3] has been created in board 'ToDos'!
+There is no value (large) in SeverityType.
+There is no Board with name 'Ultimate' in Team 'Hackers'!
 Task 'Another story' with ID [4] has been created in board 'Goals'!
 Task 'Funny story' with ID [5] has been created in board 'ToDos'!
 Task 'Third story' with ID [6] has been created in board 'ToDos'!
 Task 'Great job here' with ID [7] has been created in board 'ToDos'!
 Task 'Doing good' with ID [8] has been created in board 'Goals'!
 Task 'An Impressive job' with ID [9] has been created in board 'Goals'!
+There is no value ('11', use numbers from 1 to 10) in Rating.
 Steps to reproduce added to Bug with ID 1
 Provided task with ID 4 does not belong to Bug category!
 Steps to reproduce added to Bug with ID 2
-Person Alexa has been added to the team Suicide Squad!
-Person Cortana has been added to the team Suicide Squad!
+User <Alexa> already in team <Suicide Squad>
+User <Cortana> already in team <Suicide Squad>
 Task with ID 1 was assigned to user Alexa.
 Task with ID 5 was assigned to user Alexa.
 Task with ID 2 was assigned to user Alexa.
@@ -253,35 +265,37 @@ User Cortana added comment to task with ID 3
 User Alexa added comment to task with ID 3
 Status for Bug with ID 2 was changed to Fixed.
 Priority for Bug with ID 1 was changed to High.
+Bug does not have 'Rating' setting!
 Severity for Bug with ID 3 was changed to Minor.
+Same value passed. Nothing was changed!
 Status for Story with ID 6 was changed to InProgress.
 Status for Feedback with ID 7 was changed to Done.
 Rating for Feedback with ID 7 was changed to 8.
-<<< Bug Activity with ID -> [3] >>>
+<<< BUG Activity with ID -> [3] >>>
 === CHANGES HISTORY ===
-[26-December-2022 15:55:06] Task with ID 3 was created.
-[26-December-2022 15:55:06] Bug is unassigned
-[26-December-2022 15:55:06] Bug was assigned to: Cortana
-[26-December-2022 15:55:06] Comment added to task.
-[26-December-2022 15:55:06] Comment added to task.
-[26-December-2022 15:55:06] The severity of item with ID 3 switched from 'Major' to 'Minor'
+[27-December-2022 12:41:06] Task with ID -> [3] was created.
+[27-December-2022 12:41:06] Task is Unassigned
+[27-December-2022 12:41:06] The 'Assignee' of item with ID -> [3] switched from {Unassigned} to {Cortana}
+[27-December-2022 12:41:06] Comment added to task.
+[27-December-2022 12:41:06] Comment added to task.
+[27-December-2022 12:41:06] The 'Severity' of item with ID -> [3] switched from {Major} to {Minor}
 === COMMENTS ===
 "Thank you so much for the amazing feedback" - Cortana 
 "It was an easy work" - Alexa 
-<<< Feedback Activity with ID -> [7] >>>
+<<< FEEDBACK Activity with ID -> [7] >>>
 === CHANGES HISTORY ===
-[26-December-2022 15:55:06] Task with ID 7 was created.
-[26-December-2022 15:55:06] The status of item with ID 7 switched from 'New' to 'Done'
-[26-December-2022 15:55:06] The rating of item with ID 7 switched from '9' to '8'
+[27-December-2022 12:41:06] Task with ID -> [7] was created.
+[27-December-2022 12:41:06] The 'Status' of item with ID -> [7] switched from {New} to {Done}
+[27-December-2022 12:41:06] The 'Rating' of item with ID -> [7] switched from {9} to {8}
 === NO COMMENTS ===
 === ALL TEAMS ===
 Team: Hackers
-It has (0) users -> 
+It has (0) users
 It contains (1) boards -> ToDos
 ===============
 Team: Developers
-It has (0) users -> 
-It contains (0) boards -> 
+It has (0) users
+It contains (0) boards
 ===============
 Team: Suicide Squad
 It has (2) users -> Alexa, Cortana
@@ -289,7 +303,7 @@ It contains (1) boards -> Goals
 
 === ALL PEOPLE ===
 User: Alexa has (3) assigned tasks
-Bug: ID -> [1] 'Glitching inteface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
+Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
 	-> First open the app
 	-> Try to access the database
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Alexa
@@ -298,81 +312,70 @@ Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critic
 	-> Open the application
 	-> Perform data conversion
 	-> Save progress
-<<< Alexa's Activity History >>>
-[26-December-2022 15:55:06] User was created.
-[26-December-2022 15:55:06] Task 'Glitching inteface' assigned to Alexa
-[26-December-2022 15:55:06] Task 'Funny story' assigned to Alexa
-[26-December-2022 15:55:06] Task 'Fatal issue' assigned to Alexa
-[26-December-2022 15:55:06] Task 'Third story' assigned to Alexa
-[26-December-2022 15:55:06] Task 'Third story' unassigned from Alexa
-[26-December-2022 15:55:06] Added comment to task with ID 3
 ===============
 User: Cortana has (2) assigned tasks
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Minor | Assignee: Cortana | Steps to reproduce: Not specified
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
-<<< Cortana's Activity History >>>
-[26-December-2022 15:55:06] User was created.
-[26-December-2022 15:55:06] Task 'Serious issue' assigned to Cortana
-[26-December-2022 15:55:06] Task 'Third story' assigned to Cortana
-[26-December-2022 15:55:06] Added comment to task with ID 3
+===============
+User: Marco Polo has (0) assigned tasks
 
-Hackers's team activity:
-[26-December-2022 15:55:06] Team was created.
-[26-December-2022 15:55:06] Board ToDos added to the team Hackers
+<<< Hackers's Team Activity History >>>
+[27-December-2022 12:41:06] Team was created.
+[27-December-2022 12:41:06] Board <ToDos> added to the team <Hackers>
 
-Suicide Squad's team activity:
-[26-December-2022 15:55:06] Team was created.
-[26-December-2022 15:55:06] Board Goals added to the team Suicide Squad
-[26-December-2022 15:55:06] User Alexa added to the team Suicide Squad
-[26-December-2022 15:55:06] User Cortana added to the team Suicide Squad
+<<< Suicide Squad's Team Activity History >>>
+[27-December-2022 12:41:06] Team was created.
+[27-December-2022 12:41:06] Board <Goals> added to the team <Suicide Squad>
+[27-December-2022 12:41:06] User <Alexa> added to the team <Suicide Squad>
+[27-December-2022 12:41:06] User <Cortana> added to the team <Suicide Squad>
 
-<<< ToDos's Activity History >>>
-[26-December-2022 15:55:06] Board was created.
-===============
-[26-December-2022 15:55:06] Task Glitching inteface added to board ToDos
-===============
-[26-December-2022 15:55:06] Task Fatal issue added to board ToDos
-===============
-[26-December-2022 15:55:06] Task Serious issue added to board ToDos
-===============
-[26-December-2022 15:55:06] Task Funny story added to board ToDos
-===============
-[26-December-2022 15:55:06] Task Third story added to board ToDos
-===============
-[26-December-2022 15:55:06] Task Great job here added to board ToDos
-Cortana's user activity:
-[26-December-2022 15:55:06] User was created.
-[26-December-2022 15:55:06] Task 'Serious issue' assigned to Cortana
-[26-December-2022 15:55:06] Task 'Third story' assigned to Cortana
-[26-December-2022 15:55:06] Added comment to task with ID 3
+<<< ToDos's Board Activity History >>>
+[27-December-2022 12:41:06] Board was created.
+[27-December-2022 12:41:06] Task <Glitching interface> with ID -> [1] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Fatal issue> with ID -> [2] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Serious issue> with ID -> [3] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Funny story> with ID -> [5] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Third story> with ID -> [6] added to board <ToDos>
+[27-December-2022 12:41:06] Task <Great job here> with ID -> [7] added to board <ToDos>
 
-Suicide Squad' team members: Alexa, Cortana 
-Hackers' team boards: ToDos 
+<<< Cortana's User Activity History >>>
+[27-December-2022 12:41:06] User was created.
+[27-December-2022 12:41:06] Task <Serious issue> assigned to <Cortana>
+[27-December-2022 12:41:06] Task <Third story> assigned to <Cortana>
+[27-December-2022 12:41:06] Added comment to task with ID -> [3]
+
+Suicide Squad has (2) team members -> Alexa, Cortana 
+Hackers has (1) team boards -> ToDos 
+<<< LIST ALL FEEDBACKS>>>
 Feedback: ID -> [8] 'Doing good' | Status: New | Rating: 7
 ===============
 Feedback: ID -> [7] 'Great job here' | Status: Done | Rating: 8
 ===============
 Feedback: ID -> [9] 'An Impressive job' | Status: New | Rating: 10
+<<< LIST ALL FEEDBACKS>>>
 Feedback: ID -> [8] 'Doing good' | Status: New | Rating: 7
 ===============
 Feedback: ID -> [9] 'An Impressive job' | Status: New | Rating: 10
+<<< LIST ALL BUGS>>>
 Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critical | Assignee: Alexa | Steps to reproduce: 
 	-> Start the system
 	-> Open the application
 	-> Perform data conversion
 	-> Save progress
 ===============
-Bug: ID -> [1] 'Glitching inteface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
+Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
 	-> First open the app
 	-> Try to access the database
 ===============
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Minor | Assignee: Cortana | Steps to reproduce: Not specified
-Bug: ID -> [1] 'Glitching inteface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
+<<< LIST ALL BUGS>>>
+Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
 	-> First open the app
 	-> Try to access the database
 ===============
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Minor | Assignee: Cortana | Steps to reproduce: Not specified
-Bug: ID -> [1] 'Glitching inteface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
+<<< LIST ALL BUGS>>>
+Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
 	-> First open the app
 	-> Try to access the database
 ===============
@@ -381,13 +384,17 @@ Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critic
 	-> Open the application
 	-> Perform data conversion
 	-> Save progress
+<<< LIST ALL STORIES>>>
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Alexa
 ===============
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Unassigned
+<<< LIST ALL STORIES>>>
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
+<<< LIST ALL STORIES>>>
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
+<<< LIST ALL TASKS>>>
 Feedback: ID -> [9] 'An Impressive job' | Status: New | Rating: 10
 ===============
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Unassigned
@@ -402,7 +409,7 @@ Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critic
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Alexa
 ===============
-Bug: ID -> [1] 'Glitching inteface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
+Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: High | Severity: Major | Assignee: Alexa | Steps to reproduce: 
 	-> First open the app
 	-> Try to access the database
 ===============
@@ -411,7 +418,9 @@ Feedback: ID -> [7] 'Great job here' | Status: Done | Rating: 8
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Minor | Assignee: Cortana | Steps to reproduce: Not specified
 ===============
 Story: ID -> [6] 'Third story' | Status: InProgress | Priority: Low | Size: Large | Assignee: Cortana
+<<< LIST ALL TASKS>>>
 Feedback: ID -> [7] 'Great job here' | Status: Done | Rating: 8
+<<< LIST ALL TASKS>>>
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Unassigned
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Alexa

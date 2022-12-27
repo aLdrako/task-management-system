@@ -20,10 +20,11 @@ public class BoardImpl implements Board {
 			BOARD_MIN_LEN,
 			BOARD_MAX_LEN);
 	private static final String NEW_INSTANCE_MESSAGE = "Board was created.";
-	private static final String TASK_ALREADY_IN_BOARD = "Task with ID %s already in board %s list";
-	private static final String TASK_ADDED_SUCCESSFUL = "Task %s added to board %s";
-	private static final String TASK_REMOVED_SUCCESSFUL = "Task %s removed from board %s";
-	private static final String TASK_NOT_IN_BOARD = "Task with ID %s in not in board %s list";
+	private static final String TASK_ALREADY_IN_BOARD = "Task with ID -> [%s] already in board <%s> list";
+	private static final String TASK_ADDED_SUCCESSFUL = "Task <%s> with ID -> [%s] was added to board <%s>";
+	private static final String TASK_REMOVED_SUCCESSFUL = "Task <%s> with ID -> [%s] was removed from board <%s>";
+	private static final String TASK_NOT_IN_BOARD = "Task with ID -> <%s> in not in board <%s> list";
+	private static final String CONTAIN_TASKS_AMOUNT = ": %s contains (%s) tasks";
 
 	private String name;
 	private final List<Task> tasks;
@@ -61,7 +62,7 @@ public class BoardImpl implements Board {
 			throw new IllegalArgumentException(format(TASK_ALREADY_IN_BOARD, task.getID(), this.getName()));
 		}
 		this.tasks.add(task);
-		this.activityHistory.add(new HistoryImpl(format(TASK_ADDED_SUCCESSFUL, task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_ADDED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 	}
 
 	@Override
@@ -76,13 +77,8 @@ public class BoardImpl implements Board {
 
 	@Override
 	public String toString() {
-		String newLine = this.getTasks().size() == 0 ? "" : "\n";
 		return this.getClass().getInterfaces()[0].getSimpleName() +
-				": " + this.getName() +
-				" contains (" + this.getTasks().size() +
-				") tasks" + System.lineSeparator() +
-				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
-				newLine + "<<< " + this.getName() + "'s Activity History >>>" + System.lineSeparator() +
-				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
+				format(CONTAIN_TASKS_AMOUNT, this.getName(), this.getTasks().size()) + System.lineSeparator() +
+				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n"));
 	}
 }

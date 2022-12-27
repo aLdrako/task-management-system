@@ -20,11 +20,12 @@ public class UserImpl implements User {
 			USER_MIN_LEN,
 			USER_MAX_LEN);
 	private static final String NEW_INSTANCE_MESSAGE = "User was created.";
-	private static final String TASK_ALREADY_ASSIGNED = "Task with ID %s already assigned to %s";
-	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task '%s' assigned to %s";
-	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task '%s' unassigned from %s";
-	private static final String TASK_NOT_ASSIGNED = "Task with ID %s in not assigned to %s";
-	private static final String COMMENT_ADDED_TO_TASK_SUCCESSFUL = "Added comment to task with ID %s";
+	private static final String TASK_ALREADY_ASSIGNED = "Task with ID -> [%s] already assigned to <%s>";
+	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task <%s> with ID -> [%s] was assigned to <%s>";
+	private static final String TASK_UNASSIGNED_SUCCESSFUL = "Task <%s> with ID -> [%s] was unassigned from <%s>";
+	private static final String TASK_NOT_ASSIGNED = "Task with ID -> [%s] in not assigned to <%s>";
+	private static final String COMMENT_ADDED_TO_TASK_SUCCESSFUL = "Added comment to task with ID -> [%s]";
+	private static final String CONTAIN_TASKS_AMOUNT = ": %s has (%s) assigned tasks";
 
 	private String name;
 	private final List<Task> tasks;
@@ -63,7 +64,7 @@ public class UserImpl implements User {
 			throw new IllegalArgumentException(format(TASK_ALREADY_ASSIGNED, task.getID(), this.getName()));
 		}
 		this.tasks.add(task);
-		this.activityHistory.add(new HistoryImpl(format(TASK_ASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_ASSIGNED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class UserImpl implements User {
 			throw new IllegalArgumentException(format(TASK_NOT_ASSIGNED, task.getID(), this.getName()));
 		}
 		this.tasks.remove(task);
-		this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_UNASSIGNED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 	}
 
 	@Override
@@ -83,14 +84,9 @@ public class UserImpl implements User {
 
 	@Override
 	public String toString() {
-		String newLine = this.getTasks().size() == 0 ? "" : "\n";
 		return this.getClass().getInterfaces()[0].getSimpleName() +
-				": " + this.getName() +
-				" has (" + this.getTasks().size() +
-				") assigned tasks" + System.lineSeparator() +
-				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n")) +
-				newLine + "<<< " + this.getName() + "'s Activity History >>>" + System.lineSeparator() +
-				this.getHistories().stream().map(History::toString).collect(Collectors.joining("\n"));
+				format(CONTAIN_TASKS_AMOUNT, this.getName(), this.getTasks().size()) + System.lineSeparator() +
+				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n"));
 	}
 
 
