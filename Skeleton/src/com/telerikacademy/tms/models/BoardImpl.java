@@ -71,7 +71,7 @@ public class BoardImpl implements Board {
 			throw new IllegalArgumentException(format(TASK_NOT_IN_BOARD, task.getID(), this.getName()));
 		}
 		this.tasks.remove(task);
-		this.activityHistory.add(new HistoryImpl(format(TASK_REMOVED_SUCCESSFUL, task.getTitle(), this.getName())));
+		this.activityHistory.add(new HistoryImpl(format(TASK_REMOVED_SUCCESSFUL, task.getTitle(), task.getID(), this.getName())));
 	}
 
 
