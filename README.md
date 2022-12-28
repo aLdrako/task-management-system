@@ -210,7 +210,6 @@ assigntask 6 Alexa
 assigntask 1 jimmy
 assigntask 2 jimmy
 assigntask 3 jimmy
-assigntask 7 jimmy
 assigntask 9 jimmy
 showpersonactivity alexa
 showboardactivity Todos Hackers
@@ -238,6 +237,7 @@ ListAllStories filterByStatusAndAssignee InProgress Cortana sortByTitle
 ListAllTasks sortByTitle
 ListAllTasks filterByTitle {{Great job}}
 ListAllTasks filterByTitle story sortByTitle
+ListAllBugs filterByStatusAndAssignee Fixed Jimmy sortByPriority
 
 ```
 
@@ -261,18 +261,18 @@ Person <Alexa> has been added to the team <Suicide Squad>!
 Person <Cortana> has been added to the team <Suicide Squad>!
 User <Cortana> already in team <Suicide Squad>
 Person <Jimmy> has been added to the team <Hackers>!
-<<< <Hackers> Board ToDos's Activity History >>>
-[28-December-2022 19:41:29] Board was created.
-<<< <Suicide Squad> Board ToDos's Activity History >>>
-[28-December-2022 19:41:29] Board was created.
-<<< Alexa's User Activity History >>>
-[28-December-2022 19:41:29] User was created.
-[28-December-2022 19:41:29] User was added to team <Suicide Squad>
-<<< Marco Polo's User Activity History >>>
-[28-December-2022 19:41:29] User was created.
-<<< Cortana's User Activity History >>>
-[28-December-2022 19:41:29] User was created.
-[28-December-2022 19:41:29] User was added to team <Suicide Squad>
+<<< <Hackers> Board's ToDos ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] Board was created.
+<<< <Suicide Squad> Board's ToDos ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] Board was created.
+<<< Alexa User's ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] User was created.
+[28-December-2022 21:11:37] User was added to team <Suicide Squad>
+<<< Marco Polo User's ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] User was created.
+<<< Cortana User's ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] User was created.
+[28-December-2022 21:11:37] User was added to team <Suicide Squad>
 === ALL TEAMS ===
 Team: Hackers
 It has (1) users -> Jimmy
@@ -297,7 +297,8 @@ No task with ID -> 1
 Task <Glitching interface> with ID -> [1] has been created in board <ToDos>!
 Task <Fatal issue> with ID -> [2] has been created in board <ToDos>!
 Task <Serious issue> with ID -> [3] has been created in board <ToDos>!
-<<< LIST ALL BUGS >>>
+LIST ALL BUGS 
+	-> FilterByStatus: "Active"  
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: Not specified
 ===============
 Bug: ID -> [2] 'Fatal issue' | Status: Active | Priority: High | Severity: Critical | Assignee: Unassigned | Steps to reproduce: Not specified
@@ -305,7 +306,8 @@ Bug: ID -> [2] 'Fatal issue' | Status: Active | Priority: High | Severity: Criti
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Unassigned | Steps to reproduce: Not specified
 Status for Bug with ID 2 was changed to Fixed.
 Invalid number of arguments. Expected: 3; received: 1.
-<<< LIST ALL BUGS >>>
+LIST ALL BUGS 
+	-> FilterByStatus: "Active"  
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: Not specified
 ===============
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Unassigned | Steps to reproduce: Not specified
@@ -316,29 +318,34 @@ Task <Another story> with ID -> [4] has been created in board <Goals>!
 No <Story> with ID -> 6
 Task <Funny story> with ID -> [5] has been created in board <ToDos>!
 Task <Third story> with ID -> [6] has been created in board <ToDos>!
-<<< LIST ALL STORIES >>>
+LIST ALL STORIES  
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Unassigned
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Unassigned
 ===============
 Story: ID -> [6] 'Third story' | Status: Not Done | Priority: Low | Size: Large | Assignee: Unassigned
 You can't have arguments after 'SortByTitle'.If you wish to filter the list, you need to do it before you sort
-<<< LIST ALL STORIES >>>
+LIST ALL STORIES 
+	-> FilterByStatus: "InProgress" 
+	-> SortBySize  
 === EMPTY LIST ===
 Task <Great job here> with ID -> [7] has been created in board <ToDos>!
 Task <Doing good> with ID -> [8] has been created in board <Goals>!
 Task <An Impressive job> with ID -> [9] has been created in board <Goals>!
-<<< LIST ALL FEEDBACKS >>>
+LIST ALL FEEDBACKS  
 Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
 ===============
 Feedback: ID -> [8] 'Doing good' | Status: New | Rating: 7
 ===============
 Feedback: ID -> [9] 'An Impressive job' | Status: New | Rating: 10
-<<< LIST ALL FEEDBACKS >>>
+LIST ALL FEEDBACKS 
+	-> FilterByStatus: "Unscheduled"  
 === EMPTY LIST ===
 Status for Feedback with ID 8 was changed to Unscheduled.
 Status for Feedback with ID 9 was changed to Unscheduled.
-<<< LIST ALL FEEDBACKS >>>
+LIST ALL FEEDBACKS 
+	-> FilterByStatus: "Unscheduled" 
+	-> SortByRating  
 Feedback: ID -> [9] 'An Impressive job' | Status: Unscheduled | Rating: 10
 ===============
 Feedback: ID -> [8] 'Doing good' | Status: Unscheduled | Rating: 7
@@ -354,36 +361,35 @@ Task is already assigned to Cortana!
 Task with ID -> [1] was assigned to user <jimmy>.
 Task with ID -> [2] was assigned to user <jimmy>.
 Task with ID -> [3] was assigned to user <jimmy>.
-No <Assignable task> with ID -> 7
 No <Assignable task> with ID -> 9
-<<< Alexa's User Activity History >>>
-[28-December-2022 19:41:29] User was created.
-[28-December-2022 19:41:29] User was added to team <Suicide Squad>
-[28-December-2022 19:41:29] Task 'Another story' with ID -> [4] was assigned to <Alexa>
-<<< <Hackers> Board ToDos's Activity History >>>
-[28-December-2022 19:41:29] Board was created.
-[28-December-2022 19:41:29] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
-[28-December-2022 19:41:29] Task 'Fatal issue' with ID -> [2] was added to board <ToDos>
-[28-December-2022 19:41:29] Task 'Serious issue' with ID -> [3] was added to board <ToDos>
-[28-December-2022 19:41:29] Task 'Funny story' with ID -> [5] was added to board <ToDos>
-[28-December-2022 19:41:29] Task 'Great job here' with ID -> [7] was added to board <ToDos>
-<<< <Suicide Squad> Board ToDos's Activity History >>>
-[28-December-2022 19:41:29] Board was created.
-[28-December-2022 19:41:29] Task 'Third story' with ID -> [6] was added to board <ToDos>
-<<< BUG Activity with ID -> [2] >>>
+<<< Alexa User's ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] User was created.
+[28-December-2022 21:11:37] User was added to team <Suicide Squad>
+[28-December-2022 21:11:37] Task 'Another story' with ID -> [4] was assigned to <Alexa>
+<<< <Hackers> Board's ToDos ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] Board was created.
+[28-December-2022 21:11:37] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
+[28-December-2022 21:11:37] Task 'Fatal issue' with ID -> [2] was added to board <ToDos>
+[28-December-2022 21:11:37] Task 'Serious issue' with ID -> [3] was added to board <ToDos>
+[28-December-2022 21:11:37] Task 'Funny story' with ID -> [5] was added to board <ToDos>
+[28-December-2022 21:11:37] Task 'Great job here' with ID -> [7] was added to board <ToDos>
+<<< <Suicide Squad> Board's ToDos ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] Board was created.
+[28-December-2022 21:11:37] Task 'Third story' with ID -> [6] was added to board <ToDos>
+<<< Bug ACTIVITY with ID -> [2] >>>
 === CHANGES HISTORY ===
-[28-December-2022 19:41:29] Task with ID -> [2] was created.
-[28-December-2022 19:41:29] Task is Unassigned
-[28-December-2022 19:41:29] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
-[28-December-2022 19:41:29] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
+[28-December-2022 21:11:37] Task with ID -> [2] was created.
+[28-December-2022 21:11:37] Task is Unassigned
+[28-December-2022 21:11:37] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
+[28-December-2022 21:11:37] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
 === NO COMMENTS ===
 User <Marco Polo> added comment to task with ID -> [1]
-<<< BUG Activity with ID -> [1] >>>
+<<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[28-December-2022 19:41:29] Task with ID -> [1] was created.
-[28-December-2022 19:41:29] Task is Unassigned
-[28-December-2022 19:41:29] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[28-December-2022 19:41:29] Comment added to task.
+[28-December-2022 21:11:37] Task with ID -> [1] was created.
+[28-December-2022 21:11:37] Task is Unassigned
+[28-December-2022 21:11:37] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[28-December-2022 21:11:37] Comment added to task.
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 Task with ID -> [1] was unassigned from user <Jimmy>.
@@ -414,37 +420,41 @@ User: Jimmy has (2) assigned tasks
 Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: Not specified
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: Not specified
 Steps to reproduce added to Bug with ID -> [1]
-<<< BUG Activity with ID -> [1] >>>
+<<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[28-December-2022 19:41:29] Task with ID -> [1] was created.
-[28-December-2022 19:41:29] Task is Unassigned
-[28-December-2022 19:41:29] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[28-December-2022 19:41:29] Comment added to task.
-[28-December-2022 19:41:29] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
-[28-December-2022 19:41:29] Added steps to reproduce: '1. You have to open the interface'
-[28-December-2022 19:41:29] Added steps to reproduce: '2. You will understand what I mean'
+[28-December-2022 21:11:37] Task with ID -> [1] was created.
+[28-December-2022 21:11:37] Task is Unassigned
+[28-December-2022 21:11:37] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[28-December-2022 21:11:37] Comment added to task.
+[28-December-2022 21:11:37] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
+[28-December-2022 21:11:37] Added steps to reproduce: '1. You have to open the interface'
+[28-December-2022 21:11:37] Added steps to reproduce: '2. You will understand what I mean'
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
-<<< Hackers's Team Activity History >>>
-[28-December-2022 19:41:29] Team was created.
-[28-December-2022 19:41:29] Board <ToDos> was added to the team <Hackers>
-[28-December-2022 19:41:29] User <Jimmy> was added to the team <Hackers>
-<<< Jimmy's User Activity History >>>
-[28-December-2022 19:41:29] User was created.
-[28-December-2022 19:41:29] User was added to team <Hackers>
-[28-December-2022 19:41:29] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
-[28-December-2022 19:41:29] Task 'Fatal issue' with ID -> [2] was assigned to <Jimmy>
-[28-December-2022 19:41:29] Task 'Serious issue' with ID -> [3] was assigned to <Jimmy>
-[28-December-2022 19:41:29] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
-<<< LIST ALL FEEDBACKS >>>
+<<< Hackers Team's ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] Team was created.
+[28-December-2022 21:11:37] Board <ToDos> was added to the team <Hackers>
+[28-December-2022 21:11:37] User <Jimmy> was added to the team <Hackers>
+<<< Jimmy User's ACTIVITY HISTORY >>>
+[28-December-2022 21:11:37] User was created.
+[28-December-2022 21:11:37] User was added to team <Hackers>
+[28-December-2022 21:11:37] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
+[28-December-2022 21:11:37] Task 'Fatal issue' with ID -> [2] was assigned to <Jimmy>
+[28-December-2022 21:11:37] Task 'Serious issue' with ID -> [3] was assigned to <Jimmy>
+[28-December-2022 21:11:37] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
+LIST ALL FEEDBACKS 
+	-> sortByRating  
 Feedback: ID -> [9] 'An Impressive job' | Status: Unscheduled | Rating: 10
 ===============
 Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
 ===============
 Feedback: ID -> [8] 'Doing good' | Status: Unscheduled | Rating: 7
-<<< LIST ALL FEEDBACKS >>>
+LIST ALL FEEDBACKS 
+	-> filterByStatus: "New" 
+	-> sortByRating  
 Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
-<<< LIST ALL BUGS >>>
+LIST ALL BUGS 
+	-> sortBySeverity  
 Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: Not specified
 ===============
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: 
@@ -452,25 +462,35 @@ Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity
 	-> 2. You will understand what I mean
 ===============
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: Not specified
-<<< LIST ALL BUGS >>>
+LIST ALL BUGS 
+	-> filterByStatus: "Active" 
+	-> sortByTitle  
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: 
 	-> 1. You have to open the interface
 	-> 2. You will understand what I mean
 ===============
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: Not specified
-<<< LIST ALL BUGS >>>
+LIST ALL BUGS 
+	-> filterByAssignee: "Alexa" 
+	-> sortByPriority  
 === EMPTY LIST ===
-<<< LIST ALL STORIES >>>
+LIST ALL STORIES 
+	-> sortBySize  
 Story: ID -> [6] 'Third story' | Status: Not Done | Priority: Low | Size: Large | Assignee: Cortana
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Unassigned
 ===============
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Alexa
-<<< LIST ALL STORIES >>>
+LIST ALL STORIES 
+	-> filterByStatus: "InProgress" 
+	-> sortByTitle  
 === EMPTY LIST ===
-<<< LIST ALL STORIES >>>
+LIST ALL STORIES 
+	-> filterByStatusAndAssignee: "InProgress" "Cortana" 
+	-> sortByTitle  
 === EMPTY LIST ===
-<<< LIST ALL TASKS >>>
+LIST ALL TASKS 
+	-> sortByTitle  
 Feedback: ID -> [9] 'An Impressive job' | Status: Unscheduled | Rating: 10
 ===============
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Alexa
@@ -490,13 +510,20 @@ Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
 Bug: ID -> [3] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: Not specified
 ===============
 Story: ID -> [6] 'Third story' | Status: Not Done | Priority: Low | Size: Large | Assignee: Cortana
-<<< LIST ALL TASKS >>>
+LIST ALL TASKS 
+	-> filterByTitle: "Great job"  
 Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
-<<< LIST ALL TASKS >>>
+LIST ALL TASKS 
+	-> filterByTitle: "story" 
+	-> sortByTitle  
 Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: Small | Assignee: Alexa
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Unassigned
 ===============
 Story: ID -> [6] 'Third story' | Status: Not Done | Priority: Low | Size: Large | Assignee: Cortana
+LIST ALL BUGS 
+	-> filterByStatusAndAssignee: "Fixed" "Jimmy" 
+	-> sortByPriority  
+Bug: ID -> [2] 'Fatal issue' | Status: Fixed | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: Not specified
 
 ```
