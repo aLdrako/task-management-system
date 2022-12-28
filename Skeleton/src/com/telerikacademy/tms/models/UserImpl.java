@@ -2,6 +2,7 @@ package com.telerikacademy.tms.models;
 
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.compositions.contracts.History;
+import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
@@ -79,6 +80,10 @@ public class UserImpl implements User {
 	@Override
 	public void addCommentActivity(Task task) {
 		this.activityHistory.add(new HistoryImpl(format(COMMENT_ADDED_TO_TASK_SUCCESSFUL, task.getID())));
+	}
+	@Override
+	public void populateHistoryWhenAddingToTeam(Team team) {
+		this.activityHistory.add(new HistoryImpl(format("User was added to team <%s>", team.getName())));
 	}
 
 	@Override

@@ -4,12 +4,10 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
-import com.telerikacademy.tms.models.TeamImpl;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
-import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.List;
 

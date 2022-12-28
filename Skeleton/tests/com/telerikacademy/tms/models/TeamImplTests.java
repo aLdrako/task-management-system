@@ -87,32 +87,6 @@ public class TeamImplTests {
 	}
 
 	@Test
-	public void removeUser_Should_ThrowException_When_RemovingNonExistedUserInList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
-		User user2 = new UserImpl(USER_VALID_NAME + " ");
-		team.addUser(user);
-
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> team.removeUser(user2));
-	}
-
-	@Test
-	public void removeUser_Should_RemoveUserFromList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
-		team.addUser(user);
-
-		// Act
-		team.removeUser(user);
-
-		// Assert
-		assertEquals(0, team.getUsers().size());
-	}
-
-	@Test
 	public void addBoard_Should_AddBoardToList() {
 		// Arrange
 		Team team = new TeamImpl(TEAM_VALID_NAME);

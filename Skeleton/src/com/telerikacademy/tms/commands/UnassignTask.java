@@ -43,6 +43,7 @@ public class UnassignTask implements Command {
 				throw new InvalidUserInputException(format(TASK_ALREADY_UNASSIGNED, assignableTask.getID()));
 			}
 			previousAssignee = assignableTask.getAssignee();
+			previousAssignee.unAssignTask(assignableTask);
 			assignableTask.setAssignee(new UserImpl("Unassigned"));
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Assignable.class.getSimpleName()));

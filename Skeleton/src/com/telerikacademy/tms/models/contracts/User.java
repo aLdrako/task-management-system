@@ -14,4 +14,6 @@ public interface User extends Nameable, Historiable {
 	void unAssignTask(Task task);
 
 	void addCommentActivity(Task task);
+
+	void populateHistoryWhenAddingToTeam(Team team);
 }

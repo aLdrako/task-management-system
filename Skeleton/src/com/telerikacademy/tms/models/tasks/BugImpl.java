@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.String.format;
+
 public class BugImpl extends TaskBaseImpl implements Bug {
 	private static final String BUG_UNASSIGNED = "Task is Unassigned";
+	public static final String ADDED_STEPS_TO_REPRODUCE_BUG = "Added steps to reproduce: '%s'";
 	private final List<String> steps = new ArrayList<>();
 	private PriorityType priority;
 	private SeverityType severity;
@@ -36,6 +39,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public void addStep(String step) {
+		populateHistory(new HistoryImpl(format(ADDED_STEPS_TO_REPRODUCE_BUG, step)));
 		this.steps.add(step);
 	}
 

@@ -70,16 +70,8 @@ public class TeamImpl implements Team {
 			throw new IllegalArgumentException(format(USER_ALREADY_IN_TEAM, user.getName(), this.getName()));
 		}
 		this.users.add(user);
+		user.populateHistoryWhenAddingToTeam(this);
 		this.activityHistory.add(new HistoryImpl(format(USER_ADDED_SUCCESSFUL, user.getName(), this.getName())));
-	}
-
-	@Override
-	public void removeUser(User user) {
-		if (getUsers().stream().noneMatch(user1 -> user1.getName().equalsIgnoreCase(user.getName()))) {
-			throw new IllegalArgumentException(format(USER_NOT_IN_TEAM, user.getName(), this.getName()));
-		}
-		this.users.remove(user);
-		this.activityHistory.add(new HistoryImpl(format(USER_REMOVED_SUCCESSFUL, user.getName(), this.getName())));
 	}
 
 	@Override
