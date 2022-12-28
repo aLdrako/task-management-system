@@ -5,7 +5,10 @@ import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
+import static java.lang.String.format;
+
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
+	private static final String FEEDBACK_TO_STRING = "%s | Rating: %s";
 	private Rating rating;
 
 	public FeedbackImpl(int id, String title, String description, Rating rating) {
@@ -28,6 +31,6 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
 	@Override
 	public String toString() {
-		return super.toString() + " | Rating: " + this.getRating();
+		return format(FEEDBACK_TO_STRING, super.toString(), this.getRating());
 	}
 }

@@ -9,6 +9,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ListingHelpers.ACTIVITY_HISTORY_HEADER;
+import static com.telerikacademy.tms.utils.ListingHelpers.activityListing;
 import static java.lang.String.format;
 
 public class ShowTeamActivity implements Command {
@@ -29,12 +30,9 @@ public class ShowTeamActivity implements Command {
 	private String showTeamActivity(String name) {
 		Team team = repository.findElementByName(repository.getTeams(), name);
 
-		StringBuilder builder = new StringBuilder();
-		builder.append(format(ACTIVITY_HISTORY_HEADER, name,
-				team.getClass().getInterfaces()[0].getSimpleName())).append(System.lineSeparator());
-		for (History activityHistory : team.getHistories()) {
-			builder.append(activityHistory).append(System.lineSeparator());
-		}
-		return builder.toString();
+		return format(ACTIVITY_HISTORY_HEADER, team.getName(),
+				team.getClass().getInterfaces()[0].getSimpleName()) +
+				System.lineSeparator() +
+				activityListing(team.getHistories());
 	}
 }

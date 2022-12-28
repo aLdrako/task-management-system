@@ -17,6 +17,12 @@ public class ListingHelpers {
 				.collect(Collectors.joining("\n===============\n"));
 	}
 
+	public static <T> String activityListing(List<T> elements) {
+		return elements.stream()
+				.map(Object::toString)
+				.collect(Collectors.joining("\n"));
+	}
+
 	public static String listingCommandsSubHeader(List<String> parameters) {
 		return parameters.stream()
 				.reduce("", (acc, comb) -> {

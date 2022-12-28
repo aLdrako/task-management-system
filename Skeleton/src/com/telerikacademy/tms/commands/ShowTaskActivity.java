@@ -5,8 +5,8 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static com.telerikacademy.tms.utils.ListingHelpers.activityListing;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseInt;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
 import static java.lang.String.format;
@@ -40,9 +40,7 @@ public class ShowTaskActivity implements Command {
 		String anyComments = task.getComments().size() == 0 ? NO_COMMENTS : COMMENTS;
 
 		return format(TASK_ACTIVITY, task.getTaskType().toString().toUpperCase(), task.getID()) +
-				anyHistories +
-				task.getHistories().stream().map(Object::toString).collect(Collectors.joining("\n")) +
-				anyComments +
-				task.getComments().stream().map(Object::toString).collect(Collectors.joining("\n"));
+				anyHistories + activityListing(task.getHistories()) +
+				anyComments + activityListing(task.getComments());
 	}
 }

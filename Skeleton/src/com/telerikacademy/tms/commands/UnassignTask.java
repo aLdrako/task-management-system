@@ -2,7 +2,6 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.exceptions.ElementNotFoundException;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.contracts.User;
@@ -10,7 +9,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Assignable;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.utils.ParsingHelpers.INVALID_TASK_ID_IN_CATEGORY;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseInt;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsCount;
 import static java.lang.String.format;

@@ -24,9 +24,9 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
-	private static final String NO_RECORD_ID_SPECIFIC_TASK = "No <%s> with ID %d";
-	private static final String NO_RECORD_ID = "No task with ID %d";
-	private final static String NO_SUCH_ELEMENT = "There is no User or Team with name %s!";
+	private static final String NO_RECORD_ID_SPECIFIC_TASK = "No <%s> with ID -> %d";
+	private static final String NO_RECORD_ID = "No task with ID -> %d";
+	private final static String NO_SUCH_ELEMENT = "There is no User/Team with name %s!";
 	private final static String NO_SUCH_BOARD_IN_TEAM = "There is no Board with name '%s' in Team '%s'!";
 	private int nextId;
 
@@ -155,6 +155,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(format(NO_RECORD_ID_SPECIFIC_TASK, typeType, id)));
 	}
+
 	@Override
 	public <T extends Task> T findTaskById(List<T> elements, int id) {
 		return elements.stream()
@@ -162,6 +163,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 				.findFirst()
 				.orElseThrow(() -> new ElementNotFoundException(format(NO_RECORD_ID, id)));
 	}
+
 	@Override
 	public Board findBoardByTask(Task task) {
 		return getBoards().stream()
@@ -169,6 +171,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 				.findFirst()
 				.orElseThrow(InvalidUserInputException::new);
 	}
+
 	@Override
 	public Team findTeamByBoard(Board board) {
 		return getTeams().stream()

@@ -3,10 +3,8 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
-import com.telerikacademy.tms.models.tasks.contracts.Status;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
-import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
 import com.telerikacademy.tms.utils.ListingHelpers;
@@ -83,11 +81,10 @@ public class ListTasksWithAssignee implements Command {
 		List<Task> result;
 		try {
 			result = filterByStatus(statusValue, tasks, BugStatus.class);
-		}catch (Exception e)
-		{
-			try{
+		} catch (Exception e) {
+			try {
 				result = filterByStatus(statusValue, tasks, StoryStatus.class);
-			}catch (Exception a){
+			} catch (Exception a) {
 
 				throw new IllegalArgumentException(String.format(UNKNOWN_STATUS_PARAMETER, statusValue));
 			}

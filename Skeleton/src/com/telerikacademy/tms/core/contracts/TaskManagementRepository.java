@@ -41,12 +41,15 @@ public interface TaskManagementRepository {
 	Feedback createFeedback(String title, String description, Rating rating);
 
 	<T extends Task> T findTaskById(List<T> elements, int id);
+
 	<T extends Task> T findTaskById(List<T> elements, int id, String type);
 
 	<T extends Nameable> T findElementByName(List<T> elements, String name);
 
 	Board findBoardByNameInTeam(Team team, String name);
+
 	Board findBoardByTask(Task task);
+
 	Team findTeamByBoard(Board board);
 
 	boolean isNameUnique(String name);

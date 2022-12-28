@@ -81,6 +81,7 @@ public class UserImpl implements User {
 	public void addCommentActivity(Task task) {
 		this.activityHistory.add(new HistoryImpl(format(COMMENT_ADDED_TO_TASK_SUCCESSFUL, task.getID())));
 	}
+
 	@Override
 	public void populateHistoryWhenAddingToTeam(Team team) {
 		this.activityHistory.add(new HistoryImpl(format("User was added to team <%s>", team.getName())));
@@ -88,8 +89,9 @@ public class UserImpl implements User {
 
 	@Override
 	public String toString() {
+		String hasTasks = this.getTasks().size() != 0 ? System.lineSeparator() : "";
 		return this.getClass().getInterfaces()[0].getSimpleName() +
-				format(CONTAIN_TASKS_AMOUNT, this.getName(), this.getTasks().size()) + System.lineSeparator() +
+				format(CONTAIN_TASKS_AMOUNT, this.getName(), this.getTasks().size()) + hasTasks +
 				this.getTasks().stream().map(Task::toString).collect(Collectors.joining("\n"));
 	}
 

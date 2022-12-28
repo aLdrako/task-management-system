@@ -2,13 +2,13 @@ package com.telerikacademy.tms.commands;
 
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.models.compositions.contracts.History;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ListingHelpers.ACTIVITY_HISTORY_HEADER;
+import static com.telerikacademy.tms.utils.ListingHelpers.activityListing;
 import static java.lang.String.format;
 
 public class ShowPersonActivity implements Command {
@@ -28,12 +28,9 @@ public class ShowPersonActivity implements Command {
 
 	private String showPersonActivity(String name) {
 		User user = repository.findElementByName(repository.getUsers(), name);
-		StringBuilder builder = new StringBuilder();
-		builder.append(format(ACTIVITY_HISTORY_HEADER, name,
-				user.getClass().getInterfaces()[0].getSimpleName())).append(System.lineSeparator());
-		for (History activityHistory : user.getHistories()) {
-			builder.append(activityHistory).append(System.lineSeparator());
-		}
-		return builder.toString();
+		return format(ACTIVITY_HISTORY_HEADER, user.getName(),
+				user.getClass().getInterfaces()[0].getSimpleName()) +
+				System.lineSeparator() +
+				activityListing(user.getHistories());
 	}
 }

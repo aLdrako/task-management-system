@@ -23,6 +23,7 @@ public abstract class TaskBaseImpl implements Task {
 	private static final String TEXT_LEN_ERR = "%s should be between %s and %s symbols.";
 	private static final String CHANGE_MESSAGE = "The '%s' of item with ID -> [%d] switched from {%s} to {%s}";
 	private static final String TASK_COMMENT_ADDED = "Comment added to task.";
+	private static final String TASK_TO_STRING = "%s: ID -> [%s] '%s' | Status: %s";
 
 	private final int id;
 	private String title;
@@ -122,8 +123,8 @@ public abstract class TaskBaseImpl implements Task {
 
 	@Override
 	public String toString() {
-		return this.getClass().getInterfaces()[0].getSimpleName() + ": " + "ID -> [" +
-				this.getID() + "] '" + this.getTitle() + "' | Status: " +
-				this.getStatus();
+		return format(TASK_TO_STRING,
+				this.getClass().getInterfaces()[0].getSimpleName(),
+				this.getID(), this.getTitle(), this.getStatus());
 	}
 }

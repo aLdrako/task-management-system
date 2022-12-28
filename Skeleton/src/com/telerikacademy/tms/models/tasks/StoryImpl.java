@@ -9,8 +9,11 @@ import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
+import static java.lang.String.format;
+
 public class StoryImpl extends TaskBaseImpl implements Story {
 	private static final String STORY_UNASSIGNED = "Task is Unassigned";
+	private static final String STORY_TO_STRING = "%s | Priority: %s | Size: %s | Assignee: %s";
 	private PriorityType priority;
 	private SizeType size;
 	private User assignee = new UserImpl("Unassigned");
@@ -60,9 +63,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
 	@Override
 	public String toString() {
-		String isAssigned = this.getAssignee() != null ? this.getAssignee().getName() : "Unassigned";
-
-		return super.toString() + " | Priority: " + this.getPriority() +
-				" | Size: " + this.getSize() + " | Assignee: " + isAssigned;
+		return format(STORY_TO_STRING,
+				super.toString(), this.getPriority(), this.getSize(), this.getAssignee().getName());
 	}
 }

@@ -33,7 +33,6 @@ public class ShowAllTeams implements Command {
 		}
 		builder.append(System.lineSeparator());
 		builder.append(ListingHelpers.elementsToString(repository.getTeams()));
-		builder.append(System.lineSeparator());
 		return builder.toString();
 	}
 }

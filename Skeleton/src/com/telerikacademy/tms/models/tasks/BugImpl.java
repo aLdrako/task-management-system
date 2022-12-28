@@ -17,7 +17,8 @@ import static java.lang.String.format;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 	private static final String BUG_UNASSIGNED = "Task is Unassigned";
-	public static final String ADDED_STEPS_TO_REPRODUCE_BUG = "Added steps to reproduce: '%s'";
+	private static final String ADDED_STEPS_TO_REPRODUCE_BUG = "Added steps to reproduce: '%s'";
+	private static final String BUG_TO_STRING = "%s | Priority: %s | Severity: %s | Assignee: %s | Steps to reproduce: %s";
 	private final List<String> steps = new ArrayList<>();
 	private PriorityType priority;
 	private SeverityType severity;
@@ -78,18 +79,14 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public String toString() {
-		String isAssigned = this.getAssignee() != null ? this.getAssignee().getName() : "Unassigned";
 		StringBuilder doesHaveStepsToReproduce = new StringBuilder();
-
 		if (this.getSteps().size() == 0) {
 			doesHaveStepsToReproduce.append("Not specified");
 		} else {
 			doesHaveStepsToReproduce.append(System.lineSeparator()).append("\t-> ");
-			doesHaveStepsToReproduce.append(this.getSteps().stream().map(s -> s.toString()).collect(Collectors.joining("\n\t-> ")));
+			doesHaveStepsToReproduce.append(String.join("\n\t-> ", this.getSteps()));
 		}
-
-		return super.toString() + " | Priority: " + this.getPriority() +
-				" | Severity: " + this.getSeverity() + " | Assignee: " + isAssigned +
-				" | Steps to reproduce: " + doesHaveStepsToReproduce;
+		return format(BUG_TO_STRING,
+				super.toString(), this.getPriority(), this.getSeverity(), this.getAssignee().getName(), doesHaveStepsToReproduce);
 	}
 }

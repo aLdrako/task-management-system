@@ -7,7 +7,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.telerikacademy.tms.utils.ParsingHelpers.INVALID_TASK_ID_IN_CATEGORY;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseInt;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentCountRange;
 import static java.lang.String.format;
@@ -42,7 +41,6 @@ public class AddStepsToBug implements Command {
 		for (String step : steps) {
 			bug.addStep(step.strip());
 		}
-
 
 		return format(STEPS_ADDED_SUCCESSFUL, bug.getID());
 	}
