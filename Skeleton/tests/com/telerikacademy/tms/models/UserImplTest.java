@@ -6,7 +6,8 @@ import com.telerikacademy.tms.models.tasks.contracts.Task;
 import org.junit.jupiter.api.Test;
 
 import static com.telerikacademy.tms.models.BoardImplTests.initializeTask;
-import static com.telerikacademy.tms.utils.ModelsConstants.*;
+import static com.telerikacademy.tms.utils.ModelsConstants.USER_INVALID_NAME;
+import static com.telerikacademy.tms.utils.ModelsConstants.USER_VALID_NAME;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserImplTest {

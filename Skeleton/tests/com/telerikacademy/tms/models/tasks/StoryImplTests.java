@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.telerikacademy.tms.utils.ModelsConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 public class StoryImplTests {
 
 	@Test

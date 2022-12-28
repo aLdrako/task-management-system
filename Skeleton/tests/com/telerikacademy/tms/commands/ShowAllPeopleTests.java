@@ -5,7 +5,6 @@ import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -16,22 +15,22 @@ import static com.telerikacademy.tms.utils.TestUtils.getList;
 
 public class ShowAllPeopleTests {
 
-    private TaskManagementRepository repository;
-    private Command command;
+	private TaskManagementRepository repository;
+	private Command command;
 
-    @BeforeEach
-    public void before() {
-        repository = new TaskManagementRepositoryImpl();
-        command = new ShowAllPeople(repository);
-    }
+	@BeforeEach
+	public void before() {
+		repository = new TaskManagementRepositoryImpl();
+		command = new ShowAllPeople(repository);
+	}
 
-    @ParameterizedTest(name = "arguments count: {0}")
-    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS + 1})
-    public void execute_Should_ThrowException_When_ArgumentsAreInvalid(int argumentsCount) {
-        // Arrange
-        List<String> parameters = getList(argumentsCount);
+	@ParameterizedTest(name = "arguments count: {0}")
+	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS + 1})
+	public void execute_Should_ThrowException_When_ArgumentsAreInvalid(int argumentsCount) {
+		// Arrange
+		List<String> parameters = getList(argumentsCount);
 
-        // Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
-    }
+		// Act, Assert
+		Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
+	}
 }

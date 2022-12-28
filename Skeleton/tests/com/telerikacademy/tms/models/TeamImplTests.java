@@ -110,7 +110,7 @@ public class TeamImplTests {
 		// Act, Assert
 		assertThrows(IllegalArgumentException.class, () -> team.addBoard(board));
 	}
-	
+
 	@Test
 	public void getHistories_Should_ReturnCopyOfListTasks() {
 		// Arrange

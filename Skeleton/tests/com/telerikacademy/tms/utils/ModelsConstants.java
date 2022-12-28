@@ -24,4 +24,7 @@ public class ModelsConstants {
 	public static final String TASK_INVALID_NAME = getString(TITLE_MAX_LEN + 1);
 	public static final String DESCRIPTION_VALID_NAME = getString(DESCRIPTION_MIN_LEN + 1);
 	public static final String DESCRIPTION_INVALID_NAME = getString(DESCRIPTION_MAX_LEN + 1);
+
+	public static final String COMMENT_MESSAGE = "Comment message";
+
 }
