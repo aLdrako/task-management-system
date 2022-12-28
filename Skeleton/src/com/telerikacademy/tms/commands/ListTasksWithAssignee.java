@@ -9,6 +9,7 @@ import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
+import com.telerikacademy.tms.utils.ListingHelpers;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +42,7 @@ public class ListTasksWithAssignee implements Command {
 		List<Task> tasks = filterFeedbacksAndNotAssigned();
 		//All tasks, not filtered, not sorted.
 		if (parameters.size() == 0) {
-			return generateAllTasksList(tasks);
+			return ListingHelpers.elementsToString(tasks);
 		}
 		while (i < parameters.size()) {
 			String temp = parameters.get(i);
@@ -70,7 +71,7 @@ public class ListTasksWithAssignee implements Command {
 			tasks = sortByTitle(tasks);
 		}
 
-		return generateAllTasksList(tasks);
+		return ListingHelpers.elementsToString(tasks);
 	}
 
 	private List<Task> sortByTitle(List<Task> tasks) {
@@ -107,7 +108,9 @@ public class ListTasksWithAssignee implements Command {
 	private List<Task> filterFeedbacksAndNotAssigned() {
 		return repository.getTasks()
 				.stream()
-				.filter(task -> task.getTaskType() != TaskType.FEEDBACK && ((Assignable) task).getAssignee() != null)
+				.filter(task -> task.getTaskType() != TaskType.FEEDBACK
+						&& ((Assignable) task).getAssignee() != null
+						&& ((Assignable) task).getAssignee().getName() != "Unassigned")
 				.collect(Collectors.toList());
 	}
 
@@ -119,21 +122,5 @@ public class ListTasksWithAssignee implements Command {
 		}
 		return false;
 	}
-
-	private String generateAllTasksList(List<Task> tasks) {
-		String s = "";
-		for (Task task : tasks) {
-			s += generateTaskListing(task, ((Assignable) task).getAssignee().getName());
-		}
-		return s;
-	}
-
-	private String generateTaskListing(Task task, String assignee) {
-		return String.format("%s\t%s\t%s\t%s\n", task.getTaskType(), task.getTitle(), task.getStatus(), assignee);
-	}
-
-//	private String listTaskWithAssignee(String title, String status, String assignee) {
-//		return String.format("Task %s with status %s is assigned to %s", title, status, assignee);
-//	}
 
 }
