@@ -10,7 +10,6 @@ import com.telerikacademy.tms.utils.FilterHelpers;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;

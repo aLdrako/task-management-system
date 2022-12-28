@@ -20,7 +20,7 @@ import static java.lang.String.format;
 
 public class AssignTask implements Command {
 	private static final String TASK_ASSIGNED_SUCCESSFUL = "Task with ID %s was assigned to user %s.";
-	private static final String USER_NOT_FOUND_IN_TEAM = "Cannot find user in team in order to assign task";
+	private static final String USER_NOT_FOUND_IN_TEAM = "Cannot find user in team <%s> in order to assign task";
 	private static final String TASK_ALREADY_ASSIGNED = "Task is already assigned to %s!";
 
 	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
@@ -43,20 +43,18 @@ public class AssignTask implements Command {
 		Assignable assignableTask;
 		try {
 			assignableTask = (Assignable) repository.findElementById(repository.getTasks(), id);
-			User user = repository.findElementByName(repository.getUsers(), userName);
-
-			Team team = repository.getTeams().stream()
-					.filter(team1 -> team1.getUsers().contains(user))
-					.findFirst()
-					.orElseThrow(() -> new InvalidUserInputException(USER_NOT_FOUND_IN_TEAM));
-
-			if (team.getBoards().stream().anyMatch(board -> board.getTasks().stream().anyMatch(task1 -> task1.getID() == id))) {
-				if (!assignableTask.getAssignee().getName().equalsIgnoreCase("Unassigned")) {
-					throw new InvalidUserInputException(format(TASK_ALREADY_ASSIGNED, assignableTask.getAssignee().getName()));
-				}
-				user.assignTask((Task) assignableTask);
-				assignableTask.setAssignee(user);
+			if (!assignableTask.getAssignee().getName().equalsIgnoreCase("Unassigned")) {
+				throw new InvalidUserInputException(format(TASK_ALREADY_ASSIGNED, assignableTask.getAssignee().getName()));
 			}
+			User user = repository.findElementByName(repository.getUsers(), userName);
+			Board board = repository.findBoardByTask(assignableTask);
+			Team team = repository.findTeamByBoard(board);
+
+			if (!team.getUsers().contains(user)) {
+				throw new InvalidUserInputException(format(USER_NOT_FOUND_IN_TEAM, team.getName()));
+			}
+			user.assignTask(assignableTask);
+			assignableTask.setAssignee(user);
 
 		} catch (ClassCastException e) {
 			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Assignable.class.getSimpleName()));

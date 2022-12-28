@@ -20,6 +20,7 @@ public interface TaskManagementRepository {
 	List<Bug> getBugs();
 	List<Story> getStories();
 	List<Feedback> getFeedbacks();
+	List<Board> getBoards();
 
 	Team createTeam(String name);
 
@@ -38,6 +39,8 @@ public interface TaskManagementRepository {
 	<T extends Nameable> T findElementByName(List<T> elements, String name);
 
 	Board findBoardByNameInTeam(Team team, String name);
+	Board findBoardByTask(Task task);
+	Team findTeamByBoard(Board board);
 
 	boolean isNameUnique(String name);
 }
