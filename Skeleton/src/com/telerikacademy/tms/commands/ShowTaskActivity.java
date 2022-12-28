@@ -17,7 +17,7 @@ public class ShowTaskActivity implements Command {
 	public static final String NO_CHANGES_HISTORY = "\n=== NO CHANGES ===";
 	public static final String COMMENTS = "\n=== COMMENTS ===\n";
 	public static final String NO_COMMENTS = "\n=== NO COMMENTS ===";
-	public static final String TASK_ACTIVITY = "<<< %s Activity with ID -> [%d] >>>";
+	public static final String TASK_ACTIVITY = "<<< %s ACTIVITY with ID -> [%d] >>>";
 
 	private final TaskManagementRepository repository;
 
@@ -39,7 +39,7 @@ public class ShowTaskActivity implements Command {
 		String anyHistories = task.getHistories().size() == 0 ? NO_CHANGES_HISTORY : CHANGES_HISTORY;
 		String anyComments = task.getComments().size() == 0 ? NO_COMMENTS : COMMENTS;
 
-		return format(TASK_ACTIVITY, task.getTaskType().toString().toUpperCase(), task.getID()) +
+		return format(TASK_ACTIVITY, task.getTaskType(), task.getID()) +
 				anyHistories + activityListing(task.getHistories()) +
 				anyComments + activityListing(task.getComments());
 	}

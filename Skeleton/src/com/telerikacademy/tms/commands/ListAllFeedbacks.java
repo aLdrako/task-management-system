@@ -12,13 +12,15 @@ import java.util.List;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static java.lang.String.format;
 
 public class ListAllFeedbacks implements Command {
 	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the feedbacks only by status.";
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the feedbacks only by title/rating.";
-	public static final String LISTING_HEADER = "<<< LIST ALL FEEDBACKS >>>" + System.lineSeparator();
+	public static final String LISTING_HEADER = "LIST ALL FEEDBACKS %s %n%s";
 	private final TaskManagementRepository repository;
 
 	public ListAllFeedbacks(TaskManagementRepository repository) {
@@ -29,13 +31,14 @@ public class ListAllFeedbacks implements Command {
 	public String execute(List<String> parameters) {
 		List<Feedback> feedbacks = repository.getFeedbacks();
 		if (parameters.size() == ZERO_PARAMETERS) {
-			return LISTING_HEADER + elementsToString(feedbacks);
+			return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(feedbacks));
+
 		}
 		validateFilteringAndSortingParameters(parameters);
 		validateArgumentsSorting(parameters);
 		feedbacks = filterFeedbacks(parameters, feedbacks);
 		sortFeedbacks(parameters, feedbacks);
-		return LISTING_HEADER + elementsToString(feedbacks);
+		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(feedbacks));
 	}
 
 	private List<Feedback> filterFeedbacks(List<String> parameters, List<Feedback> feedbacks) {

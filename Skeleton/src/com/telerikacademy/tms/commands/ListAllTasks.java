@@ -4,19 +4,21 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.utils.ListingHelpers;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static java.lang.String.format;
 
 public class ListAllTasks implements Command {
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the tasks only by title.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the tasks only by title.";
 	private static final String TITLE_DOES_NOT_EXIST = "There is not task that contains the given title.";
-	public static final String LISTING_HEADER = "<<< LIST ALL TASKS >>>" + System.lineSeparator();
+	public static final String LISTING_HEADER = "LIST ALL TASKS %s %n%s";
 
 	private final TaskManagementRepository repository;
 
@@ -28,14 +30,14 @@ public class ListAllTasks implements Command {
 	public String execute(List<String> parameters) {
 		List<Task> tasks = repository.getTasks();
 		if (parameters.size() == ZERO_PARAMETERS) {
-			return LISTING_HEADER + ListingHelpers.elementsToString(tasks);
+			return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(tasks));
 		}
 		validateFilteringAndSortingParameters(parameters);
 
 		tasks = filterTasks(parameters, tasks);
 		validateArgumentsSorting(parameters);
 		sortTasks(parameters, tasks);
-		return LISTING_HEADER + ListingHelpers.elementsToString(tasks);
+		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(tasks));
 	}
 
 	private void sortTasks(List<String> parameters, List<Task> tasks) {

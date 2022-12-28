@@ -13,13 +13,16 @@ import java.util.List;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByAssignee;
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
+import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static java.lang.String.format;
 
 public class ListAllStories implements Command {
 	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the stories only by status/assignee.";
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the stories only by title/priority/size.";
-	public static final String LISTING_HEADER = "<<< LIST ALL STORIES >>>" + System.lineSeparator();
+	public static final String LISTING_HEADER = "LIST ALL STORIES %s %n%s";
 
 	private final TaskManagementRepository repository;
 
@@ -31,13 +34,13 @@ public class ListAllStories implements Command {
 	public String execute(List<String> parameters) {
 		List<Story> stories = repository.getStories();
 		if (parameters.size() == ZERO_PARAMETERS) {
-			return LISTING_HEADER + ListingHelpers.elementsToString(stories);
+			return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(stories));
 		}
 		validateFilteringAndSortingParameters(parameters);
 		validateArgumentsSorting(parameters);
 		stories = filterStories(parameters, stories);
 		sortStories(parameters, stories);
-		return LISTING_HEADER + ListingHelpers.elementsToString(stories);
+		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(stories));
 	}
 
 	private void sortStories(List<String> parameters, List<Story> stories) {

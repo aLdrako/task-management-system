@@ -13,7 +13,7 @@ import static java.lang.String.format;
 
 public class ShowBoardActivity implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	private static final String ACTIVITY_HISTORY_BOARD_HEADER = "<<< <%s> %s %s's Activity History >>>";
+	private static final String ACTIVITY_HISTORY_BOARD_HEADER = "<<< <%s> %s's %s ACTIVITY HISTORY >>>";
 	private final TaskManagementRepository repository;
 
 	public ShowBoardActivity(TaskManagementRepository repository) {
