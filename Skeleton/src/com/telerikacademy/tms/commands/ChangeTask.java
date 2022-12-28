@@ -38,7 +38,7 @@ public class ChangeTask implements Command {
 	}
 
 	private String changeTask(List<String> parameters, int id, String typeOfChange) {
-		Task task = repository.findElementById(repository.getTasks(), id);
+		Task task = repository.findTaskById(repository.getTasks(), id);
 
 		try {
 			switch (typeOfChange) {

@@ -34,12 +34,7 @@ public class ChangeBug implements Command {
 	}
 
 	private String changeBug(List<String> parameters, int id, String typeOfChange) {
-		Bug bug;
-		try {
-			bug = (Bug) repository.findElementById(repository.getTasks(), id);
-		} catch (ClassCastException e) {
-			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Bug.class.getSimpleName()));
-		}
+		Bug bug = repository.findTaskById(repository.getBugs(), id, "Bug");
 
 		try {
 			switch (typeOfChange) {

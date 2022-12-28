@@ -35,21 +35,14 @@ public class UnassignTask implements Command {
 	}
 
 	private String unassignTask(int id) {
-		Assignable assignableTask;
-		User previousAssignee;
-		try {
-			assignableTask = (Assignable) repository.findElementById(repository.getTasks(), id);
-			if (assignableTask.getAssignee().getName().equalsIgnoreCase("Unassigned")) {
-				throw new InvalidUserInputException(format(TASK_ALREADY_UNASSIGNED, assignableTask.getID()));
-			}
-			previousAssignee = assignableTask.getAssignee();
-			previousAssignee.unAssignTask(assignableTask);
-			assignableTask.setAssignee(new UserImpl("Unassigned"));
-		} catch (ClassCastException e) {
-			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Assignable.class.getSimpleName()));
-		} catch (ElementNotFoundException e) {
-			throw new ElementNotFoundException(e.getMessage());
+		Assignable assignableTask = repository.findTaskById(repository.getAssignableTasks(), id, "Assignable task");
+		if (assignableTask.getAssignee().getName().equalsIgnoreCase("Unassigned")) {
+			throw new InvalidUserInputException(format(TASK_ALREADY_UNASSIGNED, assignableTask.getID()));
 		}
+		User previousAssignee = assignableTask.getAssignee();
+		previousAssignee.unAssignTask(assignableTask);
+		assignableTask.setAssignee(new UserImpl("Unassigned"));
+
 
 		return format(TASK_UNASSIGNED_SUCCESSFUL, id, previousAssignee.getName());
 	}

@@ -24,6 +24,7 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
+	private static final String NO_RECORD_ID_SPECIFIC_TASK = "No <%s> with ID %d";
 	private static final String NO_RECORD_ID = "No task with ID %d";
 	private final static String NO_SUCH_ELEMENT = "There is no User or Team with name %s!";
 	private final static String NO_SUCH_BOARD_IN_TEAM = "There is no Board with name '%s' in Team '%s'!";
@@ -36,6 +37,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	private final List<Bug> bugs = new ArrayList<>();
 	private final List<Story> stories = new ArrayList<>();
 	private final List<Feedback> feedbacks = new ArrayList<>();
+	private final List<Assignable> assignables = new ArrayList<>();
 
 	public TaskManagementRepositoryImpl() {
 		this.nextId = 0;
@@ -72,6 +74,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	@Override
+	public List<Assignable> getAssignableTasks() {
+		return new ArrayList<>(assignables);
+	}
+
+	@Override
 	public List<Board> getBoards() {
 		return new ArrayList<>(boards);
 	}
@@ -103,6 +110,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 			Bug bug = new BugImpl(++nextId, title, description, priority, severity);
 			this.tasks.add(bug);
 			this.bugs.add(bug);
+			this.assignables.add(bug);
 			return bug;
 		} catch (IllegalArgumentException e) {
 			--nextId;
@@ -116,6 +124,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 			Story story = new StoryImpl(++nextId, title, description, priority, size);
 			this.tasks.add(story);
 			this.stories.add(story);
+			this.assignables.add(story);
 			return story;
 		} catch (IllegalArgumentException e) {
 			--nextId;
@@ -139,8 +148,15 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	/**
 	 * Search by ID all elements which extends Task interface (Bug, Story, Feedback)
 	 */
+
+	public <T extends Task> T findTaskById(List<T> elements, int id, String typeType) {
+		return elements.stream()
+				.filter(el -> el.getID() == id)
+				.findFirst()
+				.orElseThrow(() -> new ElementNotFoundException(format(NO_RECORD_ID_SPECIFIC_TASK, typeType, id)));
+	}
 	@Override
-	public <T extends Task> T findElementById(List<T> elements, int id) {
+	public <T extends Task> T findTaskById(List<T> elements, int id) {
 		return elements.stream()
 				.filter(el -> el.getID() == id)
 				.findFirst()

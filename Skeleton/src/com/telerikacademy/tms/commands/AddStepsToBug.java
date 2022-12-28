@@ -35,17 +35,14 @@ public class AddStepsToBug implements Command {
 	}
 
 	private String addStepsToReproduce(int id, List<String> steps) {
-		Bug bug;
-		try {
-			bug = (Bug) repository.findElementById(repository.getTasks(), id);
-			if (bug.getSteps().size() != 0)
-				throw new IllegalArgumentException(format(BUG_ALREADY_HAS_STEPS, bug.getID()));
-			for (String step : steps) {
-				bug.addStep(step.strip());
-			}
-		} catch (ClassCastException e) {
-			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Bug.class.getSimpleName()));
+		Bug bug = repository.findTaskById(repository.getBugs(), id, "Bug");
+
+		if (bug.getSteps().size() != 0)
+			throw new IllegalArgumentException(format(BUG_ALREADY_HAS_STEPS, bug.getID()));
+		for (String step : steps) {
+			bug.addStep(step.strip());
 		}
+
 
 		return format(STEPS_ADDED_SUCCESSFUL, bug.getID());
 	}

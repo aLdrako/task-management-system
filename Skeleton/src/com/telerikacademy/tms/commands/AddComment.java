@@ -33,7 +33,7 @@ public class AddComment implements Command {
 	}
 
 	private String addComment(int id, String commentMessage, String userName) {
-		Task task = repository.findElementById(repository.getTasks(), id);
+		Task task = repository.findTaskById(repository.getTasks(), id);
 		User user = repository.findElementByName(repository.getUsers(), userName);
 		Comment comment = new CommentImpl(commentMessage, user.getName());
 		task.addComment(comment);

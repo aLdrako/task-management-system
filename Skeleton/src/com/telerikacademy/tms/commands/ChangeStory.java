@@ -34,12 +34,7 @@ public class ChangeStory implements Command {
 	}
 
 	private String changeStory(List<String> parameters, int id, String typeOfChange) {
-		Story story;
-		try {
-			story = (Story) repository.findElementById(repository.getTasks(), id);
-		} catch (ClassCastException e) {
-			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Story.class.getSimpleName()));
-		}
+		Story story = repository.findTaskById(repository.getStories(), id, "Story");
 
 		try {
 			switch (typeOfChange) {

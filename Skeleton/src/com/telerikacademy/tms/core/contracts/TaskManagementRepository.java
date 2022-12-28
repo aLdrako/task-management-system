@@ -23,6 +23,9 @@ public interface TaskManagementRepository {
 	List<Story> getStories();
 
 	List<Feedback> getFeedbacks();
+
+	List<Assignable> getAssignableTasks();
+
 	List<Board> getBoards();
 
 	Team createTeam(String name);
@@ -37,7 +40,8 @@ public interface TaskManagementRepository {
 
 	Feedback createFeedback(String title, String description, Rating rating);
 
-	<T extends Task> T findElementById(List<T> elements, int id);
+	<T extends Task> T findTaskById(List<T> elements, int id);
+	<T extends Task> T findTaskById(List<T> elements, int id, String type);
 
 	<T extends Nameable> T findElementByName(List<T> elements, String name);
 

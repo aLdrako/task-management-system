@@ -33,12 +33,7 @@ public class ChangeFeedback implements Command {
 	}
 
 	private String changeFeedback(List<String> parameters, int id, String typeOfChange) {
-		Feedback feedback;
-		try {
-			feedback = (Feedback) repository.findElementById(repository.getTasks(), id);
-		} catch (ClassCastException e) {
-			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Feedback.class.getSimpleName()));
-		}
+		Feedback feedback = repository.findTaskById(repository.getFeedbacks(), id, "Feedback");
 
 		try {
 			switch (typeOfChange) {

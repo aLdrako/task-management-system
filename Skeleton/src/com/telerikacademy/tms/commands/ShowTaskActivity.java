@@ -34,7 +34,7 @@ public class ShowTaskActivity implements Command {
 	}
 
 	private String showTaskActivity(int id) {
-		Task task = repository.findElementById(repository.getTasks(), id);
+		Task task = repository.findTaskById(repository.getTasks(), id);
 
 		String anyHistories = task.getHistories().size() == 0 ? NO_CHANGES_HISTORY : CHANGES_HISTORY;
 		String anyComments = task.getComments().size() == 0 ? NO_COMMENTS : COMMENTS;

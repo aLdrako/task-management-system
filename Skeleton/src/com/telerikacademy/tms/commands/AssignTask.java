@@ -38,27 +38,20 @@ public class AssignTask implements Command {
 	}
 
 	private String assignTask(int id, String userName) {
-		Assignable assignableTask;
-		try {
-			assignableTask = (Assignable) repository.findElementById(repository.getTasks(), id);
-			if (!assignableTask.getAssignee().getName().equalsIgnoreCase("Unassigned")) {
-				throw new InvalidUserInputException(format(TASK_ALREADY_ASSIGNED, assignableTask.getAssignee().getName()));
-			}
-			User user = repository.findElementByName(repository.getUsers(), userName);
-			Board board = repository.findBoardByTask(assignableTask);
-			Team team = repository.findTeamByBoard(board);
+		Assignable assignableTask = repository.findTaskById(repository.getAssignableTasks(), id, "Assignable task");
 
-			if (!team.getUsers().contains(user)) {
-				throw new InvalidUserInputException(format(USER_NOT_FOUND_IN_TEAM, team.getName()));
-			}
-			user.assignTask(assignableTask);
-			assignableTask.setAssignee(user);
-
-		} catch (ClassCastException e) {
-			throw new ClassCastException(format(INVALID_TASK_ID_IN_CATEGORY, id, Assignable.class.getSimpleName()));
-		} catch (ElementNotFoundException e) {
-			throw new ElementNotFoundException(e.getMessage());
+		if (!assignableTask.getAssignee().getName().equalsIgnoreCase("Unassigned")) {
+			throw new InvalidUserInputException(format(TASK_ALREADY_ASSIGNED, assignableTask.getAssignee().getName()));
 		}
+		User user = repository.findElementByName(repository.getUsers(), userName);
+		Board board = repository.findBoardByTask(assignableTask);
+		Team team = repository.findTeamByBoard(board);
+
+		if (!team.getUsers().contains(user)) {
+			throw new InvalidUserInputException(format(USER_NOT_FOUND_IN_TEAM, team.getName()));
+		}
+		user.assignTask(assignableTask);
+		assignableTask.setAssignee(user);
 
 		return format(TASK_ASSIGNED_SUCCESSFUL, id, userName);
 	}
