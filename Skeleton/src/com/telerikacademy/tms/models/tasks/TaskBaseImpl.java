@@ -48,6 +48,7 @@ public abstract class TaskBaseImpl implements Task {
 	public String getTitle() {
 		return title;
 	}
+
 	@Override
 	public String getDescription() {
 		return description;
@@ -57,14 +58,17 @@ public abstract class TaskBaseImpl implements Task {
 	public TaskType getTaskType() {
 		return taskType;
 	}
+
 	@Override
 	public Status getStatus() {
 		return this.status;
 	}
+
 	@Override
 	public List<Comment> getComments() {
 		return new ArrayList<>(comments);
 	}
+
 	@Override
 	public List<History> getHistories() {
 		return new ArrayList<>(changesHistory);

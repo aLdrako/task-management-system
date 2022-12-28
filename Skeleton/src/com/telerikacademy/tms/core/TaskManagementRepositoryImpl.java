@@ -13,7 +13,10 @@ import com.telerikacademy.tms.models.tasks.BugImpl;
 import com.telerikacademy.tms.models.tasks.FeedbackImpl;
 import com.telerikacademy.tms.models.tasks.StoryImpl;
 import com.telerikacademy.tms.models.tasks.contracts.*;
-import com.telerikacademy.tms.models.tasks.enums.*;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.Rating;
+import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
 import java.util.ArrayList;
 import java.util.List;

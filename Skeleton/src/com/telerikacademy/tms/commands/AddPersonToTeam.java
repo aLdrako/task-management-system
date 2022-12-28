@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddPersonToTeam implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	private static final String PERSON_ADDED_TO_TEAM = "Person %s has been added to the team %s!";
+	private static final String PERSON_ADDED_TO_TEAM = "Person <%s> has been added to the team <%s>!";
 
 	private final TaskManagementRepository repository;
 
@@ -29,13 +29,6 @@ public class AddPersonToTeam implements Command {
 	private String addMemberToTeam(String userName, String teamName) {
 		User user = repository.findElementByName(repository.getUsers(), userName);
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
-
-		repository.getTeams().forEach(t -> {
-			if (t.getUsers().stream().anyMatch(u -> u.getName().equals(userName))
-					&& !t.getName().equals(teamName)) {
-				t.removeUser(user);
-			}
-		});
 
 		team.addUser(user);
 		return String.format(PERSON_ADDED_TO_TEAM, userName, team.getName());

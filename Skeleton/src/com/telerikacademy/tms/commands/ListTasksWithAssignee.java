@@ -14,9 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListTasksWithAssignee implements Command {
-	private static final int EXPECTED_MAX_NUMBER_PARAMETERS = 5;
-	private static final String TITLE_DOES_NOT_EXIST = "Task does not exist!";
-
 	private static final String FILTER_BY_ASSIGNEE = "FilterByAssignee";
 	private static final String FILTER_BY_STATUS = "FilterByStatus";
 	private static final String SORT_BY_TITLE = "SortByTitle";
