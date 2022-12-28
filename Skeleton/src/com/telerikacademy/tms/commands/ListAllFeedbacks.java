@@ -32,9 +32,8 @@ public class ListAllFeedbacks implements Command {
 			return LISTING_HEADER + elementsToString(feedbacks);
 		}
 		validateFilteringAndSortingParameters(parameters);
-
-		feedbacks = filterFeedbacks(parameters, feedbacks);
 		validateArgumentsSorting(parameters);
+		feedbacks = filterFeedbacks(parameters, feedbacks);
 		sortFeedbacks(parameters, feedbacks);
 		return LISTING_HEADER + elementsToString(feedbacks);
 	}

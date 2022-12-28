@@ -34,9 +34,8 @@ public class ListAllStories implements Command {
 			return LISTING_HEADER + ListingHelpers.elementsToString(stories);
 		}
 		validateFilteringAndSortingParameters(parameters);
-
-		stories = filterStories(parameters, stories);
 		validateArgumentsSorting(parameters);
+		stories = filterStories(parameters, stories);
 		sortStories(parameters, stories);
 		return LISTING_HEADER + ListingHelpers.elementsToString(stories);
 	}

@@ -34,8 +34,8 @@ public class ListAllBugs implements Command {
 			return LISTING_HEADER + elementsToString(bugs);
 		}
 		validateFilteringAndSortingParameters(parameters);
-		bugs = filterBugs(parameters, bugs);
 		validateArgumentsSorting(parameters);
+		bugs = filterBugs(parameters, bugs);
 		sortBugs(parameters, bugs);
 		return LISTING_HEADER + elementsToString(bugs);
 	}
