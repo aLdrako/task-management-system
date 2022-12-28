@@ -114,7 +114,7 @@ public class ListTasksWithAssignee implements Command {
 	}
 
 	private String generateTaskListing(Task task, String assignee) {
-		return String.format("%s%t%s%t%s%t%s%n", task.getTaskType(), task.getTitle(), task.getStatus(), assignee);
+		return String.format("%s\t%s\t%s\t%s\n", task.getTaskType(), task.getTitle(), task.getStatus(), assignee);
 	}
 
 //	private String listTaskWithAssignee(String title, String status, String assignee) {
