@@ -115,12 +115,11 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 - Use **Git** to keep your source code and for team collaboration.
 
 ## Implemented Commands
-
-- CreatePerson `{String name}`
 - ShowAllPeople
+- ShowAllTeams
+- CreatePerson `{String name}`
 - ShowPersonActivity `{String name}`
 - CreateTeam `{String teamName}`
-- ShowAllTeams
 - ShowTeamActivity `{String teamName}`
 - AddPersonToTeam `{String userName} {String teamName}`
 - ShowAllTeamMembers `{String teamName}`
@@ -128,7 +127,6 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 - CreateBoardInTeam `{String boardName} {String teamName}`
 - ShowBoardActivity `{String boardName} {String teamName}`
 - CreateTaskInBoard `[bug/story/feedback](enums) {String boardName} {String teamName} {(coresponding task parameters)}`
-- AddStepsToBug `{ind id} {String steps} {String steps} ...`
 - AssignTask `{ind id} {String name}`
 - UnassignTask `{ind id}`
 - AddComment `{ind id} {String comment} {String name}`
@@ -258,17 +256,17 @@ Person <Cortana> has been added to the team <Suicide Squad>!
 User <Cortana> already in team <Suicide Squad>
 Person <Jimmy> has been added to the team <Hackers>!
 <<< <Hackers> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] Board was created.
+[29-December-2022 17:23:03] Board was created.
 <<< <Suicide Squad> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] Board was created.
+[29-December-2022 17:23:03] Board was created.
 <<< Alexa User's ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] User was created.
-[29-December-2022 14:44:01] User was added to team <Suicide Squad>
+[29-December-2022 17:23:03] User was created.
+[29-December-2022 17:23:03] User was added to team <Suicide Squad>
 <<< Marco Polo User's ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] User was created.
+[29-December-2022 17:23:03] User was created.
 <<< Cortana User's ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] User was created.
-[29-December-2022 14:44:01] User was added to team <Suicide Squad>
+[29-December-2022 17:23:03] User was created.
+[29-December-2022 17:23:03] User was added to team <Suicide Squad>
 === ALL TEAMS ===
 Team: Hackers
 It has (1) users -> Jimmy
@@ -324,35 +322,35 @@ Task with ID -> [2] was assigned to user <Jimmy>.
 Task with ID -> [3] was assigned to user <Jimmy>.
 No <Assignable task> with ID -> 9
 <<< Alexa User's ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] User was created.
-[29-December-2022 14:44:01] User was added to team <Suicide Squad>
-[29-December-2022 14:44:01] Task 'Another story' with ID -> [4] was assigned to <Alexa>
+[29-December-2022 17:23:03] User was created.
+[29-December-2022 17:23:03] User was added to team <Suicide Squad>
+[29-December-2022 17:23:03] Task 'Another story' with ID -> [4] was assigned to <Alexa>
 <<< <Hackers> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] Board was created.
-[29-December-2022 14:44:01] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
-[29-December-2022 14:44:01] Task 'Serious issue' with ID -> [2] was added to board <ToDos>
-[29-December-2022 14:44:01] Task 'Fatal issue' with ID -> [3] was added to board <ToDos>
-[29-December-2022 14:44:01] Task 'Funny story' with ID -> [5] was added to board <ToDos>
-[29-December-2022 14:44:01] Task 'Great job here' with ID -> [7] was added to board <ToDos>
+[29-December-2022 17:23:03] Board was created.
+[29-December-2022 17:23:03] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
+[29-December-2022 17:23:03] Task 'Serious issue' with ID -> [2] was added to board <ToDos>
+[29-December-2022 17:23:03] Task 'Fatal issue' with ID -> [3] was added to board <ToDos>
+[29-December-2022 17:23:03] Task 'Funny story' with ID -> [5] was added to board <ToDos>
+[29-December-2022 17:23:03] Task 'Great job here' with ID -> [7] was added to board <ToDos>
 <<< <Suicide Squad> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] Board was created.
-[29-December-2022 14:44:01] Task 'Third story' with ID -> [6] was added to board <ToDos>
+[29-December-2022 17:23:03] Board was created.
+[29-December-2022 17:23:03] Task 'Third story' with ID -> [6] was added to board <ToDos>
 <<< Bug ACTIVITY with ID -> [2] >>>
 === CHANGES HISTORY ===
-[29-December-2022 14:44:01] Task with ID -> [2] was created.
-[29-December-2022 14:44:01] Task is Unassigned
-[29-December-2022 14:44:01] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
-[29-December-2022 14:44:01] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
+[29-December-2022 17:23:03] Task with ID -> [2] was created.
+[29-December-2022 17:23:03] Task is Unassigned
+[29-December-2022 17:23:03] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
+[29-December-2022 17:23:03] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
 === NO COMMENTS ===
 User <Marco Polo> added comment to task with ID -> [1]
 User <Marco Polo> added comment to task with ID -> [1]
 <<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[29-December-2022 14:44:01] Task with ID -> [1] was created.
-[29-December-2022 14:44:01] Task is Unassigned
-[29-December-2022 14:44:01] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[29-December-2022 14:44:01] Comment added to task.
-[29-December-2022 14:44:01] Comment added to task.
+[29-December-2022 17:23:03] Task with ID -> [1] was created.
+[29-December-2022 17:23:03] Task is Unassigned
+[29-December-2022 17:23:03] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[29-December-2022 17:23:03] Comment added to task.
+[29-December-2022 17:23:03] Comment added to task.
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 "Perfect job here" - Marco Polo 
@@ -382,35 +380,35 @@ User: Marco Polo has (0) assigned tasks
 ===============
 User: Jimmy has (2) assigned tasks
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
-	-> Click register user button
-	-> Type your email
-	-> App crashes!
-	-> Fix it
+	1: Click register user button
+	2: Type your email
+	3: App crashes!
+	4: Fix it
 Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: 
-	-> Open that 
-	-> Do this
+	1: Open that
+	2: Do this
 <<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[29-December-2022 14:44:01] Task with ID -> [1] was created.
-[29-December-2022 14:44:01] Task is Unassigned
-[29-December-2022 14:44:01] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[29-December-2022 14:44:01] Comment added to task.
-[29-December-2022 14:44:01] Comment added to task.
-[29-December-2022 14:44:01] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
+[29-December-2022 17:23:03] Task with ID -> [1] was created.
+[29-December-2022 17:23:03] Task is Unassigned
+[29-December-2022 17:23:03] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[29-December-2022 17:23:03] Comment added to task.
+[29-December-2022 17:23:03] Comment added to task.
+[29-December-2022 17:23:03] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 "Perfect job here" - Marco Polo 
 <<< Hackers Team's ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] Team was created.
-[29-December-2022 14:44:01] Board <ToDos> was added to the team <Hackers>
-[29-December-2022 14:44:01] User <Jimmy> was added to the team <Hackers>
+[29-December-2022 17:23:03] Team was created.
+[29-December-2022 17:23:03] Board <ToDos> was added to the team <Hackers>
+[29-December-2022 17:23:03] User <Jimmy> was added to the team <Hackers>
 <<< Jimmy User's ACTIVITY HISTORY >>>
-[29-December-2022 14:44:01] User was created.
-[29-December-2022 14:44:01] User was added to team <Hackers>
-[29-December-2022 14:44:01] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
-[29-December-2022 14:44:01] Task 'Serious issue' with ID -> [2] was assigned to <Jimmy>
-[29-December-2022 14:44:01] Task 'Fatal issue' with ID -> [3] was assigned to <Jimmy>
-[29-December-2022 14:44:01] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
+[29-December-2022 17:23:03] User was created.
+[29-December-2022 17:23:03] User was added to team <Hackers>
+[29-December-2022 17:23:03] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
+[29-December-2022 17:23:03] Task 'Serious issue' with ID -> [2] was assigned to <Jimmy>
+[29-December-2022 17:23:03] Task 'Fatal issue' with ID -> [3] was assigned to <Jimmy>
+[29-December-2022 17:23:03] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
 LIST ALL FEEDBACKS 
 	-> sortByRating  
 Feedback: ID -> [9] 'An Impressive job' | Status: Unscheduled | Rating: 10
@@ -425,28 +423,28 @@ Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
 LIST ALL BUGS 
 	-> sortBySeverity  
 Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: 
-	-> Open that 
-	-> Do this
+	1: Open that
+	2: Do this
 ===============
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: 
-	->  You have to open the interface 
-	-> You will understand what I mean 
+	1: You have to open the interface
+	2: You will understand what I mean
 ===============
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
-	-> Click register user button
-	-> Type your email
-	-> App crashes!
-	-> Fix it
+	1: Click register user button
+	2: Type your email
+	3: App crashes!
+	4: Fix it
 LIST ALL BUGS 
 	-> filterByStatus: "Active" 
 	-> sortByTitle  
 Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: 
-	-> Open that 
-	-> Do this
+	1: Open that
+	2: Do this
 ===============
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: 
-	->  You have to open the interface 
-	-> You will understand what I mean 
+	1: You have to open the interface
+	2: You will understand what I mean
 LIST ALL BUGS 
 	-> filterByAssignee: "Alexa" 
 	-> sortByPriority  
@@ -481,22 +479,22 @@ Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: S
 Feedback: ID -> [8] 'Doing good' | Status: Unscheduled | Rating: 9
 ===============
 Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Critical | Assignee: Jimmy | Steps to reproduce: 
-	-> Open that 
-	-> Do this
+	1: Open that
+	2: Do this
 ===============
 Story: ID -> [5] 'Funny story' | Status: Not Done | Priority: High | Size: Medium | Assignee: Unassigned
 ===============
 Bug: ID -> [1] 'Glitching interface' | Status: Active | Priority: Low | Severity: Major | Assignee: Unassigned | Steps to reproduce: 
-	->  You have to open the interface 
-	-> You will understand what I mean 
+	1: You have to open the interface
+	2: You will understand what I mean
 ===============
 Feedback: ID -> [7] 'Great job here' | Status: New | Rating: 9
 ===============
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
-	-> Click register user button
-	-> Type your email
-	-> App crashes!
-	-> Fix it
+	1: Click register user button
+	2: Type your email
+	3: App crashes!
+	4: Fix it
 ===============
 Story: ID -> [6] 'Third story' | Status: Not Done | Priority: Low | Size: Small | Assignee: Cortana
 LIST ALL TASKS 
@@ -514,9 +512,9 @@ LIST ALL BUGS
 	-> filterByStatusAndAssignee: "Fixed" "Jimmy" 
 	-> sortByPriority  
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
-	-> Click register user button
-	-> Type your email
-	-> App crashes!
-	-> Fix it
+	1: Click register user button
+	2: Type your email
+	3: App crashes!
+	4: Fix it
 	
 ```
