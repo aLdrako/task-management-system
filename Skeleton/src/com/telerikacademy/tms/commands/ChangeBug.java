@@ -4,6 +4,7 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
+import com.telerikacademy.tms.models.tasks.contracts.Status;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
@@ -17,7 +18,11 @@ import static java.lang.String.format;
 public class ChangeBug implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
 	private static final String INVALID_CHANGE_COMMAND = "Invalid command for change provided. Use: 'status', 'priority' or 'severity'.";
-	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
+	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID -> [%d] was changed to {%s}.";
+	private static final String BUG = Bug.class.getSimpleName();
+	private static final String STATUS = Status.class.getSimpleName();
+	private static final String PRIORITY = PriorityType.class.getSimpleName().substring(0, PriorityType.class.getSimpleName().length() - 4);
+	private static final String SEVERITY = SeverityType.class.getSimpleName().substring(0, SeverityType.class.getSimpleName().length() - 4);
 	private final TaskManagementRepository repository;
 
 	public ChangeBug(TaskManagementRepository repository) {
@@ -40,32 +45,21 @@ public class ChangeBug implements Command {
 			switch (typeOfChange) {
 				case "status":
 					BugStatus bugStatus = tryParseEnum(parameters.get(2), BugStatus.class);
-					if (bug.getStatus().equals(bugStatus)) throw new InvalidUserInputException();
 					bug.setStatus(bugStatus);
-					return getFormatedString(id, bugStatus, false);
+					return format(CHANGE_TASK_SUCCESSFUL, STATUS, BUG, id, bugStatus);
 				case "priority":
 					PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-					if (bug.getPriority().equals(priorityType)) throw new InvalidUserInputException();
 					bug.setPriority(priorityType);
-					return getFormatedString(id, priorityType, true);
+					return format(CHANGE_TASK_SUCCESSFUL, PRIORITY, BUG, id, priorityType);
 				case "severity":
 					SeverityType severityType = tryParseEnum(parameters.get(2), SeverityType.class);
-					if (bug.getSeverity().equals(severityType)) throw new InvalidUserInputException();
 					bug.setSeverity(severityType);
-					return getFormatedString(id, severityType, true);
+					return format(CHANGE_TASK_SUCCESSFUL, SEVERITY, BUG, id, severityType);
 				default:
 					return INVALID_CHANGE_COMMAND;
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
-	}
-
-	private static <E extends Enum<E>> String getFormatedString(int id, E changeType, boolean statusOrElse) {
-		String statusOrElseString = !statusOrElse
-				? changeType.getClass().getInterfaces()[0].getSimpleName()
-				: changeType.getClass().getSimpleName().substring(0, changeType.getClass().getSimpleName().length() - 4);
-
-		return format(CHANGE_TASK_SUCCESSFUL, statusOrElseString, Bug.class.getSimpleName(), id, changeType);
 	}
 }

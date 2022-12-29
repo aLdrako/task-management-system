@@ -42,6 +42,6 @@ public class UnassignTask implements Command {
 		assignableTask.setAssignee(new UserImpl("Unassigned"));
 
 
-		return format(TASK_UNASSIGNED_SUCCESSFUL, id, previousAssignee.getName());
+		return format(TASK_UNASSIGNED_SUCCESSFUL, assignableTask.getID(), previousAssignee.getName());
 	}
 }

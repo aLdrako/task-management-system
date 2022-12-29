@@ -9,7 +9,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.*;
-import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class CreateTaskInBoard implements Command {
 	public static final int EXPECTED_MIN_STORY_PARAMETERS = 7;
 	public static final int EXPECTED_MIN_FEEDBACK_PARAMETERS = 6;
 	public static final String INVALID_PARAMETER_COUNT = "Invalid parameter count";
-	public static final String TASK_CREATED_SUCCESSFULLY = "Task <%s> with ID -> [%d] has been created in board <%s>!";
+	public static final String TASK_CREATED_SUCCESSFULLY = "%s <%s> with ID -> [%d] has been created in board <%s>!";
 	private final TaskManagementRepository repository;
 
 	public CreateTaskInBoard(TaskManagementRepository repository) {
@@ -34,7 +33,7 @@ public class CreateTaskInBoard implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		validateArgumentsMin(parameters, EXPECTED_MIN_TASK_PARAMETERS);
-		TaskType ts = tryParseEnum(parameters.get(0), TaskType.class);
+		TaskType taskType = tryParseEnum(parameters.get(0), TaskType.class);
 		String boardName = parameters.get(1);
 		String teamName = parameters.get(2);
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
@@ -43,7 +42,7 @@ public class CreateTaskInBoard implements Command {
 		String description = parameters.get(4);
 		int id = 0;
 		try {
-			switch (ts) {
+			switch (taskType) {
 				case BUG: {
 					validateArgumentsMin(parameters, EXPECTED_MIN_BUG_PARAMETERS);
 					PriorityType priority = tryParseEnum(parameters.get(5), PriorityType.class);
@@ -75,7 +74,7 @@ public class CreateTaskInBoard implements Command {
 					break;
 				}
 			}
-			return String.format(TASK_CREATED_SUCCESSFULLY, title, id, boardName);
+			return String.format(TASK_CREATED_SUCCESSFULLY, taskType, title, id, board.getName());
 		} catch (IndexOutOfBoundsException ex) {
 			throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
 		}

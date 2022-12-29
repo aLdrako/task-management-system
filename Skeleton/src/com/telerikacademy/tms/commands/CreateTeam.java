@@ -26,7 +26,7 @@ public class CreateTeam implements Command {
 	}
 
 	private String createTeam(String name) {
-		if (!repository.isNameUnique(name)) {
+		if (repository.isNameUnique(name)) {
 			throw new DuplicateElementException(DUPLICATE_NAME_MESSAGE);
 		}
 		Team team = repository.createTeam(name);

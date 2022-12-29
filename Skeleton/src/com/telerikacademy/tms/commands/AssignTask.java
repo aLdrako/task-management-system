@@ -51,6 +51,6 @@ public class AssignTask implements Command {
 		user.assignTask(assignableTask);
 		assignableTask.setAssignee(user);
 
-		return format(TASK_ASSIGNED_SUCCESSFUL, id, userName);
+		return format(TASK_ASSIGNED_SUCCESSFUL, assignableTask.getID(), user.getName());
 	}
 }

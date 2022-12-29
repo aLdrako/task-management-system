@@ -28,7 +28,7 @@ public class CreatePerson implements Command {
 	}
 
 	private String createPerson(String name) {
-		if (!repository.isNameUnique(name)) {
+		if (repository.isNameUnique(name)) {
 			throw new DuplicateElementException(DUPLICATE_NAME_MESSAGE);
 		}
 		User user = repository.createUser(name);

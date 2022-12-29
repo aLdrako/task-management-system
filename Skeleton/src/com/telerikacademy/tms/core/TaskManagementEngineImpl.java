@@ -13,8 +13,8 @@ public class TaskManagementEngineImpl implements Engine {
 	private static final String COMMENT_OPEN_SYMBOL = "{{";
 	private static final String COMMENT_CLOSE_SYMBOL = "}}";
 
-	TaskManagementRepository taskManagementRepository;
-	CommandFactory commandFactory;
+	final TaskManagementRepository taskManagementRepository;
+	final CommandFactory commandFactory;
 
 	public TaskManagementEngineImpl() {
 		taskManagementRepository = new TaskManagementRepositoryImpl();
@@ -72,9 +72,7 @@ public class TaskManagementEngineImpl implements Engine {
 			int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL, indexOfOpenComment + COMMENT_OPEN_SYMBOL.length());
 			parameters.addAll(Arrays.asList(fullCommand.substring(0, indexOfOpenComment).split(" ")));
 			parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-			//fullCommand = fullCommand.replaceFirst("\\{\\{.+(?=}})}}", " ");
 			fullCommand = fullCommand.replace(fullCommand.substring(0, indexOfCloseComment + COMMENT_CLOSE_SYMBOL.length()), "");
-			//fullCommand = fullCommand.replaceFirst(regex, "");
 		}
 		parameters.addAll(Arrays.asList(fullCommand.split(" ")));
 		parameters.removeAll(Collections.singleton(""));

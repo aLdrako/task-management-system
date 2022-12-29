@@ -3,6 +3,7 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
+import com.telerikacademy.tms.models.tasks.contracts.Status;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
@@ -17,7 +18,11 @@ import static java.lang.String.format;
 public class ChangeStory implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
 	private static final String INVALID_CHANGE_COMMAND = "Invalid command for change provided. Use: 'status', 'priority' or 'size'.";
-	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
+	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID -> [%d] was changed to {%s}.";
+	private static final String STORY = Story.class.getSimpleName();
+	private static final String STATUS = Status.class.getSimpleName();
+	private static final String PRIORITY = PriorityType.class.getSimpleName().substring(0, PriorityType.class.getSimpleName().length() - 4);
+	private static final String SIZE = SizeType.class.getSimpleName().substring(0, SizeType.class.getSimpleName().length() - 4);
 	private final TaskManagementRepository repository;
 
 	public ChangeStory(TaskManagementRepository repository) {
@@ -40,32 +45,21 @@ public class ChangeStory implements Command {
 			switch (typeOfChange) {
 				case "status":
 					StoryStatus storyStatus = tryParseEnum(parameters.get(2), StoryStatus.class);
-					if (story.getStatus().equals(storyStatus)) throw new InvalidUserInputException();
 					story.setStatus(storyStatus);
-					return getFormatedString(id, storyStatus, false);
+					return format(CHANGE_TASK_SUCCESSFUL, STATUS, STORY, id, storyStatus);
 				case "priority":
 					PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-					if (story.getPriority().equals(priorityType)) throw new InvalidUserInputException();
 					story.setPriority(priorityType);
-					return getFormatedString(id, priorityType, true);
+					return format(CHANGE_TASK_SUCCESSFUL, PRIORITY, STORY, id, priorityType);
 				case "size":
 					SizeType sizeType = tryParseEnum(parameters.get(2), SizeType.class);
-					if (story.getSize().equals(sizeType)) throw new InvalidUserInputException();
 					story.setSize(sizeType);
-					return getFormatedString(id, sizeType, true);
+					return format(CHANGE_TASK_SUCCESSFUL, SIZE, STORY, id, sizeType);
 				default:
 					return INVALID_CHANGE_COMMAND;
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
-	}
-
-	private static <E extends Enum<E>> String getFormatedString(int id, E changeType, boolean statusOrElse) {
-		String statusOrElseString = !statusOrElse
-				? changeType.getClass().getInterfaces()[0].getSimpleName()
-				: changeType.getClass().getSimpleName().substring(0, changeType.getClass().getSimpleName().length() - 4);
-
-		return format(CHANGE_TASK_SUCCESSFUL, statusOrElseString, Story.class.getSimpleName(), id, changeType);
 	}
 }

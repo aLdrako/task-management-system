@@ -1,6 +1,5 @@
 package com.telerikacademy.tms.models.tasks;
 
-import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.contracts.User;
@@ -9,7 +8,6 @@ import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
-import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;

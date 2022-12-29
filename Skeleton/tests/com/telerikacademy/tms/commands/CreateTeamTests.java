@@ -57,6 +57,7 @@ public class CreateTeamTests {
 		// Assert
 		Assertions.assertEquals(1, repository.getTeams().size());
 	}
+
 	@Test
 	public void execute_Should_NotThrowException_When_ReceivingValidArgument() {
 		// Arrange

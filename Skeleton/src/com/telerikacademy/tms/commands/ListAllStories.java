@@ -5,7 +5,6 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
-import com.telerikacademy.tms.utils.ListingHelpers;
 
 import java.util.Collections;
 import java.util.Comparator;

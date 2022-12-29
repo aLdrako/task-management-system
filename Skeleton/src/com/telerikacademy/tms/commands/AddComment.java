@@ -15,7 +15,7 @@ import static java.lang.String.format;
 
 public class AddComment implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
-	public static final String COMMENT_ADDED_SUCCESSFUL = "User <%s> added comment to task with ID -> [%s]";
+	private static final String COMMENT_ADDED_SUCCESSFUL = "User <%s> added comment to task with ID -> [%s]";
 	private final TaskManagementRepository repository;
 
 	public AddComment(TaskManagementRepository repository) {
