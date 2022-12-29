@@ -32,6 +32,7 @@ public class ValidationHelpers {
 			);
 		}
 	}
+
 	public static void validateArgumentsMin(List<String> list, int minExpectedNumberOfParameters) {
 		if (list.size() < minExpectedNumberOfParameters) {
 			throw new IllegalArgumentException(

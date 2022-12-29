@@ -2,7 +2,6 @@ package com.telerikacademy.tms.core;
 
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.ElementNotFoundException;
-import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.TeamImpl;
 import com.telerikacademy.tms.models.UserImpl;
@@ -188,7 +187,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		boolean sameBoardName = getTeams().stream().flatMap(team -> team.getBoards().stream())
 				.noneMatch(n -> n.getName().equalsIgnoreCase(name));
 		boolean sameUserName = getUsers().stream().noneMatch(n -> n.getName().equalsIgnoreCase(name));
-		return sameTeamName && sameUserName && sameBoardName;
+		return !sameTeamName || !sameUserName || !sameBoardName;
 	}
 
 	/**

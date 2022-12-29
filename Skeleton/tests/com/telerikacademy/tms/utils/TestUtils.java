@@ -1,6 +1,5 @@
 package com.telerikacademy.tms.utils;
 
-import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.contracts.User;
 

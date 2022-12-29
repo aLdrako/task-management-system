@@ -4,16 +4,12 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
-import com.telerikacademy.tms.models.TeamImpl;
-import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
-import com.telerikacademy.tms.models.tasks.enums.TaskType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,7 +19,7 @@ import java.util.List;
 
 import static com.telerikacademy.tms.utils.ModelsConstants.*;
 import static com.telerikacademy.tms.utils.TestUtils.getList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AssignTaskTests {

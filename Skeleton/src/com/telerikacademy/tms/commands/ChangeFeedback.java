@@ -4,6 +4,7 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
+import com.telerikacademy.tms.models.tasks.contracts.Status;
 import com.telerikacademy.tms.models.tasks.enums.FeedbackStatus;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
 
@@ -16,7 +17,10 @@ import static java.lang.String.format;
 public class ChangeFeedback implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
 	private static final String INVALID_CHANGE_COMMAND = "Invalid command for change provided. Use: 'status' or 'rating'.";
-	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID %d was changed to %s.";
+	private static final String CHANGE_TASK_SUCCESSFUL = "%s for %s with ID -> [%d] was changed to {%s}.";
+	private static final String FEEDBACK = Feedback.class.getSimpleName();
+	private static final String STATUS = Status.class.getSimpleName();
+	private static final String RATING = Rating.class.getSimpleName();
 	private final TaskManagementRepository repository;
 
 	public ChangeFeedback(TaskManagementRepository repository) {
@@ -40,24 +44,16 @@ public class ChangeFeedback implements Command {
 				case "status":
 					FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
 					feedback.setStatus(feedbackStatus);
-					return getFormatedString(id, feedbackStatus, false);
+					return format(CHANGE_TASK_SUCCESSFUL, STATUS, FEEDBACK, id, feedbackStatus);
 				case "rating":
 					Rating rating = tryParseEnum(convertDigitToWord(parameters.get(2)), Rating.class);
 					feedback.setRating(rating);
-					return getFormatedString(id, rating, true);
+					return format(CHANGE_TASK_SUCCESSFUL, RATING, FEEDBACK, id, rating);
 				default:
 					return INVALID_CHANGE_COMMAND;
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
 		}
-	}
-
-	private static <E extends Enum<E>> String getFormatedString(int id, E changeType, boolean statusOrElse) {
-		String statusOrElseString = !statusOrElse
-				? changeType.getClass().getInterfaces()[0].getSimpleName()
-				: changeType.getClass().getSimpleName();
-
-		return format(CHANGE_TASK_SUCCESSFUL, statusOrElseString, Feedback.class.getSimpleName(), id, changeType);
 	}
 }

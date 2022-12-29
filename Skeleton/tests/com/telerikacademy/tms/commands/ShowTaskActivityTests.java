@@ -3,7 +3,6 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Feedback;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +12,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.utils.ModelsConstants.*;
-import static com.telerikacademy.tms.utils.TestUtils.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.telerikacademy.tms.utils.ModelsConstants.DESCRIPTION_VALID_NAME;
+import static com.telerikacademy.tms.utils.ModelsConstants.TASK_VALID_NAME;
+import static com.telerikacademy.tms.utils.TestUtils.getList;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ShowTaskActivityTests {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
