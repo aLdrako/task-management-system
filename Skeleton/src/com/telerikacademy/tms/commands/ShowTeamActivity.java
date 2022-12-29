@@ -12,7 +12,7 @@ import static com.telerikacademy.tms.utils.ListingHelpers.activityListing;
 import static java.lang.String.format;
 
 public class ShowTeamActivity implements Command {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
+	public static final int EXPECTED_NUMBER_PARAMETERS = 1;
 	private final TaskManagementRepository repository;
 
 	public ShowTeamActivity(TaskManagementRepository repository) {

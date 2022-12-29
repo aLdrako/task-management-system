@@ -18,8 +18,6 @@ import static java.lang.String.format;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 	private static final String BUG_UNASSIGNED = "Task is Unassigned";
-	private static final String ADDED_STEPS_TO_REPRODUCE_BUG = "Added steps to reproduce: '%s'";
-	private static final String INVALID_STEPS_MESSAGE = "N";
 	private static final String BUG_TO_STRING = "%s | Priority: %s | Severity: %s | Assignee: %s | Steps to reproduce: %s";
 	private final List<String> steps;
 	private PriorityType priority;

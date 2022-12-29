@@ -18,7 +18,4 @@ public class TestUtils {
 		return Arrays.asList(new String[size]);
 	}
 
-	public static User createUser() {
-		return new UserImpl(USER_VALID_NAME);
-	}
 }

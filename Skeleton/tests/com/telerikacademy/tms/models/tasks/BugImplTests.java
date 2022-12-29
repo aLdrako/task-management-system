@@ -27,16 +27,11 @@ public class BugImplTests {
     @Test
     public void constructor_Should_ThrowException_When_NameLengthOutOfBounds() {
         // Arrange, Act, Assert
-        assertThrows(IllegalArgumentException.class, () -> new BugImpl(1, TASK_INVALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(1)));
+        assertThrows(IllegalArgumentException.class, () -> new BugImpl(1, TASK_INVALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(0)));
     }
 
     @Test
     public void constructor_Should_ThrowException_When_DescriptionLengthOutOfBounds() {
-        // Arrange, Act, Assert
-        assertThrows(IllegalArgumentException.class, () -> new BugImpl(1, TASK_VALID_NAME, DESCRIPTION_INVALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(1)));
-    }
-    @Test
-    public void constructor_Should_ThrowException_When_ListOfStepsIsEmpty() {
         // Arrange, Act, Assert
         assertThrows(IllegalArgumentException.class, () -> new BugImpl(1, TASK_VALID_NAME, DESCRIPTION_INVALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(0)));
     }

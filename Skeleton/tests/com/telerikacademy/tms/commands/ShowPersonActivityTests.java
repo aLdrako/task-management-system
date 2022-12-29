@@ -53,10 +53,9 @@ public class ShowPersonActivityTests {
 		// Arrange
 		User user = repository.createUser(USER_VALID_NAME);
 		List<String> parameters = List.of(user.getName());
+
 		// Act, Assert
-		Assertions.assertAll(
-				() -> Assertions.assertDoesNotThrow(() -> command.execute(parameters))
-		);
+		Assertions.assertDoesNotThrow(() -> command.execute(parameters));
 	}
 
 }

@@ -35,7 +35,7 @@ public class ShowAllTeamsTests {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_ReceiveInvalidArguments() {
+    public void execute_Should_ThrowException_When_ReceiveInvalidArgumentsMinusOne() {
 
         // Arrange, Act, Assert
         Assertions.assertThrows(NegativeArraySizeException.class, () -> command.execute(getList(EXPECTED_NUMBER_PARAMETERS - 1)));
