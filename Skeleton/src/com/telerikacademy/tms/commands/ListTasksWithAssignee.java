@@ -14,15 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
+import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
+import static java.lang.String.format;
 
 public class ListTasksWithAssignee implements Command {
 	private static final String FILTER_BY_ASSIGNEE = "FilterByAssignee";
 	private static final String FILTER_BY_STATUS = "FilterByStatus";
 	private static final String SORT_BY_TITLE = "SortByTitle";
 	private static final String NAME_CANNOT_BE_EMPTY = "Assignee name field cannot be empty";
-
 	private static final String UNKNOWN_PARAMETER = "Unknown parameter \"%s\"";
 	private static final String UNKNOWN_STATUS_PARAMETER = "Unknown status parameter \"%s\"";
+	private static final String LISTING_HEADER = "LIST TASKS WITH ASSIGNEE %s %n%s";
 	private final TaskManagementRepository repository;
 
 	public ListTasksWithAssignee(TaskManagementRepository repository) {
@@ -40,7 +43,7 @@ public class ListTasksWithAssignee implements Command {
 		List<Task> tasks = filterFeedbacksAndNotAssigned();
 		//All tasks, not filtered, not sorted.
 		if (parameters.size() == 0) {
-			return ListingHelpers.elementsToString(tasks);
+			return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(tasks));
 		}
 		while (i < parameters.size()) {
 			String temp = parameters.get(i);
@@ -69,7 +72,7 @@ public class ListTasksWithAssignee implements Command {
 			tasks = sortByTitle(tasks);
 		}
 
-		return ListingHelpers.elementsToString(tasks);
+		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(tasks));
 	}
 
 	private List<Task> sortByTitle(List<Task> tasks) {
