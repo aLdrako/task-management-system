@@ -9,8 +9,6 @@ public interface Bug extends Task, Assignable {
 
 	List<String> getSteps();
 
-	void addStep(String step);
-
 	PriorityType getPriority();
 
 	SeverityType getSeverity();

@@ -11,14 +11,18 @@ import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.enums.*;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ParsingHelpers.convertDigitToWord;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseEnum;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsMin;
 
 public class CreateTaskInBoard implements Command {
-	public static final int EXPECTED_MIN_NUMBER_PARAMETERS = 6;
-	public static final int EXPECTED_MAX_NUMBER_PARAMETERS = 7;
+	public static final int EXPECTED_MIN_TASK_PARAMETERS = 5;
+	public static final int EXPECTED_MIN_BUG_PARAMETERS = 8;
+	public static final int EXPECTED_MIN_STORY_PARAMETERS = 7;
+	public static final int EXPECTED_MIN_FEEDBACK_PARAMETERS = 6;
 	public static final String INVALID_PARAMETER_COUNT = "Invalid parameter count";
 	public static final String TASK_CREATED_SUCCESSFULLY = "Task <%s> with ID -> [%d] has been created in board <%s>!";
 	private final TaskManagementRepository repository;
@@ -29,7 +33,7 @@ public class CreateTaskInBoard implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		ValidationHelpers.validateArgumentCountRange(parameters, EXPECTED_MIN_NUMBER_PARAMETERS, EXPECTED_MAX_NUMBER_PARAMETERS);
+		validateArgumentsMin(parameters, EXPECTED_MIN_TASK_PARAMETERS);
 		TaskType ts = tryParseEnum(parameters.get(0), TaskType.class);
 		String boardName = parameters.get(1);
 		String teamName = parameters.get(2);
@@ -41,14 +45,20 @@ public class CreateTaskInBoard implements Command {
 		try {
 			switch (ts) {
 				case BUG: {
+					validateArgumentsMin(parameters, EXPECTED_MIN_BUG_PARAMETERS);
 					PriorityType priority = tryParseEnum(parameters.get(5), PriorityType.class);
 					SeverityType severity = tryParseEnum(parameters.get(6), SeverityType.class);
-					Bug bug = repository.createBug(title, description, priority, severity);
+					List<String> stepsToReproduce = new ArrayList<>();
+					for (int i = 7; i < parameters.size(); i++) {
+						stepsToReproduce.add(parameters.get(i));
+					}
+					Bug bug = repository.createBug(title, description, priority, severity, stepsToReproduce);
 					id = bug.getID();
 					board.addTask(bug);
 					break;
 				}
 				case STORY: {
+					validateArgumentsMin(parameters, EXPECTED_MIN_STORY_PARAMETERS);
 					PriorityType priority = tryParseEnum(parameters.get(5), PriorityType.class);
 					SizeType size = tryParseEnum(parameters.get(6), SizeType.class);
 					Story story = repository.createStory(title, description, priority, size);
@@ -57,6 +67,7 @@ public class CreateTaskInBoard implements Command {
 					break;
 				}
 				case FEEDBACK: {
+					validateArgumentsMin(parameters, EXPECTED_MIN_FEEDBACK_PARAMETERS);
 					Rating rating = tryParseEnum(convertDigitToWord(parameters.get(5)), Rating.class);
 					Feedback feedback = repository.createFeedback(title, description, rating);
 					id = feedback.getID();

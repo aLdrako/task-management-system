@@ -12,6 +12,7 @@ public class ValidationHelpers {
 	private static final String INVALID_ARGUMENTS_AFTER_SORT_MESSAGE = "You can't have arguments after '%s'." +
 			"If you wish to filter the list, you need to do it before you sort";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
+	private static final String INVALID_NUMBER_OF_ARGUMENTS_MIN = "Invalid number of arguments. Expected: at least %d; received: %d.";
 	private static final String INVALID_NUMBER_OF_ARGUMENTS_RANGE = "Invalid number of arguments. Expected: at least %d; expected: %d; received: %d.";
 	private static final String INVALID_PARAMETER_MESSAGE = "Invalid argument detected.";
 	public static final int ZERO_PARAMETERS = 0;
@@ -28,6 +29,13 @@ public class ValidationHelpers {
 		if (list.size() != expectedNumberOfParameters) {
 			throw new IllegalArgumentException(
 					format(INVALID_NUMBER_OF_ARGUMENTS, expectedNumberOfParameters, list.size())
+			);
+		}
+	}
+	public static void validateArgumentsMin(List<String> list, int minExpectedNumberOfParameters) {
+		if (list.size() < minExpectedNumberOfParameters) {
+			throw new IllegalArgumentException(
+					format(INVALID_NUMBER_OF_ARGUMENTS_MIN, minExpectedNumberOfParameters, list.size())
 			);
 		}
 	}

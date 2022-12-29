@@ -9,6 +9,7 @@ import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import org.junit.jupiter.api.Test;
 
 import static com.telerikacademy.tms.utils.ModelsConstants.*;
+import static com.telerikacademy.tms.utils.TestUtils.getList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardImplTests {
@@ -88,7 +89,7 @@ public class BoardImplTests {
 	}
 
 	public static Task initializeTask(int id) {
-		return new BugImpl(id, TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR);
+		return new BugImpl(id, TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(0));
 	}
 
 }

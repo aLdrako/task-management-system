@@ -105,9 +105,9 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	@Override
-	public Bug createBug(String title, String description, PriorityType priority, SeverityType severity) {
+	public Bug createBug(String title, String description, PriorityType priority, SeverityType severity, List<String> steps) {
 		try {
-			Bug bug = new BugImpl(++nextId, title, description, priority, severity);
+			Bug bug = new BugImpl(++nextId, title, description, priority, severity, steps);
 			this.tasks.add(bug);
 			this.bugs.add(bug);
 			this.assignables.add(bug);
@@ -169,7 +169,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		return getBoards().stream()
 				.filter(board -> board.getTasks().contains(task))
 				.findFirst()
-				.orElseThrow(InvalidUserInputException::new);
+				.orElseThrow(ElementNotFoundException::new);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		return getTeams().stream()
 				.filter(team -> team.getBoards().contains(board))
 				.findFirst()
-				.orElseThrow(InvalidUserInputException::new);
+				.orElseThrow(ElementNotFoundException::new);
 	}
 
 	/**

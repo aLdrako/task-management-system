@@ -39,7 +39,7 @@ public class AddStepsToBug implements Command {
 		if (bug.getSteps().size() != 0)
 			throw new IllegalArgumentException(format(BUG_ALREADY_HAS_STEPS, bug.getID()));
 		for (String step : steps) {
-			bug.addStep(step.strip());
+			//bug.addStep(step.strip());
 		}
 
 		return format(STEPS_ADDED_SUCCESSFUL, bug.getID());

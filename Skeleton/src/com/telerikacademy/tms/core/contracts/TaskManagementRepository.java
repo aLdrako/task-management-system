@@ -34,7 +34,7 @@ public interface TaskManagementRepository {
 
 	Board createBoard(String name);
 
-	Bug createBug(String title, String description, PriorityType priority, SeverityType severity);
+	Bug createBug(String title, String description, PriorityType priority, SeverityType severity, List<String> steps);
 
 	Story createStory(String title, String description, PriorityType priority, SizeType size);
 

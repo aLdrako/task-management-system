@@ -5,6 +5,7 @@ import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,13 +25,19 @@ public class ShowAllPeopleTests {
 		command = new ShowAllPeople(repository);
 	}
 
-	@ParameterizedTest(name = "arguments count: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsAreInvalid(int argumentsCount) {
+	@Test
+	public void execute_Should_ThrowException_When_ArgumentsAreInvalid() {
 		// Arrange
-		List<String> parameters = getList(argumentsCount);
+		List<String> parameters = getList(EXPECTED_NUMBER_PARAMETERS + 1);
 
 		// Act, Assert
 		Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
+	}
+
+	@Test
+	public void execute_Should_ThrowException_When_ReceiveInvalidArguments() {
+
+		// Arrange, Act, Assert
+		Assertions.assertThrows(NegativeArraySizeException.class, () -> command.execute(getList(EXPECTED_NUMBER_PARAMETERS - 1)));
 	}
 }

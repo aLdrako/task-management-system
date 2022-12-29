@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ModelsConstants.*;
@@ -41,7 +42,7 @@ public class AddCommentTests {
 	@Test
 	public void execute_Should_AddComment_When_ValidArgumentsPassed() {
 		// Arrange
-		repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR);
+		repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW,SeverityType.MINOR, getList(0));
 		repository.createUser(USER_VALID_NAME);
 
 		// Act

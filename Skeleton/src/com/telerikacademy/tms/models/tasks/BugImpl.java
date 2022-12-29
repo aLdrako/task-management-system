@@ -1,5 +1,6 @@
 package com.telerikacademy.tms.models.tasks;
 
+import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.compositions.HistoryImpl;
 import com.telerikacademy.tms.models.contracts.User;
@@ -8,6 +9,7 @@ import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
+import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,30 +19,26 @@ import static java.lang.String.format;
 public class BugImpl extends TaskBaseImpl implements Bug {
 	private static final String BUG_UNASSIGNED = "Task is Unassigned";
 	private static final String ADDED_STEPS_TO_REPRODUCE_BUG = "Added steps to reproduce: '%s'";
+	private static final String INVALID_STEPS_MESSAGE = "N";
 	private static final String BUG_TO_STRING = "%s | Priority: %s | Severity: %s | Assignee: %s | Steps to reproduce: %s";
-	private final List<String> steps = new ArrayList<>();
+	private final List<String> steps;
 	private PriorityType priority;
 	private SeverityType severity;
 	private User assignee = new UserImpl("Unassigned");
 
-	public BugImpl(int id, String title, String description, PriorityType priority, SeverityType severity) {
+	public BugImpl(int id, String title, String description, PriorityType priority, SeverityType severity, List<String> steps) {
 		super(id, title, description);
 		setPriority(priority);
 		setSeverity(severity);
 		setStatus(BugStatus.ACTIVE);
 		setTaskType(TaskType.BUG);
 		populateHistory(new HistoryImpl(BUG_UNASSIGNED));
+		this.steps = new ArrayList<>(steps);
 	}
 
 	@Override
 	public List<String> getSteps() {
 		return new ArrayList<>(steps);
-	}
-
-	@Override
-	public void addStep(String step) {
-		populateHistory(new HistoryImpl(format(ADDED_STEPS_TO_REPRODUCE_BUG, step)));
-		this.steps.add(step);
 	}
 
 	@Override

@@ -57,4 +57,11 @@ public class CreateTeamTests {
 		// Assert
 		Assertions.assertEquals(1, repository.getTeams().size());
 	}
+	@Test
+	public void execute_Should_NotThrowException_When_ReceivingValidArgument() {
+		// Arrange
+		List<String> parameters = List.of(TEAM_VALID_NAME);
+		// Act, Assert
+		Assertions.assertDoesNotThrow(() -> command.execute(parameters));
+	}
 }
