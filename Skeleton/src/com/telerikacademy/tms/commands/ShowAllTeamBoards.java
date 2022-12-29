@@ -12,7 +12,6 @@ import static java.lang.String.format;
 
 public class ShowAllTeamBoards implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 1;
-
 	public static final String BOARDS_LISTED = "%s has (%s) team boards -> ";
 	public static final String NO_BOARDS_LISTED = "%s team has no boards.";
 	private final TaskManagementRepository repository;

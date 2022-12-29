@@ -13,11 +13,10 @@ import static java.lang.String.format;
 
 public class ShowTaskActivity implements Command {
 	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
-	public static final String CHANGES_HISTORY = "\n=== CHANGES HISTORY ===\n";
-	public static final String NO_CHANGES_HISTORY = "\n=== NO CHANGES ===";
-	public static final String COMMENTS = "\n=== COMMENTS ===\n";
-	public static final String NO_COMMENTS = "\n=== NO COMMENTS ===";
-	public static final String TASK_ACTIVITY = "<<< %s ACTIVITY with ID -> [%d] >>>";
+	private static final String CHANGES_HISTORY = "\n=== CHANGES HISTORY ===\n";
+	private static final String COMMENTS = "\n=== COMMENTS ===\n";
+	private static final String NO_COMMENTS = "\n=== NO COMMENTS ===";
+	private static final String TASK_ACTIVITY = "<<< %s ACTIVITY with ID -> [%d] >>>";
 
 	private final TaskManagementRepository repository;
 
@@ -36,11 +35,10 @@ public class ShowTaskActivity implements Command {
 	private String showTaskActivity(int id) {
 		Task task = repository.findTaskById(repository.getTasks(), id);
 
-		String anyHistories = task.getHistories().size() == 0 ? NO_CHANGES_HISTORY : CHANGES_HISTORY;
 		String anyComments = task.getComments().size() == 0 ? NO_COMMENTS : COMMENTS;
 
 		return format(TASK_ACTIVITY, task.getTaskType(), task.getID()) +
-				anyHistories + activityListing(task.getHistories()) +
+				CHANGES_HISTORY + activityListing(task.getHistories()) +
 				anyComments + activityListing(task.getComments());
 	}
 }

@@ -39,12 +39,10 @@ public class ChangeFeedback implements Command {
 			switch (typeOfChange) {
 				case "status":
 					FeedbackStatus feedbackStatus = tryParseEnum(parameters.get(2), FeedbackStatus.class);
-					if (feedback.getStatus().equals(feedbackStatus)) throw new InvalidUserInputException();
 					feedback.setStatus(feedbackStatus);
 					return getFormatedString(id, feedbackStatus, false);
 				case "rating":
 					Rating rating = tryParseEnum(convertDigitToWord(parameters.get(2)), Rating.class);
-					if (feedback.getRating().equals(rating)) throw new InvalidUserInputException();
 					feedback.setRating(rating);
 					return getFormatedString(id, rating, true);
 				default:

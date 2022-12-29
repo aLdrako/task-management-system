@@ -40,17 +40,14 @@ public class ChangeBug implements Command {
 			switch (typeOfChange) {
 				case "status":
 					BugStatus bugStatus = tryParseEnum(parameters.get(2), BugStatus.class);
-					if (bug.getStatus().equals(bugStatus)) throw new InvalidUserInputException();
 					bug.setStatus(bugStatus);
 					return getFormatedString(id, bugStatus, false);
 				case "priority":
 					PriorityType priorityType = tryParseEnum(parameters.get(2), PriorityType.class);
-					if (bug.getPriority().equals(priorityType)) throw new InvalidUserInputException();
 					bug.setPriority(priorityType);
 					return getFormatedString(id, priorityType, true);
 				case "severity":
 					SeverityType severityType = tryParseEnum(parameters.get(2), SeverityType.class);
-					if (bug.getSeverity().equals(severityType)) throw new InvalidUserInputException();
 					bug.setSeverity(severityType);
 					return getFormatedString(id, severityType, true);
 				default:
