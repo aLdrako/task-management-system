@@ -76,8 +76,8 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 		if (this.getSteps().size() == 0) {
 			doesHaveStepsToReproduce.append("Not specified");
 		} else {
-			doesHaveStepsToReproduce.append(System.lineSeparator()).append("\t-> ");
-			doesHaveStepsToReproduce.append(String.join("\n\t-> ", this.getSteps()));
+			doesHaveStepsToReproduce.append(System.lineSeparator()).append("\t");
+			doesHaveStepsToReproduce.append(String.join("\n\t", this.getSteps()));
 		}
 		return format(BUG_TO_STRING,
 				super.toString(), this.getPriority(), this.getSeverity(), this.getAssignee().getName(), doesHaveStepsToReproduce);

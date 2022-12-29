@@ -2,7 +2,6 @@ package com.telerikacademy.tms.core;
 
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.ElementNotFoundException;
-import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.TeamImpl;
 import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.contracts.Board;

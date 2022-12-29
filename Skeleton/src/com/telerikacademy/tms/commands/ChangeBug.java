@@ -34,7 +34,6 @@ public class ChangeBug implements Command {
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String typeOfChange = parameters.get(1).toLowerCase();
-
 		return changeBug(parameters, id, typeOfChange);
 	}
 
@@ -56,7 +55,7 @@ public class ChangeBug implements Command {
 					bug.setSeverity(severityType);
 					return format(CHANGE_TASK_SUCCESSFUL, SEVERITY, BUG, id, severityType);
 				default:
-					return INVALID_CHANGE_COMMAND;
+					throw new UnsupportedOperationException(INVALID_CHANGE_COMMAND);
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);

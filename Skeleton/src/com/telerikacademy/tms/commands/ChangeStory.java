@@ -34,7 +34,6 @@ public class ChangeStory implements Command {
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String typeOfChange = parameters.get(1).toLowerCase();
-
 		return changeStory(parameters, id, typeOfChange);
 	}
 
@@ -56,7 +55,7 @@ public class ChangeStory implements Command {
 					story.setSize(sizeType);
 					return format(CHANGE_TASK_SUCCESSFUL, SIZE, STORY, id, sizeType);
 				default:
-					return INVALID_CHANGE_COMMAND;
+					throw new UnsupportedOperationException(INVALID_CHANGE_COMMAND);
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);

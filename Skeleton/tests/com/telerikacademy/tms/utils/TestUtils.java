@@ -1,12 +1,7 @@
 package com.telerikacademy.tms.utils;
 
-import com.telerikacademy.tms.models.UserImpl;
-import com.telerikacademy.tms.models.contracts.User;
-
 import java.util.Arrays;
 import java.util.List;
-
-import static com.telerikacademy.tms.utils.ModelsConstants.USER_VALID_NAME;
 
 public class TestUtils {
 	public static String getString(int length) {

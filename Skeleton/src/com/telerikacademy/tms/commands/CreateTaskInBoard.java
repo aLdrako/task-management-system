@@ -16,6 +16,7 @@ import java.util.List;
 import static com.telerikacademy.tms.utils.ParsingHelpers.convertDigitToWord;
 import static com.telerikacademy.tms.utils.ParsingHelpers.tryParseEnum;
 import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsMin;
+import static java.lang.String.format;
 
 public class CreateTaskInBoard implements Command {
 	public static final int EXPECTED_MIN_TASK_PARAMETERS = 5;
@@ -49,7 +50,7 @@ public class CreateTaskInBoard implements Command {
 					SeverityType severity = tryParseEnum(parameters.get(6), SeverityType.class);
 					List<String> stepsToReproduce = new ArrayList<>();
 					for (int i = 7; i < parameters.size(); i++) {
-						stepsToReproduce.add(parameters.get(i));
+						stepsToReproduce.add(format("%s: %s", i - 6, parameters.get(i).strip()));
 					}
 					Bug bug = repository.createBug(title, description, priority, severity, stepsToReproduce);
 					id = bug.getID();
@@ -74,7 +75,7 @@ public class CreateTaskInBoard implements Command {
 					break;
 				}
 			}
-			return String.format(TASK_CREATED_SUCCESSFULLY, taskType, title, id, board.getName());
+			return format(TASK_CREATED_SUCCESSFULLY, taskType, title, id, board.getName());
 		} catch (IndexOutOfBoundsException ex) {
 			throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
 		}

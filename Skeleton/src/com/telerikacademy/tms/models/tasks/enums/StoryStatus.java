@@ -4,14 +4,14 @@ import com.telerikacademy.tms.exceptions.InvalidEnumArgumentException;
 import com.telerikacademy.tms.models.tasks.contracts.Status;
 
 public enum StoryStatus implements Status {
-	NOTDONE,
+	NOT_DONE,
 	INPROGRESS,
 	DONE;
 
 	@Override
 	public String toString() {
 		switch (this) {
-			case NOTDONE:
+			case NOT_DONE:
 				return "Not Done";
 			case INPROGRESS:
 				return "InProgress";

@@ -49,14 +49,6 @@ public class ValidationHelpers {
 		}
 	}
 
-	public static void validateArgumentCountRange(List<String> list, int expectedMinNumberOfParameters, int expectedMaxNumberOfParameters) {
-		if (list.size() > expectedMaxNumberOfParameters || list.size() < expectedMinNumberOfParameters) {
-			throw new IllegalArgumentException(
-					format(INVALID_NUMBER_OF_ARGUMENTS_RANGE, expectedMinNumberOfParameters, expectedMaxNumberOfParameters, list.size())
-			);
-		}
-	}
-
 	/**
 	 * In case there is a sorting parameter in the list, this method checks to see if there are parameters after
 	 * the "sort" parameter and throws an InvalidUserInputException if true.

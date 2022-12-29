@@ -32,7 +32,6 @@ public class ChangeFeedback implements Command {
 		validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 		int id = tryParseInt(parameters.get(0));
 		String typeOfChange = parameters.get(1).toLowerCase();
-
 		return changeFeedback(parameters, id, typeOfChange);
 	}
 
@@ -50,7 +49,7 @@ public class ChangeFeedback implements Command {
 					feedback.setRating(rating);
 					return format(CHANGE_TASK_SUCCESSFUL, RATING, FEEDBACK, id, rating);
 				default:
-					return INVALID_CHANGE_COMMAND;
+					throw new UnsupportedOperationException(INVALID_CHANGE_COMMAND);
 			}
 		} catch (InvalidUserInputException e) {
 			throw new InvalidUserInputException(SAME_PARAMETERS_PASSED);
