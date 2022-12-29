@@ -30,7 +30,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	private int nextId;
 
 	private final List<Team> teams = new ArrayList<>();
-	private final List<Board> boards = new ArrayList<>();
 	private final List<User> users = new ArrayList<>();
 	private final List<Task> tasks = new ArrayList<>();
 	private final List<Bug> bugs = new ArrayList<>();
@@ -78,11 +77,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	@Override
-	public List<Board> getBoards() {
-		return new ArrayList<>(boards);
-	}
-
-	@Override
 	public Team createTeam(String name) {
 		Team team = new TeamImpl(name);
 		this.teams.add(team);
@@ -94,13 +88,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 		User user = new UserImpl(name);
 		this.users.add(user);
 		return user;
-	}
-
-	@Override
-	public Board createBoard(String name) {
-		Board board = new BoardImpl(name);
-		this.boards.add(board);
-		return board;
 	}
 
 	@Override
@@ -165,10 +152,12 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 	@Override
 	public Board findBoardByTask(Task task) {
-		return getBoards().stream()
-				.filter(board -> board.getTasks().contains(task))
+		return getTeams().stream()
+				.flatMap(team -> team.getBoards()
+						.stream().filter(board -> board.getTasks().contains(task)))
 				.findFirst()
 				.orElseThrow(ElementNotFoundException::new);
+
 	}
 
 	@Override

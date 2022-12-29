@@ -26,13 +26,9 @@ public interface TaskManagementRepository {
 
 	List<Assignable> getAssignableTasks();
 
-	List<Board> getBoards();
-
 	Team createTeam(String name);
 
 	User createUser(String name);
-
-	Board createBoard(String name);
 
 	Bug createBug(String title, String description, PriorityType priority, SeverityType severity, List<String> steps);
 

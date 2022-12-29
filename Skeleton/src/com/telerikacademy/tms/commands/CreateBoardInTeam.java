@@ -3,6 +3,7 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.DuplicateElementException;
+import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.utils.ValidationHelpers;
@@ -37,8 +38,7 @@ public class CreateBoardInTeam implements Command {
 
 	private String createBoardInTeam(String boardName, String teamName) {
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
-		Board board = repository.createBoard(boardName);
-		team.addBoard(board);
-		return String.format(BOARD_CREATED_SUCCESSFULLY, board.getName(), team.getName());
+		team.addBoard(new BoardImpl(boardName));
+		return String.format(BOARD_CREATED_SUCCESSFULLY, boardName, team.getName());
 	}
 }

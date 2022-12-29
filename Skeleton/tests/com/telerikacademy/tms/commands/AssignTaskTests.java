@@ -4,6 +4,7 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
+import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
@@ -62,7 +63,7 @@ public class AssignTaskTests {
 		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
 		User user = repository.createUser(USER_VALID_NAME);
 		Team team = repository.createTeam(TEAM_VALID_NAME);
-		Board board = repository.createBoard(BOARD_VALID_NAME);
+		Board board = new BoardImpl(BOARD_VALID_NAME);
 		board.addTask(story);
 		team.addBoard(board);
 
@@ -76,7 +77,7 @@ public class AssignTaskTests {
 		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
 		User user = repository.createUser(USER_VALID_NAME);
 		Team team = repository.createTeam(TEAM_VALID_NAME);
-		Board board = repository.createBoard(BOARD_VALID_NAME);
+		Board board = new BoardImpl(BOARD_VALID_NAME);
 		board.addTask(story);
 		team.addBoard(board);
 		team.addUser(user);

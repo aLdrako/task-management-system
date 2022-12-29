@@ -2,6 +2,7 @@ package com.telerikacademy.tms.core;
 
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.ElementNotFoundException;
+import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.UserImpl;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
@@ -40,8 +41,7 @@ public class TaskManagementRepositoryImplTests {
                 () -> Assertions.assertNotNull(repository.getBugs()),
                 () -> Assertions.assertNotNull(repository.getFeedbacks()),
                 () -> Assertions.assertNotNull(repository.getStories()),
-                () -> Assertions.assertNotNull(repository.getAssignableTasks()),
-                () -> Assertions.assertNotNull(repository.getBoards())
+                () -> Assertions.assertNotNull(repository.getAssignableTasks())
         );
     }
 
@@ -109,15 +109,7 @@ public class TaskManagementRepositoryImplTests {
         // Act, Assert
         Assertions.assertNotSame(assignablesFirst, assignablesSecond);
     }
-    @Test
-    public void getBoards_Should_ReturnCopyOfCollection() {
-        // Arrange
-        List<Board> boardsFirst = repository.getBoards();
-        List<Board> boardsSecond = repository.getBoards();
 
-        // Act, Assert
-        Assertions.assertNotSame(boardsFirst, boardsSecond);
-    }
     @Test
     public void createTeam_Should_AddTeamToList() {
         // Arrange
@@ -133,14 +125,6 @@ public class TaskManagementRepositoryImplTests {
 
         // Act, Assert
         Assertions.assertEquals(1, repository.getUsers().size());
-    }
-    @Test
-    public void createBoard_Should_AddBoardToList() {
-        // Arrange
-        repository.createBoard(BOARD_VALID_NAME);
-
-        // Act, Assert
-        Assertions.assertEquals(1, repository.getBoards().size());
     }
     @Test
     public void createBug_Should_AddBugToLists() {
@@ -202,10 +186,12 @@ public class TaskManagementRepositoryImplTests {
     @Test
     public void findBoardByTask_Should_ReturnBoard() {
         // Arrange
-        Board board = repository.createBoard(BOARD_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        Team team = repository.createTeam(TEAM_VALID_NAME);
         Task task = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
                 PriorityType.LOW, SizeType.LARGE);
         // Act
+        team.addBoard(board);
         board.addTask(task);
 
         // Assert
@@ -222,7 +208,7 @@ public class TaskManagementRepositoryImplTests {
     public void findTeamByBoard_Should_ReturnTeam() {
         // Arrange
         Team team = repository.createTeam(TEAM_VALID_NAME);
-        Board board = repository.createBoard(BOARD_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
         // Act
         team.addBoard(board);
         // Assert
@@ -231,7 +217,7 @@ public class TaskManagementRepositoryImplTests {
     @Test
     public void findTeamByBoard_Should_ThrowException_When_TeamIsNotFound() {
         // Arrange
-        Board board = repository.createBoard(BOARD_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
         // Act, Assert
         Assertions.assertThrows(ElementNotFoundException.class, () -> repository.findTeamByBoard(board));
     }
@@ -240,18 +226,19 @@ public class TaskManagementRepositoryImplTests {
         // Arrange
         Team team = repository.createTeam(TEAM_VALID_NAME);
         User user = repository.createUser(USER_VALID_NAME);
-        Board board = repository.createBoard(BOARD_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        team.addBoard(board);
         // Act, Assert
         Assertions.assertAll(
-                () -> Assertions.assertFalse(repository.isNameUnique(TEAM_VALID_NAME)),
-                () -> Assertions.assertFalse(repository.isNameUnique(USER_VALID_NAME)),
-                () -> Assertions.assertFalse(repository.isNameUnique(BOARD_VALID_NAME))
+                () -> Assertions.assertTrue(repository.isNameUnique(team.getName())),
+                () -> Assertions.assertTrue(repository.isNameUnique(user.getName())),
+                () -> Assertions.assertTrue(repository.isNameUnique(board.getName()))
         );
     }
     @Test
     public void isNameUnique_Should_ReturnTrue_When_NameIsUnique() {
         // Arrange, Act, Assert
-        Assertions.assertTrue(repository.isNameUnique(TEAM_VALID_NAME));
+        Assertions.assertFalse(repository.isNameUnique(TEAM_VALID_NAME));
     }
 
     @Test
@@ -259,12 +246,11 @@ public class TaskManagementRepositoryImplTests {
         // Arrange
         Team team = repository.createTeam(TEAM_VALID_NAME);
         User user = repository.createUser(USER_VALID_NAME);
-        Board board = repository.createBoard(BOARD_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
         // Act, Assert
         Assertions.assertAll(
                 () -> Assertions.assertSame(team, repository.findElementByName(repository.getTeams(), team.getName())),
-                () -> Assertions.assertSame(user, repository.findElementByName(repository.getUsers(), user.getName())),
-                () -> Assertions.assertSame(board, repository.findElementByName(repository.getBoards(), board.getName()))
+                () -> Assertions.assertSame(user, repository.findElementByName(repository.getUsers(), user.getName()))
         );
     }
     @Test
@@ -275,7 +261,7 @@ public class TaskManagementRepositoryImplTests {
     @Test
     public void findBoardByNameInTeam_Should_ReturnBoard_When_BoardIsFound() {
         // Arrange
-        Board board = repository.createBoard(BOARD_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
         Team team = repository.createTeam(TEAM_VALID_NAME);
         // Act
         team.addBoard(board);
