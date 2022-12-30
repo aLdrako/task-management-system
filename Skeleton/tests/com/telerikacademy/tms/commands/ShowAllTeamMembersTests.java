@@ -55,9 +55,7 @@ class ShowAllTeamMembersTests {
     @Test
     void execute_Should_ReturnNoMemberMessageForExistingTeam() {
         // Arrange
-//        User user = repository.createUser("User 01");
         Team team = repository.createTeam("Team 01");
-//        team.addUser(user);
         List<String> parameters = new ArrayList<String>();
         parameters.add("Team 01");
         // Act

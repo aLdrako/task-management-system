@@ -19,10 +19,9 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateArgumentsMi
 import static java.lang.String.format;
 
 public class CreateTaskInBoard implements Command {
-	public static final int EXPECTED_MIN_TASK_PARAMETERS = 5;
+	public static final int EXPECTED_MIN_TASK_PARAMETERS = 6;
 	public static final int EXPECTED_MIN_BUG_PARAMETERS = 8;
 	public static final int EXPECTED_MIN_STORY_PARAMETERS = 7;
-	public static final int EXPECTED_MIN_FEEDBACK_PARAMETERS = 6;
 	public static final String INVALID_PARAMETER_COUNT = "Invalid parameter count";
 	public static final String TASK_CREATED_SUCCESSFULLY = "%s <%s> with ID -> [%d] has been created in board <%s>!";
 	private final TaskManagementRepository repository;
@@ -33,7 +32,7 @@ public class CreateTaskInBoard implements Command {
 
 	@Override
 	public String execute(List<String> parameters) {
-		validateArgumentsMin(parameters, EXPECTED_MIN_TASK_PARAMETERS);
+		validateArgumentsMin(parameters, EXPECTED_MIN_TASK_PARAMETERS);//Min task is same as min feedback.
 		TaskType taskType = tryParseEnum(parameters.get(0), TaskType.class);
 		String boardName = parameters.get(1);
 		String teamName = parameters.get(2);
@@ -42,7 +41,6 @@ public class CreateTaskInBoard implements Command {
 		String title = parameters.get(3);
 		String description = parameters.get(4);
 		int id = 0;
-		try {
 			switch (taskType) {
 				case BUG: {
 					validateArgumentsMin(parameters, EXPECTED_MIN_BUG_PARAMETERS);
@@ -67,7 +65,6 @@ public class CreateTaskInBoard implements Command {
 					break;
 				}
 				case FEEDBACK: {
-					validateArgumentsMin(parameters, EXPECTED_MIN_FEEDBACK_PARAMETERS);
 					Rating rating = tryParseEnum(convertDigitToWord(parameters.get(5)), Rating.class);
 					Feedback feedback = repository.createFeedback(title, description, rating);
 					id = feedback.getID();
@@ -76,8 +73,5 @@ public class CreateTaskInBoard implements Command {
 				}
 			}
 			return format(TASK_CREATED_SUCCESSFULLY, taskType, title, id, board.getName());
-		} catch (IndexOutOfBoundsException ex) {
-			throw new InvalidUserInputException(INVALID_PARAMETER_COUNT);
-		}
 	}
 }
