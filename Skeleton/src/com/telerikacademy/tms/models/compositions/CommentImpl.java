@@ -6,7 +6,6 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.validateInRange;
 import static java.lang.String.format;
 
 public class CommentImpl implements Comment {
-
 	private static final int COMMENT_MIN_LEN = 3;
 	private static final int COMMENT_MAX_LEN = 200;
 	private static final String COMMENT_LEN_ERR = format(

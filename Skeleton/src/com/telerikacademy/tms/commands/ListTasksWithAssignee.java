@@ -7,7 +7,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
 import com.telerikacademy.tms.models.tasks.enums.StoryStatus;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
-import com.telerikacademy.tms.utils.ListingHelpers;
 
 import java.util.Collections;
 import java.util.List;

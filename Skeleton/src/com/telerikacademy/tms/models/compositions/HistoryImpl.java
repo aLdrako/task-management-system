@@ -9,17 +9,20 @@ import static java.lang.String.format;
 
 public class HistoryImpl implements History {
 	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
-	private final String description;
-	private final LocalDateTime timestamp;
+	private String description;
+	private final LocalDateTime timestamp = LocalDateTime.now();
 
 	public HistoryImpl(String description) {
-		this.description = description;
-		this.timestamp = LocalDateTime.now();
+		setDescription(description);
 	}
 
 	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	private void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

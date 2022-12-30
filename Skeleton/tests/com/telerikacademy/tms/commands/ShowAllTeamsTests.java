@@ -3,7 +3,6 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
-import com.telerikacademy.tms.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.telerikacademy.tms.commands.ShowAllTeams.EXPECTED_NUMBER_PARAMETERS;
-import static com.telerikacademy.tms.utils.ModelsConstants.TEAM_VALID_NAME;
 import static com.telerikacademy.tms.utils.TestUtils.getList;
 
 public class ShowAllTeamsTests {

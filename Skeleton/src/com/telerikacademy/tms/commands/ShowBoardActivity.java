@@ -14,6 +14,7 @@ import static java.lang.String.format;
 public class ShowBoardActivity implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
 	public static final String ACTIVITY_HISTORY_BOARD_HEADER = "<<< <%s> board's %s ACTIVITY HISTORY >>>";
+
 	public final TaskManagementRepository repository;
 
 	public ShowBoardActivity(TaskManagementRepository repository) {

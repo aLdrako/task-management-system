@@ -27,6 +27,7 @@ public class UserImpl implements User {
 	private static final String TASK_NOT_ASSIGNED = "Task with ID -> [%s] in not assigned to <%s>";
 	private static final String COMMENT_ADDED_TO_TASK_SUCCESSFUL = "Added comment to task with ID -> [%s]";
 	private static final String CONTAIN_TASKS_AMOUNT = ": %s has (%s) assigned tasks";
+	private static final String USER_ADDED_TO_TEAM = "User was added to team <%s>";
 
 	private String name;
 	private final List<Task> tasks;
@@ -84,7 +85,7 @@ public class UserImpl implements User {
 
 	@Override
 	public void populateHistoryWhenAddingToTeam(Team team) {
-		this.activityHistory.add(new HistoryImpl(format("User was added to team <%s>", team.getName())));
+		this.activityHistory.add(new HistoryImpl(format(USER_ADDED_TO_TEAM, team.getName())));
 	}
 
 	@Override

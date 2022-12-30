@@ -40,7 +40,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	private void setSteps(List<String> steps) {
 		this.steps = new ArrayList<>(steps);
-		populateHistory(new HistoryImpl(format("Steps to reproduce: %s", join(" | ", steps))));
+		populateHistory(new HistoryImpl(format("Steps to reproduce -> %s", join(" -> ", steps))));
 	}
 
 	@Override

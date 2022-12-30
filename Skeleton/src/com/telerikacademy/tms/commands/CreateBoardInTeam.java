@@ -12,7 +12,7 @@ import java.util.List;
 public class CreateBoardInTeam implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
 	public static final String BOARD_CREATED_SUCCESSFULLY = "Board <%s> has been created in team <%s>!";
-	public static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. There is a User/Team with the same name!";
+	private static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. There is a User/Team with the same name!";
 	private final TaskManagementRepository repository;
 
 	public CreateBoardInTeam(TaskManagementRepository repository) {

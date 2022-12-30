@@ -75,16 +75,16 @@ public abstract class TaskBaseImpl implements Task {
 		return new ArrayList<>(changesHistory);
 	}
 
-	private void setDescription(String description) {
-		validateInRange(description.length(), DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN,
-				format(TEXT_LEN_ERR, "Description", DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN));
-		this.description = description;
-	}
-
 	private void setTitle(String title) {
 		validateInRange(title.length(), TITLE_MIN_LEN, TITLE_MAX_LEN,
 				format(TEXT_LEN_ERR, "Title", TITLE_MIN_LEN, TITLE_MAX_LEN));
 		this.title = title;
+	}
+
+	private void setDescription(String description) {
+		validateInRange(description.length(), DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN,
+				format(TEXT_LEN_ERR, "Description", DESCRIPTION_MIN_LEN, DESCRIPTION_MAX_LEN));
+		this.description = description;
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class BoardImpl implements Board {
 		return new ArrayList<>(activityHistory);
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		validateInRange(name.length(), BOARD_MIN_LEN, BOARD_MAX_LEN, BOARD_LEN_ERR);
 		this.name = name;
 	}

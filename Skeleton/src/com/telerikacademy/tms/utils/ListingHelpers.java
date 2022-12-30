@@ -7,7 +7,7 @@ import static java.lang.String.format;
 
 
 public class ListingHelpers {
-	public static final String EMPTY_LIST_MESSAGE = "=== EMPTY LIST ===";
+	private static final String EMPTY_LIST_MESSAGE = "=== EMPTY LIST ===";
 	public static final String ACTIVITY_HISTORY_HEADER = "<<< %s %s's ACTIVITY HISTORY >>>";
 
 	public static <T> String elementsToString(List<T> elements) {
