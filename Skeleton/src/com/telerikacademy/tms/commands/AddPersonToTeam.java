@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddPersonToTeam implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	private static final String PERSON_ADDED_TO_TEAM = "Person <%s> has been added to the team <%s>!";
+	public static final String PERSON_ADDED_TO_TEAM = "Person <%s> has been added to the team <%s>!";
 
 	private final TaskManagementRepository repository;
 

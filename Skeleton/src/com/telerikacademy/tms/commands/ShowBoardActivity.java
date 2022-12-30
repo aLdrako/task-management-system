@@ -12,9 +12,9 @@ import static com.telerikacademy.tms.utils.ListingHelpers.activityListing;
 import static java.lang.String.format;
 
 public class ShowBoardActivity implements Command {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	private static final String ACTIVITY_HISTORY_BOARD_HEADER = "<<< <%s> %s's %s ACTIVITY HISTORY >>>";
-	private final TaskManagementRepository repository;
+	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
+	public static final String ACTIVITY_HISTORY_BOARD_HEADER = "<<< <%s> board's %s ACTIVITY HISTORY >>>";
+	public final TaskManagementRepository repository;
 
 	public ShowBoardActivity(TaskManagementRepository repository) {
 		this.repository = repository;
@@ -34,7 +34,7 @@ public class ShowBoardActivity implements Command {
 		Board board = repository.findBoardByNameInTeam(team, boardName);
 
 		return format(ACTIVITY_HISTORY_BOARD_HEADER, team.getName(),
-				board.getClass().getInterfaces()[0].getSimpleName(), board.getName()) +
+				board.getName()) +
 				System.lineSeparator() +
 				activityListing(board.getHistories());
 	}
