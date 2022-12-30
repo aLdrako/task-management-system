@@ -5,7 +5,10 @@ import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
+import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
+import com.telerikacademy.tms.models.tasks.enums.SeverityType;
+import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +17,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
+import static com.telerikacademy.tms.commands.ListAllTasks.LISTING_HEADER;
+import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
+import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ModelsConstants.DESCRIPTION_VALID_NAME;
 import static com.telerikacademy.tms.utils.ModelsConstants.TASK_VALID_NAME;
+import static com.telerikacademy.tms.utils.TestUtils.getList;
+import static java.lang.String.format;
 
 public class ListAllTasksTests {
     private TaskManagementRepository repository;
@@ -57,6 +65,18 @@ public class ListAllTasksTests {
                 () -> Assertions.assertDoesNotThrow(() -> command.execute(parameters)),
                 () -> Assertions.assertDoesNotThrow(() -> command.execute(parameters1))
         );
+    }
+
+    @Test
+    public void execute_Should_printAllTasks_When_LastParameterIsSorting() {
+        // Arrange
+        repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+        repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.FIVE);
+        repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(1));
+        List<String> parameters = getList(0);
+
+        Assertions.assertEquals(format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(repository.getTasks())),
+                command.execute(parameters));
     }
 
 }
