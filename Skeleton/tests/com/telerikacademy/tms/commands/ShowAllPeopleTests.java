@@ -38,4 +38,10 @@ public class ShowAllPeopleTests {
 		// Arrange, Act, Assert
 		Assertions.assertThrows(NegativeArraySizeException.class, () -> command.execute(getList(EXPECTED_NUMBER_PARAMETERS - 1)));
 	}
+
+	@Test
+	public void execute_Should_ShowAllPeople_When_ValidArgumentsPassed() {
+		//Arrange, Act, Assert
+		Assertions.assertDoesNotThrow(() -> command.execute(List.of()));
+	}
 }

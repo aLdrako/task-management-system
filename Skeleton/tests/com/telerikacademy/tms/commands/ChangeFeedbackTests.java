@@ -81,7 +81,7 @@ public class ChangeFeedbackTests {
 	}
 
 	@Test
-	public void execute_Should_ChangeBugParameters_When_ValidArgumentsPassed() {
+	public void execute_Should_ChangeParameters_When_ValidArgumentsPassed() {
 		// Arrange
 		Feedback feedback = repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.TEN);
 

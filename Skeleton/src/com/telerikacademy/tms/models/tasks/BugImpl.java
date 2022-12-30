@@ -13,11 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.format;
+import static java.lang.String.join;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 	private static final String BUG_UNASSIGNED = "Task is Unassigned";
 	private static final String BUG_TO_STRING = "%s | Priority: %s | Severity: %s | Assignee: %s | Steps to reproduce: %s";
-	private final List<String> steps;
+	private List<String> steps;
 	private PriorityType priority;
 	private SeverityType severity;
 	private User assignee = new UserImpl("Unassigned");
@@ -29,12 +30,17 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 		setStatus(BugStatus.ACTIVE);
 		setTaskType(TaskType.BUG);
 		populateHistory(new HistoryImpl(BUG_UNASSIGNED));
-		this.steps = new ArrayList<>(steps);
+		setSteps(steps);
 	}
 
 	@Override
 	public List<String> getSteps() {
 		return new ArrayList<>(steps);
+	}
+
+	private void setSteps(List<String> steps) {
+		this.steps = new ArrayList<>(steps);
+		populateHistory(new HistoryImpl(format("Steps to reproduce: %s", join(" | ", steps))));
 	}
 
 	@Override
@@ -72,14 +78,9 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 	@Override
 	public String toString() {
-		StringBuilder doesHaveStepsToReproduce = new StringBuilder();
-		if (this.getSteps().size() == 0) {
-			doesHaveStepsToReproduce.append("Not specified");
-		} else {
-			doesHaveStepsToReproduce.append(System.lineSeparator()).append("\t");
-			doesHaveStepsToReproduce.append(String.join("\n\t", this.getSteps()));
-		}
+
 		return format(BUG_TO_STRING,
-				super.toString(), this.getPriority(), this.getSeverity(), this.getAssignee().getName(), doesHaveStepsToReproduce);
+				super.toString(), this.getPriority(), this.getSeverity(), this.getAssignee().getName(),
+				"\n\t".concat(join("\n\t", this.getSteps())));
 	}
 }

@@ -89,7 +89,7 @@ public class ChangeBugTests {
 	}
 
 	@Test
-	public void execute_Should_ChangeBugParameters_When_ValidArgumentsPassed() {
+	public void execute_Should_ChangeParameters_When_ValidArgumentsPassed() {
 		// Arrange
 		Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
 				PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));

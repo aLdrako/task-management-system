@@ -86,7 +86,7 @@ public class ChangeStoryTests {
 	}
 
 	@Test
-	public void execute_Should_ChangeBugParameters_When_ValidArgumentsPassed() {
+	public void execute_Should_ChangeParameters_When_ValidArgumentsPassed() {
 		// Arrange
 		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.MEDIUM, SizeType.LARGE);
 
