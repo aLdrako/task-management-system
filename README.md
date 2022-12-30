@@ -126,19 +126,19 @@ One of the developers has fixed a bug that was assigned to him. He adds a commen
 - ShowAllTeamBoards `{String teamName}`
 - CreateBoardInTeam `{String boardName} {String teamName}`
 - ShowBoardActivity `{String boardName} {String teamName}`
-- CreateTaskInBoard `[bug/story/feedback](enums) {String boardName} {String teamName} {(coresponding task parameters)}`
+- CreateTaskInBoard `[bug/story/feedback] {String boardName} {String teamName} {(coresponding task parameters)}`
 - AssignTask `{ind id} {String name}`
 - UnassignTask `{ind id}`
 - AddComment `{ind id} {String comment} {String name}`
-- ChangeBug `{ind id} [status/priority/severity/](enums)`
-- ChangeStory `{ind id} [status/priority/size](enums)`
-- ChangeFeedback `{ind id} [status/rating](enums)`
+- ChangeBug `{ind id} [status/priority/severity/] {String (enums)}`
+- ChangeStory `{ind id} [status/priority/size] {String (enums)}`
+- ChangeFeedback `{ind id} [status/rating] {String (enums)}`
 - ShowTaskActivity `{ind id}`
-- ListAllTasks `[sortByTitle] || [filterByTitle {String title}] || [filterByTitle {String title} sortByTitle]` 
-- ListAllBugs `[sortByTitle/sortByPriority/sortBySeverity] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySeverity]` 
-- ListAllStories `[sortByTitle/sortByPriority/sortBySize] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee}] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee {String status/assignee/status assignee} sortByTitle/sortByPriority/sortBySize]`
-- ListAllFeedbacks `[sortByTitle/sortByRating] || [filterByStatus {String status}] || [filterByStatus {String status} sortByTitle/sortByPriority]`
-- ListTasksWithAssignee
+- ListAllTasks `sortByTitle || filterByTitle {String title} || filterByTitle {String title} sortByTitle` 
+- ListAllBugs `[sortByTitle/sortByPriority/sortBySeverity] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee] {String [status/assignee/status assignee]} || [filterByStatus/filterByAssignee/filterByStatusAndAssignee] {String [status/assignee/status assignee]} [sortByTitle/sortByPriority/sortBySeverity]` 
+- ListAllStories `[sortByTitle/sortByPriority/sortBySize] || [filterByStatus/filterByAssignee/filterByStatusAndAssignee] {String [status/assignee/status assignee]} || [filterByStatus/filterByAssignee/filterByStatusAndAssignee] {String [status/assignee/status assignee]} [sortByTitle/sortByPriority/sortBySize]`
+- ListAllFeedbacks `[sortByTitle/sortByRating] || filterByStatus {String status} || filterByStatus {String status} [sortByTitle/sortByPriority]`
+- ListTasksWithAssignee `sortByTitle || [filterByAssignee/filterByStatus] {String [userName/status]} || [filterByAssignee/filterByStatus] {String [userName/status]} sortByTitle || filterByAssignee {String userName} filterByStatus {String status} || filterByAssignee {String userName} filterByStatus {String status} sortByTitle`
 
 ## Teamwork Guidelines
 Please see the Teamwork Guidelines [document](https://learn.telerikacademy.com/mod/page/view.php?id=38822 "document").
@@ -220,7 +220,7 @@ showtaskactivity 1
 showteamactivity Hackers
 showpersonactivity jimmy
 ListTasksWithAssignee
-ListTasksWithAssignee FilterByAssignee Jimmy FilterByStatus Fixed SortByTitle
+ListTasksWithAssignee filterByAssignee Jimmy filterByStatus Fixed sortByTitle
 ListAllFeedbacks sortByRating
 ListAllFeedbacks filterByStatus New sortByRating
 ListAllBugs sortBySeverity
@@ -229,7 +229,7 @@ ListAllBugs filterByAssignee Alexa sortByPriority
 ListAllStories sortBySize
 ListAllStories filterByStatus InProgress sortByTitle
 ListAllStories filterByStatusAndAssignee InProgress Cortana sortByTitle
-ListAllFeedbacks FilterByStatus Unscheduled SortByRating
+ListAllFeedbacks filterByStatus Unscheduled sortByRating
 ListAllTasks 
 ListAllTasks filterByTitle {{Great job}}
 ListAllTasks filterByTitle story sortByTitle
@@ -256,18 +256,18 @@ Person <Alexa> has been added to the team <Suicide Squad>!
 Person <Cortana> has been added to the team <Suicide Squad>!
 User <Cortana> already in team <Suicide Squad>
 Person <Jimmy> has been added to the team <Hackers>!
-<<< <Hackers> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] Board was created.
-<<< <Suicide Squad> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] Board was created.
+<<< <Hackers> board's ToDos ACTIVITY HISTORY >>>
+[30-December-2022 21:11:40] Board was created.
+<<< <Suicide Squad> board's ToDos ACTIVITY HISTORY >>>
+[30-December-2022 21:11:40] Board was created.
 <<< Alexa User's ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] User was created.
-[29-December-2022 18:47:24] User was added to team <Suicide Squad>
+[30-December-2022 21:11:40] User was created.
+[30-December-2022 21:11:40] User was added to team <Suicide Squad>
 <<< Marco Polo User's ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] User was created.
+[30-December-2022 21:11:40] User was created.
 <<< Cortana User's ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] User was created.
-[29-December-2022 18:47:24] User was added to team <Suicide Squad>
+[30-December-2022 21:11:40] User was created.
+[30-December-2022 21:11:40] User was added to team <Suicide Squad>
 === ALL TEAMS ===
 Team: Hackers
 It has (1) users -> Jimmy
@@ -323,35 +323,37 @@ Task with ID -> [2] was assigned to user <Jimmy>.
 Task with ID -> [3] was assigned to user <Jimmy>.
 No <Assignable task> with ID -> 9
 <<< Alexa User's ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] User was created.
-[29-December-2022 18:47:24] User was added to team <Suicide Squad>
-[29-December-2022 18:47:24] Task 'Another story' with ID -> [4] was assigned to <Alexa>
-<<< <Hackers> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] Board was created.
-[29-December-2022 18:47:24] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
-[29-December-2022 18:47:24] Task 'Serious issue' with ID -> [2] was added to board <ToDos>
-[29-December-2022 18:47:24] Task 'Fatal issue' with ID -> [3] was added to board <ToDos>
-[29-December-2022 18:47:24] Task 'Funny story' with ID -> [5] was added to board <ToDos>
-[29-December-2022 18:47:24] Task 'Great job here' with ID -> [7] was added to board <ToDos>
-<<< <Suicide Squad> Board's ToDos ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] Board was created.
-[29-December-2022 18:47:24] Task 'Third story' with ID -> [6] was added to board <ToDos>
+[30-December-2022 21:11:40] User was created.
+[30-December-2022 21:11:40] User was added to team <Suicide Squad>
+[30-December-2022 21:11:40] Task 'Another story' with ID -> [4] was assigned to <Alexa>
+<<< <Hackers> board's ToDos ACTIVITY HISTORY >>>
+[30-December-2022 21:11:40] Board was created.
+[30-December-2022 21:11:40] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
+[30-December-2022 21:11:40] Task 'Serious issue' with ID -> [2] was added to board <ToDos>
+[30-December-2022 21:11:40] Task 'Fatal issue' with ID -> [3] was added to board <ToDos>
+[30-December-2022 21:11:40] Task 'Funny story' with ID -> [5] was added to board <ToDos>
+[30-December-2022 21:11:40] Task 'Great job here' with ID -> [7] was added to board <ToDos>
+<<< <Suicide Squad> board's ToDos ACTIVITY HISTORY >>>
+[30-December-2022 21:11:40] Board was created.
+[30-December-2022 21:11:40] Task 'Third story' with ID -> [6] was added to board <ToDos>
 <<< Bug ACTIVITY with ID -> [2] >>>
 === CHANGES HISTORY ===
-[29-December-2022 18:47:24] Task with ID -> [2] was created.
-[29-December-2022 18:47:24] Task is Unassigned
-[29-December-2022 18:47:24] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
-[29-December-2022 18:47:24] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
+[30-December-2022 21:11:40] Task with ID -> [2] was created.
+[30-December-2022 21:11:40] Task is Unassigned
+[30-December-2022 21:11:40] Steps to reproduce -> 1: Click register user button -> 2: Type your email -> 3: App crashes! -> 4: Fix it
+[30-December-2022 21:11:40] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
+[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
 === NO COMMENTS ===
 User <Marco Polo> added comment to task with ID -> [1]
 User <Marco Polo> added comment to task with ID -> [1]
 <<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[29-December-2022 18:47:24] Task with ID -> [1] was created.
-[29-December-2022 18:47:24] Task is Unassigned
-[29-December-2022 18:47:24] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[29-December-2022 18:47:24] Comment added to task.
-[29-December-2022 18:47:24] Comment added to task.
+[30-December-2022 21:11:40] Task with ID -> [1] was created.
+[30-December-2022 21:11:40] Task is Unassigned
+[30-December-2022 21:11:40] Steps to reproduce -> 1: You have to open the interface -> 2: You will understand what I mean
+[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[30-December-2022 21:11:40] Comment added to task.
+[30-December-2022 21:11:40] Comment added to task.
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 "Perfect job here" - Marco Polo 
@@ -390,26 +392,27 @@ Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Criti
 	2: Do this
 <<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[29-December-2022 18:47:24] Task with ID -> [1] was created.
-[29-December-2022 18:47:24] Task is Unassigned
-[29-December-2022 18:47:24] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[29-December-2022 18:47:24] Comment added to task.
-[29-December-2022 18:47:24] Comment added to task.
-[29-December-2022 18:47:24] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
+[30-December-2022 21:11:40] Task with ID -> [1] was created.
+[30-December-2022 21:11:40] Task is Unassigned
+[30-December-2022 21:11:40] Steps to reproduce -> 1: You have to open the interface -> 2: You will understand what I mean
+[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[30-December-2022 21:11:40] Comment added to task.
+[30-December-2022 21:11:40] Comment added to task.
+[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 "Perfect job here" - Marco Polo 
 <<< Hackers Team's ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] Team was created.
-[29-December-2022 18:47:24] Board <ToDos> was added to the team <Hackers>
-[29-December-2022 18:47:24] User <Jimmy> was added to the team <Hackers>
+[30-December-2022 21:11:40] Team was created.
+[30-December-2022 21:11:40] Board <ToDos> was added to the team <Hackers>
+[30-December-2022 21:11:40] User <Jimmy> was added to the team <Hackers>
 <<< Jimmy User's ACTIVITY HISTORY >>>
-[29-December-2022 18:47:24] User was created.
-[29-December-2022 18:47:24] User was added to team <Hackers>
-[29-December-2022 18:47:24] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
-[29-December-2022 18:47:24] Task 'Serious issue' with ID -> [2] was assigned to <Jimmy>
-[29-December-2022 18:47:24] Task 'Fatal issue' with ID -> [3] was assigned to <Jimmy>
-[29-December-2022 18:47:24] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
+[30-December-2022 21:11:40] User was created.
+[30-December-2022 21:11:40] User was added to team <Hackers>
+[30-December-2022 21:11:40] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
+[30-December-2022 21:11:40] Task 'Serious issue' with ID -> [2] was assigned to <Jimmy>
+[30-December-2022 21:11:40] Task 'Fatal issue' with ID -> [3] was assigned to <Jimmy>
+[30-December-2022 21:11:40] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
 LIST TASKS WITH ASSIGNEE  
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
 	1: Click register user button
@@ -425,9 +428,9 @@ Story: ID -> [4] 'Another story' | Status: Not Done | Priority: Medium | Size: S
 ===============
 Story: ID -> [6] 'Third story' | Status: Not Done | Priority: Low | Size: Small | Assignee: Cortana
 LIST TASKS WITH ASSIGNEE 
-	-> FilterByAssignee: "Jimmy" 
-	-> FilterByStatus: "Fixed" 
-	-> SortByTitle  
+	-> filterByAssignee: "Jimmy" 
+	-> filterByStatus: "Fixed" 
+	-> sortByTitle  
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
 	1: Click register user button
 	2: Type your email
@@ -489,8 +492,8 @@ LIST ALL STORIES
 	-> sortByTitle  
 === EMPTY LIST ===
 LIST ALL FEEDBACKS 
-	-> FilterByStatus: "Unscheduled" 
-	-> SortByRating  
+	-> filterByStatus: "Unscheduled" 
+	-> sortByRating  
 Feedback: ID -> [9] 'An Impressive job' | Status: Unscheduled | Rating: 10
 ===============
 Feedback: ID -> [8] 'Doing good' | Status: Unscheduled | Rating: 9
@@ -540,4 +543,109 @@ Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Ma
 	3: App crashes!
 	4: Fix it
 
+```
+### Use Cases Sample Input
+#### №1 Input
+```
+UseCase№1
+CreateTeam Seniors
+CreateBoardInTeam Issues Seniors
+CreateTaskInBoard bug Issues Seniors {{The program freezes when the LogIn is clicked}} {{This needs to be fixed quickly!}} high critical {{Open the application}} {{Click "Log In"}} {{The application freezes!}}
+CreatePerson Tomas
+AddPersonToTeam Tomas Seniors
+AssignTask 1 Tomas
+ShowTaskActivity 1
+
+```
+#### №1 Output
+```
+Team with a name <Seniors> was created.
+Board <Issues> has been created in team <Seniors>!
+Bug <The program freezes when the LogIn is clicked> with ID -> [1] has been created in board <Issues>!
+User with a name <Tomas> was created.
+Person <Tomas> has been added to the team <Seniors>!
+Task with ID -> [1] was assigned to user <Tomas>.
+<<< Bug ACTIVITY with ID -> [1] >>>
+=== CHANGES HISTORY ===
+[30-December-2022 21:16:28] Task with ID -> [1] was created.
+[30-December-2022 21:16:28] Task is Unassigned
+[30-December-2022 21:16:28] Steps to reproduce -> 1: Open the application -> 2: Click "Log In" -> 3: The application freezes!
+[30-December-2022 21:16:28] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Tomas}
+=== NO COMMENTS ===
+```
+
+#### №2 Input
+```
+CreateTeam Juniors
+CreateBoardInTeam Issues Juniors
+CreateTaskInBoard bug Issues Juniors {{The program freezes when the LogIn is clicked}} {{This needs to be fixed quickly!}} high critical {{Open the application}} {{Click "Log In"}}
+CreateTaskInBoard bug Issues Juniors {{Serious issue}} {{App does not work}} medium major {{Click register user button}} {{Type your email}} {{App crashes!}} {{Fix it}}
+CreateTaskInBoard bug Issues Juniors {{Fatal issue}} {{Server is down}} high critical {{Open that }} {{Do this}}
+CreatePerson Clare
+AddPersonToTeam Clare Juniors
+ListAllBugs sortBySeverity
+AssignTask 1 Clare
+AssignTask 3 Clare
+
+```
+#### №2 Output
+```
+Team with a name <Juniors> was created.
+Board <Issues> has been created in team <Juniors>!
+Bug <The program freezes when the LogIn is clicked> with ID -> [1] has been created in board <Issues>!
+Bug <Serious issue> with ID -> [2] has been created in board <Issues>!
+Bug <Fatal issue> with ID -> [3] has been created in board <Issues>!
+User with a name <Clare> was created.
+Person <Clare> has been added to the team <Juniors>!
+LIST ALL BUGS 
+	-> sortBySeverity  
+Bug: ID -> [1] 'The program freezes when the LogIn is clicked' | Status: Active | Priority: High | Severity: Critical | Assignee: Unassigned | Steps to reproduce: 
+	1: Open the application
+	2: Click "Log In"
+===============
+Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Critical | Assignee: Unassigned | Steps to reproduce: 
+	1: Open that
+	2: Do this
+===============
+Bug: ID -> [2] 'Serious issue' | Status: Active | Priority: Medium | Severity: Major | Assignee: Unassigned | Steps to reproduce: 
+	1: Click register user button
+	2: Type your email
+	3: App crashes!
+	4: Fix it
+Task with ID -> [1] was assigned to user <Clare>.
+Task with ID -> [3] was assigned to user <Clare>.
+```
+#### №3 Input
+```
+CreateTeam Juniors
+CreateBoardInTeam Issues Juniors
+CreateTaskInBoard bug Issues Juniors {{The program freezes when the LogIn is clicked}} {{This needs to be fixed quickly!}} high critical {{Open the application}} {{Click "Log In"}}
+CreatePerson Clare
+AddPersonToTeam Clare Juniors
+AssignTask 1 Clare
+AddComment 1 {{This one took me a while, but it is fixed now!}} Clare
+ChangeBug 1 status fixed
+ShowTaskActivity 1
+
+```
+#### №3 Output
+```
+Team with a name <Juniors> was created.
+Board <Issues> has been created in team <Juniors>!
+Bug <The program freezes when the LogIn is clicked> with ID -> [1] has been created in board <Issues>!
+User with a name <Clare> was created.
+Person <Clare> has been added to the team <Juniors>!
+Task with ID -> [1] was assigned to user <Clare>.
+User <Clare> added comment to task with ID -> [1]
+Status for Bug with ID -> [1] was changed to {Fixed}.
+<<< Bug ACTIVITY with ID -> [1] >>>
+=== CHANGES HISTORY ===
+[30-December-2022 21:19:35] Task with ID -> [1] was created.
+[30-December-2022 21:19:35] Task is Unassigned
+[30-December-2022 21:19:35] Steps to reproduce -> 1: Open the application -> 2: Click "Log In"
+[30-December-2022 21:19:35] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Clare}
+[30-December-2022 21:19:35] Comment added to task.
+[30-December-2022 21:19:35] The 'Status' of item with ID -> [1] switched from {Active} to {Fixed}
+=== COMMENTS ===
+"This one took me a while, but it is fixed now!" - Clare 
 ```
