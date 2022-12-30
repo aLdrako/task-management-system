@@ -29,7 +29,6 @@ class ShowAllTeamBoardsTests {
     void setUp() {
         repository = new TaskManagementRepositoryImpl();
         command = new ShowAllTeamBoards(repository);
-
     }
 
     @Test
