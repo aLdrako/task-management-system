@@ -22,14 +22,14 @@ public class CreateBoardInTeam implements Command {
 	@Override
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
-		String name = isNameSameAsUserOrTeam(parameters.get(0));
 		String team = parameters.get(1);
+		String name = boardExistInTeam(parameters.get(0), team);
 		return createBoardInTeam(name, team);
 	}
 
-	private String isNameSameAsUserOrTeam(String name) {
-		if (repository.getUsers().stream().anyMatch(user -> user.getName().equalsIgnoreCase(name)) ||
-				repository.getTeams().stream().anyMatch(team -> team.getName().equalsIgnoreCase(name))) {
+	private String boardExistInTeam(String name, String team) {
+		Team t = repository.findElementByName(repository.getTeams(), team);
+		if (t.getBoards().stream().anyMatch(board -> board.getName().equalsIgnoreCase(name))) {
 			throw new DuplicateElementException(DUPLICATE_NAME_MESSAGE);
 		}
 		return name;
