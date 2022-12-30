@@ -112,14 +112,4 @@ public class ListTasksWithAssignee implements Command {
 						&& ((Assignable) task).getAssignee().getName() != "Unassigned")
 				.collect(Collectors.toList());
 	}
-
-	private boolean titleContains(String title) {
-		for (Task task : repository.getTasks()) {
-			if (task.getTitle().contains(title)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 }
