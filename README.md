@@ -544,7 +544,8 @@ Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Ma
 	4: Fix it
 
 ```
-### Use Cases Sample Input
+
+## Use Cases Sample Input
 #### №1 Input
 ```
 UseCase№1
@@ -586,6 +587,7 @@ AddPersonToTeam Clare Juniors
 ListAllBugs sortBySeverity
 AssignTask 1 Clare
 AssignTask 3 Clare
+ShowPersonActivity Clare
 
 ```
 #### №2 Output
@@ -614,6 +616,11 @@ Bug: ID -> [2] 'Serious issue' | Status: Active | Priority: Medium | Severity: M
 	4: Fix it
 Task with ID -> [1] was assigned to user <Clare>.
 Task with ID -> [3] was assigned to user <Clare>.
+<<< Clare User's ACTIVITY HISTORY >>>
+[30-December-2022 22:23:16] User was created.
+[30-December-2022 22:23:16] User was added to team <Juniors>
+[30-December-2022 22:23:16] Task 'The program freezes when the LogIn is clicked' with ID -> [1] was assigned to <Clare>
+[30-December-2022 22:23:16] Task 'Fatal issue' with ID -> [3] was assigned to <Clare>
 ```
 #### №3 Input
 ```
