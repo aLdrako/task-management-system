@@ -45,7 +45,7 @@ public class ListAllFeedbacks implements Command {
 		try {
 			if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
 				return filterByStatus(parameters.get(1), feedbacks, FeedbackStatus.class);
-			} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
+			} else if (parameters.get(0).toLowerCase().contains("filterby")) {
 				throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 			}
 		} catch (IndexOutOfBoundsException ex) {

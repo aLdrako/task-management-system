@@ -63,7 +63,7 @@ public class ListAllStories implements Command {
 			} else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
 				stories = filterByStatus(parameters.get(1), stories, StoryStatus.class);
 				return filterByAssignee(parameters.get(2), stories, repository);
-			} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
+			} else if (parameters.get(0).toLowerCase().contains("filterby")) {
 				throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 			}
 		} catch (IndexOutOfBoundsException ex) {

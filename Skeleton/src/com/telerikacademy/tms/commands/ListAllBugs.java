@@ -63,7 +63,7 @@ public class ListAllBugs implements Command {
 			} else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
 				bugs = filterByStatus(parameters.get(1), bugs, BugStatus.class);
 				return FilterHelpers.filterByAssignee(parameters.get(2), bugs, repository);
-			} else if (parameters.stream().anyMatch(value -> value.toLowerCase().contains("filterby"))) {
+			} else if (parameters.get(0).toLowerCase().contains("filterby")) {
 				throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 			}
 		} catch (IndexOutOfBoundsException e) {
