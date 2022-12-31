@@ -546,9 +546,8 @@ Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Ma
 ```
 
 ## Use Cases Sample Input
-#### №1 Input
+#### Use case №1 Input
 ```
-UseCase№1
 CreateTeam Seniors
 CreateBoardInTeam Issues Seniors
 CreateTaskInBoard bug Issues Seniors {{The program freezes when the LogIn is clicked}} {{This needs to be fixed quickly!}} high critical {{Open the application}} {{Click "Log In"}} {{The application freezes!}}
@@ -556,9 +555,8 @@ CreatePerson Tomas
 AddPersonToTeam Tomas Seniors
 AssignTask 1 Tomas
 ShowTaskActivity 1
-
 ```
-#### №1 Output
+#### Use case №1 Output
 ```
 Team with a name <Seniors> was created.
 Board <Issues> has been created in team <Seniors>!
@@ -574,8 +572,7 @@ Task with ID -> [1] was assigned to user <Tomas>.
 [30-December-2022 21:16:28] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Tomas}
 === NO COMMENTS ===
 ```
-
-#### №2 Input
+#### Use case №2 Input
 ```
 CreateTeam Juniors
 CreateBoardInTeam Issues Juniors
@@ -588,9 +585,8 @@ ListAllBugs sortBySeverity
 AssignTask 1 Clare
 AssignTask 3 Clare
 ShowPersonActivity Clare
-
 ```
-#### №2 Output
+#### Use case №2 Output
 ```
 Team with a name <Juniors> was created.
 Board <Issues> has been created in team <Juniors>!
@@ -622,7 +618,7 @@ Task with ID -> [3] was assigned to user <Clare>.
 [30-December-2022 22:23:16] Task 'The program freezes when the LogIn is clicked' with ID -> [1] was assigned to <Clare>
 [30-December-2022 22:23:16] Task 'Fatal issue' with ID -> [3] was assigned to <Clare>
 ```
-#### №3 Input
+#### Use case №3 Input
 ```
 CreateTeam Juniors
 CreateBoardInTeam Issues Juniors
@@ -633,9 +629,8 @@ AssignTask 1 Clare
 AddComment 1 {{This one took me a while, but it is fixed now!}} Clare
 ChangeBug 1 status fixed
 ShowTaskActivity 1
-
 ```
-#### №3 Output
+#### Use case №3 Output
 ```
 Team with a name <Juniors> was created.
 Board <Issues> has been created in team <Juniors>!
