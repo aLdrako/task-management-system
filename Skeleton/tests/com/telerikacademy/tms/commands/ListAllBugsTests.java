@@ -55,21 +55,16 @@ public class ListAllBugsTests {
 	}
 
 	@Test
-	public void execute_Should_ThrowException_When_WrongFilterParameterSpecified() {
+	public void execute_Should_ThrowException_When_WrongParameterSpecified() {
 		// Arrange
-		List<String> params = List.of("filterBySomething");
+		List<String> params1 = List.of("sortBySomething");
+		List<String> params2 = List.of("filterBySomething");
 
 		// Act, Assert
-		assertThrows(InvalidUserInputException.class, () -> listAllBugs.execute(params));
-	}
-
-	@Test
-	public void execute_Should_ThrowException_When_WrongSortParameterSpecified() {
-		// Arrange
-		List<String> params = List.of("sortBySomething");
-
-		// Act, Assert
-		assertThrows(InvalidUserInputException.class, () -> listAllBugs.execute(params));
+		assertAll(
+				() -> assertThrows(InvalidUserInputException.class, () -> listAllBugs.execute(params1)),
+				() -> assertThrows(InvalidUserInputException.class, () -> listAllBugs.execute(params2))
+		);
 	}
 
 	@Test
