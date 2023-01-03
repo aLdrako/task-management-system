@@ -4,9 +4,11 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
+import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -29,13 +31,10 @@ public class ShowAllTeamBoards implements Command {
 
 		StringBuilder builder = new StringBuilder();
 		if (boards.size() == 0) {
-			builder.append(format(NO_BOARDS_LISTED, teamName));
+			builder.append(format(NO_BOARDS_LISTED, findTeam.getName()));
 		} else {
-			builder.append(format(BOARDS_LISTED, teamName, boards.size()));
-			for (Board board : boards) {
-				builder.append(board.getName()).append(", ");
-			}
-			builder.deleteCharAt(builder.length() - 2);
+			builder.append(format(BOARDS_LISTED, findTeam.getName(), boards.size()));
+			builder.append(boards.stream().map(Nameable::getName).collect(Collectors.joining(", ")));
 		}
 		return builder.toString();
 	}
