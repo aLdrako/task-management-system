@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.telerikacademy.tms.utils.FilterHelpers.filterByAssignee;
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
@@ -36,8 +37,8 @@ public class ListAllBugs implements Command {
 			return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(bugs));
 		}
 		validateFilteringAndSortingParameters(parameters);
-		validateArgumentsSorting(parameters);
 		bugs = filterBugs(parameters, bugs);
+		validateArgumentsSorting(parameters);
 		sortBugs(parameters, bugs);
 		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(bugs));
 	}
@@ -59,10 +60,10 @@ public class ListAllBugs implements Command {
 			if (parameters.get(0).equalsIgnoreCase("filterByStatus")) {
 				return filterByStatus(parameters.get(1), bugs, BugStatus.class);
 			} else if (parameters.get(0).equalsIgnoreCase("filterByAssignee")) {
-				return FilterHelpers.filterByAssignee(parameters.get(1), bugs, repository);
+				return filterByAssignee(parameters.get(1), bugs, repository);
 			} else if (parameters.get(0).equalsIgnoreCase("filterByStatusAndAssignee")) {
 				bugs = filterByStatus(parameters.get(1), bugs, BugStatus.class);
-				return FilterHelpers.filterByAssignee(parameters.get(2), bugs, repository);
+				return filterByAssignee(parameters.get(2), bugs, repository);
 			} else if (parameters.get(0).toLowerCase().contains("filterby")) {
 				throw new InvalidUserInputException(INVALID_FILTER_OPTION_MESSAGE);
 			}

@@ -57,13 +57,9 @@ public class ValidationHelpers {
 	 */
 	public static void validateArgumentsSorting(List<String> list) {
 		if (list.stream().anyMatch(value -> value.toLowerCase().contains("sortby"))) {
-			int index = list.indexOf(list.stream().reduce("", (acc, comb) -> {
-				List<String> words = list
-						.stream()
-						.filter(value -> value.toLowerCase().contains("sortby"))
-						.collect(Collectors.toList());
-				return words.get(0);
-			}));
+			int index = list.indexOf(list.stream().filter(value -> value.toLowerCase().contains("sortby"))
+					.findFirst()
+					.orElseThrow(InvalidUserInputException::new));
 			if (list.size() - 1 != index) {
 				throw new InvalidUserInputException(format(INVALID_ARGUMENTS_AFTER_SORT_MESSAGE, list.get(index)));
 			}
@@ -95,6 +91,11 @@ public class ValidationHelpers {
 		if (list.stream().noneMatch(value -> value.toLowerCase().contains("sortby") ||
 				value.toLowerCase().contains("filterby"))) {
 			throw new InvalidUserInputException(INVALID_COMMAND);
+		} else if (list.stream().anyMatch(value -> value.toLowerCase().contains("sortby")) &&
+		list.stream().noneMatch(value -> value.toLowerCase().contains("filterby"))) {
+			if (!list.get(0).toLowerCase().contains("sortby")) {
+				throw new InvalidUserInputException(INVALID_COMMAND);
+			}
 		}
 		validateArgumentsFiltering(list);
 	}
