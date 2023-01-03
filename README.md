@@ -219,6 +219,8 @@ ShowAllPeople
 showtaskactivity 1
 showteamactivity Hackers
 showpersonactivity jimmy
+ShowAllTeamMembers {{Suicide Squad}}
+ShowAllTeamBoards {{Suicide Squad}}
 ListTasksWithAssignee
 ListTasksWithAssignee filterByAssignee Jimmy filterByStatus Fixed sortByTitle
 ListAllFeedbacks sortByRating
@@ -234,7 +236,6 @@ ListAllTasks
 ListAllTasks filterByTitle {{Great job}}
 ListAllTasks filterByTitle story sortByTitle
 ListAllBugs filterByStatusAndAssignee Fixed Jimmy sortByPriority
-
 ```
 ### Sample Output
 ```none
@@ -257,17 +258,17 @@ Person <Cortana> has been added to the team <Suicide Squad>!
 User <Cortana> already in team <Suicide Squad>
 Person <Jimmy> has been added to the team <Hackers>!
 <<< <Hackers> board's ToDos ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] Board was created.
+[03-January-2023 11:47:25] Board was created.
 <<< <Suicide Squad> board's ToDos ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] Board was created.
+[03-January-2023 11:47:25] Board was created.
 <<< Alexa User's ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] User was created.
-[30-December-2022 21:11:40] User was added to team <Suicide Squad>
+[03-January-2023 11:47:25] User was created.
+[03-January-2023 11:47:25] User was added to team <Suicide Squad>
 <<< Marco Polo User's ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] User was created.
+[03-January-2023 11:47:25] User was created.
 <<< Cortana User's ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] User was created.
-[30-December-2022 21:11:40] User was added to team <Suicide Squad>
+[03-January-2023 11:47:25] User was created.
+[03-January-2023 11:47:25] User was added to team <Suicide Squad>
 === ALL TEAMS ===
 Team: Hackers
 It has (1) users -> Jimmy
@@ -323,37 +324,37 @@ Task with ID -> [2] was assigned to user <Jimmy>.
 Task with ID -> [3] was assigned to user <Jimmy>.
 No <Assignable task> with ID -> 9
 <<< Alexa User's ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] User was created.
-[30-December-2022 21:11:40] User was added to team <Suicide Squad>
-[30-December-2022 21:11:40] Task 'Another story' with ID -> [4] was assigned to <Alexa>
+[03-January-2023 11:47:25] User was created.
+[03-January-2023 11:47:25] User was added to team <Suicide Squad>
+[03-January-2023 11:47:25] Task 'Another story' with ID -> [4] was assigned to <Alexa>
 <<< <Hackers> board's ToDos ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] Board was created.
-[30-December-2022 21:11:40] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
-[30-December-2022 21:11:40] Task 'Serious issue' with ID -> [2] was added to board <ToDos>
-[30-December-2022 21:11:40] Task 'Fatal issue' with ID -> [3] was added to board <ToDos>
-[30-December-2022 21:11:40] Task 'Funny story' with ID -> [5] was added to board <ToDos>
-[30-December-2022 21:11:40] Task 'Great job here' with ID -> [7] was added to board <ToDos>
+[03-January-2023 11:47:25] Board was created.
+[03-January-2023 11:47:25] Task 'Glitching interface' with ID -> [1] was added to board <ToDos>
+[03-January-2023 11:47:25] Task 'Serious issue' with ID -> [2] was added to board <ToDos>
+[03-January-2023 11:47:25] Task 'Fatal issue' with ID -> [3] was added to board <ToDos>
+[03-January-2023 11:47:25] Task 'Funny story' with ID -> [5] was added to board <ToDos>
+[03-January-2023 11:47:25] Task 'Great job here' with ID -> [7] was added to board <ToDos>
 <<< <Suicide Squad> board's ToDos ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] Board was created.
-[30-December-2022 21:11:40] Task 'Third story' with ID -> [6] was added to board <ToDos>
+[03-January-2023 11:47:25] Board was created.
+[03-January-2023 11:47:25] Task 'Third story' with ID -> [6] was added to board <ToDos>
 <<< Bug ACTIVITY with ID -> [2] >>>
 === CHANGES HISTORY ===
-[30-December-2022 21:11:40] Task with ID -> [2] was created.
-[30-December-2022 21:11:40] Task is Unassigned
-[30-December-2022 21:11:40] Steps to reproduce -> 1: Click register user button -> 2: Type your email -> 3: App crashes! -> 4: Fix it
-[30-December-2022 21:11:40] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
-[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
+[03-January-2023 11:47:25] Task with ID -> [2] was created.
+[03-January-2023 11:47:25] Task is Unassigned
+[03-January-2023 11:47:25] Steps to reproduce -> 1: Click register user button -> 2: Type your email -> 3: App crashes! -> 4: Fix it
+[03-January-2023 11:47:25] The 'Status' of item with ID -> [2] switched from {Active} to {Fixed}
+[03-January-2023 11:47:25] The 'Assignee' of item with ID -> [2] switched from {Unassigned} to {Jimmy}
 === NO COMMENTS ===
 User <Marco Polo> added comment to task with ID -> [1]
 User <Marco Polo> added comment to task with ID -> [1]
 <<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[30-December-2022 21:11:40] Task with ID -> [1] was created.
-[30-December-2022 21:11:40] Task is Unassigned
-[30-December-2022 21:11:40] Steps to reproduce -> 1: You have to open the interface -> 2: You will understand what I mean
-[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[30-December-2022 21:11:40] Comment added to task.
-[30-December-2022 21:11:40] Comment added to task.
+[03-January-2023 11:47:25] Task with ID -> [1] was created.
+[03-January-2023 11:47:25] Task is Unassigned
+[03-January-2023 11:47:25] Steps to reproduce -> 1: You have to open the interface -> 2: You will understand what I mean
+[03-January-2023 11:47:25] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[03-January-2023 11:47:25] Comment added to task.
+[03-January-2023 11:47:25] Comment added to task.
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 "Perfect job here" - Marco Polo 
@@ -392,27 +393,29 @@ Bug: ID -> [3] 'Fatal issue' | Status: Active | Priority: High | Severity: Criti
 	2: Do this
 <<< Bug ACTIVITY with ID -> [1] >>>
 === CHANGES HISTORY ===
-[30-December-2022 21:11:40] Task with ID -> [1] was created.
-[30-December-2022 21:11:40] Task is Unassigned
-[30-December-2022 21:11:40] Steps to reproduce -> 1: You have to open the interface -> 2: You will understand what I mean
-[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
-[30-December-2022 21:11:40] Comment added to task.
-[30-December-2022 21:11:40] Comment added to task.
-[30-December-2022 21:11:40] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
+[03-January-2023 11:47:25] Task with ID -> [1] was created.
+[03-January-2023 11:47:25] Task is Unassigned
+[03-January-2023 11:47:25] Steps to reproduce -> 1: You have to open the interface -> 2: You will understand what I mean
+[03-January-2023 11:47:25] The 'Assignee' of item with ID -> [1] switched from {Unassigned} to {Jimmy}
+[03-January-2023 11:47:25] Comment added to task.
+[03-January-2023 11:47:25] Comment added to task.
+[03-January-2023 11:47:25] The 'Assignee' of item with ID -> [1] switched from {Jimmy} to {Unassigned}
 === COMMENTS ===
 "I like how you did this" - Marco Polo 
 "Perfect job here" - Marco Polo 
 <<< Hackers Team's ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] Team was created.
-[30-December-2022 21:11:40] Board <ToDos> was added to the team <Hackers>
-[30-December-2022 21:11:40] User <Jimmy> was added to the team <Hackers>
+[03-January-2023 11:47:25] Team was created.
+[03-January-2023 11:47:25] Board <ToDos> was added to the team <Hackers>
+[03-January-2023 11:47:25] User <Jimmy> was added to the team <Hackers>
 <<< Jimmy User's ACTIVITY HISTORY >>>
-[30-December-2022 21:11:40] User was created.
-[30-December-2022 21:11:40] User was added to team <Hackers>
-[30-December-2022 21:11:40] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
-[30-December-2022 21:11:40] Task 'Serious issue' with ID -> [2] was assigned to <Jimmy>
-[30-December-2022 21:11:40] Task 'Fatal issue' with ID -> [3] was assigned to <Jimmy>
-[30-December-2022 21:11:40] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
+[03-January-2023 11:47:25] User was created.
+[03-January-2023 11:47:25] User was added to team <Hackers>
+[03-January-2023 11:47:25] Task 'Glitching interface' with ID -> [1] was assigned to <Jimmy>
+[03-January-2023 11:47:25] Task 'Serious issue' with ID -> [2] was assigned to <Jimmy>
+[03-January-2023 11:47:25] Task 'Fatal issue' with ID -> [3] was assigned to <Jimmy>
+[03-January-2023 11:47:25] Task 'Glitching interface' with ID -> [1] was unassigned from <Jimmy>
+Suicide Squad has (2) team members -> Alexa, Cortana
+Suicide Squad has (2) team boards -> ToDos, Goals
 LIST TASKS WITH ASSIGNEE  
 Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Major | Assignee: Jimmy | Steps to reproduce: 
 	1: Click register user button
@@ -542,7 +545,6 @@ Bug: ID -> [2] 'Serious issue' | Status: Fixed | Priority: Medium | Severity: Ma
 	2: Type your email
 	3: App crashes!
 	4: Fix it
-
 ```
 
 ## Use Cases Sample Input
