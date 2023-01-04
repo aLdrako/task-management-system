@@ -21,5 +21,4 @@ public class FilterHelpers {
 				.collect(Collectors.toList());
 	}
 
-
 }

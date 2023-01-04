@@ -8,7 +8,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowAllTeams implements Command {
-	public static final int EXPECTED_NUMBER_PARAMETERS = 0;
+	private static final int EXPECTED_NUMBER_PARAMETERS = 0;
 	private static final String NO_TEAMS_MESSAGE = "=== NO ADDED TEAMS ===";
 	private static final String ALL_TEAMS_MESSAGE = "=== ALL TEAMS ===";
 	private final TaskManagementRepository repository;

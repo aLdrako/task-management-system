@@ -8,7 +8,7 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowAllPeople implements Command {
-	public static final int EXPECTED_NUMBER_PARAMETERS = 0;
+	private static final int EXPECTED_NUMBER_PARAMETERS = 0;
 	private static final String NO_PEOPLE_MESSAGE = "=== NO ADDED PEOPLE ===";
 	private static final String ALL_PEOPLE_MESSAGE = "=== ALL PEOPLE ===";
 	private final TaskManagementRepository repository;

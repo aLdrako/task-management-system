@@ -18,9 +18,9 @@ import static com.telerikacademy.tms.utils.ValidationHelpers.*;
 import static java.lang.String.format;
 
 public class ListAllStories implements Command {
-	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
-	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the stories only by status/assignee.";
-	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the stories only by title/priority/size.";
+	private static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
+	private static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the stories only by status/assignee.";
+	private static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the stories only by title/priority/size.";
 	public static final String LISTING_HEADER = "LIST ALL STORIES %s %n%s";
 
 	private final TaskManagementRepository repository;

@@ -13,12 +13,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.commands.ShowPersonActivity.EXPECTED_NUMBER_PARAMETERS;
 import static com.telerikacademy.tms.utils.ModelsConstants.USER_VALID_NAME;
 import static com.telerikacademy.tms.utils.TestUtils.getList;
 
 public class ShowPersonActivityTests {
-
+	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
 	private TaskManagementRepository repository;
 	private Command command;
 

@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.commands.ShowAllPeople.EXPECTED_NUMBER_PARAMETERS;
 import static com.telerikacademy.tms.utils.TestUtils.getList;
 
 public class ShowAllPeopleTests {
-
+	private static final int EXPECTED_NUMBER_PARAMETERS = 0;
 	private TaskManagementRepository repository;
 	private Command command;
 
