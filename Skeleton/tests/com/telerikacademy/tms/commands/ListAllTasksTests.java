@@ -4,6 +4,8 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.TaskManagementRepositoryImpl;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
+import com.telerikacademy.tms.models.contracts.User;
+import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
@@ -17,23 +19,25 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static com.telerikacademy.tms.commands.ListAllTasks.LISTING_HEADER;
+
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
-import static com.telerikacademy.tms.utils.ModelsConstants.DESCRIPTION_VALID_NAME;
-import static com.telerikacademy.tms.utils.ModelsConstants.TASK_VALID_NAME;
+import static com.telerikacademy.tms.utils.ModelsConstants.*;
 import static com.telerikacademy.tms.utils.TestUtils.getList;
 import static java.lang.String.format;
+import static java.lang.String.valueOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ListAllTasksTests {
-	private TaskManagementRepository repository;
-	private Command command;
+	private static final String LISTING_HEADER = "LIST ALL TASKS %s %n%s";
+    private TaskManagementRepository repository;
+	private Command listAllTasks;
 
 
 	@BeforeEach
 	public void before() {
 		repository = new TaskManagementRepositoryImpl();
-		command = new ListAllTasks(repository);
+		listAllTasks = new ListAllTasks(repository);
 	}
 
 	@ParameterizedTest(name = "passed arguments: {0}")
@@ -47,8 +51,25 @@ public class ListAllTasksTests {
 
 		// Act, Assert
 		Assertions.assertAll(
-				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> command.execute(parameters)),
-				() -> Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters1))
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(parameters)),
+				() -> Assertions.assertThrows(IllegalArgumentException.class, () -> listAllTasks.execute(parameters1))
+		);
+	}
+	@Test
+	public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
+		// Arrange
+		Task task = repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.FIVE);
+		List<String> parameters = List.of(RANDOM_WORD);
+		List<String> parameters1 = List.of(RANDOM_WORD, "filterByTitle", task.getTitle(), "sortByTitle");
+		List<String> parameters2 = List.of(RANDOM_WORD, "filterByTitle", task.getTitle());
+		List<String> parameters3 = List.of(RANDOM_WORD, "sortByTitle");
+
+		// Act, Assert
+		Assertions.assertAll(
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(parameters)),
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(parameters1)),
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(parameters2)),
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(parameters3))
 		);
 	}
 
@@ -63,21 +84,47 @@ public class ListAllTasksTests {
 
 		// Act, Assert
 		Assertions.assertAll(
-				() -> Assertions.assertDoesNotThrow(() -> command.execute(parameters)),
-				() -> Assertions.assertDoesNotThrow(() -> command.execute(parameters1))
+				() -> Assertions.assertDoesNotThrow(() -> listAllTasks.execute(parameters)),
+				() -> Assertions.assertDoesNotThrow(() -> listAllTasks.execute(parameters1))
 		);
 	}
-
 	@Test
-	public void execute_Should_printAllTasks_When_LastParameterIsSorting() {
+	public void execute_Should_ListAllTasks_When_ValidFilterParametersPassed() {
 		// Arrange
-		repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
-		repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.FIVE);
-		repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(1));
-		List<String> parameters = getList(0);
+		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
+		User user = repository.createUser(USER_VALID_NAME);
+		story.setAssignee(user);
+		List<String> params = List.of("filterByTitle", valueOf(story.getTitle()));
 
-		Assertions.assertEquals(format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(repository.getTasks())),
-				command.execute(parameters));
+		// Act, Assert
+		assertDoesNotThrow(() -> listAllTasks.execute(params));
+	}
+
+	@ParameterizedTest(name = "passed arguments: {0}")
+	@ValueSource(strings = {"sortByTitle"})
+	public void execute_Should_ListAllTasks_When_ValidSortParametersPassed(String argument) {
+		// Arrange
+		List<String> params = List.of(argument);
+
+		// Act, Assert
+		assertDoesNotThrow(() -> listAllTasks.execute(params));
+	}
+	@ParameterizedTest(name = "passed arguments: {0}")
+	@ValueSource(strings = {"sortByPriority", "sortBySeverity", "sortByRating", "sortBySize"})
+	public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {
+		// Arrange
+		List<String> params = List.of(argument);
+
+		// Act, Assert
+		assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(params));
+	}
+	@Test
+	public void execute_Should_ListAllTasks_When_ZeroParametersSpecified() {
+		// Arrange
+		List<String> params = List.of();
+
+		// Act, Assert
+		assertDoesNotThrow(() -> listAllTasks.execute(params));
 	}
 
 }

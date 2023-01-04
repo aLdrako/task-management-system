@@ -6,8 +6,11 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Story;
+import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
+import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,6 +44,23 @@ public class ListAllStoriesTests {
 		assertAll(
 				() -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params1)),
 				() -> assertThrows(IllegalArgumentException.class, () -> listAllStories.execute(params2))
+		);
+	}
+	@Test
+	public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
+		// Arrange
+		Task task = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+		List<String> parameters = List.of(RANDOM_WORD);
+		List<String> parameters1 = List.of(RANDOM_WORD, "filterByStatus", task.getStatus().toString(), "sortByTitle");
+		List<String> parameters2 = List.of(RANDOM_WORD, "filterByStatus", task.getStatus().toString());
+		List<String> parameters3 = List.of(RANDOM_WORD, "sortByTitle");
+
+		// Act, Assert
+		Assertions.assertAll(
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters)),
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters1)),
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters2)),
+				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters3))
 		);
 	}
 
@@ -93,6 +113,15 @@ public class ListAllStoriesTests {
 
 		// Act, Assert
 		assertDoesNotThrow(() -> listAllStories.execute(params));
+	}
+	@ParameterizedTest(name = "passed arguments: {0}")
+	@ValueSource(strings = {"sortBySeverity", "sortByRating"})
+	public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {
+		// Arrange
+		List<String> params = List.of(argument);
+
+		// Act, Assert
+		assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params));
 	}
 
 	@Test
