@@ -18,7 +18,7 @@ public class ListAllTasks implements Command {
 	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the tasks only by title.";
 	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the tasks only by title.";
 	private static final String TITLE_DOES_NOT_EXIST = "There is not task that contains the given title.";
-	public static final String LISTING_HEADER = "LIST ALL TASKS %s %n%s";
+	private static final String LISTING_HEADER = "LIST ALL TASKS %s %n%s";
 
 	private final TaskManagementRepository repository;
 
@@ -33,9 +33,7 @@ public class ListAllTasks implements Command {
 			return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(tasks));
 		}
 		validateFilteringAndSortingParameters(parameters);
-
 		tasks = filterTasks(parameters, tasks);
-		validateArgumentsSorting(parameters);
 		sortTasks(parameters, tasks);
 		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(tasks));
 	}

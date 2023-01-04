@@ -36,7 +36,6 @@ public class ListAllFeedbacks implements Command {
 		}
 		validateFilteringAndSortingParameters(parameters);
 		feedbacks = filterFeedbacks(parameters, feedbacks);
-		validateArgumentsSorting(parameters);
 		sortFeedbacks(parameters, feedbacks);
 		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(feedbacks));
 	}

@@ -37,7 +37,6 @@ public class ListAllStories implements Command {
 		}
 		validateFilteringAndSortingParameters(parameters);
 		stories = filterStories(parameters, stories);
-		validateArgumentsSorting(parameters);
 		sortStories(parameters, stories);
 		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(stories));
 	}

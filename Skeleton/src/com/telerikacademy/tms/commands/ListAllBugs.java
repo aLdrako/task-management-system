@@ -20,10 +20,10 @@ import static java.lang.String.format;
 
 
 public class ListAllBugs implements Command {
-	public static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
-	public static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
-	public static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
-	public static final String LISTING_HEADER = "LIST ALL BUGS %s %n%s";
+	private static final String INVALID_COUNT_PARAMETER = "Invalid parameter count.";
+	private static final String INVALID_FILTER_OPTION_MESSAGE = "Invalid filter option. You can filter the bugs only by status or assignee.";
+	private static final String INVALID_SORT_OPTION_MESSAGE = "Invalid sort option. You can sort the bugs only by title/severity/priority.";
+	private static final String LISTING_HEADER = "LIST ALL BUGS %s %n%s";
 	private final TaskManagementRepository repository;
 
 	public ListAllBugs(TaskManagementRepository repository) {
@@ -38,7 +38,6 @@ public class ListAllBugs implements Command {
 		}
 		validateFilteringAndSortingParameters(parameters);
 		bugs = filterBugs(parameters, bugs);
-		validateArgumentsSorting(parameters);
 		sortBugs(parameters, bugs);
 		return format(LISTING_HEADER, listingCommandsSubHeader(parameters), elementsToString(bugs));
 	}
