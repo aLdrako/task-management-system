@@ -9,10 +9,12 @@ import com.telerikacademy.tms.utils.ValidationHelpers;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 public class CreateBoardInTeam implements Command {
 	public static final int EXPECTED_NUMBER_PARAMETERS = 2;
 	public static final String BOARD_CREATED_SUCCESSFULLY = "Board <%s> has been created in team <%s>!";
-	private static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. There is a User/Team with the same name!";
+	private static final String DUPLICATE_NAME_MESSAGE = "Duplicate name. There is a Board with the same name in team <%s>!";
 	private final TaskManagementRepository repository;
 
 	public CreateBoardInTeam(TaskManagementRepository repository) {
@@ -30,7 +32,7 @@ public class CreateBoardInTeam implements Command {
 	private String boardExistInTeam(String name, String team) {
 		Team t = repository.findElementByName(repository.getTeams(), team);
 		if (t.getBoards().stream().anyMatch(board -> board.getName().equalsIgnoreCase(name))) {
-			throw new DuplicateElementException(DUPLICATE_NAME_MESSAGE);
+			throw new DuplicateElementException(format(DUPLICATE_NAME_MESSAGE, t.getName()));
 		}
 		return name;
 	}
@@ -38,6 +40,6 @@ public class CreateBoardInTeam implements Command {
 	private String createBoardInTeam(String boardName, String teamName) {
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
 		team.addBoard(new BoardImpl(boardName));
-		return String.format(BOARD_CREATED_SUCCESSFULLY, boardName, team.getName());
+		return format(BOARD_CREATED_SUCCESSFULLY, boardName, team.getName());
 	}
 }

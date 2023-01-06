@@ -42,8 +42,7 @@ public class AssignTask implements Command {
 			throw new InvalidUserInputException(format(TASK_ALREADY_ASSIGNED, assignableTask.getAssignee().getName()));
 		}
 		User user = repository.findElementByName(repository.getUsers(), userName);
-		Board board = repository.findBoardByTask(assignableTask);
-		Team team = repository.findTeamByBoard(board);
+		Team team = repository.findTeamByTask(assignableTask);
 
 		if (!team.getUsers().contains(user)) {
 			throw new InvalidUserInputException(format(USER_NOT_FOUND_IN_TEAM, team.getName()));

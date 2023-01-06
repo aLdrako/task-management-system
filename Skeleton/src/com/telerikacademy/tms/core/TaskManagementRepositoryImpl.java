@@ -150,21 +150,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 	}
 
 	@Override
-	public Board findBoardByTask(Task task) {
+	public Team findTeamByTask(Task task) {
 		return getTeams().stream()
-				.flatMap(team -> team.getBoards()
-						.stream().filter(board -> board.getTasks().contains(task)))
+				.filter(team -> team.getBoards().stream()
+						.anyMatch(board -> board.getTasks().contains(task)))
 				.findFirst()
 				.orElseThrow(ElementNotFoundException::new);
 
-	}
 
-	@Override
-	public Team findTeamByBoard(Board board) {
-		return getTeams().stream()
-				.filter(team -> team.getBoards().contains(board))
-				.findFirst()
-				.orElseThrow(ElementNotFoundException::new);
 	}
 
 	/**

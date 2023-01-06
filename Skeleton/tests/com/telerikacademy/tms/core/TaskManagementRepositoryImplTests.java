@@ -6,11 +6,9 @@ import com.telerikacademy.tms.models.BoardImpl;
 import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
+import com.telerikacademy.tms.models.tasks.FeedbackImpl;
 import com.telerikacademy.tms.models.tasks.contracts.*;
-import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
-import com.telerikacademy.tms.models.tasks.enums.SizeType;
+import com.telerikacademy.tms.models.tasks.enums.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -194,45 +192,24 @@ public class TaskManagementRepositoryImplTests {
 	}
 
 	@Test
-	public void findBoardByTask_Should_ReturnBoard() {
-		// Arrange
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		Team team = repository.createTeam(TEAM_VALID_NAME);
-		Task task = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
-				PriorityType.LOW, SizeType.LARGE);
-		// Act
-		team.addBoard(board);
-		board.addTask(task);
-
-		// Assert
-		Assertions.assertSame(board, repository.findBoardByTask(task));
-	}
-
-	@Test
-	public void findBoardByTask_Should_ThrowException_When_BoardIsNotFound() {
-		// Arrange
-		Task task = repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.FIVE);
-		// Act, Assert
-		Assertions.assertThrows(ElementNotFoundException.class, () -> repository.findBoardByTask(task));
-	}
-
-	@Test
 	public void findTeamByBoard_Should_ReturnTeam() {
 		// Arrange
 		Team team = repository.createTeam(TEAM_VALID_NAME);
 		Board board = new BoardImpl(BOARD_VALID_NAME);
+		Task task = new FeedbackImpl(1, TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.FIVE);
 		// Act
 		team.addBoard(board);
+		board.addTask(task);
 		// Assert
-		Assertions.assertSame(team, repository.findTeamByBoard(board));
+		Assertions.assertSame(team, repository.findTeamByTask(task));
 	}
 
 	@Test
 	public void findTeamByBoard_Should_ThrowException_When_TeamIsNotFound() {
 		// Arrange
-		Board board = new BoardImpl(BOARD_VALID_NAME);
+		Task task = new FeedbackImpl(1, TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.FIVE);
 		// Act, Assert
-		Assertions.assertThrows(ElementNotFoundException.class, () -> repository.findTeamByBoard(board));
+		Assertions.assertThrows(ElementNotFoundException.class, () -> repository.findTeamByTask(task));
 	}
 
 	@Test

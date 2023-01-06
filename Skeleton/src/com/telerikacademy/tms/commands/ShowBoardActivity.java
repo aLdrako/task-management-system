@@ -33,7 +33,6 @@ public class ShowBoardActivity implements Command {
 	private String showBoardActivity(String boardName, String teamName) {
 		Team team = repository.findElementByName(repository.getTeams(), teamName);
 		Board board = repository.findBoardByNameInTeam(team, boardName);
-
 		return format(ACTIVITY_HISTORY_BOARD_HEADER, team.getName(),
 				board.getName()) +
 				System.lineSeparator() +

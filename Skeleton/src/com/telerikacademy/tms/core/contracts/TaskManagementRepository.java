@@ -44,9 +44,7 @@ public interface TaskManagementRepository {
 
 	Board findBoardByNameInTeam(Team team, String name);
 
-	Board findBoardByTask(Task task);
-
-	Team findTeamByBoard(Board board);
+	Team findTeamByTask(Task task);
 
 	boolean isNameUnique(String name);
 }
