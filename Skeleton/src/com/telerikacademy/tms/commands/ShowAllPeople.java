@@ -21,18 +21,8 @@ public class ShowAllPeople implements Command {
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 
-		return showAllUsers();
-	}
-
-	private String showAllUsers() {
-		StringBuilder builder = new StringBuilder();
-		if (repository.getUsers().size() == 0) {
-			builder.append(NO_PEOPLE_MESSAGE);
-		} else {
-			builder.append(ALL_PEOPLE_MESSAGE);
-		}
-		builder.append(System.lineSeparator());
-		builder.append(ListingHelpers.elementsToString(repository.getUsers()));
-		return builder.toString();
+		return (repository.getUsers().size() == 0 ? NO_PEOPLE_MESSAGE : ALL_PEOPLE_MESSAGE) +
+				System.lineSeparator() +
+				ListingHelpers.elementsToString(repository.getUsers());
 	}
 }

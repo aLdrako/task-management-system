@@ -29,13 +29,8 @@ public class ShowAllTeamBoards implements Command {
 		Team findTeam = repository.findElementByName(repository.getTeams(), teamName);
 		List<Board> boards = findTeam.getBoards();
 
-		StringBuilder builder = new StringBuilder();
-		if (boards.size() == 0) {
-			builder.append(format(NO_BOARDS_LISTED, findTeam.getName()));
-		} else {
-			builder.append(format(BOARDS_LISTED, findTeam.getName(), boards.size()));
-			builder.append(boards.stream().map(Nameable::getName).collect(Collectors.joining(", ")));
-		}
-		return builder.toString();
+		return (boards.size() == 0 ? format(NO_BOARDS_LISTED, findTeam.getName()) :
+				format(BOARDS_LISTED, findTeam.getName(), boards.size())) +
+				boards.stream().map(Nameable::getName).collect(Collectors.joining(", "));
 	}
 }
