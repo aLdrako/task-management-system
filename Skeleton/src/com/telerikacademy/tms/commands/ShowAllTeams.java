@@ -21,18 +21,8 @@ public class ShowAllTeams implements Command {
 	public String execute(List<String> parameters) {
 		ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_PARAMETERS);
 
-		return showAllTeams();
-	}
-
-	private String showAllTeams() {
-		StringBuilder builder = new StringBuilder();
-		if (repository.getTeams().size() == 0) {
-			builder.append(NO_TEAMS_MESSAGE);
-		} else {
-			builder.append(ALL_TEAMS_MESSAGE);
-		}
-		builder.append(System.lineSeparator());
-		builder.append(ListingHelpers.elementsToString(repository.getTeams()));
-		return builder.toString();
+		return repository.getTeams().size() == 0 ? NO_TEAMS_MESSAGE : ALL_TEAMS_MESSAGE +
+				System.lineSeparator() +
+				ListingHelpers.elementsToString(repository.getTeams());
 	}
 }
