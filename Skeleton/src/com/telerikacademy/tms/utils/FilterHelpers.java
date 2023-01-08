@@ -4,7 +4,6 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
-import com.telerikacademy.tms.models.tasks.contracts.Nameable;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 
 import java.util.List;
@@ -24,6 +23,7 @@ public class FilterHelpers {
 		return list.stream().filter(task -> task.getAssignee() == user)
 				.collect(Collectors.toList());
 	}
+
 	public static <T extends Task> List<T> filterByTitle(String parameter, List<T> list) {
 		if (list.stream().noneMatch(task -> task.getTitle().toLowerCase().contains(parameter.toLowerCase().strip()))) {
 			throw new InvalidUserInputException(TITLE_DOES_NOT_EXIST);

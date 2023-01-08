@@ -16,7 +16,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 
 import static com.telerikacademy.tms.utils.ModelsConstants.*;
-import static com.telerikacademy.tms.utils.ModelsConstants.RANDOM_WORD;
 import static java.lang.String.valueOf;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,6 +43,7 @@ public class ListAllFeedbacksTests {
 				() -> assertThrows(IllegalArgumentException.class, () -> listAllFeedbacks.execute(params2))
 		);
 	}
+
 	@Test
 	public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
 		// Arrange
@@ -103,6 +103,7 @@ public class ListAllFeedbacksTests {
 		// Act, Assert
 		assertDoesNotThrow(() -> listAllFeedbacks.execute(params));
 	}
+
 	@ParameterizedTest(name = "passed arguments: {0}")
 	@ValueSource(strings = {"sortBySeverity", "sortByPriority"})
 	public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {

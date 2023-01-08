@@ -5,7 +5,6 @@ import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.enums.BugStatus;
-import com.telerikacademy.tms.utils.FilterHelpers;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +14,8 @@ import static com.telerikacademy.tms.utils.FilterHelpers.filterByAssignee;
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 import static java.lang.String.format;
 
 

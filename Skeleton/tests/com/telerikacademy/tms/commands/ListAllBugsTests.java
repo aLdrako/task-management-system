@@ -8,7 +8,6 @@ import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Bug;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
-import com.telerikacademy.tms.models.tasks.enums.Rating;
 import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,6 +46,7 @@ public class ListAllBugsTests {
 				() -> assertThrows(IllegalArgumentException.class, () -> listAllBugs.execute(params2))
 		);
 	}
+
 	@Test
 	public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
 		// Arrange
@@ -116,6 +116,7 @@ public class ListAllBugsTests {
 		// Act, Assert
 		assertDoesNotThrow(() -> listAllBugs.execute(params));
 	}
+
 	@ParameterizedTest(name = "passed arguments: {0}")
 	@ValueSource(strings = {"sortByRating", "sortBySize"})
 	public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {

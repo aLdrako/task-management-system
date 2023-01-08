@@ -9,7 +9,6 @@ import com.telerikacademy.tms.models.tasks.contracts.Story;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
 import com.telerikacademy.tms.models.tasks.enums.PriorityType;
 import com.telerikacademy.tms.models.tasks.enums.Rating;
-import com.telerikacademy.tms.models.tasks.enums.SeverityType;
 import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,18 +18,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-
-import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
-import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
 import static com.telerikacademy.tms.utils.ModelsConstants.*;
-import static com.telerikacademy.tms.utils.TestUtils.getList;
-import static java.lang.String.format;
 import static java.lang.String.valueOf;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ListAllTasksTests {
 	private static final String LISTING_HEADER = "LIST ALL TASKS %s %n%s";
-    private TaskManagementRepository repository;
+	private TaskManagementRepository repository;
 	private Command listAllTasks;
 
 
@@ -55,6 +50,7 @@ public class ListAllTasksTests {
 				() -> Assertions.assertThrows(IllegalArgumentException.class, () -> listAllTasks.execute(parameters1))
 		);
 	}
+
 	@Test
 	public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
 		// Arrange
@@ -88,6 +84,7 @@ public class ListAllTasksTests {
 				() -> Assertions.assertDoesNotThrow(() -> listAllTasks.execute(parameters1))
 		);
 	}
+
 	@Test
 	public void execute_Should_ListAllTasks_When_ValidFilterParametersPassed() {
 		// Arrange
@@ -109,6 +106,7 @@ public class ListAllTasksTests {
 		// Act, Assert
 		assertDoesNotThrow(() -> listAllTasks.execute(params));
 	}
+
 	@ParameterizedTest(name = "passed arguments: {0}")
 	@ValueSource(strings = {"sortByPriority", "sortBySeverity", "sortByRating", "sortBySize"})
 	public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {
@@ -118,6 +116,7 @@ public class ListAllTasksTests {
 		// Act, Assert
 		assertThrows(InvalidUserInputException.class, () -> listAllTasks.execute(params));
 	}
+
 	@Test
 	public void execute_Should_ListAllTasks_When_ZeroParametersSpecified() {
 		// Arrange

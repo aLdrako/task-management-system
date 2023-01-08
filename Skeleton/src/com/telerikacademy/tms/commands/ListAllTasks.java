@@ -4,16 +4,15 @@ import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
 import com.telerikacademy.tms.models.tasks.contracts.Task;
-import com.telerikacademy.tms.utils.FilterHelpers;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByTitle;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 import static java.lang.String.format;
 
 public class ListAllTasks implements Command {

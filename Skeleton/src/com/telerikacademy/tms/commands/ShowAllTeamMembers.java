@@ -31,6 +31,6 @@ public class ShowAllTeamMembers implements Command {
 
 		return members.size() == 0 ? format(NO_MEMBERS_LISTED, findTeam.getName()) :
 				format(MEMBERS_LISTED, findTeam.getName(), members.size()) +
-				members.stream().map(Nameable::getName).collect(Collectors.joining(", "));
+						members.stream().map(Nameable::getName).collect(Collectors.joining(", "));
 	}
 }

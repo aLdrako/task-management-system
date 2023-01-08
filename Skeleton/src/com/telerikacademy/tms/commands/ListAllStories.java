@@ -14,7 +14,8 @@ import static com.telerikacademy.tms.utils.FilterHelpers.filterByAssignee;
 import static com.telerikacademy.tms.utils.FilterHelpers.filterByStatus;
 import static com.telerikacademy.tms.utils.ListingHelpers.elementsToString;
 import static com.telerikacademy.tms.utils.ListingHelpers.listingCommandsSubHeader;
-import static com.telerikacademy.tms.utils.ValidationHelpers.*;
+import static com.telerikacademy.tms.utils.ValidationHelpers.ZERO_PARAMETERS;
+import static com.telerikacademy.tms.utils.ValidationHelpers.validateFilteringAndSortingParameters;
 import static java.lang.String.format;
 
 public class ListAllStories implements Command {

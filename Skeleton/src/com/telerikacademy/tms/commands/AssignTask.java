@@ -3,7 +3,6 @@ package com.telerikacademy.tms.commands;
 import com.telerikacademy.tms.commands.contracts.Command;
 import com.telerikacademy.tms.core.contracts.TaskManagementRepository;
 import com.telerikacademy.tms.exceptions.InvalidUserInputException;
-import com.telerikacademy.tms.models.contracts.Board;
 import com.telerikacademy.tms.models.contracts.Team;
 import com.telerikacademy.tms.models.contracts.User;
 import com.telerikacademy.tms.models.tasks.contracts.Assignable;
