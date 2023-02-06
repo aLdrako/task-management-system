@@ -12,39 +12,39 @@ import com.telerikacademy.tms.models.tasks.enums.SizeType;
 import java.util.List;
 
 public interface TaskManagementRepository {
-	List<Team> getTeams();
+    List<Team> getTeams();
 
-	List<User> getUsers();
+    List<User> getUsers();
 
-	List<Task> getTasks();
+    List<Task> getTasks();
 
-	List<Bug> getBugs();
+    List<Bug> getBugs();
 
-	List<Story> getStories();
+    List<Story> getStories();
 
-	List<Feedback> getFeedbacks();
+    List<Feedback> getFeedbacks();
 
-	List<Assignable> getAssignableTasks();
+    List<Assignable> getAssignableTasks();
 
-	Team createTeam(String name);
+    Team createTeam(String name);
 
-	User createUser(String name);
+    User createUser(String name);
 
-	Bug createBug(String title, String description, PriorityType priority, SeverityType severity, List<String> steps);
+    Bug createBug(String title, String description, PriorityType priority, SeverityType severity, List<String> steps);
 
-	Story createStory(String title, String description, PriorityType priority, SizeType size);
+    Story createStory(String title, String description, PriorityType priority, SizeType size);
 
-	Feedback createFeedback(String title, String description, Rating rating);
+    Feedback createFeedback(String title, String description, Rating rating);
 
-	<T extends Task> T findTaskById(List<T> elements, int id);
+    <T extends Task> T findTaskById(List<T> elements, int id);
 
-	<T extends Task> T findTaskById(List<T> elements, int id, String type);
+    <T extends Task> T findTaskById(List<T> elements, int id, String type);
 
-	<T extends Nameable> T findElementByName(List<T> elements, String name);
+    <T extends Nameable> T findElementByName(List<T> elements, String name);
 
-	Board findBoardByNameInTeam(Team team, String name);
+    Board findBoardByNameInTeam(Team team, String name);
 
-	Team findTeamByTask(Task task);
+    Team findTeamByTask(Task task);
 
-	boolean isNameUnique(String name);
+    boolean isNameUnique(String name);
 }

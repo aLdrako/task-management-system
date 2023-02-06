@@ -22,129 +22,129 @@ import static java.lang.String.valueOf;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ListAllStoriesTests {
-	private TaskManagementRepository repository;
-	private Command listAllStories;
+    private TaskManagementRepository repository;
+    private Command listAllStories;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		listAllStories = new ListAllStories(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        listAllStories = new ListAllStories(repository);
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(strings = {"sortByTitle", "filterByStatus"})
-	public void execute_Should_ThrowException_When_ReceivingParametersAfterSorting(String argument) {
-		// Arrange
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
-		List<String> params1 = List.of("sortByTitle", argument);
-		List<String> params2 = List.of("filterByStatus", valueOf(story.getStatus()), "sortByTitle", argument);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(strings = {"sortByTitle", "filterByStatus"})
+    public void execute_Should_ThrowException_When_ReceivingParametersAfterSorting(String argument) {
+        // Arrange
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
+        List<String> params1 = List.of("sortByTitle", argument);
+        List<String> params2 = List.of("filterByStatus", valueOf(story.getStatus()), "sortByTitle", argument);
 
-		// Act, Assert
-		assertAll(
-				() -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params1)),
-				() -> assertThrows(IllegalArgumentException.class, () -> listAllStories.execute(params2))
-		);
-	}
+        // Act, Assert
+        assertAll(
+                () -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params1)),
+                () -> assertThrows(IllegalArgumentException.class, () -> listAllStories.execute(params2))
+        );
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
-		// Arrange
-		Task task = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
-		List<String> parameters = List.of(RANDOM_WORD);
-		List<String> parameters1 = List.of(RANDOM_WORD, "filterByStatus", task.getStatus().toString(), "sortByTitle");
-		List<String> parameters2 = List.of(RANDOM_WORD, "filterByStatus", task.getStatus().toString());
-		List<String> parameters3 = List.of(RANDOM_WORD, "sortByTitle");
+    @Test
+    public void execute_Should_ThrowException_When_ReceivingInvalidArguments() {
+        // Arrange
+        Task task = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+        List<String> parameters = List.of(RANDOM_WORD);
+        List<String> parameters1 = List.of(RANDOM_WORD, "filterByStatus", task.getStatus().toString(), "sortByTitle");
+        List<String> parameters2 = List.of(RANDOM_WORD, "filterByStatus", task.getStatus().toString());
+        List<String> parameters3 = List.of(RANDOM_WORD, "sortByTitle");
 
-		// Act, Assert
-		Assertions.assertAll(
-				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters)),
-				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters1)),
-				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters2)),
-				() -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters3))
-		);
-	}
+        // Act, Assert
+        Assertions.assertAll(
+                () -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters)),
+                () -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters1)),
+                () -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters2)),
+                () -> Assertions.assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(parameters3))
+        );
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(strings = {"filterByStatus", "filterByAssignee", "filterByStatusAndAssignee"})
-	public void execute_Should_ThrowException_When_FilterArgumentsCountDiffer(String argument) {
-		// Arrange
-		List<String> params = List.of(argument);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(strings = {"filterByStatus", "filterByAssignee", "filterByStatusAndAssignee"})
+    public void execute_Should_ThrowException_When_FilterArgumentsCountDiffer(String argument) {
+        // Arrange
+        List<String> params = List.of(argument);
 
-		// Act, Assert
-		assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params));
-	}
+        // Act, Assert
+        assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_WrongParameterSpecified() {
-		// Arrange
-		List<String> params1 = List.of("sortBySomething");
-		List<String> params2 = List.of("filterBySomething");
+    @Test
+    public void execute_Should_ThrowException_When_WrongParameterSpecified() {
+        // Arrange
+        List<String> params1 = List.of("sortBySomething");
+        List<String> params2 = List.of("filterBySomething");
 
-		// Act, Assert
-		assertAll(
-				() -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params1)),
-				() -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params2))
-		);
-	}
+        // Act, Assert
+        assertAll(
+                () -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params1)),
+                () -> assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params2))
+        );
+    }
 
-	@Test
-	public void execute_Should_ListAllStories_When_ValidFilterParametersPassed() {
-		// Arrange
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
-		User user = repository.createUser(USER_VALID_NAME);
-		story.setAssignee(user);
-		List<String> params1 = List.of("filterByStatus", valueOf(story.getStatus()));
-		List<String> params2 = List.of("filterByAssignee", user.getName());
-		List<String> params3 = List.of("filterByStatusAndAssignee", valueOf(story.getStatus()), user.getName());
+    @Test
+    public void execute_Should_ListAllStories_When_ValidFilterParametersPassed() {
+        // Arrange
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
+        User user = repository.createUser(USER_VALID_NAME);
+        story.setAssignee(user);
+        List<String> params1 = List.of("filterByStatus", valueOf(story.getStatus()));
+        List<String> params2 = List.of("filterByAssignee", user.getName());
+        List<String> params3 = List.of("filterByStatusAndAssignee", valueOf(story.getStatus()), user.getName());
 
-		// Act, Assert
-		assertAll(
-				() -> assertDoesNotThrow(() -> listAllStories.execute(params1)),
-				() -> assertDoesNotThrow(() -> listAllStories.execute(params2)),
-				() -> assertDoesNotThrow(() -> listAllStories.execute(params3))
-		);
-	}
+        // Act, Assert
+        assertAll(
+                () -> assertDoesNotThrow(() -> listAllStories.execute(params1)),
+                () -> assertDoesNotThrow(() -> listAllStories.execute(params2)),
+                () -> assertDoesNotThrow(() -> listAllStories.execute(params3))
+        );
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(strings = {"sortByTitle", "sortByPriority", "sortBySize"})
-	public void execute_Should_ListAllStories_When_ValidSortParametersPassed(String argument) {
-		// Arrange
-		List<String> params = List.of(argument);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(strings = {"sortByTitle", "sortByPriority", "sortBySize"})
+    public void execute_Should_ListAllStories_When_ValidSortParametersPassed(String argument) {
+        // Arrange
+        List<String> params = List.of(argument);
 
-		// Act, Assert
-		assertDoesNotThrow(() -> listAllStories.execute(params));
-	}
+        // Act, Assert
+        assertDoesNotThrow(() -> listAllStories.execute(params));
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(strings = {"sortBySeverity", "sortByRating"})
-	public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {
-		// Arrange
-		List<String> params = List.of(argument);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(strings = {"sortBySeverity", "sortByRating"})
+    public void execute_Should_ThrowException_When_InvalidSortParametersPassed(String argument) {
+        // Arrange
+        List<String> params = List.of(argument);
 
-		// Act, Assert
-		assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params));
-	}
+        // Act, Assert
+        assertThrows(InvalidUserInputException.class, () -> listAllStories.execute(params));
+    }
 
-	@Test
-	public void execute_Should_ListAllStories_When_LastParameterIsSorting() {
-		// Arrange
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
-		List<String> params1 = List.of("sortByTitle");
-		List<String> params2 = List.of("filterByStatus", valueOf(story.getStatus()), "sortByTitle");
+    @Test
+    public void execute_Should_ListAllStories_When_LastParameterIsSorting() {
+        // Arrange
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.SMALL);
+        List<String> params1 = List.of("sortByTitle");
+        List<String> params2 = List.of("filterByStatus", valueOf(story.getStatus()), "sortByTitle");
 
-		// Act, Assert
-		assertAll(
-				() -> assertDoesNotThrow(() -> listAllStories.execute(params1)),
-				() -> assertDoesNotThrow(() -> listAllStories.execute(params2))
-		);
-	}
+        // Act, Assert
+        assertAll(
+                () -> assertDoesNotThrow(() -> listAllStories.execute(params1)),
+                () -> assertDoesNotThrow(() -> listAllStories.execute(params2))
+        );
+    }
 
-	@Test
-	public void execute_Should_ListAllStories_When_ZeroParametersSpecified() {
-		// Arrange
-		List<String> params = List.of();
+    @Test
+    public void execute_Should_ListAllStories_When_ZeroParametersSpecified() {
+        // Arrange
+        List<String> params = List.of();
 
-		// Act, Assert
-		assertDoesNotThrow(() -> listAllStories.execute(params));
-	}
+        // Act, Assert
+        assertDoesNotThrow(() -> listAllStories.execute(params));
+    }
 }

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Historiable {
 
-	List<History> getHistories();
+    List<History> getHistories();
 
 }

@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface Bug extends Task, Assignable {
 
-	List<String> getSteps();
+    List<String> getSteps();
 
-	PriorityType getPriority();
+    PriorityType getPriority();
 
-	SeverityType getSeverity();
+    SeverityType getSeverity();
 
-	void setPriority(PriorityType priority);
+    void setPriority(PriorityType priority);
 
-	void setSeverity(SeverityType severity);
+    void setSeverity(SeverityType severity);
 
 }

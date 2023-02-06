@@ -24,65 +24,65 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AssignTaskTests {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 2;
-	private Command assignTask;
-	private TaskManagementRepository repository;
+    private static final int EXPECTED_NUMBER_PARAMETERS = 2;
+    private Command assignTask;
+    private TaskManagementRepository repository;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		assignTask = new AssignTask(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        assignTask = new AssignTask(repository);
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		//Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> assignTask.execute(parameters));
-	}
+        //Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> assignTask.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_TaskAlreadyAssigned() {
-		// Arrange
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
-		User user = repository.createUser(USER_VALID_NAME);
+    @Test
+    public void execute_Should_ThrowException_When_TaskAlreadyAssigned() {
+        // Arrange
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+        User user = repository.createUser(USER_VALID_NAME);
 
-		// Act
-		story.setAssignee(user);
+        // Act
+        story.setAssignee(user);
 
-		// Assert
-		assertThrows(InvalidUserInputException.class, () -> assignTask.execute(List.of(String.valueOf(story.getID()), user.getName())));
-	}
+        // Assert
+        assertThrows(InvalidUserInputException.class, () -> assignTask.execute(List.of(String.valueOf(story.getID()), user.getName())));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_UserNotFoundInTeam() {
-		// Arrange, Act
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
-		User user = repository.createUser(USER_VALID_NAME);
-		Team team = repository.createTeam(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		board.addTask(story);
-		team.addBoard(board);
+    @Test
+    public void execute_Should_ThrowException_When_UserNotFoundInTeam() {
+        // Arrange, Act
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+        User user = repository.createUser(USER_VALID_NAME);
+        Team team = repository.createTeam(TEAM_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        board.addTask(story);
+        team.addBoard(board);
 
-		// Assert
-		assertThrows(InvalidUserInputException.class, () -> assignTask.execute(List.of(String.valueOf(story.getID()), user.getName())));
-	}
+        // Assert
+        assertThrows(InvalidUserInputException.class, () -> assignTask.execute(List.of(String.valueOf(story.getID()), user.getName())));
+    }
 
-	@Test
-	public void execute_Should_AssignTask_When_ValidArgumentsPassed() {
-		// Arrange, Act
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
-		User user = repository.createUser(USER_VALID_NAME);
-		Team team = repository.createTeam(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		board.addTask(story);
-		team.addBoard(board);
-		team.addUser(user);
+    @Test
+    public void execute_Should_AssignTask_When_ValidArgumentsPassed() {
+        // Arrange, Act
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+        User user = repository.createUser(USER_VALID_NAME);
+        Team team = repository.createTeam(TEAM_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        board.addTask(story);
+        team.addBoard(board);
+        team.addUser(user);
 
-		// Assert
-		assertDoesNotThrow(() -> assignTask.execute(List.of(String.valueOf(story.getID()), user.getName())));
-	}
+        // Assert
+        assertDoesNotThrow(() -> assignTask.execute(List.of(String.valueOf(story.getID()), user.getName())));
+    }
 }

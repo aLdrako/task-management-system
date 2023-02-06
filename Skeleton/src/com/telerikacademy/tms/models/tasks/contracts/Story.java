@@ -5,12 +5,12 @@ import com.telerikacademy.tms.models.tasks.enums.SizeType;
 
 public interface Story extends Task, Assignable {
 
-	PriorityType getPriority();
+    PriorityType getPriority();
 
-	SizeType getSize();
+    SizeType getSize();
 
-	void setPriority(PriorityType priority);
+    void setPriority(PriorityType priority);
 
-	void setSize(SizeType size);
+    void setSize(SizeType size);
 
 }

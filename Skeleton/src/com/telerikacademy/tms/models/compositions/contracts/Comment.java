@@ -1,7 +1,7 @@
 package com.telerikacademy.tms.models.compositions.contracts;
 
 public interface Comment {
-	String getContent();
+    String getContent();
 
-	String getAuthor();
+    String getAuthor();
 }

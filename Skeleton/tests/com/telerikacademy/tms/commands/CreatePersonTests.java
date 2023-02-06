@@ -20,43 +20,43 @@ import static com.telerikacademy.tms.utils.TestUtils.getList;
 
 public class CreatePersonTests {
 
-	private Command command;
-	private TaskManagementRepository repository;
+    private Command command;
+    private TaskManagementRepository repository;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		command = new CreatePerson(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        command = new CreatePerson(repository);
+    }
 
-	@ParameterizedTest(name = "with arguments count: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountIsDifferentThanExpected(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    @ParameterizedTest(name = "with arguments count: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountIsDifferentThanExpected(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		//Act, Assert
-		Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
-	}
+        //Act, Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_DuplicateNameIsFound() {
-		// Arrange
-		repository.createUser(USER_VALID_NAME);
-		List<String> parameters = List.of(USER_VALID_NAME);
+    @Test
+    public void execute_Should_ThrowException_When_DuplicateNameIsFound() {
+        // Arrange
+        repository.createUser(USER_VALID_NAME);
+        List<String> parameters = List.of(USER_VALID_NAME);
 
-		//Act, Assert
-		Assertions.assertThrows(DuplicateElementException.class, () -> command.execute(parameters));
-	}
+        //Act, Assert
+        Assertions.assertThrows(DuplicateElementException.class, () -> command.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_AddUserInRepository_When_ReceivingValidArguments() {
-		// Arrange
-		User user = new UserImpl(USER_VALID_NAME);
-		List<String> parameters = List.of(user.getName());
-		//Act
-		command.execute(parameters);
-		//Assert
-		Assertions.assertEquals(1, repository.getUsers().size());
-	}
+    @Test
+    public void execute_Should_AddUserInRepository_When_ReceivingValidArguments() {
+        // Arrange
+        User user = new UserImpl(USER_VALID_NAME);
+        List<String> parameters = List.of(user.getName());
+        //Act
+        command.execute(parameters);
+        //Assert
+        Assertions.assertEquals(1, repository.getUsers().size());
+    }
 }

@@ -19,40 +19,40 @@ import static com.telerikacademy.tms.utils.TestUtils.getList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddCommentTests {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
-	private Command addCommentCommand;
-	private TaskManagementRepository repository;
+    private static final int EXPECTED_NUMBER_PARAMETERS = 3;
+    private Command addCommentCommand;
+    private TaskManagementRepository repository;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		addCommentCommand = new AddComment(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        addCommentCommand = new AddComment(repository);
+    }
 
-	//TODO fix it
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    //TODO fix it
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		//Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> addCommentCommand.execute(parameters));
-	}
+        //Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> addCommentCommand.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_AddComment_When_ValidArgumentsPassed() {
-		// Arrange
-		Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(0));
-		User user = repository.createUser(USER_VALID_NAME);
+    @Test
+    public void execute_Should_AddComment_When_ValidArgumentsPassed() {
+        // Arrange
+        Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SeverityType.MINOR, getList(0));
+        User user = repository.createUser(USER_VALID_NAME);
 
-		// Act
-		addCommentCommand.execute(List.of(String.valueOf(bug.getID()), COMMENT_MESSAGE, user.getName()));
+        // Act
+        addCommentCommand.execute(List.of(String.valueOf(bug.getID()), COMMENT_MESSAGE, user.getName()));
 
-		// Assert
-		assertAll(
-				() -> assertEquals(1, repository.getTasks().get(0).getComments().size()),
-				() -> assertEquals(2, repository.getUsers().get(0).getHistories().size())
-		);
-	}
+        // Assert
+        assertAll(
+                () -> assertEquals(1, repository.getTasks().get(0).getComments().size()),
+                () -> assertEquals(2, repository.getUsers().get(0).getHistories().size())
+        );
+    }
 }

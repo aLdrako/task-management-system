@@ -24,49 +24,49 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UnassignTaskTests {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
-	private Command unassignTask;
-	private TaskManagementRepository repository;
+    private static final int EXPECTED_NUMBER_PARAMETERS = 1;
+    private Command unassignTask;
+    private TaskManagementRepository repository;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		unassignTask = new UnassignTask(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        unassignTask = new UnassignTask(repository);
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		//Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> unassignTask.execute(parameters));
-	}
+        //Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> unassignTask.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_TaskAlreadyUnassigned() {
-		// Arrange
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+    @Test
+    public void execute_Should_ThrowException_When_TaskAlreadyUnassigned() {
+        // Arrange
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
 
-		// Act, Assert
-		assertThrows(InvalidUserInputException.class, () -> unassignTask.execute(List.of(String.valueOf(story.getID()))));
-	}
+        // Act, Assert
+        assertThrows(InvalidUserInputException.class, () -> unassignTask.execute(List.of(String.valueOf(story.getID()))));
+    }
 
-	@Test
-	public void execute_Should_UnassignTask_When_ValidArgumentsPassed() {
-		// Arrange
-		Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
-		User user = repository.createUser(USER_VALID_NAME);
-		Team team = repository.createTeam(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		board.addTask(story);
-		team.addBoard(board);
-		team.addUser(user);
-		user.assignTask(story);
-		story.setAssignee(user);
+    @Test
+    public void execute_Should_UnassignTask_When_ValidArgumentsPassed() {
+        // Arrange
+        Story story = repository.createStory(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, PriorityType.LOW, SizeType.LARGE);
+        User user = repository.createUser(USER_VALID_NAME);
+        Team team = repository.createTeam(TEAM_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        board.addTask(story);
+        team.addBoard(board);
+        team.addUser(user);
+        user.assignTask(story);
+        story.setAssignee(user);
 
-		// Act, Assert
-		assertDoesNotThrow(() -> unassignTask.execute(List.of(String.valueOf(story.getID()))));
-	}
+        // Act, Assert
+        assertDoesNotThrow(() -> unassignTask.execute(List.of(String.valueOf(story.getID()))));
+    }
 }

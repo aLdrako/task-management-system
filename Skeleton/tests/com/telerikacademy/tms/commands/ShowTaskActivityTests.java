@@ -19,32 +19,32 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ShowTaskActivityTests {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
-	private Command showTaskActivityCommand;
-	private TaskManagementRepository repository;
+    private static final int EXPECTED_NUMBER_PARAMETERS = 1;
+    private Command showTaskActivityCommand;
+    private TaskManagementRepository repository;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		showTaskActivityCommand = new ShowTaskActivity(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        showTaskActivityCommand = new ShowTaskActivity(repository);
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> showTaskActivityCommand.execute(parameters));
-	}
+        // Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> showTaskActivityCommand.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_ShowTaskActivity_When_ValidArgumentsPassed() {
-		// Arrange
-		Feedback feedback = repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.TEN);
+    @Test
+    public void execute_Should_ShowTaskActivity_When_ValidArgumentsPassed() {
+        // Arrange
+        Feedback feedback = repository.createFeedback(TASK_VALID_NAME, DESCRIPTION_VALID_NAME, Rating.TEN);
 
-		// Act, Assert
-		assertDoesNotThrow(() -> showTaskActivityCommand.execute(List.of(String.valueOf(feedback.getID()))));
-	}
+        // Act, Assert
+        assertDoesNotThrow(() -> showTaskActivityCommand.execute(List.of(String.valueOf(feedback.getID()))));
+    }
 }

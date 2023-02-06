@@ -7,7 +7,7 @@ import com.telerikacademy.tms.models.tasks.contracts.Task;
 import java.util.List;
 
 public interface Board extends Nameable, Historiable {
-	List<Task> getTasks();
+    List<Task> getTasks();
 
-	void addTask(Task task);
+    void addTask(Task task);
 }

@@ -17,43 +17,43 @@ import static com.telerikacademy.tms.utils.ModelsConstants.USER_VALID_NAME;
 import static com.telerikacademy.tms.utils.TestUtils.getList;
 
 public class ShowPersonActivityTests {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 1;
-	private TaskManagementRepository repository;
-	private Command command;
+    private static final int EXPECTED_NUMBER_PARAMETERS = 1;
+    private TaskManagementRepository repository;
+    private Command command;
 
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		command = new ShowPersonActivity(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        command = new ShowPersonActivity(repository);
+    }
 
-	@ParameterizedTest(name = "with arguments count: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountIsDifferentThanExpected(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    @ParameterizedTest(name = "with arguments count: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountIsDifferentThanExpected(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		//Act, Assert
-		Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
-	}
+        //Act, Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_UserDoesNotExistInRepository() {
-		// Arrange
-		List<String> parameters = List.of(USER_VALID_NAME);
-		// Act, Assert
-		Assertions.assertThrows(ElementNotFoundException.class, () -> command.execute(parameters));
-	}
+    @Test
+    public void execute_Should_ThrowException_When_UserDoesNotExistInRepository() {
+        // Arrange
+        List<String> parameters = List.of(USER_VALID_NAME);
+        // Act, Assert
+        Assertions.assertThrows(ElementNotFoundException.class, () -> command.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_printPersonActivity_When_InputValid() {
-		// Arrange
-		User user = repository.createUser(USER_VALID_NAME);
-		List<String> parameters = List.of(user.getName());
+    @Test
+    public void execute_Should_printPersonActivity_When_InputValid() {
+        // Arrange
+        User user = repository.createUser(USER_VALID_NAME);
+        List<String> parameters = List.of(user.getName());
 
-		// Act, Assert
-		Assertions.assertDoesNotThrow(() -> command.execute(parameters));
-	}
+        // Act, Assert
+        Assertions.assertDoesNotThrow(() -> command.execute(parameters));
+    }
 
 }

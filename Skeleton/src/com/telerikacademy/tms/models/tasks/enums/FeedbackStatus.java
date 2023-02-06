@@ -4,24 +4,24 @@ import com.telerikacademy.tms.exceptions.InvalidEnumArgumentException;
 import com.telerikacademy.tms.models.tasks.contracts.Status;
 
 public enum FeedbackStatus implements Status {
-	NEW,
-	UNSCHEDULED,
-	SCHEDULED,
-	DONE;
+    NEW,
+    UNSCHEDULED,
+    SCHEDULED,
+    DONE;
 
-	@Override
-	public String toString() {
-		switch (this) {
-			case NEW:
-				return "New";
-			case UNSCHEDULED:
-				return "Unscheduled";
-			case SCHEDULED:
-				return "Scheduled";
-			case DONE:
-				return "Done";
-			default:
-				throw new InvalidEnumArgumentException("No such status");
-		}
-	}
+    @Override
+    public String toString() {
+        switch (this) {
+            case NEW:
+                return "New";
+            case UNSCHEDULED:
+                return "Unscheduled";
+            case SCHEDULED:
+                return "Scheduled";
+            case DONE:
+                return "Done";
+            default:
+                throw new InvalidEnumArgumentException("No such status");
+        }
+    }
 }

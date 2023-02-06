@@ -4,7 +4,7 @@ import com.telerikacademy.tms.models.tasks.enums.Rating;
 
 public interface Feedback extends Task {
 
-	Rating getRating();
+    Rating getRating();
 
-	void setRating(Rating rating);
+    void setRating(Rating rating);
 }

@@ -23,87 +23,87 @@ import static java.lang.String.valueOf;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ChangeBugTests {
-	private static final int EXPECTED_NUMBER_PARAMETERS = 3;
-	private Command changeBug;
-	private TaskManagementRepository repository;
+    private static final int EXPECTED_NUMBER_PARAMETERS = 3;
+    private Command changeBug;
+    private TaskManagementRepository repository;
 
-	@BeforeEach
-	public void before() {
-		repository = new TaskManagementRepositoryImpl();
-		changeBug = new ChangeBug(repository);
-	}
+    @BeforeEach
+    public void before() {
+        repository = new TaskManagementRepositoryImpl();
+        changeBug = new ChangeBug(repository);
+    }
 
-	@ParameterizedTest(name = "passed arguments: {0}")
-	@ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
-	public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
-		// Arrange
-		List<String> parameters = getList(argumentsCount);
+    @ParameterizedTest(name = "passed arguments: {0}")
+    @ValueSource(ints = {EXPECTED_NUMBER_PARAMETERS - 1, EXPECTED_NUMBER_PARAMETERS + 1})
+    public void execute_Should_ThrowException_When_ArgumentsCountDiffer(int argumentsCount) {
+        // Arrange
+        List<String> parameters = getList(argumentsCount);
 
-		//Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> changeBug.execute(parameters));
-	}
+        //Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> changeBug.execute(parameters));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_WrongChangeParameterProvided() {
-		// Arrange
-		Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
-				PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
+    @Test
+    public void execute_Should_ThrowException_When_WrongChangeParameterProvided() {
+        // Arrange
+        Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
+                PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
 
-		// Act, Assert
-		assertThrows(UnsupportedOperationException.class,
-				() -> changeBug.execute(List.of(valueOf(bug.getID()), "size", valueOf(SizeType.LARGE))));
-	}
+        // Act, Assert
+        assertThrows(UnsupportedOperationException.class,
+                () -> changeBug.execute(List.of(valueOf(bug.getID()), "size", valueOf(SizeType.LARGE))));
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_EnumParameterDoesNotMatch() {
-		// Arrange
-		Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
-				PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
+    @Test
+    public void execute_Should_ThrowException_When_EnumParameterDoesNotMatch() {
+        // Arrange
+        Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
+                PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
 
-		// Act, Assert
-		assertAll(
-				() -> assertThrows(IllegalArgumentException.class,
-						() -> changeBug.execute(List.of(valueOf(bug.getID()), "status", valueOf(PriorityType.HIGH)))),
-				() -> assertThrows(IllegalArgumentException.class,
-						() -> changeBug.execute(List.of(valueOf(bug.getID()), "severity", valueOf(BugStatus.FIXED)))),
-				() -> assertThrows(IllegalArgumentException.class,
-						() -> changeBug.execute(List.of(valueOf(bug.getID()), "priority", valueOf(SeverityType.MAJOR))))
-		);
-	}
+        // Act, Assert
+        assertAll(
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> changeBug.execute(List.of(valueOf(bug.getID()), "status", valueOf(PriorityType.HIGH)))),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> changeBug.execute(List.of(valueOf(bug.getID()), "severity", valueOf(BugStatus.FIXED)))),
+                () -> assertThrows(IllegalArgumentException.class,
+                        () -> changeBug.execute(List.of(valueOf(bug.getID()), "priority", valueOf(SeverityType.MAJOR))))
+        );
+    }
 
-	@Test
-	public void execute_Should_ThrowException_When_ChangingToSameParameter() {
-		// Arrange
-		Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
-				PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
+    @Test
+    public void execute_Should_ThrowException_When_ChangingToSameParameter() {
+        // Arrange
+        Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
+                PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
 
-		// Act, Assert
-		assertAll(
-				() -> assertThrows(InvalidUserInputException.class,
-						() -> changeBug.execute(List.of(valueOf(bug.getID()), "status", valueOf(BugStatus.ACTIVE)))),
-				() -> assertThrows(InvalidUserInputException.class,
-						() -> changeBug.execute(List.of(valueOf(bug.getID()), "priority", valueOf(PriorityType.MEDIUM)))),
-				() -> assertThrows(InvalidUserInputException.class,
-						() -> changeBug.execute(List.of(valueOf(bug.getID()), "severity", valueOf(SeverityType.CRITICAL))))
-		);
-	}
+        // Act, Assert
+        assertAll(
+                () -> assertThrows(InvalidUserInputException.class,
+                        () -> changeBug.execute(List.of(valueOf(bug.getID()), "status", valueOf(BugStatus.ACTIVE)))),
+                () -> assertThrows(InvalidUserInputException.class,
+                        () -> changeBug.execute(List.of(valueOf(bug.getID()), "priority", valueOf(PriorityType.MEDIUM)))),
+                () -> assertThrows(InvalidUserInputException.class,
+                        () -> changeBug.execute(List.of(valueOf(bug.getID()), "severity", valueOf(SeverityType.CRITICAL))))
+        );
+    }
 
-	@Test
-	public void execute_Should_ChangeParameters_When_ValidArgumentsPassed() {
-		// Arrange
-		Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
-				PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
+    @Test
+    public void execute_Should_ChangeParameters_When_ValidArgumentsPassed() {
+        // Arrange
+        Bug bug = repository.createBug(TASK_VALID_NAME, DESCRIPTION_VALID_NAME,
+                PriorityType.MEDIUM, SeverityType.CRITICAL, List.of("Step 1", "Step 2"));
 
-		// Act
-		changeBug.execute(List.of(valueOf(bug.getID()), "status", valueOf(BugStatus.FIXED)));
-		changeBug.execute(List.of(valueOf(bug.getID()), "priority", valueOf(PriorityType.LOW)));
-		changeBug.execute(List.of(valueOf(bug.getID()), "severity", valueOf(SeverityType.MINOR)));
+        // Act
+        changeBug.execute(List.of(valueOf(bug.getID()), "status", valueOf(BugStatus.FIXED)));
+        changeBug.execute(List.of(valueOf(bug.getID()), "priority", valueOf(PriorityType.LOW)));
+        changeBug.execute(List.of(valueOf(bug.getID()), "severity", valueOf(SeverityType.MINOR)));
 
-		// Assert
-		assertAll(
-				() -> assertEquals(BugStatus.FIXED, bug.getStatus()),
-				() -> assertEquals(PriorityType.LOW, bug.getPriority()),
-				() -> assertEquals(SeverityType.MINOR, bug.getSeverity())
-		);
-	}
+        // Assert
+        assertAll(
+                () -> assertEquals(BugStatus.FIXED, bug.getStatus()),
+                () -> assertEquals(PriorityType.LOW, bug.getPriority()),
+                () -> assertEquals(SeverityType.MINOR, bug.getSeverity())
+        );
+    }
 }

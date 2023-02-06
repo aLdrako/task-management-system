@@ -3,15 +3,15 @@ package com.telerikacademy.tms.models.tasks.contracts;
 import com.telerikacademy.tms.models.tasks.enums.TaskType;
 
 public interface Task extends Historiable, Commentable, Comparable<Task> {
-	int getID();
+    int getID();
 
-	String getTitle();
+    String getTitle();
 
-	String getDescription();
+    String getDescription();
 
-	Status getStatus();
+    Status getStatus();
 
-	<T extends Status> void setStatus(T status);
+    <T extends Status> void setStatus(T status);
 
-	TaskType getTaskType();
+    TaskType getTaskType();
 }

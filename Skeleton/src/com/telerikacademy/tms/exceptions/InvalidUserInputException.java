@@ -1,10 +1,10 @@
 package com.telerikacademy.tms.exceptions;
 
 public class InvalidUserInputException extends RuntimeException {
-	public InvalidUserInputException() {
-	}
+    public InvalidUserInputException() {
+    }
 
-	public InvalidUserInputException(String message) {
-		super(message);
-	}
+    public InvalidUserInputException(String message) {
+        super(message);
+    }
 }

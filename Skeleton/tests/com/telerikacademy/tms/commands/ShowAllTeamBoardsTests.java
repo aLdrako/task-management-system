@@ -18,58 +18,58 @@ import static com.telerikacademy.tms.utils.TestUtils.getList;
 import static java.lang.String.format;
 
 class ShowAllTeamBoardsTests {
-	private TaskManagementRepository repository;
-	private Command command;
+    private TaskManagementRepository repository;
+    private Command command;
 
-	@BeforeEach
-	void setUp() {
-		repository = new TaskManagementRepositoryImpl();
-		command = new ShowAllTeamBoards(repository);
-	}
+    @BeforeEach
+    void setUp() {
+        repository = new TaskManagementRepositoryImpl();
+        command = new ShowAllTeamBoards(repository);
+    }
 
-	@Test
-	void execute_Should_ThrowException_When_NumberOfArgumentsIsInvalid() {
-		// Arrange
-		List<String> parameters = getList(EXPECTED_NUMBER_PARAMETERS + 1);
+    @Test
+    void execute_Should_ThrowException_When_NumberOfArgumentsIsInvalid() {
+        // Arrange
+        List<String> parameters = getList(EXPECTED_NUMBER_PARAMETERS + 1);
 
-		// Act, Assert
-		Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
+        // Act, Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(parameters));
 
-		Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(getList(EXPECTED_NUMBER_PARAMETERS - 1)));
-	}
+        Assertions.assertThrows(IllegalArgumentException.class, () -> command.execute(getList(EXPECTED_NUMBER_PARAMETERS - 1)));
+    }
 
-	@Test
-	void execute_Should_ThrowException_When_GivenTeamDoesNotExist() {
-		// Arrange
-		List<String> parameters = new ArrayList<String>();
-		parameters.add("Non existant team");
-		// Act, Assert
-		Assertions.assertThrows(ElementNotFoundException.class, () -> command.execute(parameters));
-	}
+    @Test
+    void execute_Should_ThrowException_When_GivenTeamDoesNotExist() {
+        // Arrange
+        List<String> parameters = new ArrayList<String>();
+        parameters.add("Non existant team");
+        // Act, Assert
+        Assertions.assertThrows(ElementNotFoundException.class, () -> command.execute(parameters));
+    }
 
-	@Test
-	void execute_Should_ReturnNoBoardsMessageForExistingTeam() {
-		// Arrange
-		repository.createTeam("Team 01");
-		List<String> parameters = new ArrayList<String>();
-		parameters.add("Team 01");
-		// Act
-		String result = command.execute(parameters);
-		// Assert
-		Assertions.assertEquals(format(NO_BOARDS_LISTED, "Team 01"), result);
-	}
+    @Test
+    void execute_Should_ReturnNoBoardsMessageForExistingTeam() {
+        // Arrange
+        repository.createTeam("Team 01");
+        List<String> parameters = new ArrayList<String>();
+        parameters.add("Team 01");
+        // Act
+        String result = command.execute(parameters);
+        // Assert
+        Assertions.assertEquals(format(NO_BOARDS_LISTED, "Team 01"), result);
+    }
 
-	@Test
-	void execute_Should_ReturnStringContainingBoardsForExistingTeam() {
-		// Arrange
-		Team team = repository.createTeam("Team 02");
-		team.addBoard(new BoardImpl("TestBoard"));
-		List<String> parameters = new ArrayList<String>();
-		parameters.add("Team 02");
-		// Act
-		String result = command.execute(parameters);
-		// Assert
-		int index = result.indexOf(format(BOARDS_LISTED, "Team 02", 1));
-		Assertions.assertEquals(0, index);
-	}
+    @Test
+    void execute_Should_ReturnStringContainingBoardsForExistingTeam() {
+        // Arrange
+        Team team = repository.createTeam("Team 02");
+        team.addBoard(new BoardImpl("TestBoard"));
+        List<String> parameters = new ArrayList<String>();
+        parameters.add("Team 02");
+        // Act
+        String result = command.execute(parameters);
+        // Assert
+        int index = result.indexOf(format(BOARDS_LISTED, "Team 02", 1));
+        Assertions.assertEquals(0, index);
+    }
 }

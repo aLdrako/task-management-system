@@ -7,13 +7,13 @@ import com.telerikacademy.tms.models.tasks.contracts.Task;
 import java.util.List;
 
 public interface User extends Nameable, Historiable {
-	List<Task> getTasks();
+    List<Task> getTasks();
 
-	void assignTask(Task task);
+    void assignTask(Task task);
 
-	void unAssignTask(Task task);
+    void unAssignTask(Task task);
 
-	void addCommentActivity(Task task);
+    void addCommentActivity(Task task);
 
-	void populateHistoryWhenAddingToTeam(Team team);
+    void populateHistoryWhenAddingToTeam(Team team);
 }

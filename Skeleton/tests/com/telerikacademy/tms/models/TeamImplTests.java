@@ -11,115 +11,115 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TeamImplTests {
 
-	@Test
-	public void teamImpl_Should_Implement_TeamInterface() {
-		// Arrange, Act
-		Team team = new TeamImpl(TEAM_VALID_NAME);
+    @Test
+    public void teamImpl_Should_Implement_TeamInterface() {
+        // Arrange, Act
+        Team team = new TeamImpl(TEAM_VALID_NAME);
 
-		// Assert
-		assertTrue(team instanceof Team);
-	}
+        // Assert
+        assertTrue(team instanceof Team);
+    }
 
-	@Test
-	public void constructor_Should_ThrowException_When_NameLengthOutOfBounds() {
-		// Arrange, Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> new TeamImpl(TEAM_INVALID_NAME));
-	}
+    @Test
+    public void constructor_Should_ThrowException_When_NameLengthOutOfBounds() {
+        // Arrange, Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> new TeamImpl(TEAM_INVALID_NAME));
+    }
 
-	@Test
-	public void constructor_Should_CreateNewTeam_When_ValidArgumentsPassed() {
-		// Arrange
-		TeamImpl team = new TeamImpl(TEAM_VALID_NAME);
-		// Act, Assert
-		assertEquals(TEAM_VALID_NAME, team.getName());
-	}
+    @Test
+    public void constructor_Should_CreateNewTeam_When_ValidArgumentsPassed() {
+        // Arrange
+        TeamImpl team = new TeamImpl(TEAM_VALID_NAME);
+        // Act, Assert
+        assertEquals(TEAM_VALID_NAME, team.getName());
+    }
 
-	@Test
-	public void getUsers_Should_ReturnCopyOfListTasks() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
+    @Test
+    public void getUsers_Should_ReturnCopyOfListTasks() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
+        User user = new UserImpl(USER_VALID_NAME);
 
-		// Act
-		team.getUsers().add(user);
+        // Act
+        team.getUsers().add(user);
 
-		// Assert
-		assertEquals(0, team.getUsers().size());
-	}
+        // Assert
+        assertEquals(0, team.getUsers().size());
+    }
 
-	@Test
-	public void getBoards_Should_ReturnCopyOfListTasks() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
+    @Test
+    public void getBoards_Should_ReturnCopyOfListTasks() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
 
-		// Act
-		team.getBoards().add(board);
+        // Act
+        team.getBoards().add(board);
 
-		// Assert
-		assertEquals(0, team.getBoards().size());
-	}
+        // Assert
+        assertEquals(0, team.getBoards().size());
+    }
 
-	@Test
-	public void addUser_Should_AddUserToList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
-		User user2 = new UserImpl(USER_VALID_NAME + " ");
+    @Test
+    public void addUser_Should_AddUserToList() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
+        User user = new UserImpl(USER_VALID_NAME);
+        User user2 = new UserImpl(USER_VALID_NAME + " ");
 
-		// Act
-		team.addUser(user);
-		team.addUser(user2);
+        // Act
+        team.addUser(user);
+        team.addUser(user2);
 
-		// Assert
-		assertEquals(2, team.getUsers().size());
-	}
+        // Assert
+        assertEquals(2, team.getUsers().size());
+    }
 
-	@Test
-	public void addUser_Should_ThrowException_When_AddingSameUser() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		User user = new UserImpl(USER_VALID_NAME);
-		team.addUser(user);
+    @Test
+    public void addUser_Should_ThrowException_When_AddingSameUser() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
+        User user = new UserImpl(USER_VALID_NAME);
+        team.addUser(user);
 
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> team.addUser(user));
-	}
+        // Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> team.addUser(user));
+    }
 
-	@Test
-	public void addBoard_Should_AddBoardToList() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		Board board2 = new BoardImpl(BOARD_VALID_NAME + " ");
-		// Act
-		team.addBoard(board);
-		team.addBoard(board2);
+    @Test
+    public void addBoard_Should_AddBoardToList() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        Board board2 = new BoardImpl(BOARD_VALID_NAME + " ");
+        // Act
+        team.addBoard(board);
+        team.addBoard(board2);
 
-		// Assert
-		assertEquals(2, team.getBoards().size());
-	}
+        // Assert
+        assertEquals(2, team.getBoards().size());
+    }
 
-	@Test
-	public void addBoard_Should_ThrowException_When_AddingSameBoard() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
-		Board board = new BoardImpl(BOARD_VALID_NAME);
-		team.addBoard(board);
+    @Test
+    public void addBoard_Should_ThrowException_When_AddingSameBoard() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
+        Board board = new BoardImpl(BOARD_VALID_NAME);
+        team.addBoard(board);
 
-		// Act, Assert
-		assertThrows(IllegalArgumentException.class, () -> team.addBoard(board));
-	}
+        // Act, Assert
+        assertThrows(IllegalArgumentException.class, () -> team.addBoard(board));
+    }
 
-	@Test
-	public void getHistories_Should_ReturnCopyOfListTasks() {
-		// Arrange
-		Team team = new TeamImpl(TEAM_VALID_NAME);
+    @Test
+    public void getHistories_Should_ReturnCopyOfListTasks() {
+        // Arrange
+        Team team = new TeamImpl(TEAM_VALID_NAME);
 
-		// Act
-		team.getHistories().add(new HistoryImpl("History"));
+        // Act
+        team.getHistories().add(new HistoryImpl("History"));
 
-		// Assert
-		assertEquals(1, team.getHistories().size());
-	}
+        // Assert
+        assertEquals(1, team.getHistories().size());
+    }
 }
